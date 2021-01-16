@@ -1,0 +1,31 @@
+.dashboard {
+  margin-left: 1.5em;
+}
+
+.project-progress {
+  display: flex;
+  border: 1px solid black;
+  justify-content: center;
+}
+
+.dashboard-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-info {
+  display: flex;
+  align-content: flex-end;
+}
+
+.task-progress {
+  display: flex;
+  border: 1px solid black;
+  flex-direction: row;
+}
+
+
+.task-assigned {
+  display: flex;
+  flex-direction: column;
+}
