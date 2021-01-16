@@ -19,12 +19,14 @@ app.use(express.static("public"));
 
 const messageRoutes = require("../routes/messages");
 const employeeRoutes = require("./routes/employees");
-app.use("/messages", messageRoutes(db));
+const taskRoutes = require("../routes/tasks");
+
+app.use("/apli", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
 
 // Tasks route
-const taskRoutes = require("../routes/tasks");
 app.use("/api", taskRoutes(db));
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
