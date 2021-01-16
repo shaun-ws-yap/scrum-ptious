@@ -1,14 +1,15 @@
-import './App.css';
+import '../styles/App.css';
+import { Route, BrowserRouter as Router, withRouter } from 'react-router-dom';
 
-import Nav from './Nav';
+import Sidebar from './Sidebar';
 
-import { Route, BrowserRouter as Router } from 'react-router-dom';
+import "../styles/Sidebar.css";
 
 function App() {
   return (
     <main className="layout">
       <section className="sidebar">
-
+        <Sidebar />
       </section>
     </main>
   );
