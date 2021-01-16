@@ -18,7 +18,9 @@ db.connect(err => {
 app.use(express.static("public"));
 
 const messageRoutes = require("../routes/messages");
+const employeeRoutes = require("./routes/employees");
 app.use("/messages", messageRoutes(db));
+app.use("/api", employeeRoutes(db));
 
 // Tasks route
 const taskRoutes = require("../routes/tasks");
