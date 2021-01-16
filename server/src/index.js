@@ -14,7 +14,7 @@ db.connect();
 app.use(express.static("public"));
 
 const messageRoutes = require("../routes/messages");
-app.use("/messages", messageRoutes(db));
+app.use("/api", messageRoutes(db));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
