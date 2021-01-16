@@ -1,11 +1,25 @@
-const express = require('express')
-const app = express()
-const port = 8001
+require('dotenv').config();
+
+const PORT       = process.env.PORT || 8080;
+const ENV        = process.env.ENV || "development";
+const express    = require("express");
+const app        = express();
+
+// PG database client/connection setup
+const { Pool } = require('pg');
+const dbParams = require('./lib/db');
+const db = new Pool(dbParams);
+db.connect();
+
+app.use(express.static("public"));
+
+const messageRoutes = require("../routes/messages");
+app.use("/messages", messageRoutes(db));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Example app listening at http://localhost:${PORT}`)
 })
