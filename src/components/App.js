@@ -1,13 +1,16 @@
 import './App.css';
 
+import Nav from './Nav';
+
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 
 function App() {
   return (
-    <Router>
-      
+    <main className="layout">
+      <section className="sidebar">
 
-    </Router>
+      </section>
+    </main>
   );
 }
 
