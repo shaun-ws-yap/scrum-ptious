@@ -8,7 +8,8 @@ module.exports = (db) => {
       email,
       phone_number,
       role,
-      team_id
+      team_id,
+      team_name
     FROM employees
     JOIN teams ON team_id = teams.id
     ORDER BY role
