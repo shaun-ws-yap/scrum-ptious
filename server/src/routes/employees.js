@@ -14,10 +14,9 @@ module.exports = (db) => {
     JOIN teams ON team_id = teams.id
     ORDER BY role
     `;
-
     db.query(queryString)
     .then(data => {
-      response.json(data.rows);
+      res.json(data.rows);
     });
   });
 
