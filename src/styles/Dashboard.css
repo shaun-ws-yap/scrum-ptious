@@ -1,0 +1,65 @@
+.dashboard {
+  margin-left: 1.5em;
+}
+
+.project-progress {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 20px;
+  justify-content: center;
+}
+
+.dashboard-top {
+  display: flex;
+  flex-direction: row;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-content: flex-end;
+  border: 1px solid black;
+  border-radius: 20px;
+  margin-right: 1em;
+  padding: 1em;
+  text-align: center;
+}
+
+.task-progress {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 20px;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+}
+
+.task-assigned {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar {
+  height: auto;
+}
+
+/* .pro-sidebar {
+  text-align: right;
+} */
+
+.pro-sidebar-header {
+  display: flex;
+  justify-content: center;
+}
+
+.pro-inner-item {
+  display: flex;
+  align-content: flex-end;
+  margin-left: 2em;
+}
+
+.user-avatar {
+  border-radius: 30px;
+  height: 100px;
+  width: 100px;
+}

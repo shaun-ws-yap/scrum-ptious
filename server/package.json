@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node ./src/index.js",
+    "start": "nodemon ./src/index.js",
+    "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "error": "TEST_ERROR=true node ./src/index.js",
     "reset": "psql -U development -d scheduler_development < ./src/db/schema/create.sql && psql -U development -d scheduler_development < ./src/db/schema/development.sql",
     "test:server": "NODE_ENV=test npm start"
@@ -17,5 +18,8 @@
     "pg": "^8.5.1",
     "socket.io": "^3.1.0",
     "ws": "^7.4.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
