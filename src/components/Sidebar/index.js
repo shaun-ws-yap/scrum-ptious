@@ -8,34 +8,34 @@ export default function Sidebar(props) {
   return (
     <Router>
       <div className="sidebar">
-      <ProSidebar width="150px">
-        <SidebarHeader>
-          <img src={"https://logoipsum.com/logo/logo-25.svg"}></img>
-        </SidebarHeader>
-        <SidebarContent>
-          <Menu>
-            <MenuItem>
-              Dashboard
-              <Link to="/" />
-            </MenuItem>
-          </Menu>
-          <Menu>
-            <MenuItem>
-              Tasks
-              <Link to="/tasks" />
-            </MenuItem>
-          </Menu>
-          <Menu>
-            <MenuItem>
-              Chat
-              <Link to="/chat" />
-            </MenuItem>
-          </Menu>
-        </SidebarContent>
-        <SidebarFooter>
-          <button>Logout</button>
-        </SidebarFooter>
-      </ProSidebar>
+        <ProSidebar width="150px">
+          <SidebarHeader>
+            <img src={"https://logoipsum.com/logo/logo-25.svg"}></img>
+          </SidebarHeader>
+          <SidebarContent>
+            <Menu>
+              <MenuItem>
+                Dashboard
+                <Link to="/" />
+              </MenuItem>
+            </Menu>
+            <Menu>
+              <MenuItem>
+                Tasks
+                <Link to="/tasks" />
+              </MenuItem>
+            </Menu>
+            <Menu>
+              <MenuItem>
+                Chat
+                <Link to="/chat" />
+              </MenuItem>
+            </Menu>
+          </SidebarContent>
+          <SidebarFooter>
+            <button>Logout</button>
+          </SidebarFooter>
+        </ProSidebar>
       </div>
     </Router>
   )
