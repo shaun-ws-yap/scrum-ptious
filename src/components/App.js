@@ -1,27 +1,23 @@
 import '../styles/App.css';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
 
-import Sidebar from './Sidebar';
 import Dashboard from './Dashboard';
+import Sidebar from './Sidebar';
+import UserInfo from './Dashboard/UserInfo'
+import TaskResource from './Dashboard/TaskResource'
 
-import "../styles/Sidebar.css";
+import 'react-pro-sidebar/dist/css/styles.css';
 
 function App() {
   return (
-    <>
-    {/* <main className="layout">
-      <section className="sidebar"> */}
-        <Router>
-          <Sidebar />
-          <Switch>
-            <Route path='/' exact component={Dashboard}/>
-            {/* <Route path='/' component={Tasks}/>
-            <Route path='/' component={Teamchat}/> */}
-          </Switch>
-        </Router>
-      {/* </section>
-    </main> */}
-    </>
+    <div className="container">
+      <Sidebar />
+      <div className="main">
+        <Dashboard />
+        <TaskResource />
+      </div>
+      <UserInfo />
+    </div>
   );
 }
 
