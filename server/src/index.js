@@ -21,7 +21,7 @@ const messageRoutes = require("../routes/messages");
 const employeeRoutes = require("./routes/employees");
 const taskRoutes = require("../routes/tasks");
 
-app.use("/apli", messageRoutes(db));
+app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
 
 // Tasks route
