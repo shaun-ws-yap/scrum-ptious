@@ -7,6 +7,7 @@ import Moment from 'react-moment';
 export default function Sidebar(props) {
   return (
     <Router>
+      <div className="sidebar">
       <ProSidebar width="150px">
         <SidebarHeader>
           <img src={"https://logoipsum.com/logo/logo-25.svg"}></img>
@@ -35,6 +36,7 @@ export default function Sidebar(props) {
           <button>Logout</button>
         </SidebarFooter>
       </ProSidebar>
+      </div>
     </Router>
   )
 }

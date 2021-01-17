@@ -39,9 +39,13 @@
   flex-direction: column;
 }
 
-.pro-sidebar {
-  text-align: right;
+.sidebar {
+  height: auto;
 }
+
+/* .pro-sidebar {
+  text-align: right;
+} */
 
 .pro-sidebar-header {
   display: flex;
