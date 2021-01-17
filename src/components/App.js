@@ -5,8 +5,8 @@ import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
 import Sidebar from './Sidebar';
-import UserInfo from './Dashboard/UserInfo'
-import TaskResource from './Dashboard/TaskResource'
+import UserInfo from './Dashboard/UserInfo';
+import TaskResource from './Dashboard/TaskResource';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 
