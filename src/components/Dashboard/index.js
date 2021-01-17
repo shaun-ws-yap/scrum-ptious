@@ -6,15 +6,19 @@ import UserInfo from './UserInfo';
 
 import '../../styles/Dashboard.css';
 
+const users = [
+  {
+
+  }
+]
+
 export default function Dashboard() {
   return (
     <div className='dashboard'>
-      <h1>Your Dashboard</h1>
       <div className="dashboard-top">
-        <ProjectProgress />
-        <UserInfo />
+        <TaskProgress />
+        {/* <ProjectProgress /> */}
       </div>
-      <TaskProgress />
     </div>
   )
 }

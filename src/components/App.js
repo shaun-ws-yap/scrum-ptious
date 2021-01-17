@@ -1,19 +1,19 @@
 import '../styles/App.css';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
 
-import Sidebar from './Sidebar/Sidebar';
-import Routes from '../routes'
+import Dashboard from './Dashboard';
+import Sidebar from './Sidebar';
+import UserInfo from './Dashboard/UserInfo'
 
-import "../styles/Sidebar.css";
+import 'react-pro-sidebar/dist/css/styles.css';
 
 function App() {
   return (
     <div className="container">
-      <div style={{display: "flex"}}>
+      <div className="main">
         <Sidebar />
-        <div>
-          <Routes />
-        </div>
+        <Dashboard />
+        <UserInfo />
       </div>
     </div>
   );
