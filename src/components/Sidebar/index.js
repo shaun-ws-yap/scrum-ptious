@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 
 export default function Sidebar(props) {
   return (
-    <Router>
       <div className="sidebar">
       <ProSidebar width="150px">
         <SidebarHeader>
@@ -15,20 +14,23 @@ export default function Sidebar(props) {
         <SidebarContent>
           <Menu>
             <MenuItem>
-              Dashboard
-              <Link to="/" />
+              <Link to="/">
+                Dashboard
+              </Link>
             </MenuItem>
           </Menu>
           <Menu>
             <MenuItem>
-              Tasks
-              <Link to="/tasks" />
+              <Link to="/tasks">
+                Tasks
+              </Link>
             </MenuItem>
           </Menu>
           <Menu>
             <MenuItem>
-              Chat
-              <Link to="/chat" />
+              <Link to="/chat">
+                Chat
+              </Link>
             </MenuItem>
           </Menu>
         </SidebarContent>
@@ -37,6 +39,5 @@ export default function Sidebar(props) {
         </SidebarFooter>
       </ProSidebar>
       </div>
-    </Router>
   )
 }
