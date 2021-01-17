@@ -3,7 +3,7 @@ import { Doughnut, Bar } from 'react-chartjs-2';
 
 // import ProjectProgressListItem from './ProjectProgressListItem';
 
-const projectTasks = [
+const independentTasks = [
   {
   "id": 1,
   "title": "Create ERD",
@@ -21,7 +21,7 @@ const projectTasks = [
   "creation_date": "2021-01-16T15:41:01.771Z",
   "due_date": "2021-01-16T01:00:00.000Z",
   "employee_id": 2,
-  "status": 1,
+  "status": 2,
   "is_viewed": true
   },
   {
@@ -55,26 +55,6 @@ const projectTasks = [
     "is_viewed": false
   },
   {
-    "id": 6,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
-    "is_viewed": false
-  },
-  {
-    "id": 7,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
-    "is_viewed": false
-  },
-  {
     "id": 8,
     "title": "Setup project skeleton",
     "description": "Install packages and write boiler plate code",
@@ -82,26 +62,6 @@ const projectTasks = [
     "due_date": "2021-01-11T01:00:00.000Z",
     "employee_id": 1,
     "status": 4,
-    "is_viewed": false
-  },
-  {
-    "id": 9,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 4,
-    "is_viewed": false
-  },
-  {
-    "id": 10,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
     "is_viewed": false
   },
   {
@@ -126,7 +86,7 @@ const projectTasks = [
   }
 ]
 
-export default function ProjectProgress(props) {
+export default function IndependentProgress(props) {
 
   const taskStatus = (status, data) => {
     let counter = 0;
@@ -140,16 +100,16 @@ export default function ProjectProgress(props) {
     return counter;
   }
 
-  const assignedTasks = taskStatus(0, projectTasks);
-  const inProgressTasks = taskStatus(1, projectTasks);
-  const inReviewTasks = taskStatus(2, projectTasks);
-  const lateTasks = taskStatus(3, projectTasks);
-  const completeTasks = taskStatus(4, projectTasks);
+  const assignedTasks = taskStatus(0, independentTasks);
+  const inProgressTasks = taskStatus(1, independentTasks);
+  const inReviewTasks = taskStatus(2, independentTasks);
+  const lateTasks = taskStatus(3, independentTasks);
+  const completeTasks = taskStatus(4, independentTasks);
 
 
   return (
     <div className="task-progress">
-      <Doughnut
+      <Bar
         data={{
           labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],
           datasets: [
@@ -172,12 +132,19 @@ export default function ProjectProgress(props) {
           maintainAspectRatio: false,
           title: {
             display: true,
-            text: 'Project Progress',
+            text: 'Your Progress',
             fontSize: 25
           },
           legend: {
             display: true,
             position: 'right'
+          },
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
           }
         }}
       />
