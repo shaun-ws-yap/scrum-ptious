@@ -13,7 +13,7 @@ export default function useApplicationData(props) {
   const setUser = user => setState({...state, user});
   
   useEffect(() => {
-    const GET_TASKS = `http://localhost:8080/api/tasks/${state.user}`;
+    let GET_TASKS = `http://localhost:8080/api/tasks/user/${state.user}`;
     Promise.all([
       axios.get(GET_TASKS),
     ]).then(all => {
