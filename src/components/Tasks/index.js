@@ -7,11 +7,12 @@ import TaskResource from './TaskResource';
 
 // import '../../styles/Dashboard.css';
 
-export default function Tasks() {
+export default function Tasks(props) {
+  
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
-        <TaskProgress />
+        <TaskProgress tasks={props.tasks} />
       </div>
       <div className="dashboard-bottom">
         <TaskResource />

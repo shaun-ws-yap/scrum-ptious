@@ -1,6 +1,8 @@
 import React from 'react';
+// import { taskStatus } from '../../helpers/taskStatus';
 
 export default function TaskItem(props) {
+
   return (
     <li>
       <h2>{props.title}</h2>

@@ -13,7 +13,7 @@ export default function Login(props) {
         onChange={event => props.setUser(event.target.value)}
       />
       <button
-        onClick={event => props.setUser(event.target.value)}
+        onSubmit={event => props.setUser(event.target.value)}
       >Submit</button>
     </form>
   )
