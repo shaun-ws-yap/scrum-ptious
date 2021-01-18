@@ -2,19 +2,24 @@ import React from 'react';
 
 import ProjectProgress from './ProjectProgress';
 import IndependentProgress from './IndependentProgress';
-import UserInfo from './UserInfo';
+import TaskItem from './TaskItem';
 
 import '../../styles/Dashboard.css';
 
-export default function Dashboard() {
+export default function Dashboard(props) {
+  const DASHBOARD = "Dashboard";
+  const TASKS = "Tasks";
+  const CHAT = "Chat";
+
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
-        <ProjectProgress />
+        { props.menu === DASHBOARD && <ProjectProgress />}
+        { props.menu === TASKS && <TaskItem />}
+        { props.menu === CHAT && <h1>Chat</h1>}
       </div>
-      <br />
       <div className="dashboard-bottom">
-        <IndependentProgress />
+      { props.menu === DASHBOARD && <IndependentProgress />}
       </div>
     </div>
   )
