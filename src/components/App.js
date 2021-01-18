@@ -1,6 +1,7 @@
 import '../styles/App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
@@ -9,10 +10,16 @@ import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import TaskResource from './Dashboard/TaskResource';
 
+import useApplicationData from '../hooks/useApplicationData';
+
 import 'react-pro-sidebar/dist/css/styles.css';
 
 function App() {
-  const [menu, setMenu] = useState("Dashboard");
+
+  const { 
+    state,
+    setMenu 
+  } = useApplicationData();
 
   return (
     <div className="container">
@@ -23,7 +30,7 @@ function App() {
         />
         <nav className="sidebar__menu">
           <Sidebar
-            menu={menu}
+            menu={state.menu}
             setMenu={setMenu}
           />
         </nav>
@@ -31,7 +38,8 @@ function App() {
 
       <section className="main">
         <Dashboard 
-          menu={menu}
+          menu={state.menu}
+          tasks={state.tasks}
         />
       </section>
       

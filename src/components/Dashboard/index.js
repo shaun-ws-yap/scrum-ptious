@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ProjectProgress from './ProjectProgress';
 import IndependentProgress from './IndependentProgress';
@@ -15,7 +15,7 @@ export default function Dashboard(props) {
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
-        { props.menu === DASHBOARD && <ProjectProgress />}
+        { props.menu === DASHBOARD && <ProjectProgress projectTasks={props.tasks} />}
         { props.menu === TASKS && <TaskItem />}
         { props.menu === CHAT && <Chat />}
       </div>
