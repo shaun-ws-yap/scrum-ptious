@@ -1,13 +1,12 @@
 .container {
   display: flex;
-
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
 }
 
 .dashboard {
   margin-left: 1.5em;
-}
-
-.main {
 }
 
 .project-progress {
@@ -49,7 +48,34 @@
 }
 
 .sidebar {
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  background-color: gray;
+  text-align: center;
+  border-radius: 20px;
+}
+
+.sidebar__menu {
+  flex: 1;
+}
+
+.sidebar__menu > ul {
+  padding: 0em;
+}
+
+.sidebar-list__item {
+  list-style-type: none;
+}
+
+.sidebar-list__item > h2{
+  padding-bottom: 0.25em;
+  padding-top: 0.25em;
+  margin-left: 0;
+}
+
+.sidebar-list__item :hover {
+  background-color: white;
 }
 
 /* .pro-sidebar {

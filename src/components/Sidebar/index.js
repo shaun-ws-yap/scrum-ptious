@@ -3,52 +3,40 @@ import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent, Menu, MenuIte
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Moment from 'react-moment';
 
-// import SidebarItem from './SidebarItem';
+import SidebarItem from './SidebarItem';
 import classNames from 'classnames';
 
-
+const menuItems = [
+  {
+    name: 'Dashboard'
+  },
+  {
+    name: 'Tasks'
+  },
+  {
+    name: 'Chat'
+  }
+];
 
 export default function Sidebar(props) {
   const menuClass = classNames("sidebar__item", {
-    'sidebar__item--selected': selected
+    'sidebar__item--selected': props.selected
   })
 
-  const [menu, setMenu] = useState()
-
+  const options = menuItems.map(menu => {
+    return (
+      <SidebarItem
+        key={menu.name}
+        name={menu.name}
+        selected={menu.name === props.menu}
+        setMenu={props.setMenu}
+      />
+    )
+  })
 
   return (
-      <div className="sidebar">
-      <ProSidebar width="150px">
-        <SidebarHeader>
-          <img src={"https://logoipsum.com/logo/logo-25.svg"}></img>
-        </SidebarHeader>
-        <SidebarContent>
-          <Menu>
-            <MenuItem className={menuClass} onClick={() => }>
-              <Link to="/">
-                Dashboard
-              </Link>
-            </MenuItem>
-          </Menu>
-          <Menu>
-            <MenuItem className={menuClass} onClick={() => }>
-              <Link to="/tasks">
-                Tasks
-              </Link>
-            </MenuItem>
-          </Menu>
-          <Menu>
-            <MenuItem className={menuClass} onClick={() => }>
-              <Link to="/chat">
-                Chat
-              </Link>
-            </MenuItem>
-          </Menu>
-        </SidebarContent>
-        <SidebarFooter>
-          <button>Logout</button>
-        </SidebarFooter>
-      </ProSidebar>
-      </div>
+    <ul>
+      {options}
+    </ul>
   )
 }
