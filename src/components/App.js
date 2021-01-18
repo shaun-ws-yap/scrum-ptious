@@ -40,8 +40,8 @@ function App() {
 
       <section className="main">
         
-        { state.user === null && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== null && <Dashboard menu={state.menu} tasks={state.tasks} /> }
+        { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
+        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} /> }
 
       </section>
       
