@@ -4,7 +4,13 @@ module.exports = (db) => {
   // Get all messages
   router.get("/messages", (req, res) => {
     db.query(`
-      SELECT * FROM messages
+      SELECT 
+        messages.*,
+        to_char(send_time, 'Mon DD, YYYY at FMHH12:MIam') as time_sent,
+        name
+      FROM messages
+      JOIN employees ON employees.id = sender_id
+      ORDER BY send_time
     `)
     .then(data => {
       res.json(data.rows);
@@ -14,7 +20,10 @@ module.exports = (db) => {
         .status(500)
         .send('Could not get messages from database', err);
     })
-  })
+  });
+
+  // Get most recent messages
+  
 
   // Post message
   router.post("/messages", (req, res) => {

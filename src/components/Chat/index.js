@@ -1,25 +1,19 @@
 import React from 'react';
 
-// import ProjectProgress from './ProjectProgress';
-// import TaskProgress from './TaskProgress';
-// import TaskResource from './TaskResource';
-// import UserInfo from './UserInfo';
+import ChatLog from "./ChatLog";
+import MembersList from "./MembersList";
+import InputBox from "./InputBox";
 
-// import '../../styles/Dashboard.css';
+import '../../styles/Chat.css';
 
 export default function Chat() {
   return (
-    // <div className='dashboard'>
-    //   <div className="dashboard-top">
-    //     <TaskProgress />
-    //     {/* <ProjectProgress /> */}
-    //   </div>
-    //   <div className="dashboard-bottom">
-    //     <TaskResource />
-    //   </div>
-    // </div>
-    <div>
-      <h1>Chat</h1>
+    <div className="chat-container">
+      <div className="chat-top">
+        <ChatLog />
+        <MembersList />
+      </div>
+      <InputBox />
     </div>
   )
 }
