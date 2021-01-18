@@ -2,7 +2,7 @@ import React from 'react';
 
 import ProjectProgress from './ProjectProgress';
 import IndependentProgress from './IndependentProgress';
-import TaskItem from './TaskItem';
+import TaskItem from '../Tasks';
 
 import '../../styles/Dashboard.css';
 
