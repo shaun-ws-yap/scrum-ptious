@@ -5,11 +5,14 @@ export default function useApplicationData(props) {
   const GET_TASKS = `http://localhost:8080/api/tasks`
 
   const [state, setState] = useState({
+    user: null,
     menu: "Dashboard",
     tasks: [],
   })
 
   const setMenu = menu => setState({...state, menu});
+
+  const setUser = user => setState({...state, user});
 
   useEffect(() => {
     Promise.all([
@@ -19,6 +22,6 @@ export default function useApplicationData(props) {
     })
   }, [])
 
-  return { state, setMenu }
+  return { state, setMenu, setUser }
 
 }

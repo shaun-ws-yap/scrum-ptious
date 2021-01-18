@@ -9,6 +9,7 @@ import Chat from './Chat';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import TaskResource from './Dashboard/TaskResource';
+import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
 
@@ -18,7 +19,8 @@ function App() {
 
   const { 
     state,
-    setMenu 
+    setMenu,
+    setUser,
   } = useApplicationData();
 
   return (
@@ -37,10 +39,10 @@ function App() {
       </section>
 
       <section className="main">
-        <Dashboard 
-          menu={state.menu}
-          tasks={state.tasks}
-        />
+        
+        { state.user === null && <Login setUser={setUser} user={state.user} /> }
+        { state.user !== null && <Dashboard menu={state.menu} tasks={state.tasks} /> }
+
       </section>
       
       <section className="user__info">

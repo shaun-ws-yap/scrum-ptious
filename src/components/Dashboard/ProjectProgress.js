@@ -5,8 +5,6 @@ import { Doughnut, Bar } from 'react-chartjs-2';
 
 export default function ProjectProgress(props) {
 
-  console.log(props.projectTasks);
-
   const taskStatus = (status, data) => {
     let counter = 0;
   
