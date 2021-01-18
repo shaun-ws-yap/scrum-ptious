@@ -4,13 +4,17 @@ export default function Login(props) {
 
   return (
     <form
-      onSubmit={event => props.setUser(event.target.value)}
+      // onChange={event => props.setUser(event.target.value)}
+      // onSubmit={event => event.preventDefault()}
     >
       <h1>Enter your user ID: </h1>
       <input 
         value={props.user}
-        onSubmit={event => event.preventDefault()}
+        onChange={event => props.setUser(event.target.value)}
       />
+      <button
+        onSubmit={event => props.setUser(event.target.value)}
+      >Submit</button>
     </form>
   )
 }

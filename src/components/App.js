@@ -12,6 +12,7 @@ import TaskResource from './Dashboard/TaskResource';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
+import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 
@@ -40,8 +41,8 @@ function App() {
 
       <section className="main">
         
-        { state.user === null && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== null && <Dashboard menu={state.menu} tasks={state.tasks} /> }
+        { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
+        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} /> }
 
       </section>
       
