@@ -20,7 +20,7 @@ export default function Dashboard(props) {
         { props.menu === CHAT && <Chat />}
       </div>
       <div className="dashboard-bottom">
-      { props.menu === DASHBOARD && <IndependentProgress />}
+      { props.menu === DASHBOARD && <IndependentProgress independentTasks={props.tasks} />}
       </div>
     </div>
   )
