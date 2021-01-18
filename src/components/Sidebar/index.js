@@ -9,11 +9,7 @@ import classNames from 'classnames';
 
 
 export default function Sidebar(props) {
-  const menuClass = classNames("sidebar__item", {
-    'sidebar__item--selected': selected
-  })
 
-  const [menu, setMenu] = useState()
 
 
   return (
@@ -24,21 +20,21 @@ export default function Sidebar(props) {
         </SidebarHeader>
         <SidebarContent>
           <Menu>
-            <MenuItem className={menuClass} onClick={() => }>
+            <MenuItem>
               <Link to="/">
                 Dashboard
               </Link>
             </MenuItem>
           </Menu>
           <Menu>
-            <MenuItem className={menuClass} onClick={() => }>
+            <MenuItem>
               <Link to="/tasks">
                 Tasks
               </Link>
             </MenuItem>
           </Menu>
           <Menu>
-            <MenuItem className={menuClass} onClick={() => }>
+            <MenuItem>
               <Link to="/chat">
                 Chat
               </Link>
