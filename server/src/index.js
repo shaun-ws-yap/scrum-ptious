@@ -3,6 +3,7 @@ require('dotenv').config();
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const express    = require("express");
+const cors       = require('cors');
 const app        = express();
 
 // PG database client/connection setup
@@ -15,6 +16,7 @@ db.connect(err => {
   }
 });
 
+app.use(cors());
 app.use(express.static("public"));
 
 const messageRoutes = require("../routes/messages");

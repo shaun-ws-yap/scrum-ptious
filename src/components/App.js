@@ -1,6 +1,7 @@
 import '../styles/App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
@@ -12,7 +13,20 @@ import TaskResource from './Dashboard/TaskResource';
 import 'react-pro-sidebar/dist/css/styles.css';
 
 function App() {
-  const [menu, setMenu] = useState("Dashboard");
+
+  const [state, setState] = useState({
+    menu: "Dashboard",
+    tasks: []
+  });
+
+  useEffect(() => {
+    const tasksURL = `http://localhost:8080/api/tasks`
+    axios.get(tasksURL)
+    .then((data) => {
+      // console.log(data);
+      setState(prev => ({...prev, tasks: data}));
+    })
+  }, [])
 
   return (
     <div className="container">
@@ -23,15 +37,16 @@ function App() {
         />
         <nav className="sidebar__menu">
           <Sidebar
-            menu={menu}
-            setMenu={setMenu}
+            menu={state.menu}
+            setMenu={setState}
           />
         </nav>
       </section>
 
       <section className="main">
         <Dashboard 
-          menu={menu}
+          menu={state.menu}
+          tasks={state.tasks}
         />
       </section>
       

@@ -128,6 +128,8 @@ const projectTasks = [
 
 export default function ProjectProgress(props) {
 
+  console.log(props.projectTasks)
+
   const taskStatus = (status, data) => {
     let counter = 0;
   
@@ -140,11 +142,11 @@ export default function ProjectProgress(props) {
     return counter;
   }
 
-  const assignedTasks = taskStatus(0, projectTasks);
-  const inProgressTasks = taskStatus(1, projectTasks);
-  const inReviewTasks = taskStatus(2, projectTasks);
-  const lateTasks = taskStatus(3, projectTasks);
-  const completeTasks = taskStatus(4, projectTasks);
+  const assignedTasks = taskStatus(0, props.tasks);
+  const inProgressTasks = taskStatus(1, props.tasks);
+  const inReviewTasks = taskStatus(2, props.tasks);
+  const lateTasks = taskStatus(3, props.tasks);
+  const completeTasks = taskStatus(4, props.tasks);
 
 
   return (
