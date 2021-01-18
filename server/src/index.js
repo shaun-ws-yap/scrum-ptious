@@ -17,12 +17,14 @@ db.connect(err => {
 
 app.use(express.static("public"));
 
-const messageRoutes = require("../routes/messages");
+const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
-const taskRoutes = require("../routes/tasks");
+const submissionRoutes = require("./routes/submissions");
+const taskRoutes = require("./routes/tasks");
 
 app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
+app.use("/api", submissionRoutes(db));
 
 // Tasks route
 app.use("/api", taskRoutes(db));
