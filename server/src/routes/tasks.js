@@ -31,10 +31,10 @@ module.exports = (db) => {
   router.get("/tasks/:id", (req, res) => {
     const queryString = `
     SELECT * from tasks
-    WHERE id = 1
+    WHERE id = $1
     `;
 
-    db.query(queryString)
+    db.query(queryString, [req.params.id])
     .then(data => {
       res.json(data.rows)
     })
