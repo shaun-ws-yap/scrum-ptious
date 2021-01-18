@@ -30,7 +30,7 @@ export default function Sidebar(props) {
         name={menu.name}
         selected={menu.name === props.menu}
         setMenu={props.setMenu}
-      />
+      
     )
   })
 
