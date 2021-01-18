@@ -25,6 +25,7 @@ function App() {
     .then((data) => {
       // console.log(data);
       setState(prev => ({...prev, tasks: data}));
+      console.log(data);
     })
   }, [])
 
