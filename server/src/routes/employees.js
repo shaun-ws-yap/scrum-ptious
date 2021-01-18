@@ -21,5 +21,17 @@ module.exports = (db) => {
     });
   });
 
+  // Get user by id
+  router.get("/employees/:id", (req, res) => {
+    const queryString = `
+    SELECT * FROM employees
+    WHERE id = $1
+    `;
+    db.query(queryString, [req.params.id])
+    .then(data => {
+      res.json(data.rows);
+    });
+  });
+
   return router;
 }

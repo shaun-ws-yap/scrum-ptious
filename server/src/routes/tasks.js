@@ -12,6 +12,20 @@ module.exports = (db) => {
     })
     .catch(e => res.send(e));
   });
+
+  // Get task by employee id
+  router.get("/tasks/user/:id", (req, res) => {
+    const queryString = `
+    SELECT * FROM tasks
+    WHERE employee_id = $1
+    `;
+    
+    db.query(queryString, [req.params.id])
+    .then(data => {
+      res.json(data.rows)
+    })
+    .catch(e => res.send(e));
+  })
   
   // Get task by id
   router.get("/tasks/:id", (req, res) => {
