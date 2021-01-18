@@ -13,7 +13,7 @@ export default function UserInfo(props) {
         Task Deadlines:
         <br />
         <div>
-          <DeadlineList />
+          <DeadlineList userDeadlines={props.deadlines}/>
         </div>
       </div>
     </div>
