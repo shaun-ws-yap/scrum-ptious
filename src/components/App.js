@@ -47,7 +47,7 @@ function App() {
       </section>
       
       <section className="user__info">
-        <UserInfo />
+        <UserInfo userInfo={state.userInfo} />
       </section>
     </div>
   );
