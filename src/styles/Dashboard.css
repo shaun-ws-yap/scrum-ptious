@@ -1,5 +1,13 @@
+.container {
+  display: flex;
+
+}
+
 .dashboard {
   margin-left: 1.5em;
+}
+
+.main {
 }
 
 .project-progress {
@@ -23,6 +31,7 @@
   margin-right: 1em;
   padding: 1em;
   text-align: center;
+  align-self: flex-end;
 }
 
 .task-progress {
