@@ -3,132 +3,9 @@ import { Doughnut, Bar } from 'react-chartjs-2';
 
 // import ProjectProgressListItem from './ProjectProgressListItem';
 
-const projectTasks = [
-  {
-  "id": 1,
-  "title": "Create ERD",
-  "description": "Design ERD to base schema off of",
-  "creation_date": "2021-01-16T15:41:01.771Z",
-  "due_date": "2021-01-21T01:00:00.000Z",
-  "employee_id": 3,
-  "status": 0,
-  "is_viewed": false
-  },
-  {
-  "id": 2,
-  "title": "Create seeds",
-  "description": "Insert into tables in database dummy data for testing",
-  "creation_date": "2021-01-16T15:41:01.771Z",
-  "due_date": "2021-01-16T01:00:00.000Z",
-  "employee_id": 2,
-  "status": 1,
-  "is_viewed": true
-  },
-  {
-  "id": 3,
-  "title": "Setup project skeleton",
-  "description": "Install packages and write boiler plate code",
-  "creation_date": "2021-01-16T15:41:01.771Z",
-  "due_date": "2021-01-11T01:00:00.000Z",
-  "employee_id": 1,
-  "status": 2,
-  "is_viewed": false
-  },
-  {
-    "id": 4,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
-    "is_viewed": false
-  },
-  {
-    "id": 5,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 4,
-    "is_viewed": false
-  },
-  {
-    "id": 6,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
-    "is_viewed": false
-  },
-  {
-    "id": 7,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
-    "is_viewed": false
-  },
-  {
-    "id": 8,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 4,
-    "is_viewed": false
-  },
-  {
-    "id": 9,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 4,
-    "is_viewed": false
-  },
-  {
-    "id": 10,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 3,
-    "is_viewed": false
-  },
-  {
-    "id": 10,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 1,
-    "is_viewed": false
-  },
-  {
-    "id": 10,
-    "title": "Setup project skeleton",
-    "description": "Install packages and write boiler plate code",
-    "creation_date": "2021-01-16T15:41:01.771Z",
-    "due_date": "2021-01-11T01:00:00.000Z",
-    "employee_id": 1,
-    "status": 2,
-    "is_viewed": false
-  }
-]
-
 export default function ProjectProgress(props) {
 
-  console.log(props.projectTasks)
+  console.log(props.projectTasks);
 
   const taskStatus = (status, data) => {
     let counter = 0;
@@ -142,11 +19,11 @@ export default function ProjectProgress(props) {
     return counter;
   }
 
-  const assignedTasks = taskStatus(0, props.tasks);
-  const inProgressTasks = taskStatus(1, props.tasks);
-  const inReviewTasks = taskStatus(2, props.tasks);
-  const lateTasks = taskStatus(3, props.tasks);
-  const completeTasks = taskStatus(4, props.tasks);
+  const assignedTasks = taskStatus(0, props.projectTasks);
+  const inProgressTasks = taskStatus(1, props.projectTasks);
+  const inReviewTasks = taskStatus(2, props.projectTasks);
+  const lateTasks = taskStatus(3, props.projectTasks);
+  const completeTasks = taskStatus(4, props.projectTasks);
 
 
   return (

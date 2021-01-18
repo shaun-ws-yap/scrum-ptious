@@ -10,24 +10,16 @@ import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import TaskResource from './Dashboard/TaskResource';
 
+import useApplicationData from '../hooks/useApplicationData';
+
 import 'react-pro-sidebar/dist/css/styles.css';
 
 function App() {
 
-  const [state, setState] = useState({
-    menu: "Dashboard",
-    tasks: []
-  });
-
-  useEffect(() => {
-    const tasksURL = `http://localhost:8080/api/tasks`
-    axios.get(tasksURL)
-    .then((data) => {
-      // console.log(data);
-      setState(prev => ({...prev, tasks: data}));
-      console.log(data);
-    })
-  }, [])
+  const { 
+    state,
+    setMenu 
+  } = useApplicationData();
 
   return (
     <div className="container">
@@ -39,7 +31,7 @@ function App() {
         <nav className="sidebar__menu">
           <Sidebar
             menu={state.menu}
-            setMenu={setState}
+            setMenu={setMenu}
           />
         </nav>
       </section>

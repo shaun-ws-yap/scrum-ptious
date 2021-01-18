@@ -11,14 +11,10 @@ export default function Dashboard(props) {
   const TASKS = "Tasks";
   const CHAT = "Chat";
 
-  const [state, setState] = useState({
-    tasks: props.tasks.data
-  })
-
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
-        { props.menu === DASHBOARD && <ProjectProgress projectTasks={state.tasks} />}
+        { props.menu === DASHBOARD && <ProjectProgress projectTasks={props.tasks} />}
         { props.menu === TASKS && <TaskItem />}
         { props.menu === CHAT && <h1>Chat</h1>}
       </div>
