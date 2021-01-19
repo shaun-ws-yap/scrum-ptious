@@ -18,15 +18,15 @@ export default function Chat(props) {
 
     socket.emit('joining msg', userInfo.name);
   
-    socket.on('chat message', function(msg) {
-      console.log(msg);
+    socket.on('chat message', function(messageData) {
+      console.log(messageData);
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 
-  const sendMessage = (message) => {
-    socket.emit('chat message', message);
+  const sendMessage = (messageData) => {
+    socket.emit('chat message', messageData);
   }
 
   return (
@@ -35,7 +35,7 @@ export default function Chat(props) {
         <ChatLog />
         <MembersList />
       </div>
-      <InputBox onSend={sendMessage} />
+      <InputBox userInfo={userInfo} onSend={sendMessage} />
     </div>
   )
 }

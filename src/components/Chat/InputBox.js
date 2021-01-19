@@ -2,14 +2,15 @@ import { React, useState } from 'react';
 
 
 export default function InputBox(props) {
-  const { onSend } = props;
-  const [ msg, setMsg ] = useState('');
+  const { onSend, userInfo } = props;
+  const { id, name, team_id: teamId } = userInfo;
+  const [ message, setMessage ] = useState('');
 
   const submitForm = (e) => {
     e.preventDefault();
-    if (msg) {
-      onSend(msg);
-      setMsg('');
+    if (message) {
+      onSend({message, timeSent: Date.now(), sender: name});
+      setMessage('');
     }
   };
 
@@ -23,8 +24,8 @@ export default function InputBox(props) {
           name="msg"
           type="text"
           placeholder="Your message"
-          value={msg}
-          onChange={e => setMsg(e.target.value)}
+          value={message}
+          onChange={e => setMessage(e.target.value)}
         />
         <button type="submit">Send</button>
       </form>
