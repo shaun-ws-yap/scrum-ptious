@@ -27,8 +27,6 @@ function App() {
     setTaskItem
   } = useApplicationData();
 
-  console.log(state.teamTasks);
-
   return (
     <div className="container">
       { state.user !== 0 && (
@@ -47,6 +45,7 @@ function App() {
             </nav>
           </section>
         </>
+        
       )}
       
       <section className="main">

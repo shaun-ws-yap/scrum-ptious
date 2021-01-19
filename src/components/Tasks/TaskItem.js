@@ -17,9 +17,9 @@ export default function TaskItem(props) {
       <li
         onClick={() => props.setTaskItem(props), handleShow}
       >
-        <h2>{props.title}</h2>
-        <h3>{props.description}</h3>
-        <h4>Assigned on: {props.due_date}</h4>
+        <h4>{props.title}</h4>
+        <p>{props.description}</p>
+        <h6>Assigned on: {props.due_date}</h6>
       </li>
       {props.role === 1 && <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

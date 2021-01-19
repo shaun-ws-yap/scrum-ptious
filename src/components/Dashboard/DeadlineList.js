@@ -53,7 +53,7 @@ export default function DeadlineList(props) {
       <li className="task-in-progress">
       <DeadlineListItem
         key={deadline.id}
-        name={deadline.title}
+        title={deadline.title}
         description={deadline.description}
         due_date={deadline.due_date}
         creation_date={deadline.creation_date}
