@@ -2,9 +2,11 @@ require('dotenv').config();
 
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
-const express    = require("express");
 const cors       = require('cors');
-const app        = express();
+const app        = require("express")();
+const http       = require('http').Server(app);
+const io         = require('socket.io')(http);
+//const app        = express();
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -17,7 +19,7 @@ db.connect(err => {
 });
 
 app.use(cors());
-app.use(express.static("public"));
+//app.use(express.static("public"));
 
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
@@ -36,6 +38,20 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.listen(PORT, () => {
+io.on('connection', (socket) => {
+  socket.on('joining msg', (username) => {
+    console.log(username + " joined the chat.");
+  });
+
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
+http.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
 })

@@ -33,6 +33,7 @@ function App() {
         <>
           <section className="sidebar">
             <img 
+              alt="Scrum-ptious Logo"
               className="sidebar-centered"
               src="https://logoipsum.com/logo/logo-25.svg"
             />
@@ -46,7 +47,6 @@ function App() {
           </section>
         </>
       )}
-      
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
