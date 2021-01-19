@@ -18,7 +18,8 @@ module.exports = (db) => {
     db.query(queryString)
     .then(data => {
       res.json(data.rows);
-    });
+    })
+    .catch(e => res.send(e));
   });
 
   // Get user by id
@@ -30,7 +31,8 @@ module.exports = (db) => {
     db.query(queryString, [req.params.id])
     .then(data => {
       res.json(data.rows);
-    });
+    })
+    .catch(e => res.send(e));
   });
 
   return router;
