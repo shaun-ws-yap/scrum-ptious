@@ -6,11 +6,11 @@ import { taskStatus, lateTaskStatus } from '../../helpers/taskStatus';
 
 export default function ProjectProgress(props) {
 
-  const assignedTasks = taskStatus(0, props.projectTasks);
-  const inProgressTasks = taskStatus(1, props.projectTasks);
-  const inReviewTasks = taskStatus(2, props.projectTasks);
-  const completeTasks = taskStatus(3, props.projectTasks);
-  const lateTasks = lateTaskStatus(props.projectTasks);
+  const assignedTasks = taskStatus(0, props.teamTasks);
+  const inProgressTasks = taskStatus(1, props.teamTasks);
+  const inReviewTasks = taskStatus(2, props.teamTasks);
+  const completeTasks = taskStatus(3, props.teamTasks);
+  const lateTasks = lateTaskStatus(props.teamTasks);
 
 
   return (
