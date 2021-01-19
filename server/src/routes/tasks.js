@@ -41,6 +41,20 @@ module.exports = (db) => {
     .catch(e => res.send(e));
   })
 
+  // Get task by team_id
+  router.get("/tasks/team/:id", (req, res) => {
+    const queryString = `
+    SELECT * from tasks
+    WHERE projectTask_id = $1
+    `;
+
+    db.query(queryString, [req.params.id])
+    .then(data => {
+      res.json(data.rows)
+    })
+    .catch(e => res.send(e));
+  })
+
   // Create and edit task
   router.put("/tasks/:id", (req, res) => {
     const { params } = req.body;

@@ -27,6 +27,8 @@ function App() {
     setTaskItem
   } = useApplicationData();
 
+  console.log(state.teamTasks);
+
   return (
     <div className="container">
       { state.user !== 0 && (
@@ -50,7 +52,7 @@ function App() {
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} /> }
+        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} /> }
 
       </section>
       

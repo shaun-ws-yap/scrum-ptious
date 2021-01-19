@@ -38,7 +38,7 @@ export default function Sidebar(props) {
     'sidebar__item--selected': props.selected
   })
 
-  console.log(props)
+  // console.log(props)
 
   return (
     <ul>
