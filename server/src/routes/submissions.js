@@ -28,6 +28,7 @@ module.exports = (db) => {
     .then(data => {
       res.json(data.rows[0])
     })
+    .catch(e => res.send(e));
   })
 
   return router;

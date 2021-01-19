@@ -15,6 +15,8 @@ import useApplicationData from '../hooks/useApplicationData';
 import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
