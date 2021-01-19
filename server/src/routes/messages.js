@@ -35,9 +35,9 @@ module.exports = (db) => {
         send_time,
         message
       )
-      VALUES ($1, $2, $3, $4)
+      VALUES ($1, $2, to_timestamp($3), $4)
       RETURNING *
-    `, [senderId, teamId, sendTime, message])
+    `, [senderId, teamId, sendTime / 1000, message])
     .then(data => res.json(data.rows[0]))
     .catch(err => {
       res

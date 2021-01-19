@@ -8,16 +8,16 @@ import '../../styles/Chat.css';
 
 import { io } from 'socket.io-client';
 
-const name = 'User'
 
-export default function Chat() {
+export default function Chat(props) {
+  const { userInfo } = props;
   const socket = io();
 
-  const sendMessage = (message) => {
-    socket.emit('chat message', message);
+  const sendMessage = (messageData) => {
+    socket.emit('chat message', messageData);
   }
 
-  socket.emit('joining msg', name);
+  socket.emit('joining msg', userInfo.name);
 
   socket.on('chat message', function(msg) {
     console.log(msg);
@@ -29,7 +29,7 @@ export default function Chat() {
         <ChatLog />
         <MembersList />
       </div>
-      <InputBox onSend={sendMessage} />
+      <InputBox userInfo={userInfo} onSend={sendMessage} />
     </div>
   )
 }

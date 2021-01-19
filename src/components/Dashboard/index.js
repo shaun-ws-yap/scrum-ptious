@@ -14,17 +14,19 @@ export default function Dashboard(props) {
   const CHAT = "Chat";
   const PERFORMANCE_REVIEW = "Performance Review"
 
+  const { menu, tasks, teamTasks, setTaskItem, taskItem, role, userInfo } = props;
+
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
-        { props.menu === DASHBOARD && <ProjectProgress projectTasks={props.tasks} teamTasks={props.teamTasks} />}
-        { props.menu === TASKS && <Tasks tasks={props.tasks} setTaskItem={props.setTaskItem} taskItem={props.taskItem} role={props.role} teamTasks={props.teamTasks} />}
-        { props.menu === CHAT && <Chat />}
-        { props.menu === PERFORMANCE_REVIEW && <PerformanceReview />}
+        { menu === DASHBOARD && <ProjectProgress projectTasks={tasks} teamTasks={teamTasks} />}
+        { menu === TASKS && <Tasks tasks={tasks} setTaskItem={setTaskItem} taskItem={taskItem} role={role} teamTasks={teamTasks} />}
+        { menu === CHAT && <Chat userInfo={userInfo}/>}
+        { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
       <div className="dashboard-bottom">
-      {props.menu === DASHBOARD && props.role === 1 && <h1>Project Manager View</h1>}
-      {props.menu === DASHBOARD && props.role === 2 && <IndependentProgress independentTasks={props.tasks} />}
+      {menu === DASHBOARD && role === 1 && <h1>Project Manager View</h1>}
+      {menu === DASHBOARD && role === 2 && <IndependentProgress independentTasks={tasks} />}
       </div>
     </div>
   )

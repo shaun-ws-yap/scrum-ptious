@@ -4,7 +4,7 @@ const path = require("path");
 
 // PG database client/connection setup
 const { Client } = require('pg');
-const dbParams = require('./lib/db');
+const dbParams = require('../lib/db');
 const db = new Client(dbParams);
 db.connect(err => {
   if (err) {
@@ -28,8 +28,8 @@ function read(file) {
 }
 
 Promise.all([
-  read(path.resolve(__dirname, `db/schema/create.sql`)),
-  read(path.resolve(__dirname, `db/schema/development.sql`))
+  read(path.resolve(__dirname, `./schema/create.sql`)),
+  read(path.resolve(__dirname, `./schema/development.sql`))
 ])
   .then(([create, seed]) => {
     db.query(create)
