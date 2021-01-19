@@ -48,8 +48,6 @@ const deadlines = [
 
 export default function DeadlineList(props) {
 
-  console.log(props.userDeadlines);
-
   const allDeadlines = props.userDeadlines.map((deadline) => {
     return (
       <li className="task-in-progress">

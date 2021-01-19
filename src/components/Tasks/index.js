@@ -11,8 +11,14 @@ export default function Tasks(props) {
   
   return (
     <div className='dashboard'>
+      { props.taskItem !== undefined && (
+        <>
+          <h1>{props.taskItem}</h1>
+          <button onClick={() => props.setTaskItem(undefined)}>x</button>
+        </>
+      ) }
       <div className="dashboard-top">
-        <TaskProgress tasks={props.tasks} />
+        <TaskProgress tasks={props.tasks} setTaskItem={props.setTaskItem} />
       </div>
       <div className="dashboard-bottom">
         <TaskResource />
