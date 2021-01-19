@@ -28,6 +28,7 @@ function App() {
     <div className="container">
       <section className="sidebar">
         <img 
+          alt="Scrum-ptious Logo"
           className="sidebar-centered"
           src="https://logoipsum.com/logo/logo-25.svg"
         />
