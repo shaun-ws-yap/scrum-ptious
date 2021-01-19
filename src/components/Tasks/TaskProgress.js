@@ -15,9 +15,11 @@ export default function TaskProgress(props) {
             return (
               <TaskItem 
                 key={index}
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
+                setTaskItem={props.setTaskItem}
               />
             )
           }
@@ -31,9 +33,11 @@ export default function TaskProgress(props) {
             return (
               <TaskItem 
                 key={index}
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
+                setTaskItem={props.setTaskItem}
               />
             )
           }
@@ -47,9 +51,11 @@ export default function TaskProgress(props) {
             return (
               <TaskItem 
                 key={index}
+                id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
+                setTaskItem={props.setTaskItem}
               />
             )
           }

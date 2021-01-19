@@ -18,7 +18,7 @@ export default function Dashboard(props) {
     <div className='dashboard'>
       <div className="dashboard-top">
         { props.menu === DASHBOARD && <ProjectProgress projectTasks={props.tasks} />}
-        { props.menu === TASKS && <Tasks tasks={props.tasks} />}
+        { props.menu === TASKS && <Tasks tasks={props.tasks} setTaskItem={props.setTaskItem} taskItem={props.taskItem} />}
         { props.menu === CHAT && <Chat />}
         { props.menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
