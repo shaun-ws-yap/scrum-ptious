@@ -24,6 +24,7 @@ export default function useApplicationData(props) {
     })
     
   }, [state.user])
+
   return { state, setMenu, setUser }
 
 }

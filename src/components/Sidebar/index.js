@@ -18,25 +18,53 @@ const menuItems = [
   }
 ];
 
+const managerMenuItems = [
+  {
+    name: 'Dashboard'
+  },
+  {
+    name: 'Tasks'
+  },
+  {
+    name: 'Chat'
+  },
+  {
+    name: 'Performance Review'
+  }
+]
+
 export default function Sidebar(props) {
   const menuClass = classNames("sidebar__item", {
     'sidebar__item--selected': props.selected
   })
 
-  const options = menuItems.map(menu => {
-    return (
-      <SidebarItem
-        key={menu.name}
-        name={menu.name}
-        selected={menu.name === props.menu}
-        setMenu={props.setMenu}
-      />
-    )
-  })
+  console.log(props)
 
   return (
     <ul>
-      {options}
+     { props.userInfo && props.userInfo.role === 2 && menuItems.map(menu => {
+        return (
+          <SidebarItem
+            key={menu.name}
+            name={menu.name}
+            selected={menu.name === props.menu}
+            setMenu={props.setMenu}
+          />
+        )
+      }) }
+
+      { props.userInfo && props.userInfo.role === 1 && managerMenuItems.map(menu => {
+        return (
+          <SidebarItem
+            key={menu.name}
+            name={menu.name}
+            selected={menu.name === props.menu}
+            setMenu={props.setMenu}
+          />
+        )
+      }) } 
+
+      
     </ul>
   )
 }
