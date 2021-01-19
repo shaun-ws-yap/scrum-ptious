@@ -20,6 +20,7 @@ export default function TaskProgress(props) {
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
+                role={props.role}
               />
             )
           }
@@ -38,6 +39,7 @@ export default function TaskProgress(props) {
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
+                role={props.role}
               />
             )
           }
@@ -56,6 +58,7 @@ export default function TaskProgress(props) {
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
+                role={props.role}
               />
             )
           }

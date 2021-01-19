@@ -3,13 +3,9 @@ import React, { useState } from 'react';
 export default function Login(props) {
 
   return (
-    <form
-      // onChange={event => props.setUser(event.target.value)}
-      // onSubmit={event => event.preventDefault()}
-    >
+    <form>
       <h1>Enter your user ID: </h1>
-      <input 
-        value={props.user}
+      <input
         onChange={event => props.setUser(event.target.value)}
       />
       <button

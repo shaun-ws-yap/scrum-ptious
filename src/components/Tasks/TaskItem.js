@@ -10,6 +10,8 @@ export default function TaskItem(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log(props.role);
+
   return (
     <>
       <li
@@ -19,8 +21,7 @@ export default function TaskItem(props) {
         <h3>{props.description}</h3>
         <h4>Assigned on: {props.due_date}</h4>
       </li>
-
-      <Modal show={show} onHide={handleClose}>
+      {props.role === 1 && <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>{props.title}</Modal.Title>
         </Modal.Header>
@@ -39,7 +40,7 @@ export default function TaskItem(props) {
             Edit
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal>}
     </>
 
     
