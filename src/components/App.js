@@ -47,7 +47,7 @@ function App() {
       </section>
       
       <section className="user__info">
-        <UserInfo deadlines={state.tasks} />
+        <UserInfo userInfo={state.userInfo} deadlines={state.tasks} />
       </section>
     </div>
   );
