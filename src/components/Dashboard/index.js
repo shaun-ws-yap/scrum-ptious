@@ -23,7 +23,8 @@ export default function Dashboard(props) {
         { props.menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
       <div className="dashboard-bottom">
-      { props.menu === DASHBOARD && <IndependentProgress independentTasks={props.tasks} />}
+      {props.menu === DASHBOARD && props.role === 1 && <h1>Project Manager View</h1>}
+      {props.menu === DASHBOARD && props.role === 2 && <IndependentProgress independentTasks={props.tasks} />}
       </div>
     </div>
   )

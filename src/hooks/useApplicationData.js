@@ -7,7 +7,8 @@ export default function useApplicationData(props) {
     menu: "Dashboard",
     tasks: [],
     userInfo: {},
-    taskItem: {},
+    taskItem: [],
+    role: 0
   })
   
   const GET_TASKS = `http://localhost:8080/api/tasks/user/${state.user}`;
@@ -22,10 +23,12 @@ export default function useApplicationData(props) {
       axios.get(GET_TASKS),
       axios.get(GET_USER_INFO),
     ]).then(all => {
-      setState(prev => ({ ...prev, tasks: all[0].data, userInfo: all[1].data[0] }))
+      if (state.user !== 0) {
+      setState(prev => ({ ...prev, tasks: all[0].data, userInfo: all[1].data[0], role: all[1].data[0]['role'] }))
+      }
+
     })
-    
-  }, [state.user, state.taskItem])
+  }, [state.user])
 
   return { state, setMenu, setUser, setTaskItem }
 
