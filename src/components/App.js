@@ -26,19 +26,24 @@ function App() {
 
   return (
     <div className="container">
-      <section className="sidebar">
-        <img 
-          className="sidebar-centered"
-          src="https://logoipsum.com/logo/logo-25.svg"
-        />
-        <nav className="sidebar__menu">
-          <Sidebar
-            menu={state.menu}
-            setMenu={setMenu}
-          />
-        </nav>
-      </section>
-
+      { state.user !== 0 && (
+        <>
+          <section className="sidebar">
+            <img 
+              className="sidebar-centered"
+              src="https://logoipsum.com/logo/logo-25.svg"
+            />
+            <nav className="sidebar__menu">
+              <Sidebar
+                menu={state.menu}
+                setMenu={setMenu}
+                userInfo={state.userInfo}
+              />
+            </nav>
+          </section>
+        </>
+      )}
+      
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
@@ -47,7 +52,7 @@ function App() {
       </section>
       
       <section className="user__info">
-        <UserInfo userInfo={state.userInfo} deadlines={state.tasks} />
+        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.tasks} /> }
       </section>
     </div>
   );
