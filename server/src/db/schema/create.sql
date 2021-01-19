@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS teams CASCADE;
+CREATE TABLE teams (
+  id SERIAL PRIMARY KEY NOT NULL,
+  team_name VARCHAR(255) NOT NULL
+  -- ,manager_id INTEGER REFERENCES employees(id) NOT NULL
+);
+
 DROP TABLE IF EXISTS employees CASCADE;
 CREATE TABLE employees (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -5,14 +12,7 @@ CREATE TABLE employees (
   email VARCHAR(255) NOT NULL,
   phone_number VARCHAR(255) NOT NULL,
   role INTEGER NOT NULL,
-  team_id INTEGER REFERENCES teams(id) 
-);
-
-DROP TABLE IF EXISTS teams CASCADE;
-CREATE TABLE teams (
-  id SERIAL PRIMARY KEY NOT NULL,
-  team_name VARCHAR(255) NOT NULL,
-  manager_id INTEGER REFERENCES employees(id) NOT NULL
+  team_id INTEGER REFERENCES teams(id)
 );
 
 DROP TABLE IF EXISTS tasks CASCADE;

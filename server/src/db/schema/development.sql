@@ -1,12 +1,12 @@
 INSERT INTO teams (
   id,
-  team_name,
-  manager_id
+  team_name
+  -- ,manager_id
 ) 
 VALUES (
   1,
-  'Super Team 1',
-  1
+  'Super Team 1'
+  -- .1
 );
 
 INSERT INTO employees (
@@ -82,17 +82,17 @@ VALUES (
   2,
   1,
   '2021-01-05 13:11:12',
-  "Whats poppin"
+  'Whats poppin'
 ),
 (
   1,
   1,
   '2021-01-05 14:56:12',
-  "Stop slacking and get back to work!"
+  'Stop slacking and get back to work!'
 ),
 (
   3,
   1,
   '2021-01-05 15:01:32',
-  "Oh shit, big boss is here"
+  'Oh shit, big boss is here'
 );
