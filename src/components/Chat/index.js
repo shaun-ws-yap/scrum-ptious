@@ -8,20 +8,26 @@ import '../../styles/Chat.css';
 
 import { io } from 'socket.io-client';
 
-const name = 'User'
+let socket;
 
-export default function Chat() {
-  const socket = io();
+export default function Chat(props) {
+  const { userInfo } = props;
+
+  useEffect(() => {
+    socket = io();
+
+    socket.emit('joining msg', userInfo.name);
+  
+    socket.on('chat message', function(msg) {
+      console.log(msg);
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
 
   const sendMessage = (message) => {
     socket.emit('chat message', message);
   }
-
-  socket.emit('joining msg', name);
-
-  socket.on('chat message', function(msg) {
-    console.log(msg);
-  });
 
   return (
     <div className="chat-container">
