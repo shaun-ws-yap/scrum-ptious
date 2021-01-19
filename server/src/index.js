@@ -12,6 +12,7 @@ const io         = require('socket.io')(http);
 const { Pool } = require('pg');
 const dbParams = require('./lib/db');
 const db = new Pool(dbParams);
+
 db.connect(err => {
   if (err) {
     return console.error("could not connect to postgres", err);
@@ -54,4 +55,4 @@ io.on('connection', (socket) => {
 
 http.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
-})
+});
