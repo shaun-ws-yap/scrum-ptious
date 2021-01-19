@@ -15,6 +15,8 @@ import useApplicationData from '../hooks/useApplicationData';
 import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
 
@@ -22,33 +24,38 @@ function App() {
     state,
     setMenu,
     setUser,
+    setTaskItem
   } = useApplicationData();
 
   return (
     <div className="container">
-      <section className="sidebar">
-        <img 
-          alt="Scrum-ptious Logo"
-          className="sidebar-centered"
-          src="https://logoipsum.com/logo/logo-25.svg"
-        />
-        <nav className="sidebar__menu">
-          <Sidebar
-            menu={state.menu}
-            setMenu={setMenu}
-          />
-        </nav>
-      </section>
-
+      { state.user !== 0 && (
+        <>
+          <section className="sidebar">
+            <img 
+              alt="Scrum-ptious Logo"
+              className="sidebar-centered"
+              src="https://logoipsum.com/logo/logo-25.svg"
+            />
+            <nav className="sidebar__menu">
+              <Sidebar
+                menu={state.menu}
+                setMenu={setMenu}
+                userInfo={state.userInfo}
+              />
+            </nav>
+          </section>
+        </>
+      )}
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} /> }
+        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} /> }
 
       </section>
       
       <section className="user__info">
-        <UserInfo userInfo={state.userInfo} deadlines={state.tasks} />
+        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.tasks} /> }
       </section>
     </div>
   );

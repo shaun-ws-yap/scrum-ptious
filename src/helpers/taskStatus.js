@@ -10,3 +10,14 @@ export function taskStatus (status, data) {
   return counter;
 }
 
+export function lateTaskStatus (data) {
+  let counter = 0;
+
+  for (const index of data) {
+    if (index.is_late === true) {
+      counter += 1;
+    }
+  }
+
+  return counter;
+}

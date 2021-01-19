@@ -28,14 +28,27 @@ INSERT INTO tasks (
   due_date,
   employee_id,
   status,
-  is_viewed
+  is_viewed,
+  projecttask_id,
+  is_late
 )
 VALUES 
-('Create ERD', 'Design ERD to base schema off of', '2021-01-20 17:00:00', 3, 0, false),
-('Create Schema', 'Write sql to create tables for database', '2021-01-20 17:00:00', 1, 1, true),
-('Create seeds', 'Insert into tables in database dummy data for testing', '2021-01-15 17:00:00', 2, 2, true),
-('Setup project skeleton', 'Install packages and write boiler plate code', '2021-01-10 17:00:00', 1, 3, false),
-('Start project', 'Start on project', '2021-01-10 17:00:00', 4, 4, true);
+('Create ERD', 'Design ERD to base schema off of', '2021-01-20 17:00:00', 3, 0, false, 1, false),
+('Create Schema', 'Write sql to create tables for database', '2021-01-20 17:00:00', 4, 1, true, 1, false),
+('Create seeds', 'Insert into tables in database dummy data for testing', '2021-01-15 17:00:00', 2, 2, true, 1, true),
+('Setup project skeleton', 'Install packages and write boiler plate code', '2021-01-10 17:00:00', 2, 2, false, 1, true),
+('Start project', 'Start on project', '2021-01-10 17:00:00', 4, 1, true, 1, true),
+
+('Create API server', 'Use API server to persist data from the database', '2021-01-20 17:00:00', 2, 3, false, 1, false),
+('Setup routes', 'Setup routes to query our database tables', '2021-01-20 17:00:00', 3, 3, true, 1, false),
+('Setup React layout(Sidebar, 1/3)', 'Begin to setup layout of front-end by creating a nav sidebar', '2021-01-15 17:00:00', 3, 3, true, 1, false),
+('Setup React layout(Dashboard display, 2/3)', 'Setup different displays for different sections of the dashboard(Main, Tasks, Chat)', '2021-01-10 17:00:00', 2, 2, false, 1, true),
+('Start React layout(User panel, 3/3)', 'Setup user panel to display image, name and upcoming deadlines of tasks', '2021-01-10 17:00:00', 4, 2, true, 1, true),
+('Create Main Dashboard components', 'Create components to display the top dashboard(project progress) and bottom dashboard (independent progress)', '2021-01-20 17:00:00', 5, 0, false, 1, false),
+('Utilize Charts.js library', 'Use the Charts.js library to visualize data of project/independent progress', '2021-01-20 17:00:00', 5, 3, true, 1, false),
+('Setup axios', 'Setup communications between our React and API server to retrieve data from our database', '2021-01-15 17:00:00', 2, 2, true, 1, true),
+('Use axios requests for Tasks section', 'Utilize axios to retrieve tasks according to the individual employee', '2021-01-10 17:00:00', 3, 0, false, 1, true),
+('Use axios requests for User panel', 'Utilize axios to retrieve deadlines according to the individual employee', '2021-01-10 17:00:00', 3, 1, true, 1, true);
 
 
 INSERT INTO submissions (
