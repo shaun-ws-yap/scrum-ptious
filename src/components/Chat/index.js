@@ -7,20 +7,25 @@ import InputBox from "./InputBox";
 import '../../styles/Chat.css';
 
 import { io } from 'socket.io-client';
-
 let socket;
 
 export default function Chat(props) {
   const { userInfo } = props;
+  const { name } = userInfo;
 
   useEffect(() => {
     socket = io();
 
-    socket.emit('joining msg', userInfo.name);
+    socket.emit('joining msg', name);
   
     socket.on('chat message', function(messageData) {
       console.log(messageData);
     });
+
+    return () => {
+      socket.off('chat message');
+      socket.emit('leaving msg', name);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -38,4 +43,4 @@ export default function Chat(props) {
       <InputBox userInfo={userInfo} onSend={sendMessage} />
     </div>
   )
-}
+};
