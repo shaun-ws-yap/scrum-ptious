@@ -40,16 +40,20 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-  socket.on('joining msg', (username) => {
+  socket.on('joining msg', username => {
     console.log(username + " joined the chat.");
   });
 
-  socket.on('chat message', (message) => {
+  socket.on('leaving msg', username => {
+    console.log(username + " left the chat.");
+  })
+
+  socket.on('chat message', message => {
     io.emit('chat message', message);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('Disconnected');
   });
 });
 
