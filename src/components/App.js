@@ -27,6 +27,18 @@ function App() {
     setTaskItem
   } = useApplicationData();
 
+  /*** spread out state instead if you want ***/
+  const { 
+    // user,
+    // menu,
+    // tasks,
+    userInfo,
+    // taskItem,
+    // role,
+    // team,
+    // teamTasks
+  } = state
+
   return (
     <div className="container">
       { state.user !== 0 && (
@@ -51,12 +63,12 @@ function App() {
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} /> }
+        { state.user !== 0 && <Dashboard userInfo={userInfo} menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} /> }
 
       </section>
       
       <section className="user__info">
-        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.tasks} /> }
+        { state.user !== 0 && <UserInfo userInfo={userInfo} deadlines={state.tasks} /> }
       </section>
     </div>
   );
