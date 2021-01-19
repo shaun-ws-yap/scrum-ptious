@@ -1,5 +1,6 @@
 import React from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
+import { taskStatus, lateTaskStatus } from '../../helpers/taskStatus';
 
 // import ProjectProgressListItem from './ProjectProgressListItem';
 
@@ -88,23 +89,11 @@ import { Doughnut, Bar } from 'react-chartjs-2';
 
 export default function IndependentProgress(props) {
 
-  const taskStatus = (status, data) => {
-    let counter = 0;
-  
-    for (const index of data) {
-      if (index.status === status) {
-        counter += 1
-      }
-    }
-  
-    return counter;
-  }
-
   const assignedTasks = taskStatus(0, props.independentTasks);
   const inProgressTasks = taskStatus(1, props.independentTasks);
   const inReviewTasks = taskStatus(2, props.independentTasks);
-  const lateTasks = taskStatus(3, props.independentTasks);
-  const completeTasks = taskStatus(4, props.independentTasks);
+  const completeTasks = taskStatus(3, props.independentTasks);
+  const lateTasks = lateTaskStatus(props.independentTasks);
 
 
   return (
