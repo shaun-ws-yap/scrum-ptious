@@ -41,7 +41,7 @@ DROP TABLE IF EXISTS messages CASCADE;
 CREATE TABLE messages(
   id SERIAL PRIMARY KEY NOT NULL,
   sender_id INTEGER REFERENCES employees(id) NOT NULL ,
-  team_id INTEGER REFERENCES teams(id) NOT NULL ,
+  team_id INTEGER REFERENCES teams(id) NOT NULL,
   send_time TIMESTAMP NOT NULL DEFAULT NOW(),
   message VARCHAR(500) NOT NULL
 );

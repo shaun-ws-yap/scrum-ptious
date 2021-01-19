@@ -44,8 +44,8 @@ io.on('connection', (socket) => {
     console.log(username + " joined the chat.");
   });
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('chat message', (message) => {
+    io.emit('chat message', message);
   });
 
   socket.on('disconnect', () => {
