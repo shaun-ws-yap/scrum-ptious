@@ -15,7 +15,7 @@ export default function useApplicationData(props) {
   
   const GET_TASKS = `http://localhost:8080/api/tasks/user/${state.user}`;
   const GET_USER_INFO = `http://localhost:8080/api/employees/${state.user}`;
-  const GET_TEAM_TASKS = `http://localhost:8080/api/tasks/team/${state.user}`;
+  const GET_TEAM_TASKS = `http://localhost:8080/api/tasks/team/${state.team}`;
 
   const setMenu = menu => setState({...state, menu});
   const setUser = user => setState({...state, user});

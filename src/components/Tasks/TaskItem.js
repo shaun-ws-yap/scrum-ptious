@@ -10,8 +10,6 @@ export default function TaskItem(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(props.role);
-
   return (
     <>
       <li
