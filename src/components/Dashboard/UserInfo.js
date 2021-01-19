@@ -19,11 +19,7 @@ export default function UserInfo(props) {
         <h4>{props.userInfo.name} </h4>
         <h5>{roles[props.userInfo.role]}</h5>
         <div>
-          Task Deadlines:
-          <br />
-          <div>
-            <DeadlineList />
-          </div>
+          <DeadlineList userDeadlines={props.deadlines} />
         </div>
         </>
         ) 
