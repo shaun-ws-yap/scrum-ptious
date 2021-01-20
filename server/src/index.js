@@ -7,7 +7,6 @@ const app        = require("express")();
 const bodyParser = require("body-parser");
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
-const bodyParser = require('body-parser');
 //const app        = express();
 
 const { saveMessage } = require("./routes/helpers/messages");
@@ -17,9 +16,9 @@ const submissionRoutes = require("./routes/submissions");
 const taskRoutes = require("./routes/tasks");
 
 // PG database client/connection setup
-const { Pool } = require('pg');
+const { Client } = require('pg');
 const dbParams = require('./lib/db');
-const db = new Pool(dbParams);
+const db = new Client(dbParams);
 
 db.connect(err => {
   if (err) {

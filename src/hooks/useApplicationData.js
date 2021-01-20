@@ -41,43 +41,21 @@ export default function useApplicationData(props) {
       }
     })
     .catch(e => console.log(e));
-  }, [state.user, state.team])
+  }, [state.user, state.team, state.teamTasks])
 
-  console.log(state.allTasks);
 
   function createTaskItem(taskItem) {
-
-    const task = {...taskItem, projecttask_id: state.team }
+    let task = {...taskItem, projecttask_id: state.team }
 
     return axios.put(`http://localhost:8080/api/tasks`, task)
     .then(res => {
-      console.log("successfully added", task)
+      const id = res.data.id;
+      task = {...task, id: id};
+      const tmp = [...state.teamTasks];
+      tmp.push(task);
+      setState(prev => ({...prev, teamTasks: tmp}))
     })
     .catch(e => console.log(e));
-
-    // const task = {
-    //   ...state.teamTasks[id],
-
-    //   description,
-    // }
-
-    // const tasks = {
-    //   ...state.tasks,
-    //   [id]: task
-    // }
-
-    // console.log(task.title);
-    
-    // return axios.put(`http://localhost:8080/api/tasks/${id}`, task)
-    // .then(() => {
-    //   console.log('successful');
-    //   // call tasks
-    //   // setState({
-    //   //   ...state,
-    //   //   tasks
-    //   // });
-    // })
-    // .catch((e) => console.log(e));
   }
 
   return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem  }

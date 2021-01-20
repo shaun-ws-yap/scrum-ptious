@@ -59,16 +59,17 @@ module.exports = (db) => {
   router.put("/tasks", (req, res) => {
     const params = req.body;
 
-    console.log(params)
+    // console.log(params)
 
     const queryString = `
       INSERT INTO tasks (title, description, due_date, employee_id, projecttask_id)
       VALUES ($1, $2, $3, $4, $5)
+      RETURNING id
     `;
 
     db.query(queryString, [params.title, params.description, params.due_date, params.employee_id, params.projecttask_id])
     .then(data => {
-      res.status(204).json({});
+      res.send(data.rows[0])
     })
     .catch(e => res.send(e));
   })
