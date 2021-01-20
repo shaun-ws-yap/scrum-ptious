@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { saveMessage } = require('./helpers/messages');
+const { saveMessage } = require('./queries/messages');
 
 module.exports = (db) => {
   

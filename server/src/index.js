@@ -7,10 +7,9 @@ const app        = require("express")();
 const bodyParser = require("body-parser");
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
-const bodyParser = require('body-parser');
 //const app        = express();
 
-const { saveMessage } = require("./routes/helpers/messages");
+const { saveMessage } = require("./routes/queries/messages");
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
