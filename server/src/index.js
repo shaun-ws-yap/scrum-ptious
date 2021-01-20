@@ -9,9 +9,9 @@ const io         = require('socket.io')(http);
 //const app        = express();
 
 // PG database client/connection setup
-const { Pool } = require('pg');
+const { Client } = require('pg');
 const dbParams = require('./lib/db');
-const db = new Pool(dbParams);
+const db = new Client(dbParams);
 
 db.connect(err => {
   if (err) {
