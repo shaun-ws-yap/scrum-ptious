@@ -32,18 +32,6 @@ function App() {
     createTaskItem
   } = useApplicationData();
 
-  /*** spread out state instead if you want ***/
-  const { 
-    // user,
-    // menu,
-    // tasks,
-    userInfo,
-    // taskItem,
-    // role,
-    // team,
-    // teamTasks
-  } = state
-
   return (
     <div className="container">
       { state.user !== 0 && (
@@ -70,12 +58,12 @@ function App() {
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard user={state.user} userInfo={userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks} setAllTasks={setAllTasks} allTasks={state.allTasks} createTaskItem={createTaskItem} /> }
+        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks} setAllTasks={setAllTasks} allTasks={state.allTasks} createTaskItem={createTaskItem} /> }
 
       </section>
       
       <section className="user__info">
-        { state.user !== 0 && <UserInfo userInfo={userInfo} deadlines={state.tasks} /> }
+        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.tasks} /> }
       </section>
     </div>
   );
