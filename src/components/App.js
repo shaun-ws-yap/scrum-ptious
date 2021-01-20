@@ -16,6 +16,7 @@ import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 
 function App() {
@@ -24,7 +25,8 @@ function App() {
     state,
     setMenu,
     setUser,
-    setTaskItem
+    setTaskItem,
+    createTaskItem
   } = useApplicationData();
 
   return (
@@ -42,6 +44,8 @@ function App() {
                 menu={state.menu}
                 setMenu={setMenu}
                 userInfo={state.userInfo}
+                team={state.teamMembers}
+                createTaskItem={createTaskItem}
               />
             </nav>
           </section>
@@ -51,7 +55,7 @@ function App() {
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} /> }
+        { state.user !== 0 && <Dashboard menu={state.menu} tasks={state.tasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} createTaskItem={createTaskItem} /> }
 
       </section>
       

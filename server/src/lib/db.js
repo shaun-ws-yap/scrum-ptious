@@ -3,7 +3,7 @@ if (process.env.DATABASE_URL) {
   dbParams.connectionString = process.env.DATABASE_URL;
 } else {
   dbParams = {
-    max: 5,
+    max: 20,
     host: process.env.PGHOST,
     port: process.env.PGPORT,
     user: process.env.PGUSER,

@@ -4,8 +4,6 @@ import TaskItem from './TaskItem';
 
 export default function TaskProgress(props) {
 
-  console.log("from task view", props.tasks)
-
   // console.log(props.teamTasks);
 
   return (
@@ -16,13 +14,15 @@ export default function TaskProgress(props) {
           if (item.status === 0) {
             return (
               <TaskItem 
-                key={index}
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
                 role={props.role}
+                assignedTo={item.employee_id}
+                createTaskItem={props.createTaskItem}
               />
             )
           }
@@ -31,13 +31,15 @@ export default function TaskProgress(props) {
           if (item.status === 0) {
             return (
               <TaskItem 
-                key={index}
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
                 role={props.role}
+                assignedTo={item.employee_id}
+                createTaskItem={props.createTaskItem}
               />
             )
           }
@@ -50,13 +52,15 @@ export default function TaskProgress(props) {
           if (item.status === 1 || item.status === 2) {
             return (
               <TaskItem 
-                key={index}
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
                 role={props.role}
+                assignedTo={item.employee_id}
+                createTaskItem={props.createTaskItem}
               />
             )
           }
@@ -65,13 +69,15 @@ export default function TaskProgress(props) {
           if (item.status === 1 || item.status === 2) {
             return (
               <TaskItem 
-                key={index}
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
                 role={props.role}
+                assignedTo={item.employee_id}
+                createTaskItem={props.createTaskItem}
               />
             )
           }
@@ -84,13 +90,15 @@ export default function TaskProgress(props) {
           if (item.status === 3) {
             return (
               <TaskItem 
-                key={index}
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
                 role={props.role}
+                assignedTo={item.employee_id}
+                createTaskItem={props.createTaskItem}
               />
             )
           }
@@ -99,13 +107,15 @@ export default function TaskProgress(props) {
           if (item.status === 3) {
             return (
               <TaskItem 
-                key={index}
+                key={item.id}
                 id={item.id}
                 title={item.title}
                 description={item.description}
                 due_date={item.due_date}
                 setTaskItem={props.setTaskItem}
                 role={props.role}
+                assignedTo={item.employee_id}
+                createTaskItem={props.createTaskItem}
               />
             )
           }
