@@ -9,7 +9,7 @@ const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
-const { saveMessage } = require("./routes/queries/messages");
+const { saveMessage, getRecentMessages } = require("./routes/queries/messages");
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
@@ -46,17 +46,20 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   socket.on('joining msg', username => {
     console.log(username + " joined the chat.");
+    getRecentMessages(db, 10)
+      .then(data => io.emit('join', { messagesData: data.rows }))
+      .catch(err => io.emit('error', 'could not retrieve messages from db: ' + err));
   });
 
   socket.on('leaving msg', username => {
     console.log(username + " left the chat.");
-  })
+  });
 
   socket.on('chat message', messageData => {
     io.emit('chat message', messageData);
     saveMessage(db, messageData)
       .then(data => io.emit('message saved', data.rows[0]))
-      .catch(err => io.emit('error', err));
+      .catch(err => io.emit('error', 'could not save message to db: ' + err));
   });
 
   socket.on('disconnect', () => {
