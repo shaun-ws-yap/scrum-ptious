@@ -75,7 +75,7 @@ VALUES (
 INSERT INTO messages (
   sender_id,
   team_id,
-  send_time,
+  time_iso,
   message
 )
 VALUES (

@@ -2,14 +2,13 @@ import { React, useState } from 'react';
 
 
 export default function InputBox(props) {
-  const { onSend, userInfo } = props;
-  const { id, name, team_id: teamId } = userInfo;
+  const { sendMessage } = props;
   const [ message, setMessage ] = useState('');
 
   const submitForm = (e) => {
     e.preventDefault();
     if (message) {
-      onSend({message, timeSent: Date.now(), sender: name});
+      sendMessage( message );
       setMessage('');
     }
   };
