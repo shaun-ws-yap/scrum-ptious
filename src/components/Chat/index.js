@@ -1,5 +1,6 @@
 import { React, useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
+import axios from "axios";
 
 import ChatLog from "./ChatLog";
 import MembersList from "./MembersList";
@@ -9,37 +10,20 @@ import '../../styles/Chat.css';
 
 import formatDateString from "../../utilities/format-date";
 
-let socket;
+const MESSAGES_URL = "http://localhost:8080/api/messages/10";
 
-const dummyMsgs = [
-  {
-    sender_id: 2,
-    sender: "Shaun Yap",
-    message: "Whats poppin",
-    time_iso: "2021-01-05T21:11:12.000Z",
-    time_locale: "Jan 5, 2021 at 1:11 PM"
-  },
-  {
-    sender_id: 1,
-    sender: "Andy Lindsay",
-    message: "Stop slacking and get back to work!",
-    time_iso: "2021-01-05T22:56:12.000Z",
-    time_locale: "Jan 5, 2021 at 2:56 PM"
-  },
-  {
-    sender_id: 3,
-    sender: "Kevin Li",
-    message: "Oh shit, big boss is here",
-    time_iso: "2021-01-05T23:01:32.000Z",
-    time_locale: "Jan 5, 2021 at 3:01 PM"
-  }
-];
+let socket;
 
 export default function Chat(props) {
   const { userInfo } = props;
-  const { id, name } = userInfo;
+  const { id, name, team_id } = userInfo;
 
-  const [messages, setMessages] = useState(dummyMsgs);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    axios.get(MESSAGES_URL)
+    .then(messages => setMessages(messages.data));
+  }, []);
 
   useEffect(() => {
     socket = io();
@@ -48,11 +32,20 @@ export default function Chat(props) {
   
     socket.on('chat message', function(messageData) {
       setMessages(prev => [...prev, messageData])
-      console.log(messageData);
     });
+
+    socket.on('message saved', function(messageData) {
+      console.log('message saved: ', messageData);
+    });
+
+    socket.on('error', function(error) {
+      console.log('error saving message: ', error);
+    })
 
     return () => {
       socket.off('chat message');
+      socket.off('message saved');
+      socket.off('error');
       socket.emit('leaving msg', name);
       socket.close(); // TODO: need to ask mentor about this and useRef
     };
@@ -63,6 +56,7 @@ export default function Chat(props) {
     const now = new Date();
     const messageData = {
       message,
+      team_id,
       sender_id: id,
       sender: name,
       time_iso: now.toISOString(),
