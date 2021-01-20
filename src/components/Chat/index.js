@@ -7,6 +7,8 @@ import InputBox from "./InputBox";
 
 import '../../styles/Chat.css';
 
+import formatDateString from "../../utilities/format-date";
+
 let socket;
 
 const dummyMsgs = [
@@ -32,21 +34,6 @@ const dummyMsgs = [
     time_locale: "Jan 5, 2021 at 3:01 PM"
   }
 ];
-
-function formatDateString(date) {
-  const dateString = date.toLocaleDateString('en-US', {
-    day:    'numeric',
-    month:  'short',
-    year:   'numeric'
-  });
-
-  const timeString = date.toLocaleTimeString(undefined, {
-    hour:   'numeric',
-    minute: '2-digit',
-});
-
-  return dateString + " at " + timeString;
-}
 
 export default function Chat(props) {
   const { userInfo } = props;
