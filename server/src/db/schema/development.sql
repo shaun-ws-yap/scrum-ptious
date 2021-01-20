@@ -95,4 +95,16 @@ VALUES (
   1,
   '2021-01-05 15:01:32',
   'Oh shit, big boss is here'
-);
+),
+(
+  4,
+  1,
+  '2021-01-05 17:01:32',
+  'Everybody run!'
+),
+(
+  5,
+  1,
+  '2021-01-05 17:10:32',
+  'Hey guys what''s going on'
+)

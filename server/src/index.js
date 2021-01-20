@@ -4,10 +4,17 @@ const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const cors       = require('cors');
 const app        = require("express")();
+const bodyParser = require("body-parser");
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 const bodyParser = require('body-parser');
 //const app        = express();
+
+const { saveMessage } = require("./routes/helpers/messages");
+const messageRoutes = require("./routes/messages");
+const employeeRoutes = require("./routes/employees");
+const submissionRoutes = require("./routes/submissions");
+const taskRoutes = require("./routes/tasks");
 
 // PG database client/connection setup
 const { Pool } = require('pg');
@@ -22,12 +29,8 @@ db.connect(err => {
 
 app.use(bodyParser.json());
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static("public"));
-
-const messageRoutes = require("./routes/messages");
-const employeeRoutes = require("./routes/employees");
-const submissionRoutes = require("./routes/submissions");
-const taskRoutes = require("./routes/tasks");
 
 app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
@@ -52,6 +55,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', messageData => {
     io.emit('chat message', messageData);
+    saveMessage(db, messageData)
+      .then(data => io.emit('message saved', data.rows[0]))
+      .catch(err => io.emit('error', err));
   });
 
   socket.on('disconnect', () => {
