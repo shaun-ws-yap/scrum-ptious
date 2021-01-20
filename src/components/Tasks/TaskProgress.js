@@ -4,9 +4,7 @@ import TaskItem from './TaskItem';
 
 export default function TaskProgress(props) {
 
-  console.log("from task view", props.tasks)
-
-  // console.log(props.teamTasks);
+  // console.log("from task view", props.tasks)
 
   return (
     <div className="task-progress">

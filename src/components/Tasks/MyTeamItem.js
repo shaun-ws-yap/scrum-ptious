@@ -9,6 +9,9 @@ export default function MyTeamItem(props) {
 
   return (
     <li className="task-progress">
+      <button onClick={() => props.getUserTasks(props.id)}>
+        Test
+      </button>
       <h4>{props.name}</h4>
       <h5>{props.email}</h5>
       <h5>{props.phone_number}</h5>
