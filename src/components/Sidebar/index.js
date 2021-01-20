@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 
 import SidebarItem from './SidebarItem';
 import classNames from 'classnames';
+import NewTaskItem from '../Tasks/NewTaskItem';
 
 const menuItems = [
   {
@@ -55,14 +56,23 @@ export default function Sidebar(props) {
 
       { props.userInfo && props.userInfo.role === 1 && managerMenuItems.map(menu => {
         return (
+          <>
           <SidebarItem
             key={menu.name}
             name={menu.name}
             selected={menu.name === props.menu}
             setMenu={props.setMenu}
           />
+          </>
         )
-      }) } 
+      }) 
+      } 
+      { props.userInfo && props.userInfo.role === 1 && (
+
+        <div>
+          <NewTaskItem team={props.team} createTaskItem={props.createTaskItem} />
+        </div>
+      )}
 
       
     </ul>

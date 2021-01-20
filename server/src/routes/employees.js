@@ -20,6 +20,8 @@ module.exports = (db) => {
       res.json(data.rows);
     })
     .catch(e => res.send(e));
+
+
   });
 
   // Get user by id
@@ -33,7 +35,25 @@ module.exports = (db) => {
       res.json(data.rows);
     })
     .catch(e => res.send(e));
+
+
   });
+
+  router.get("/employees/team/:id", (req, res) => {
+    const queryString = `
+    SELECT * FROM employees
+    WHERE team_id = $1
+    `
+
+    db.query(queryString, [req.params.id])
+    .then(data => {
+      res.json(data.rows);
+
+    })
+    .catch(e => res.send(e));
+
+  })
+
 
   return router;
 }

@@ -56,17 +56,17 @@ module.exports = (db) => {
   })
 
   // Create and edit task
-  router.put("/tasks/:id", (req, res) => {
-    const { params } = req.body;
+  router.put("/tasks", (req, res) => {
+    const params = req.body;
+
+    console.log(params)
 
     const queryString = `
-    INSERT INTO tasks (title, description, due_date, employee_id)
-    VALUES ($1, $2, $3, $4)
-    ON CONFLICT (id) DO
-    UPDATE SET title = $1, description = $2, due_date = $3, employee_id = $4
+      INSERT INTO tasks (title, description, due_date, employee_id, projecttask_id)
+      VALUES ($1, $2, $3, $4, $5)
     `;
 
-    db.query(queryString, [params.title, params.description, params.due_date, params.employee_id])
+    db.query(queryString, [params.title, params.description, params.due_date, params.employee_id, params.projecttask_id])
     .then(data => {
       res.status(204).json({});
     })

@@ -13,13 +13,10 @@ export default function Tasks(props) {
 
   return (
     <div className='dashboard'>
-        <div className="task-item__modal">
-          
-        </div>
 
 
       <div className="dashboard-top">
-        <TaskProgress tasks={props.tasks} setTaskItem={props.setTaskItem} role={props.role} teamTasks={props.teamTasks} />
+        <TaskProgress tasks={props.tasks} setTaskItem={props.setTaskItem} role={props.role} teamTasks={props.teamTasks} createTaskItem={props.createTaskItem} />
       </div>
       <div className="dashboard-bottom">
         <TaskResource />

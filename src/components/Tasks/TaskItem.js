@@ -10,6 +10,7 @@ export default function TaskItem(props) {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+
   return (
     <>
       <li
@@ -19,26 +20,36 @@ export default function TaskItem(props) {
         <p>{props.description}</p>
         <h6>Assigned on: {props.due_date}</h6>
       </li>
-      {props.role === 1 && <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>{props.title}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-        <textarea
-        value={desc}
-        onChange={(event) => setDesc(event.target.value)}
-        />
-        </Modal.Body>
-        <Modal.Body>Assigned on: {props.due_date}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Delete
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Edit
-          </Button>
-        </Modal.Footer>
-      </Modal>}
+      {props.role === 1 && 
+        <form
+          onSubmit={event => event.preventDefault()}
+        >
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{props.title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+            <input
+            value={desc}
+            onChange={(event) => setDesc(event.target.value)}
+            type="text"
+            />
+            </Modal.Body>
+            <Modal.Body>
+              <p>Assigned to: {props.assignedTo}</p>
+              <p>On: {props.due_date}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="danger" onClick={handleClose}>
+                Delete
+              </Button>
+              <Button confirm variant="primary" onClick={() => props.createTaskItem(props.id, desc)}>
+                Edit
+              </Button>
+            </Modal.Footer>
+          </Modal>
+      </form>
+      }
     </>
 
     

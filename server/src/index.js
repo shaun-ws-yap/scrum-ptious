@@ -6,6 +6,7 @@ const cors       = require('cors');
 const app        = require("express")();
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
+const bodyParser = require('body-parser');
 //const app        = express();
 
 // PG database client/connection setup
@@ -18,6 +19,7 @@ db.connect(err => {
   }
 });
 
+app.use(bodyParser.json());
 app.use(cors());
 //app.use(express.static("public"));
 
