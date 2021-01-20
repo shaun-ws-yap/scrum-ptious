@@ -4,14 +4,15 @@ const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const cors       = require('cors');
 const app        = require("express")();
+const bodyParser = require("body-parser");
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
 // PG database client/connection setup
-const { Client } = require('pg');
+const { Pool } = require('pg');
 const dbParams = require('./lib/db');
-const db = new Client(dbParams);
+const db = new Pool(dbParams);
 
 db.connect(err => {
   if (err) {
@@ -20,6 +21,7 @@ db.connect(err => {
 });
 
 app.use(cors());
+app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static("public"));
 
 const messageRoutes = require("./routes/messages");
