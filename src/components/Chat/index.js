@@ -15,10 +15,10 @@ const MESSAGES_URL = "http://localhost:8080/api/messages/10";
 let socket;
 
 export default function Chat(props) {
-  const { userInfo } = props;
-  const { id, name, team_id } = userInfo;
+  const { id, name, team_id } = props.userInfo;
 
-  const [messages, setMessages] = useState([]);
+  const [ messages, setMessages ] = useState([]);
+  const [ onlineUsers, setOnlineUsers ] = useState([]);
 
   useEffect(() => {
     axios.get(MESSAGES_URL)
@@ -28,7 +28,19 @@ export default function Chat(props) {
   useEffect(() => {
     socket = io();
 
-    socket.emit('joining msg', name);
+    socket.emit('joining msg', name, id);
+
+    socket.on('user joined', (users, username) => {
+      setOnlineUsers(users);
+      console.log(users);
+      console.log(username + " joined the chat");
+    });
+
+    socket.on('user left', (users, username) => {
+      setOnlineUsers(users);
+      console.log(users);
+      console.log(username + " left the chat");
+    });
   
     socket.on('chat message', function(messageData) {
       setMessages(prev => [...prev, messageData])
@@ -43,10 +55,12 @@ export default function Chat(props) {
     })
 
     return () => {
+      socket.off('user joined');
+      socket.off('user left');
       socket.off('chat message');
       socket.off('message saved');
       socket.off('error');
-      socket.emit('leaving msg', name);
+      socket.emit('leaving msg', name, id );
       socket.close(); // TODO: need to ask mentor about this and useRef
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,9 +83,9 @@ export default function Chat(props) {
     <div className="chat-container">
       <div className="chat-top">
         <ChatLog messages={messages}/>
-        <MembersList />
+        <MembersList teamUsers={props.teamUsers} onlineUsers={onlineUsers} />
       </div>
-      <InputBox userInfo={userInfo} sendMessage={sendMessage} />
+      <InputBox sendMessage={sendMessage} />
     </div>
   )
 };
