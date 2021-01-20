@@ -36,6 +36,7 @@ export default function TaskItem(props) {
             />
             </Modal.Body>
             <Modal.Body>
+              <p>db id: {props.id}</p>
               <p>Assigned to: {props.assignedTo}</p>
               <p>On: {props.due_date}</p>
             </Modal.Body>
@@ -43,7 +44,7 @@ export default function TaskItem(props) {
               <Button variant="danger" onClick={handleClose}>
                 Delete
               </Button>
-              <Button confirm variant="primary" onClick={() => props.createTaskItem(props.id, desc)}>
+              <Button confirm variant="primary" onClick={() => props.editTaskItem(props.id, desc)}>
                 Edit
               </Button>
             </Modal.Footer>

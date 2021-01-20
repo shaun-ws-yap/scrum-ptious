@@ -23,6 +23,7 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
+                teamUsers={props.teamUsers} 
               />
             )
           }
@@ -40,6 +41,7 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
+                teamUsers={props.teamUsers} 
               />
             )
           }
@@ -61,6 +63,7 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
+                teamUsers={props.teamUsers} 
               />
             )
           }
@@ -78,6 +81,7 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
+                teamUsers={props.teamUsers} 
               />
             )
           }
@@ -99,6 +103,7 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
+                teamUsers={props.teamUsers} 
               />
             )
           }
@@ -116,6 +121,7 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
+                teamUsers={props.teamUsers} 
               />
             )
           }

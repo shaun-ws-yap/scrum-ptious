@@ -27,7 +27,9 @@ export default function useApplicationData(props) {
   const setTasks = tasks => setState({...state, tasks});
   const setTeamTasks = teamTasks => setState({...state, teamTasks});
   const setAllTasks = allTasks => setState({...state, allTasks});
-  
+
+  console.log(state);
+
   useEffect(() => {
 
     Promise.all([
@@ -58,6 +60,11 @@ export default function useApplicationData(props) {
     .catch(e => console.log(e));
   }
 
-  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem  }
+  function editTaskItem(id, taskItem) {
+    console.log(id)
+    console.log(taskItem);
+  }
+
+  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem }
 
 }
