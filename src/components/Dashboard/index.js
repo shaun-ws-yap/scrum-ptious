@@ -14,13 +14,13 @@ export default function Dashboard(props) {
   const CHAT = "Chat";
   const PERFORMANCE_REVIEW = "Performance Review"
 
-  const { menu, tasks, teamTasks, setTaskItem, taskItem, role, userInfo } = props;
+  const { menu, tasks, teamTasks, setTaskItem, taskItem, role, userInfo, teamUsers } = props;
 
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
         { menu === DASHBOARD && <ProjectProgress projectTasks={tasks} teamTasks={teamTasks} />}
-        { menu === TASKS && <Tasks tasks={tasks} setTaskItem={setTaskItem} taskItem={taskItem} role={role} teamTasks={teamTasks} />}
+        { menu === TASKS && <Tasks tasks={tasks} setTaskItem={setTaskItem} taskItem={taskItem} role={role} teamTasks={teamTasks} teamUsers={teamUsers} />}
         { menu === CHAT && <Chat userInfo={userInfo}/>}
         { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
