@@ -11,7 +11,8 @@ export default function useApplicationData(props) {
     role: 0,
     team: 0,
     teamTasks: [],
-    teamUsers: []
+    teamUsers: [],
+    allTasks: []
   })
   
   const GET_TASKS = `http://localhost:8080/api/tasks/user/${state.user}`;
@@ -22,6 +23,9 @@ export default function useApplicationData(props) {
   const setMenu = menu => setState({...state, menu});
   const setUser = user => setState({...state, user});
   const setTaskItem = taskItem => setState({...state, taskItem});
+  const setTasks = tasks => setState({...state, tasks});
+  const setTeamTasks = teamTasks => setState({...state, teamTasks});
+  const setAllTasks = allTasks => setState({...state, allTasks});
   
   useEffect(() => {
 
@@ -32,12 +36,12 @@ export default function useApplicationData(props) {
       axios.get(GET_TEAM_USERS)
     ]).then(all => {
       if (state.user !== 0) {
-      setState(prev => ({ ...prev, tasks: all[0].data, userInfo: all[1].data[0], role: all[1].data[0]['role'], team: all[1].data[0]['team_id'], teamTasks: all[2].data, teamUsers: all[3].data }))
+      setState(prev => ({ ...prev, tasks: all[0].data, userInfo: all[1].data[0], role: all[1].data[0]['role'], team: all[1].data[0]['team_id'], teamTasks: all[2].data, teamUsers: all[3].data, allTasks: all[2].data }))
       }
 
     })
   }, [state.user, state.team])
 
-  return { state, setMenu, setUser, setTaskItem }
+  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks }
 
 }
