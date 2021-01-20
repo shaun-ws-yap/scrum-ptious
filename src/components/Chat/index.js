@@ -15,20 +15,24 @@ const MESSAGES_URL = "http://localhost:8080/api/messages/10";
 let socket;
 
 export default function Chat(props) {
-  const { userInfo } = props;
+  const { userInfo, teamUsers } = props;
   const { id, name, team_id } = userInfo;
 
-  const [messages, setMessages] = useState([]);
+  const [ messages, setMessages ] = useState([]);
 
-  useEffect(() => {
-    axios.get(MESSAGES_URL)
-    .then(messages => setMessages(messages.data));
-  }, []);
+  // useEffect(() => {
+  //   axios.get(MESSAGES_URL)
+  //   .then(messages => setMessages(messages.data));
+  // }, []);
 
   useEffect(() => {
     socket = io();
 
     socket.emit('joining msg', name);
+
+    socket.on('join', data => {
+      setMessages(data.messagesData);
+    })
   
     socket.on('chat message', function(messageData) {
       setMessages(prev => [...prev, messageData])
@@ -43,6 +47,7 @@ export default function Chat(props) {
     })
 
     return () => {
+      socket.off('join');
       socket.off('chat message');
       socket.off('message saved');
       socket.off('error');
@@ -69,7 +74,7 @@ export default function Chat(props) {
     <div className="chat-container">
       <div className="chat-top">
         <ChatLog messages={messages}/>
-        <MembersList />
+        <MembersList teamUsers={teamUsers} />
       </div>
       <InputBox userInfo={userInfo} sendMessage={sendMessage} />
     </div>
