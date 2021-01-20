@@ -10,16 +10,16 @@ const io         = require('socket.io')(http);
 //const app        = express();
 
 const { saveMessage } = require("./routes/queries/messages");
-const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/helpers');
+const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
 const taskRoutes = require("./routes/tasks");
 
 // PG database client/connection setup
-const { Pool } = require('pg');
+const { Client } = require('pg');
 const dbParams = require('./lib/db');
-const db = new Pool(dbParams);
+const db = new Client(dbParams);
 
 db.connect(err => {
   if (err) {
