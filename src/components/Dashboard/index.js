@@ -36,7 +36,7 @@ export default function Dashboard(props) {
       <div className="dashboard-top">
         { menu === DASHBOARD && <ProjectProgress teamTasks={teamTasks} />}
         { menu === TASKS && <Tasks getUserTasks={getUserTasks} user={props.user} tasks={tasks} setTaskItem={setTaskItem} taskItem={taskItem} role={role} teamTasks={teamTasks} teamUsers={teamUsers} tasks={props.tasks} setTasks={props.setTasks} setTeamTasks={setTeamTasks} createTaskItem={createTaskItem} />}
-        { menu === CHAT && <Chat userInfo={userInfo}/>}
+        { menu === CHAT && <Chat userInfo={userInfo} teamUsers={teamUsers}/>}
         { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
       <div className="dashboard-bottom">
