@@ -48,8 +48,8 @@ io.on('connection', (socket) => {
     console.log(username + " left the chat.");
   })
 
-  socket.on('chat message', message => {
-    io.emit('chat message', message);
+  socket.on('chat message', messageData => {
+    io.emit('chat message', messageData);
   });
 
   socket.on('disconnect', () => {
