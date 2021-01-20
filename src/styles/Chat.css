@@ -53,6 +53,8 @@
 }
 
 .members-list {
+  display: flex;
+  flex-direction: column;
   border: 1px solid black;
   border-radius: 20px;
   padding: 1em;
@@ -69,6 +71,10 @@
   height: 50px;
 }
 
-.online {
-  border: 5px solid greenyellow;
+.avatar-online {
+  border: 3px solid greenyellow;
+}
+
+.member-item-online {
+  order: -1;
 }
