@@ -9,7 +9,8 @@ const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
-const { saveMessage, getRecentMessages } = require("./routes/queries/messages");
+const { saveMessage } = require("./routes/queries/messages");
+const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/helpers');
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
@@ -41,18 +42,17 @@ app.use("/api", taskRoutes(db));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
-})
+});
 
 io.on('connection', (socket) => {
-  socket.on('joining msg', username => {
-    console.log(username + " joined the chat.");
-    getRecentMessages(db, 10)
-      .then(data => io.emit('join', { messagesData: data.rows }))
-      .catch(err => io.emit('error', 'could not retrieve messages from db: ' + err));
+  socket.on('joining msg', (username, userId) => {
+    addClientToMap(userId, socket.id);
+    io.emit('user joined', parseMap(), username);
   });
 
-  socket.on('leaving msg', username => {
-    console.log(username + " left the chat.");
+  socket.on('leaving msg', (username, userId) => {
+    removeClientFromMap(userId, socket.id);
+    io.emit('user left', parseMap(), username)
   });
 
   socket.on('chat message', messageData => {
