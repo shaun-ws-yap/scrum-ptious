@@ -14,21 +14,16 @@ export default function Dashboard(props) {
   const CHAT = "Chat";
   const PERFORMANCE_REVIEW = "Performance Review"
 
-  const { menu, tasks, teamTasks, allTasks, setTaskItem, taskItem, role, userInfo, teamUsers, setTeamTasks, setAllTasks } = props;
-
-  // console.log(props.tasks);
-  // Make a func:
-  // takes in an emp ID
-  // takes current state of teamTasks
-  // filter out where emp ID === emp ID to get that employee's tasks
-  // from myTeamItem, pass in props.^function(member.id)
-
-  console.log(props.allTasks);
+  const { menu, tasks, teamTasks, allTasks, setTaskItem, taskItem, role, userInfo, teamUsers, setTeamTasks } = props;
   
   const getUserTasks = function(empID) {
     const selectedUserTasks = [];
     allTasks.filter((userTask) => {
-      if (userTask.employee_id === empID) {
+      if (empID !== 1) {
+        if (userTask.employee_id === empID) {
+          selectedUserTasks.push(userTask);
+        }
+      } else {
         selectedUserTasks.push(userTask);
       }
     });
