@@ -9,6 +9,12 @@ const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
+const { saveMessage } = require("./routes/helpers/messages");
+const messageRoutes = require("./routes/messages");
+const employeeRoutes = require("./routes/employees");
+const submissionRoutes = require("./routes/submissions");
+const taskRoutes = require("./routes/tasks");
+
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db');
@@ -23,11 +29,6 @@ db.connect(err => {
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static("public"));
-
-const messageRoutes = require("./routes/messages");
-const employeeRoutes = require("./routes/employees");
-const submissionRoutes = require("./routes/submissions");
-const taskRoutes = require("./routes/tasks");
 
 app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
@@ -52,6 +53,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', messageData => {
     io.emit('chat message', messageData);
+    saveMessage(db, messageData)
+      .then(data => io.emit('message saved', data.rows[0]))
+      .catch(err => io.emit('error', err));
   });
 
   socket.on('disconnect', () => {
