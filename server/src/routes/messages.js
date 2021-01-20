@@ -5,12 +5,14 @@ module.exports = (db) => {
   router.get("/messages", (req, res) => {
     db.query(`
       SELECT 
-        messages.*,
-        to_char(send_time, 'Mon DD, YYYY at FMHH12:MIam') as time_sent,
-        name
+        sender_id,
+        name as sender,
+        message,
+        time_iso,
+        to_char(time_iso, 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
       FROM messages
       JOIN employees ON employees.id = sender_id
-      ORDER BY send_time
+      ORDER BY time_iso
     `)
     .then(data => {
       res.json(data.rows);
@@ -35,9 +37,9 @@ module.exports = (db) => {
         send_time,
         message
       )
-      VALUES ($1, $2, $3, $4)
+      VALUES ($1, $2, to_timestamp($3), $4)
       RETURNING *
-    `, [senderId, teamId, sendTime, message])
+    `, [senderId, teamId, sendTime / 1000, message])
     .then(data => res.json(data.rows[0]))
     .catch(err => {
       res

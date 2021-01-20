@@ -10,7 +10,7 @@ export default function NewTaskItem(props) {
     due_date: new Date(),
   });
 
-  const teamMembersList = props.team.map(member => {
+  const teamMembersList = props.teamUsers.map(member => {
     return (
       <option value={member.id}>{member.name}</option>
     )

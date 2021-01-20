@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 
 // import ProjectProgress from './ProjectProgress';
 import TaskProgress from './TaskProgress';
+import MyTeam from './MyTeam';
 import TaskResource from './TaskResource';
-
 // import UserInfo from './UserInfo';
 
 // import '../../styles/Dashboard.css';
@@ -16,10 +16,11 @@ export default function Tasks(props) {
 
 
       <div className="dashboard-top">
-        <TaskProgress tasks={props.tasks} setTaskItem={props.setTaskItem} role={props.role} teamTasks={props.teamTasks} createTaskItem={props.createTaskItem} />
+        <TaskProgress tasks={props.tasks} setTaskItem={props.setTaskItem} role={props.role} teamTasks={props.teamTasks} tasks={props.tasks} setTasks={props.setTasks} createTaskItem={props.createTaskItem} />
       </div>
       <div className="dashboard-bottom">
-        <TaskResource />
+        { props.role === 1 && <MyTeam getUserTasks={props.getUserTasks} user={props.user} teamUsers={props.teamUsers} tasks={props.tasks} setTasks={props.setTasks} teamTasks={props.teamTasks} setTeamTasks={props.setTeamTasks}/>}
+        { props.role === 2 && <TaskResource />}
       </div>
     </div>
   )

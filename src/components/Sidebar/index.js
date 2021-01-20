@@ -70,7 +70,7 @@ export default function Sidebar(props) {
       { props.userInfo && props.userInfo.role === 1 && (
 
         <div>
-          <NewTaskItem team={props.team} createTaskItem={props.createTaskItem} />
+          <NewTaskItem teamUsers={props.teamUsers} createTaskItem={props.createTaskItem} />
         </div>
       )}
 

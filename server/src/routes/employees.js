@@ -39,6 +39,7 @@ module.exports = (db) => {
 
   });
 
+  // Get team of users by team_id
   router.get("/employees/team/:id", (req, res) => {
     const queryString = `
     SELECT * FROM employees
@@ -48,12 +49,9 @@ module.exports = (db) => {
     db.query(queryString, [req.params.id])
     .then(data => {
       res.json(data.rows);
-
     })
     .catch(e => res.send(e));
-
   })
-
 
   return router;
 }

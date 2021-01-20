@@ -13,6 +13,7 @@ const bodyParser = require('body-parser');
 const { Pool } = require('pg');
 const dbParams = require('./lib/db');
 const db = new Pool(dbParams);
+
 db.connect(err => {
   if (err) {
     return console.error("could not connect to postgres", err);
@@ -41,19 +42,23 @@ app.get('/', (req, res) => {
 })
 
 io.on('connection', (socket) => {
-  socket.on('joining msg', (username) => {
+  socket.on('joining msg', username => {
     console.log(username + " joined the chat.");
   });
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
+  socket.on('leaving msg', username => {
+    console.log(username + " left the chat.");
+  })
+
+  socket.on('chat message', messageData => {
+    io.emit('chat message', messageData);
   });
 
   socket.on('disconnect', () => {
-    console.log('user disconnected');
+    console.log('Disconnected');
   });
 });
 
 http.listen(PORT, () => {
   console.log(`Example app listening at http://localhost:${PORT}`)
-})
+});
