@@ -34,13 +34,11 @@ export default function Chat(props) {
     socket.on('user joined', (users, username) => {
       setOnlineUsers(users);
       setJoinMessage(username + " joined the chat")
-      console.log(users);
     });
 
     socket.on('user left', (users, username) => {
       setOnlineUsers(users);
       setJoinMessage(username + " left the chat")
-      console.log(users);
     });
   
     socket.on('chat message', function(messageData) {
@@ -56,7 +54,7 @@ export default function Chat(props) {
     });
 
     socket.on('error', function(error) {
-      console.log('error saving message: ', error);
+      console.log('error received: ', error);
     })
 
     return () => {
