@@ -9,7 +9,7 @@ const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
-const { saveMessage } = require("./routes/queries/messages");
+const { saveMessage, queryMessages } = require("./routes/queries/messages");
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
@@ -61,6 +61,12 @@ io.on('connection', (socket) => {
       .then(data => io.emit('message saved', data.rows[0]))
       .catch(err => io.emit('error', 'could not save message to db: ' + err));
   });
+
+  socket.on('get previous messages', (time_iso, numMsg) => {
+    queryMessages(db, numMsg, time_iso)
+      .then(data => socket.emit('get previous messages', data.rows))
+      .catch(err => socket.emit('error', 'could not get previous messages: ' + err))
+  })
 
   socket.on('disconnect', () => {
     console.log('Disconnected');
