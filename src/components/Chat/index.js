@@ -46,8 +46,9 @@ export default function Chat(props) {
     });
 
     socket.on('get previous messages', messagesData => {
+      setMessages(prev => [...messagesData, ...prev]);
       console.log(messagesData);
-    })
+    });
 
     socket.on('message saved', function(messageData) {
       console.log('message saved: ', messageData);
@@ -55,7 +56,7 @@ export default function Chat(props) {
 
     socket.on('error', function(error) {
       console.log('error received: ', error);
-    })
+    });
 
     return () => {
       socket.off('user joined');
