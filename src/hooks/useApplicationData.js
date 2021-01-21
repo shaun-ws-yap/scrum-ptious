@@ -28,7 +28,7 @@ export default function useApplicationData(props) {
   const setTeamTasks = teamTasks => setState({...state, teamTasks});
   const setAllTasks = allTasks => setState({...state, allTasks});
 
-  console.log(state);
+  // console.log(state);
 
   useEffect(() => {
 
@@ -43,7 +43,7 @@ export default function useApplicationData(props) {
       }
     })
     .catch(e => console.log(e));
-  }, [state.user, state.team, state.teamTasks])
+  }, [state.user, state.team])
 
 
   function createTaskItem(taskItem) {
@@ -53,9 +53,9 @@ export default function useApplicationData(props) {
     .then(res => {
       const id = res.data.id;
       task = {...task, id: id};
-      const tmp = [...state.teamTasks];
+      const tmp = [...state.allTasks];
       tmp.push(task);
-      setState(prev => ({...prev, teamTasks: tmp}))
+      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
     })
     .catch(e => console.log(e));
   }
