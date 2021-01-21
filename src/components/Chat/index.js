@@ -39,8 +39,8 @@ export default function Chat(props) {
 
     socket.on('user left', (users, username) => {
       setOnlineUsers(users);
+      setJoinMessage(username + " left the chat")
       console.log(users);
-      console.log(username + " left the chat");
     });
   
     socket.on('chat message', function(messageData) {
