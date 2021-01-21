@@ -65,6 +65,13 @@ export default function useApplicationData(props) {
     console.log(taskItem);
   }
 
-  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem }
+  function deleteTaskItem(id) {
+    return axios.delete(`http://localhost:8080/api/tasks/${id}`)
+    .then(() => {
+      console.log('success');
+    })
+  }
+
+  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem, deleteTaskItem }
 
 }

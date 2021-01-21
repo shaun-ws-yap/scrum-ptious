@@ -14,7 +14,7 @@ export default function Dashboard(props) {
   const CHAT = "Chat";
   const PERFORMANCE_REVIEW = "Performance Review"
 
-  const { menu, tasks, teamTasks, allTasks, setTaskItem, taskItem, role, userInfo, teamUsers, setTeamTasks, createTaskItem } = props;
+  const { menu, tasks, teamTasks, allTasks, setTaskItem, taskItem, role, userInfo, teamUsers, setTeamTasks, createTaskItem, deleteTaskItem } = props;
   
   const getUserTasks = function(empID) {
     const selectedUserTasks = [];
@@ -35,7 +35,7 @@ export default function Dashboard(props) {
     <div className='dashboard'>
       <div className="dashboard-top">
         { menu === DASHBOARD && <ProjectProgress teamTasks={teamTasks} />}
-        { menu === TASKS && <Tasks getUserTasks={getUserTasks} user={props.user} tasks={tasks} setTaskItem={setTaskItem} taskItem={taskItem} role={role} teamTasks={teamTasks} teamUsers={teamUsers} tasks={props.tasks} setTasks={props.setTasks} setTeamTasks={setTeamTasks} createTaskItem={createTaskItem} />}
+        { menu === TASKS && <Tasks getUserTasks={getUserTasks} user={props.user} tasks={tasks} setTaskItem={setTaskItem} taskItem={taskItem} role={role} teamTasks={teamTasks} teamUsers={teamUsers} tasks={props.tasks} setTasks={props.setTasks} setTeamTasks={setTeamTasks} createTaskItem={createTaskItem} deleteTaskItem={deleteTaskItem} />}
         { menu === CHAT && <Chat userInfo={userInfo} teamUsers={teamUsers}/>}
         { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
