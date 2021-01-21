@@ -32,7 +32,7 @@ const getRecentMessages = (db, numMsg) => {
   `, [numMsg])
 };
 
-const getOlderMessages = (db, numMsg, time_iso) => {
+const queryMessages = (db, numMsg, time_iso) => {
   return db.query(`
     SELECT 
       T1.team_id,
@@ -72,5 +72,5 @@ module.exports = {
   saveMessage,
   getRecentMessages,
   getAllMessages,
-  getOlderMessages,
+  queryMessages,
 }
