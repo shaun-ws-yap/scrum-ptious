@@ -21,14 +21,6 @@ export default function Chat(props) {
   const [ onlineUsers, setOnlineUsers ] = useState([]);
   const [ joinMessage, setJoinMessage ] = useState("");
 
-  const getPrevMessages = time_iso => {
-    console.log(messages[0]);
-    const before = encodeURIComponent(time_iso || messages[0].time_iso);
-    axios.get(`${MESSAGES_URL}/query/?before=${before}&num_msg=${5}`)
-    .then(res => console.log(res.data));
-    //.then(res => setMessages(prev => ([...res.data, ...prev])));
-  }
-
   useEffect(() => {
     axios.get(`${MESSAGES_URL}/5`)
     .then(res => setMessages(res.data));
@@ -55,6 +47,10 @@ export default function Chat(props) {
       setMessages(prev => [...prev, messageData])
     });
 
+    socket.on('get previous messages', messagesData => {
+      console.log(messagesData);
+    })
+
     socket.on('message saved', function(messageData) {
       console.log('message saved: ', messageData);
     });
@@ -67,6 +63,7 @@ export default function Chat(props) {
       socket.off('user joined');
       socket.off('user left');
       socket.off('chat message');
+      socket.off('get previous messages');
       socket.off('message saved');
       socket.off('error');
       socket.emit('leaving msg', name, id );
@@ -74,6 +71,15 @@ export default function Chat(props) {
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const getPrevMessages = time_iso => {
+    // const before = encodeURIComponent(time_iso || messages[0].time_iso);
+    // axios.get(`${MESSAGES_URL}/query/?before=${before}&num_msg=${5}`)
+    // .then(res => console.log(res.data));
+    // //.then(res => setMessages(prev => ([...res.data, ...prev])));
+    const before = time_iso || messages[0].time_iso;
+    socket.emit('get previous messages', before, 5);
+  }
 
   const sendMessage = message => {
     const now = new Date();
