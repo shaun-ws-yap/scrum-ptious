@@ -19,6 +19,7 @@ export default function Chat(props) {
 
   const [ messages, setMessages ] = useState([]);
   const [ onlineUsers, setOnlineUsers ] = useState([]);
+  const [ joinMessage, setJoinMessage ] = useState("");
 
   useEffect(() => {
     axios.get(MESSAGES_URL)
@@ -32,14 +33,14 @@ export default function Chat(props) {
 
     socket.on('user joined', (users, username) => {
       setOnlineUsers(users);
+      setJoinMessage(username + " joined the chat")
       console.log(users);
-      console.log(username + " joined the chat");
     });
 
     socket.on('user left', (users, username) => {
       setOnlineUsers(users);
+      setJoinMessage(username + " left the chat")
       console.log(users);
-      console.log(username + " left the chat");
     });
   
     socket.on('chat message', function(messageData) {
@@ -82,7 +83,7 @@ export default function Chat(props) {
   return (
     <div className="chat-container">
       <div className="chat-top">
-        <ChatLog messages={messages}/>
+        <ChatLog messages={messages} chatInfo={joinMessage}/>
         <MembersList teamUsers={props.teamUsers} onlineUsers={onlineUsers} />
       </div>
       <InputBox sendMessage={sendMessage} />
