@@ -30,10 +30,9 @@ export default function useApplicationData(props) {
   const setTeamTasks = teamTasks => setState({...state, teamTasks});
   const setAllTasks = allTasks => setState({...state, allTasks});
 
-  console.log(state);
+  // console.log(state);
 
   useEffect(() => {
-
     Promise.all([
       axios.get(GET_TASKS),
       axios.get(GET_USER_INFO),
@@ -46,7 +45,7 @@ export default function useApplicationData(props) {
       }
     })
     .catch(e => console.log(e));
-  }, [state.user, state.team, state.teamTasks])
+  }, [state.user, state.team])
 
 
   function createTaskItem(taskItem) {
@@ -56,9 +55,9 @@ export default function useApplicationData(props) {
     .then(res => {
       const id = res.data.id;
       task = {...task, id: id};
-      const tmp = [...state.teamTasks];
+      const tmp = [...state.allTasks];
       tmp.push(task);
-      setState(prev => ({...prev, teamTasks: tmp}))
+      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
     })
     .catch(e => console.log(e));
   }
@@ -70,9 +69,11 @@ export default function useApplicationData(props) {
 
   function deleteTaskItem(id) {
     return axios.delete(`http://localhost:8080/api/tasks/${id}`)
-    .then(() => {
-      console.log('success');
+    .then((res) => {
+      const tmp = [...state.allTasks]
+      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
     })
+    .catch(e => console.log(e));
   }
 
   return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem, deleteTaskItem }

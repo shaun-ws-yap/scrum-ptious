@@ -18,7 +18,6 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 
-
 function App() {
 
   const { 
@@ -32,6 +31,8 @@ function App() {
     createTaskItem,
     deleteTaskItem
   } = useApplicationData();
+
+  console.log(state);
 
   return (
     <div className="container">
@@ -49,9 +50,12 @@ function App() {
                 setMenu={setMenu}
                 userInfo={state.userInfo}
                 teamUsers={state.teamUsers}
-                createTaskItem={createTaskItem}
+                createTaskItem={createTaskItem.bind(this)}
               />
             </nav>
+            <button onClick={() => setUser(0)}>
+              Log out
+            </button>
           </section>
         </>
         
@@ -59,7 +63,7 @@ function App() {
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks} setAllTasks={setAllTasks} allTasks={state.allTasks} createTaskItem={createTaskItem} deleteTaskItem={deleteTaskItem} /> }
+        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks.bind(this)} setAllTasks={setAllTasks.bind(this)} allTasks={state.allTasks} createTaskItem={createTaskItem.bind(this)} deleteTaskItem={deleteTaskItem} /> }
 
       </section>
       
