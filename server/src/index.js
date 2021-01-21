@@ -4,6 +4,7 @@ const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
 const cors       = require('cors');
 const app        = require("express")();
+const bodyParser = require("body-parser");
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
