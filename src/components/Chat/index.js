@@ -10,7 +10,7 @@ import '../../styles/Chat.css';
 
 import formatDateString from "../../utilities/format-date";
 
-const MESSAGES_URL = "http://localhost:8080/api/messages/10";
+const MESSAGES_URL = "http://localhost:8080/api/messages";
 
 let socket;
 
@@ -21,9 +21,17 @@ export default function Chat(props) {
   const [ onlineUsers, setOnlineUsers ] = useState([]);
   const [ joinMessage, setJoinMessage ] = useState("");
 
+  const getPrevMessages = time_iso => {
+    console.log(messages[0]);
+    const before = encodeURIComponent(time_iso || messages[0].time_iso);
+    axios.get(`${MESSAGES_URL}/query/?before=${before}&num_msg=${5}`)
+    .then(res => console.log(res.data));
+    //.then(res => setMessages(prev => ([...res.data, ...prev])));
+  }
+
   useEffect(() => {
-    axios.get(MESSAGES_URL)
-    .then(messages => setMessages(messages.data));
+    axios.get(`${MESSAGES_URL}/5`)
+    .then(res => setMessages(res.data));
   }, []);
 
   useEffect(() => {
@@ -67,7 +75,7 @@ export default function Chat(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const sendMessage = (message) => {
+  const sendMessage = message => {
     const now = new Date();
     const messageData = {
       message,
@@ -78,10 +86,11 @@ export default function Chat(props) {
       time_locale: formatDateString(now),
     }
     socket.emit('chat message', messageData);
-  }
+  };
 
   return (
     <div className="chat-container">
+      <button onClick={()=> getPrevMessages()}>Test Get Previous Messages</button>
       <div className="chat-top">
         <ChatLog messages={messages} chatInfo={joinMessage}/>
         <MembersList teamUsers={props.teamUsers} onlineUsers={onlineUsers} />
