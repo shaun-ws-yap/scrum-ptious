@@ -19,8 +19,8 @@ const getRecentMessages = (db, numMsg) => {
       sender_id,
       name as sender,
       message,
-      time_iso,
-      to_char(time_iso, 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
+      (time_iso at time zone 'PST8PDT') as time_iso,
+      to_char(time_iso at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
     FROM (
       SELECT * 
       FROM messages
@@ -39,8 +39,8 @@ const queryMessages = (db, numMsg, time_iso) => {
       sender_id,
       name as sender,
       message,
-      time_iso,
-      to_char(time_iso, 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
+      (time_iso at time zone 'PST8PDT') as time_iso,
+      to_char(time_iso at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
     FROM (
       SELECT * 
       FROM messages
@@ -60,8 +60,8 @@ const getAllMessages = db => {
       sender_id,
       name as sender,
       message,
-      time_iso,
-      to_char(time_iso, 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
+      (time_iso at time zone 'PST8PDT') as time_iso,
+      to_char(time_iso at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
     FROM messages
     JOIN employees ON employees.id = sender_id
     ORDER BY time_iso

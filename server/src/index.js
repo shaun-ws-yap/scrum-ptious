@@ -58,8 +58,8 @@ io.on('connection', (socket) => {
   socket.on('chat message', messageData => {
     io.emit('chat message', messageData);
     saveMessage(db, messageData)
-      .then(data => io.emit('message saved', data.rows[0]))
-      .catch(err => io.emit('error', 'could not save message to db: ' + err));
+      .then(data => socket.emit('message saved', data.rows[0]))
+      .catch(err => socket.emit('error', 'could not save message to db: ' + err));
   });
 
   socket.on('get previous messages', (time_iso, numMsg) => {
