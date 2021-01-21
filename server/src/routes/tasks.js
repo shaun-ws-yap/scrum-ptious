@@ -4,10 +4,14 @@ module.exports = (db) => {
 
 
   // Get deadlines by due_date
-  router.get("/tasks/deadlines", (req, res) => {
-    const queryString = 'SELECT * FROM tasks WHERE due_date > now()';
+  router.get("/tasks/deadlines/:id", (req, res) => {
+    const queryString = `
+    SELECT * FROM tasks
+    WHERE employee_id = $1
+    AND due_date > now()
+    `;
 
-    db.query(queryString)
+    db.query(queryString, [req.params.id])
     .then(data => {
       res.json(data.rows);
     })
