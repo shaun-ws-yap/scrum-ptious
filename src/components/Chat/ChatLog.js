@@ -3,7 +3,7 @@ import React from 'react';
 import ChatLogItem from "./ChatLogItem";
 
 export default function ChatLog(props) {
-  const { messages } = props;
+  const { messages, chatInfo } = props;
   const messageComponents = messages.map(messageData => {
     const { sender, message, sender_id, time_iso, time_locale } = messageData;
     return (
@@ -20,6 +20,11 @@ export default function ChatLog(props) {
     <div className="chat-log">
       <h2>Chat Log</h2>
       {messageComponents}
+      <div className="chat-log-bottom">
+        <span className="clat=info">
+          {chatInfo}
+        </span>
+      </div>
     </div>
   )
 }
