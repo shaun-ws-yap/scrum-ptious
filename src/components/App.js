@@ -29,7 +29,8 @@ function App() {
     setTasks,
     setTeamTasks,
     setAllTasks,
-    createTaskItem
+    createTaskItem,
+    deleteTaskItem
   } = useApplicationData();
 
   return (
@@ -58,7 +59,7 @@ function App() {
       <section className="main">
         
         { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks} setAllTasks={setAllTasks} allTasks={state.allTasks} createTaskItem={createTaskItem} /> }
+        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks} setAllTasks={setAllTasks} allTasks={state.allTasks} createTaskItem={createTaskItem} deleteTaskItem={deleteTaskItem} /> }
 
       </section>
       
