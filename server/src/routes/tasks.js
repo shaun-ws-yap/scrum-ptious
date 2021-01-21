@@ -2,6 +2,22 @@ const router = require("express").Router();
 
 module.exports = (db) => {
 
+
+  // Get deadlines by due_date
+  router.get("/tasks/deadlines/:id", (req, res) => {
+    const queryString = `
+    SELECT * FROM tasks
+    WHERE employee_id = $1
+    AND due_date > now()
+    `;
+
+    db.query(queryString, [req.params.id])
+    .then(data => {
+      res.json(data.rows);
+    })
+    .catch(e => res.send(e));
+  });
+
   // Get all tasks
   router.get("/tasks", (req, res) => {
     const queryString = 'SELECT * from tasks';
@@ -54,6 +70,7 @@ module.exports = (db) => {
     })
     .catch(e => res.send(e));
   })
+
 
   // Create and edit task
   router.put("/tasks", (req, res) => {

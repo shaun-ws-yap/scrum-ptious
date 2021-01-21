@@ -9,7 +9,8 @@ const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
-const { saveMessage } = require("./routes/helpers/messages");
+const { saveMessage, queryMessages } = require("./routes/queries/messages");
+const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
@@ -41,23 +42,31 @@ app.use("/api", taskRoutes(db));
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
-})
+});
 
 io.on('connection', (socket) => {
-  socket.on('joining msg', username => {
-    console.log(username + " joined the chat.");
+  socket.on('joining msg', (username, userId) => {
+    addClientToMap(userId, socket.id);
+    io.emit('user joined', parseMap(), username);
   });
 
-  socket.on('leaving msg', username => {
-    console.log(username + " left the chat.");
-  })
+  socket.on('leaving msg', (username, userId) => {
+    removeClientFromMap(userId, socket.id);
+    io.emit('user left', parseMap(), username)
+  });
 
   socket.on('chat message', messageData => {
     io.emit('chat message', messageData);
     saveMessage(db, messageData)
-      .then(data => io.emit('message saved', data.rows[0]))
-      .catch(err => io.emit('error', err));
+      .then(data => socket.emit('message saved', data.rows[0]))
+      .catch(err => socket.emit('error', 'could not save message to db: ' + err));
   });
+
+  socket.on('get previous messages', (time_iso, numMsg) => {
+    queryMessages(db, numMsg, time_iso)
+      .then(data => socket.emit('get previous messages', data.rows))
+      .catch(err => socket.emit('error', 'could not get previous messages: ' + err))
+  })
 
   socket.on('disconnect', () => {
     console.log('Disconnected');
