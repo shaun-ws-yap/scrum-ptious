@@ -44,8 +44,6 @@ function App() {
     // teamTasks
   } = state
 
-  console.log(state.deadlines);
-
   return (
     <div className="container">
       { state.user !== 0 && (
@@ -77,7 +75,7 @@ function App() {
       </section>
       
       <section className="user__info">
-        { state.user !== 0 && <UserInfo userInfo={userInfo} deadlines={state.tasks} /> }
+        { state.user !== 0 && <UserInfo userInfo={userInfo} deadlines={state.deadlines} /> }
       </section>
     </div>
   );
