@@ -23,7 +23,8 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers} 
+                teamUsers={props.teamUsers}
+                deleteTaskItem={props.deleteTaskItem}
               />
             )
           }
@@ -41,7 +42,8 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers} 
+                teamUsers={props.teamUsers}
+                deleteTaskItem={props.deleteTaskItem}
               />
             )
           }
@@ -63,7 +65,8 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers} 
+                teamUsers={props.teamUsers}
+                deleteTaskItem={props.deleteTaskItem}
               />
             )
           }
@@ -81,7 +84,8 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers} 
+                teamUsers={props.teamUsers}
+                deleteTaskItem={props.deleteTaskItem}
               />
             )
           }
@@ -103,7 +107,8 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers} 
+                teamUsers={props.teamUsers}
+                deleteTaskItem={props.deleteTaskItem}
               />
             )
           }
@@ -121,7 +126,8 @@ export default function TaskProgress(props) {
                 role={props.role}
                 assignedTo={item.employee_id}
                 createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers} 
+                teamUsers={props.teamUsers}
+                deleteTaskItem={props.deleteTaskItem}
               />
             )
           }

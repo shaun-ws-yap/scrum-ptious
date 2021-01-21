@@ -31,7 +31,6 @@ export default function useApplicationData(props) {
   // console.log(state);
 
   useEffect(() => {
-
     Promise.all([
       axios.get(GET_TASKS),
       axios.get(GET_USER_INFO),
@@ -43,6 +42,9 @@ export default function useApplicationData(props) {
       }
     })
     .catch(e => console.log(e));
+    return () => {
+      console.log('Fire');
+    }
   }, [state.user, state.team])
 
 
@@ -65,6 +67,15 @@ export default function useApplicationData(props) {
     console.log(taskItem);
   }
 
-  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem }
+  function deleteTaskItem(id) {
+    return axios.delete(`http://localhost:8080/api/tasks/${id}`)
+    .then((res) => {
+      const tmp = [...state.allTasks]
+      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
+    })
+    .catch(e => console.log(e));
+  }
+
+  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem, deleteTaskItem }
 
 }
