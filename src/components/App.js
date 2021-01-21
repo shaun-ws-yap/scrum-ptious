@@ -64,7 +64,7 @@ function App() {
       </section>
       
       <section className="user__info">
-        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.tasks} /> }
+        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.deadlines} /> }
       </section>
     </div>
   );
