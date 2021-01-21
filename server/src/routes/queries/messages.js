@@ -30,9 +30,25 @@ const getRecentMessages = (db, numMsg) => {
     JOIN employees ON employees.id = sender_id
     ORDER BY time_iso
   `, [numMsg])
-}
+};
+
+const getAllMessages = db => {
+  return db.query(`
+    SELECT 
+      messages.team_id,
+      sender_id,
+      name as sender,
+      message,
+      time_iso,
+      to_char(time_iso, 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
+    FROM messages
+    JOIN employees ON employees.id = sender_id
+    ORDER BY time_iso
+  `)
+};
 
 module.exports = {
   saveMessage,
-  getRecentMessages
+  getRecentMessages,
+  getAllMessages
 }
