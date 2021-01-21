@@ -44,6 +44,8 @@ function App() {
     // teamTasks
   } = state
 
+  console.log(state.deadlines);
+
   return (
     <div className="container">
       { state.user !== 0 && (
