@@ -3,9 +3,9 @@ import axios from 'axios';
 
 export default function useApplicationData(props) {
   const [state, setState] = useState({
-    user: 0,
+    userId: 0,
     menu: "Dashboard",
-    tasks: [],
+    userTasks: [],
     userInfo: {},
     taskItem: [],
     role: 0,
@@ -13,20 +13,22 @@ export default function useApplicationData(props) {
     teamTasks: [],
     teamUsers: [],
     allTasks: [],
-    deadlines: []
+    deadlines: [],
   })
   
   const GET_ALL_TASKS = `http://localhost:8080/api/tasks/`;
-  const GET_USER_INFO = `http://localhost:8080/api/employees/${state.user}`;
-  const GET_TASKS = `http://localhost:8080/api/tasks/user/${state.user}`;
+  const GET_USER_INFO = `http://localhost:8080/api/employees/${state.userId}`;
+  const GET_USER_TASKS = `http://localhost:8080/api/tasks/user/${state.userId}`;
   const GET_TEAM_TASKS = `http://localhost:8080/api/tasks/team/${state.team}`;
   const GET_TEAM_USERS = `http://localhost:8080/api/employees/team/${state.team}`;
-  const GET_USER_DEADLINES = `http://localhost:8080/api/tasks/deadlines/${state.user}`;
+  const GET_USER_DEADLINES = `http://localhost:8080/api/tasks/deadlines/${state.userId}`;
 
   const setMenu = menu => setState({...state, menu});
-  const setUser = user => setState({...state, user});
+  const setUser = userId => setState({...state, userId});
   const setTaskItem = taskItem => setState({...state, taskItem});
-  const setTasks = tasks => setState({...state, tasks});
+  
+  // not being used
+  const setUserTasks = userTasks => setState({...state, userTasks});
   const setTeamTasks = teamTasks => setState({...state, teamTasks});
   const setAllTasks = allTasks => setState({...state, allTasks});
 
@@ -34,19 +36,28 @@ export default function useApplicationData(props) {
 
   useEffect(() => {
     Promise.all([
-      axios.get(GET_TASKS),
+      axios.get(GET_USER_TASKS),
       axios.get(GET_USER_INFO),
       axios.get(GET_TEAM_TASKS),
       axios.get(GET_TEAM_USERS),
       axios.get(GET_USER_DEADLINES)
     ]).then(all => {
-      if (state.user !== 0) {
-      setState(prev => ({ ...prev, tasks: all[0].data, userInfo: all[1].data[0], role: all[1].data[0]['role'], team: all[1].data[0]['team_id'], teamTasks: all[2].data, teamUsers: all[3].data, allTasks: all[2].data, deadlines: all[4].data }))
+      if (state.userId !== 0) {
+        setState(prev => ({ 
+          ...prev, 
+          userTasks: all[0].data, 
+          userInfo: all[1].data[0], 
+          role: all[1].data[0]['role'], 
+          team: all[1].data[0]['team_id'], 
+          teamTasks: all[2].data, 
+          teamUsers: all[3].data, 
+          allTasks: all[2].data, 
+          deadlines: all[4].data 
+        }));
       }
     })
     .catch(e => console.log(e));
-  }, [state.user, state.team])
-
+  }, [state.userId, state.team])
 
   function createTaskItem(taskItem) {
     let task = {...taskItem, projecttask_id: state.team }
@@ -76,6 +87,18 @@ export default function useApplicationData(props) {
     .catch(e => console.log(e));
   }
 
-  return { state, setMenu, setUser, setTaskItem, setTasks, setTeamTasks, setAllTasks, createTaskItem, editTaskItem, deleteTaskItem }
-
+  return { 
+    state, 
+    setMenu, 
+    setUser, 
+    setTaskItem, 
+    createTaskItem, 
+    editTaskItem, 
+    deleteTaskItem, 
+    
+    // not being used
+    setUserTasks, 
+    setTeamTasks, 
+    setAllTasks, 
+  }
 }
