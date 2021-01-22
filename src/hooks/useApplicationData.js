@@ -16,16 +16,14 @@ export default function useApplicationData(socket, loginToken) {
     team: 0, // not used
   });
 
-  //const [tasks, setTasks] = useState([]);
-
   const setMenu = menu => setState({...state, menu});
   const setTaskItem = taskItem => setState({...state, taskItem});
+  const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
   
   // not being used
-  const setUser = userId => setState({...state, userId});
-  const setUserTasks = userTasks => setState({...state, userTasks});
-  const setTeamTasks = teamTasks => setState({...state, teamTasks});
-  const setAllTasks = allTasks => setState({...state, allTasks});
+  // const setUser = userId => setState({...state, userId});
+  // const setUserTasks = userTasks => setState({...state, userTasks});
+  // const setAllTasks = allTasks => setState({...state, allTasks});
 
   useEffect(() => {
     if (!loginToken) {
@@ -66,11 +64,6 @@ export default function useApplicationData(socket, loginToken) {
 
     return axios.put(`http://localhost:8080/api/tasks`, task)
     .then(res => {
-      console.log(res.data)
-      // const id = res.data.id;
-      // task = {...task, id: id};
-      // const tmp = [...state.allTasks];
-      // tmp.push(task);
       const newTasks = [ ...state.teamTasks, res.data ];
       setTeamTasks(newTasks);
     })
@@ -94,15 +87,15 @@ export default function useApplicationData(socket, loginToken) {
   return { 
     state, 
     setMenu, 
-    setUser, 
     setTaskItem, 
     createTaskItem, 
     editTaskItem, 
     deleteTaskItem, 
     
     // not being used
-    setUserTasks, 
-    setTeamTasks, 
-    setAllTasks, 
+    // setUser, 
+    // setUserTasks, 
+    // setTeamTasks, 
+    // setAllTasks, 
   }
 }
