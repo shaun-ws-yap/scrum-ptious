@@ -13,7 +13,7 @@ export default function useApplicationData(props) {
     teamTasks: [],
     teamUsers: [],
     allTasks: [],
-    deadlines: []
+    deadlines: [],
   })
   
   const GET_ALL_TASKS = `http://localhost:8080/api/tasks/`;
@@ -26,6 +26,8 @@ export default function useApplicationData(props) {
   const setMenu = menu => setState({...state, menu});
   const setUser = userId => setState({...state, userId});
   const setTaskItem = taskItem => setState({...state, taskItem});
+  
+  // not being used
   const setUserTasks = userTasks => setState({...state, userTasks});
   const setTeamTasks = teamTasks => setState({...state, teamTasks});
   const setAllTasks = allTasks => setState({...state, allTasks});
@@ -56,21 +58,6 @@ export default function useApplicationData(props) {
     })
     .catch(e => console.log(e));
   }, [state.userId, state.team])
-
-  const getUserTasks = function(empID) {
-    const selectedUserTasks = [];
-    state.allTasks.filter((userTask) => {
-      if (empID !== 1) {
-        if (userTask.employee_id === empID) {
-          selectedUserTasks.push(userTask);
-        }
-      } else {
-        selectedUserTasks.push(userTask);
-      }
-    });
-    setTeamTasks(selectedUserTasks);
-  }
-
 
   function createTaskItem(taskItem) {
     let task = {...taskItem, projecttask_id: state.team }
@@ -105,12 +92,13 @@ export default function useApplicationData(props) {
     setMenu, 
     setUser, 
     setTaskItem, 
+    createTaskItem, 
+    editTaskItem, 
+    deleteTaskItem, 
+    
+    // not being used
     setUserTasks, 
     setTeamTasks, 
     setAllTasks, 
-    getUserTasks,
-    createTaskItem, 
-    editTaskItem, 
-    deleteTaskItem 
   }
 }
