@@ -1,6 +1,4 @@
-import { React, useEffect, useState, useRef } from 'react';
-import { io } from 'socket.io-client';
-import axios from "axios";
+import { React } from 'react';
 
 import ChatLog from "./ChatLog";
 import MembersList from "./MembersList";
@@ -9,87 +7,18 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 
 import '../../styles/Chat.css';
 
-import formatDateString from "../../utilities/format-date";
-
-const MESSAGES_URL = "http://localhost:8080/api/messages";
-
-let socket;
+import useChat from '../../hooks/useChat';
 
 export default function Chat(props) {
-  const { id, name, team_id } = props.userInfo;
+  const { socket, userInfo, teamUsers } = props
 
-  const [ messages, setMessages ] = useState([]);
-  const [ onlineUsers, setOnlineUsers ] = useState([]);
-  const [ joinMessage, setJoinMessage ] = useState("");
-
-  useEffect(() => {
-    axios.get(`${MESSAGES_URL}/15`)
-    .then(res => setMessages(res.data));
-  }, []);
-
-  useEffect(() => {
-    socket = io();
-
-    socket.emit('joining msg', name, id);
-
-    socket.on('user joined', (users, username) => {
-      setOnlineUsers(users);
-      setJoinMessage(username + " joined the chat")
-    });
-
-    socket.on('user left', (users, username) => {
-      setOnlineUsers(users);
-      setJoinMessage(username + " left the chat")
-    });
-  
-    socket.on('chat message', function(messageData) {
-      setMessages(prev => [...prev, messageData])
-    });
-
-    socket.on('get previous messages', messagesData => {
-      setMessages(prev => [...messagesData, ...prev]);
-      console.log(messagesData);
-    });
-
-    socket.on('message saved', function(messageData) {
-      console.log('message saved: ', messageData);
-    });
-
-    socket.on('error', function(error) {
-      console.log('error received: ', error);
-    });
-
-    return () => {
-      socket.off('user joined');
-      socket.off('user left');
-      socket.off('chat message');
-      socket.off('get previous messages');
-      socket.off('message saved');
-      socket.off('error');
-      socket.emit('leaving msg', name, id );
-      socket.close(); // TODO: need to ask mentor about this and useRef
-    };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const getPrevMessages = () => {
-    if (messages[0]) {
-      socket.emit('get previous messages', messages[0].time_iso, 12);
-    }
-  }
-
-  const sendMessage = message => {
-    const now = new Date();
-    const messageData = {
-      message,
-      team_id,
-      sender_id: id,
-      sender: name,
-      time_iso: now.toISOString(),
-      time_locale: formatDateString(now),
-    }
-    socket.emit('chat message', messageData);
-  };
+  const { 
+    messages, 
+    joinMessage, 
+    onlineUsers, 
+    getPrevMessages, 
+    sendMessage,
+  } = useChat(socket, userInfo);
 
   return (
     <div className="chat-container">
@@ -102,7 +31,7 @@ export default function Chat(props) {
             getPrevMessages={getPrevMessages}
           />
         </ScrollToBottom>
-        <MembersList teamUsers={props.teamUsers} onlineUsers={onlineUsers} />
+        <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />
       </div>
       <InputBox sendMessage={sendMessage} />
     </div>
