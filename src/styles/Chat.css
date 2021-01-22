@@ -2,12 +2,19 @@
   display: flex;
   flex-direction: column;
   margin: 1.5em;
+  height: 800px;
+  width: 600px;
 }
 
 .chat-top {
   display: flex;
   flex-direction: row;
   margin-bottom: 0.5em;
+  height: 75%;
+}
+
+.chat-scroll {
+  width: 70%;
 }
 
 /* .members-list-item img{
@@ -22,11 +29,14 @@
   flex-direction: column;
   padding: 1em;
   margin-right: 0.5em;
+  /* width: 70%;
+  overflow-y: auto; */
 }
 
 .chat-item {
   display: flex;
   flex-direction: row;
+  position: relative;
 }
 
 .chat-avatar {
@@ -37,7 +47,9 @@
 
 .chat-item:hover .chat-message-time {
   display: flex;
-  position: fixed;
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .chat-message-time {
@@ -58,6 +70,7 @@
   border: 1px solid black;
   border-radius: 20px;
   padding: 1em;
+  width: 30%;
 }
 
 .members-list-item {
