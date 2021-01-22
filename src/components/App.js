@@ -61,10 +61,32 @@ function App() {
         
       )}
       <section className="main">
-        
-        { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks.bind(this)} setAllTasks={setAllTasks.bind(this)} allTasks={state.allTasks} createTaskItem={createTaskItem.bind(this)} deleteTaskItem={deleteTaskItem} /> }
-
+        { menu === DASHBOARD && 
+          <Dashboard
+            tasks={userTasks} 
+            role={role} 
+            teamTasks={teamTasks} 
+            allTasks={allTasks} 
+          /> }
+        { menu === TASKS && 
+          <Tasks 
+            socket={socket} 
+            role={role} 
+            tasks={role === 1 ? teamTasks : userTasks} 
+            teamUsers={teamUsers} 
+            setTaskItem={setTaskItem} 
+            getUserTasks={getUserTasks} 
+            createTaskItem={createTaskItem} 
+            deleteTaskItem={deleteTaskItem} 
+            editTaskItem={editTaskItem}
+          />}
+        { menu === CHAT && 
+          <Chat 
+            socket={socket} 
+            userInfo={userInfo} 
+            teamUsers={teamUsers}
+          />}
+        { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </section>
       
       <section className="user__info">
