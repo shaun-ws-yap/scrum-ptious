@@ -1,17 +1,17 @@
 const router = require("express").Router();
+const { 
+  getTasksByEmployee, 
+  getDeadlinesByDueDate, 
+  getTasksByTeam, 
+  saveTask, 
+  deleteTask } = require('./queries/tasks');
 
 module.exports = (db) => {
 
 
   // Get deadlines by due_date
   router.get("/tasks/deadlines/:id", (req, res) => {
-    const queryString = `
-    SELECT * FROM tasks
-    WHERE employee_id = $1
-    AND due_date > now()
-    `;
-
-    db.query(queryString, [req.params.id])
+    getDeadlinesByDueDate(db, req.params.id)
     .then(data => {
       res.json(data.rows);
     })
@@ -31,12 +31,7 @@ module.exports = (db) => {
 
   // Get task by employee id
   router.get("/tasks/user/:id", (req, res) => {
-    const queryString = `
-    SELECT * FROM tasks
-    WHERE employee_id = $1
-    `;
-    
-    db.query(queryString, [req.params.id])
+    getTasksByEmployee(db, req.params.id)
     .then(data => {
       res.json(data.rows)
     })
@@ -59,12 +54,7 @@ module.exports = (db) => {
 
   // Get task by team_id
   router.get("/tasks/team/:id", (req, res) => {
-    const queryString = `
-    SELECT * from tasks
-    WHERE projectTask_id = $1
-    `;
-
-    db.query(queryString, [req.params.id])
+    getTasksByTeam(db, req.params.id)
     .then(data => {
       res.json(data.rows)
     })
@@ -74,26 +64,14 @@ module.exports = (db) => {
 
   // Create and edit task
   router.put("/tasks", (req, res) => {
-    const params = req.body;
-
-    // console.log(params)
-
-    const queryString = `
-      INSERT INTO tasks (title, description, due_date, employee_id, projecttask_id)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING id
-    `;
-
-    db.query(queryString, [params.title, params.description, params.due_date, params.employee_id, params.projecttask_id])
-    .then(data => {
-      res.send(data.rows[0])
-    })
+    saveTask(db, req.body)
+    .then(data => res.send(data.rows[0]))
     .catch(e => res.send(e));
   })
 
   // Delete task by id
   router.delete("/tasks/:id", (req, res) => {
-    db.query("DELETE FROM tasks WHERE id = $1", [req.params.id])
+    deleteTask(db, req.params.id)
     .then(data => {
       res.status(204);
     })

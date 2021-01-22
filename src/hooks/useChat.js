@@ -45,17 +45,12 @@ export default function useChat(socket, userInfo) {
       console.log('message saved: ', messageData);
     });
 
-    socket.on('error', function(error) {
-      console.log('error received: ', error);
-    });
-
     return () => {
       socket.off('user joined');
       socket.off('user left');
       socket.off('chat message');
       socket.off('get previous messages');
       socket.off('message saved');
-      socket.off('error');
       socket.emit('leaving msg', name, id );
       //socket.close(); // TODO: need to ask mentor about this and useRef
     };

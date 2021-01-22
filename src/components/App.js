@@ -25,19 +25,19 @@ const CHAT = "Chat";
 const PERFORMANCE_REVIEW = "Performance Review"
 
 function App() {
+  const [loginToken, setLoginToken] = useState(0);
+  const { socket } = useSocket();
 
   const { 
     state,
     setMenu,
-    setUser,
     setTaskItem,
     createTaskItem,
     editTaskItem,
     deleteTaskItem
-  } = useApplicationData();
+  } = useApplicationData(socket, loginToken);
 
   const {
-    userId,
     menu,
     userTasks,
     userInfo,
@@ -49,15 +49,14 @@ function App() {
     deadlines
   } = state;
 
-  const { socket } = useSocket();
-
-  if ( userId === 0 ) {
+  if ( loginToken === 0 ) {
     return (
       <section className="main">
-        { userId === 0 && <Login setUser={setUser} user={userId} /> }
+        { loginToken === 0 && <Login setLogin={setLoginToken}/> }
       </section>
     )
   }
+
   return (
     <div className="container">
       <section className="sidebar">
@@ -75,7 +74,7 @@ function App() {
             createTaskItem={createTaskItem.bind(this)}
           />
         </nav>
-        <button onClick={() => setUser(0)}>
+        <button onClick={() => setLoginToken(0)}>
           Log out
         </button>
       </section>
