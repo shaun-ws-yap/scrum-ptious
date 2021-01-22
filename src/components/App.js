@@ -32,7 +32,7 @@ function App() {
     deleteTaskItem
   } = useApplicationData();
 
-  console.log(state);
+  console.log(state.teamUsers);
 
   return (
     <div className="container">

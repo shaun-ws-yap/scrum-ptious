@@ -5,6 +5,7 @@ import IndependentProgress from './IndependentProgress';
 import Tasks from '../Tasks';
 import Chat from '../Chat'
 import PerformanceReview from './PerformanceReview';
+import EmployeeProgress from './EmployeeProgress';
 
 import '../../styles/Dashboard.css';
 
@@ -40,7 +41,7 @@ export default function Dashboard(props) {
         { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </div>
       <div className="dashboard-bottom">
-      {menu === DASHBOARD && role === 1 && <h1>Project Manager View</h1>}
+      {menu === DASHBOARD && role === 1 && <EmployeeProgress independentTasks={tasks} teamTasks={teamTasks} allTasks={allTasks} teamUsers={teamUsers} />}
       {menu === DASHBOARD && role === 2 && <IndependentProgress independentTasks={tasks} />}
       </div>
     </div>
