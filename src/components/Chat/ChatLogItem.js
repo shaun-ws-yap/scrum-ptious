@@ -8,8 +8,8 @@ export default function ChatLogItem(props) {
       <div className="chat-item-right">
         <div className="chat-message-sender">{sender}</div>
         <div className="chat-message">{message}</div>
+        <span className="chat-message-time">{time_locale}</span>
       </div>
-      <span className="chat-message-time">{time_locale}</span>
     </div>
   )
 }
