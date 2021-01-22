@@ -49,9 +49,6 @@ function App() {
     deadlines
   } = state;
 
-  console.log(state);
-
-
   const { socket } = useSocket();
 
   if ( userId === 0 ) {
