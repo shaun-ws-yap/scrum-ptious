@@ -83,8 +83,9 @@ function App() {
           <Dashboard
             tasks={userTasks} 
             role={role} 
-            teamTasks={teamTasks} 
-            allTasks={allTasks} 
+            teamTasks={teamTasks}
+            teamUsers={teamUsers}
+            allTasks={allTasks}
           /> }
         { menu === TASKS && 
           <Tasks 
