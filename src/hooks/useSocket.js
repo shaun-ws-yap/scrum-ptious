@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-export default function useSocket(userId) {
+export default function useSocket(loginToken) {
   const [socket, setSocket] = useState({});
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function useSocket(userId) {
     return () => {
       conn.close();
     }
-  }, [userId])
+  }, [loginToken])
 
   return { socket };
 };
