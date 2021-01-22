@@ -17,8 +17,8 @@ export default function Dashboard(props) {
         <ProjectProgress teamTasks={teamTasks} allTasks={allTasks} />
       </div>
       <div className="dashboard-bottom">
-      {menu === DASHBOARD && role === 1 && <EmployeeProgress independentTasks={tasks} teamTasks={teamTasks} allTasks={allTasks} teamUsers={teamUsers} />}
-      {menu === DASHBOARD && role === 2 && <IndependentProgress independentTasks={tasks} />}
+      {role === 1 && <EmployeeProgress independentTasks={tasks} teamTasks={teamTasks} allTasks={allTasks} teamUsers={teamUsers} />}
+      {role === 2 && <IndependentProgress independentTasks={tasks} />}
       </div>
     </div>
   )
