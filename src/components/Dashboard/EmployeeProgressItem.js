@@ -1,6 +1,5 @@
  import React from 'react';
  import { Doughnut, Bar } from 'react-chartjs-2';
- import { taskStatus, lateTaskStatus } from '../../helpers/taskStatus';
  
  export default function EmployeeProgress(props) {
  
