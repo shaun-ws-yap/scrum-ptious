@@ -29,8 +29,16 @@ const getLoginData = (db, uid, callback) => {
     getTasksByEmployee(db, uid), 
     teamTasksData,
     getDeadlinesByDueDate(db, uid), 
-    callback
-  );
+    (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
+      const loginData = {
+        userInfo: userData.rows[0],
+        teamUsers: teamData.rows,
+        userTasks: userTasksData.rows,
+        teamTasks: teamTasksData.rows,
+        deadlines: deadlinesData.rows,
+      }
+      callback(loginData);
+    });
 }
 
 module.exports = {

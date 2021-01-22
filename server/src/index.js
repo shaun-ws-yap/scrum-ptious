@@ -44,14 +44,7 @@ app.use("/api", taskRoutes(db));
 // test for getting login data 
 app.get('/:id', (req, res) => {
   const userId = req.params.id
-  getLoginData(db, userId, (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
-    const loginData = {
-      userInfo: userData.rows[0],
-      teamUsers: teamData.rows,
-      userTasks: userTasksData.rows,
-      teamTasks: teamTasksData.rows,
-      deadlines: deadlinesData.rows,
-    }
+  getLoginData(db, userId, loginData => {
     res.json(loginData);
   });
 });
@@ -60,14 +53,7 @@ io.on('connection', (socket) => {
   //on login
   socket.on('user logged in', userId => {
     console.log('logged in');
-    getLoginData(db, userId, (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
-      const loginData = {
-        userInfo: userData.rows[0],
-        teamUsers: teamData.rows,
-        userTasks: userTasksData.rows,
-        teamTasks: teamTasksData.rows,
-        deadlines: deadlinesData.rows,
-      }
+    getLoginData(db, userId, loginData => {
       socket.emit('login data', loginData);
     });
   });
