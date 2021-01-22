@@ -7,6 +7,7 @@ export default function useSocket(userId) {
   useEffect(() => {
     const conn = io();
     setSocket(conn);
+
     return () => {
       conn.close();
     }
