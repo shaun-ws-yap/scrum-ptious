@@ -19,7 +19,6 @@ export default function sortTasks(tasks) {
         break;
     }
   }
-  console.log(toReturn);
   return toReturn;
 };
   
