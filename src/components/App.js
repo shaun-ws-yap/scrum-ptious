@@ -49,10 +49,7 @@ function App() {
     deadlines
   } = state;
 
-  console.log(state);
-
-
-  const { socket } = useSocket();
+  const { socket } = useSocket(userId);
 
   if ( userId === 0 ) {
     return (
@@ -61,6 +58,7 @@ function App() {
       </section>
     )
   }
+
   return (
     <div className="container">
       <section className="sidebar">
