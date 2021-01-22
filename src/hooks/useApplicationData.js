@@ -100,6 +100,17 @@ export default function useApplicationData(props) {
     .catch(e => console.log(e));
   }
 
-  return { state, setMenu, setUser, setTaskItem, setUserTasks, setTeamTasks, setAllTasks, getUserTasks,createTaskItem, editTaskItem, deleteTaskItem }
-
+  return { 
+    state, 
+    setMenu, 
+    setUser, 
+    setTaskItem, 
+    setUserTasks, 
+    setTeamTasks, 
+    setAllTasks, 
+    getUserTasks,
+    createTaskItem, 
+    editTaskItem, 
+    deleteTaskItem 
+  }
 }

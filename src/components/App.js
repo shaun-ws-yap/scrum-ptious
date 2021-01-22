@@ -36,6 +36,7 @@ function App() {
     setAllTasks,
     getUserTasks,
     createTaskItem,
+    editTaskItem,
     deleteTaskItem
   } = useApplicationData();
 
@@ -53,6 +54,7 @@ function App() {
   } = state;
 
   console.log(state);
+
 
   const { socket } = useSocket();
 
@@ -95,19 +97,16 @@ function App() {
         { menu === TASKS && 
           <Tasks 
             socket={socket} 
-            getUserTasks={getUserTasks} 
-            user={userId} 
-            tasks={userTasks} 
-            setTaskItem={setTaskItem} 
-            taskItem={taskItem} 
             role={role} 
-            teamTasks={teamTasks} 
+            tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
-            setTasks={setTasks} 
-            setTeamTasks={setTeamTasks} 
+            teamTasks={teamTasks} 
+            setTaskItem={setTaskItem} 
+            getUserTasks={getUserTasks} 
             createTaskItem={createTaskItem} 
             deleteTaskItem={deleteTaskItem} 
-            allTasks={allTasks} />}
+            editTaskItem={editTaskItem}
+          />}
         { menu === CHAT && 
           <Chat 
             socket={socket} 
