@@ -6,17 +6,23 @@ import axios from 'axios';
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
+import PerformanceReview from './Performance-Review/PerformanceReview';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
-import TaskResource from './Dashboard/TaskResource';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
+import useSocket from '../hooks/useSocket';
 import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
+
+const DASHBOARD = "Dashboard";
+const TASKS = "Tasks";
+const CHAT = "Chat";
+const PERFORMANCE_REVIEW = "Performance Review"
 
 function App() {
 
@@ -28,38 +34,58 @@ function App() {
     setTasks,
     setTeamTasks,
     setAllTasks,
+    getUserTasks,
     createTaskItem,
+    editTaskItem,
     deleteTaskItem
   } = useApplicationData();
 
+  const {
+    userId,
+    menu,
+    userTasks,
+    userInfo,
+    taskItem,
+    role,
+    teamTasks,
+    teamUsers,
+    allTasks,
+    deadlines
+  } = state;
+
   console.log(state);
 
+
+  const { socket } = useSocket();
+
+  if ( userId === 0 ) {
+    return (
+      <section className="main">
+        { userId === 0 && <Login setUser={setUser} user={userId} /> }
+      </section>
+    )
+  }
   return (
     <div className="container">
-      { state.user !== 0 && (
-        <>
-          <section className="sidebar">
-            <img 
-              alt="Scrum-ptious Logo"
-              className="sidebar-centered"
-              src="https://logoipsum.com/logo/logo-25.svg"
-            />
-            <nav className="sidebar__menu">
-              <Sidebar
-                menu={state.menu}
-                setMenu={setMenu}
-                userInfo={state.userInfo}
-                teamUsers={state.teamUsers}
-                createTaskItem={createTaskItem.bind(this)}
-              />
-            </nav>
-            <button onClick={() => setUser(0)}>
-              Log out
-            </button>
-          </section>
-        </>
-        
-      )}
+      <section className="sidebar">
+        <img 
+          alt="Scrum-ptious Logo"
+          className="sidebar-centered"
+          src="https://logoipsum.com/logo/logo-25.svg"
+        />
+        <nav className="sidebar__menu">
+          <Sidebar
+            menu={menu}
+            setMenu={setMenu}
+            userInfo={userInfo}
+            teamUsers={teamUsers}
+            createTaskItem={createTaskItem.bind(this)}
+          />
+        </nav>
+        <button onClick={() => setUser(0)}>
+          Log out
+        </button>
+      </section>
       <section className="main">
         { menu === DASHBOARD && 
           <Dashboard
@@ -88,9 +114,8 @@ function App() {
           />}
         { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
       </section>
-      
       <section className="user__info">
-        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.deadlines} /> }
+        <UserInfo userInfo={userInfo} deadlines={deadlines} /> 
       </section>
     </div>
   );

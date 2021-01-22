@@ -10,15 +10,24 @@ import TaskResource from './TaskResource';
 // import '../../styles/Dashboard.css';
 
 export default function Tasks(props) {
+  const {
+    role,
+    tasks,
+    teamUsers,
+    setTaskItem,
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+    getUserTasks,
+  } = props
 
   return (
     <div className='dashboard'>
-
-
       <div className="dashboard-top">
         <TaskProgress 
           role={role} 
           tasks={tasks} 
+          teamUsers={teamUsers} 
           setTaskItem={setTaskItem} 
           createTaskItem={createTaskItem} 
           deleteTaskItem={deleteTaskItem} 
@@ -26,8 +35,12 @@ export default function Tasks(props) {
         />
       </div>
       <div className="dashboard-bottom">
-        { props.role === 1 && <MyTeam getUserTasks={props.getUserTasks} user={props.user} teamUsers={props.teamUsers} tasks={props.tasks} setTasks={props.setTasks} teamTasks={props.teamTasks} setTeamTasks={props.setTeamTasks} allTasks={props.allTasks} />}
-        { props.role === 2 && <TaskResource />}
+        { role === 1 && 
+          <MyTeam 
+            teamUsers={teamUsers} 
+            getUserTasks={getUserTasks}  
+          />}
+        { role === 2 && <TaskResource />}
       </div>
     </div>
   )
