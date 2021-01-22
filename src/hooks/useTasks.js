@@ -1,42 +1,37 @@
 import { useState, useEffect } from 'react';
-import axios from "axios";
 
 export default function useTasks(socket, setTeamTasks, setUserTasks ) {
   useEffect(() => {
-    socket.on('user tasks update', (userTasks) => {
-      setUserTasks(userTasks);
+    socket.on('tasks update', (userTasks) => {
+      console.log('task updated');
+      //setUserTasks(userTasks);
     });
 
-    socket.on('team tasks update', (teamTasks) => {
-      setTeamTasks(teamTasks);
-    })
+    socket.on('action saved', (msg) => {
+      console.log(msg);
+    });
+
+    return () => {
+      socket.off('tasks update');
+      socket.off('tasks action saved');
+    }
   }, []);
 
-  // function createTaskItem(taskItem, ) {
-  //   let task = {...taskItem, projecttask_id: state.team }
+  const createTaskItem = taskItem => {
+    socket.emit('tasks add', taskItem);
+  };
 
-  //   return axios.put(`http://localhost:8080/api/tasks`, task)
-  //   .then(res => {
-  //     const id = res.data.id;
-  //     task = {...task, id: id};
-  //     const tmp = [...state.allTasks];
-  //     tmp.push(task);
-  //     setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
-  //   })
-  //   .catch(e => console.log(e));
-  // }
+  const editTaskItem = (id, taskItem) => {
+    socket.emit('tasks edit', id, taskItem);
+  };
 
-  // function editTaskItem(id, taskItem) {
-  //   console.log(id)
-  //   console.log(taskItem);
-  // }
+  const deleteTaskItem = id => {
+    socket.emit('tasks delete', id);
+  };
 
-  // function deleteTaskItem(id) {
-  //   return axios.delete(`http://localhost:8080/api/tasks/${id}`)
-  //   .then((res) => {
-  //     const tmp = [...state.allTasks]
-  //     setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
-  //   })
-  //   .catch(e => console.log(e));
-  // }
+  return {
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+  };
 }
