@@ -50,3 +50,11 @@ export function teamTaskStatus (data, team, empID) {
 
   return result;
 }
+
+
+export function changeTaskStatus (data) {
+
+  data.status += 1;
+  return data;
+
+}

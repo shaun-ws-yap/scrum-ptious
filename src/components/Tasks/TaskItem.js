@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-// import { taskStatus } from '../../helpers/taskStatus';
+import { changeTaskStatus } from '../../helpers/taskStatus';
 
 import { Modal, Button } from 'react-bootstrap';
 
@@ -56,6 +56,30 @@ export default function TaskItem(props) {
               </Button>
               <Button confirm variant="primary" onClick={() => editTaskItem(id, desc)}>
                 Edit
+              </Button>
+            </Modal.Footer>
+          </Modal>
+      </form>
+      }
+      {role === 2 && (taskData.status === 0 || taskData.status === 1) &&
+        <form
+          onSubmit={event => event.preventDefault()}
+        >
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>{title}</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {desc}
+            </Modal.Body>
+            <Modal.Body>
+              <p>db id: {id}</p>
+              <p>Assigned to: {assignedTo}</p>
+              <p>On: {due_date}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button confirm variant="primary" onClick={() => props.setTaskItem(taskData.status += 1)}>
+                Submit
               </Button>
             </Modal.Footer>
           </Modal>
