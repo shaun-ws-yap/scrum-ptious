@@ -66,16 +66,16 @@ io.on('connection', (socket) => {
       .catch(err => socket.emit('error', 'could not save task to db: ' + err));
   });
 
-  socket.on('tasks edit', (id, taskItem) => {
+  socket.on('tasks edit', (taskId, taskItem) => {
     io.emit('tasks update');
-    editTask(db, id, taskItem)
+    editTask(db, taskId, taskItem)
       .then(data => socket.emit('tasks action saved', 'edited task ' + data.rows[0]))
       .catch(err => socket.emit('error', 'could not edit task in db: ' + err));
   });
 
-  socket.on('tasks delete', id => {
+  socket.on('tasks delete', taskId => {
     io.emit('tasks update');
-    deleteTask(db, id)
+    deleteTask(db, taskId)
       .then(data => socket.emit('tasks action saved', 'deleted task' + data.rows[0]))
       .catch(err => socket.emit('error', 'could not delete task from db: ' + err));
   });
