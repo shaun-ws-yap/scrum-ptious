@@ -31,10 +31,6 @@ function App() {
     setMenu,
     setUser,
     setTaskItem,
-    setTasks,
-    setTeamTasks,
-    setAllTasks,
-    getUserTasks,
     createTaskItem,
     editTaskItem,
     deleteTaskItem
@@ -101,7 +97,6 @@ function App() {
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
             setTaskItem={setTaskItem} 
-            getUserTasks={getUserTasks} 
             createTaskItem={createTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
