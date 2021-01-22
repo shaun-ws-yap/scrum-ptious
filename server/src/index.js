@@ -64,7 +64,13 @@ io.on('connection', (socket) => {
 
   socket.on('get previous messages', (time_iso, numMsg) => {
     queryMessages(db, numMsg, time_iso)
-      .then(data => socket.emit('get previous messages', data.rows))
+      .then(data => {
+        socket.emit('get previous messages', data.rows)
+
+        // setTimeout(() => {
+        //   socket.emit('get previous messages', data.rows)
+        // }, 500);
+      })
       .catch(err => socket.emit('error', 'could not get previous messages: ' + err))
   })
 
