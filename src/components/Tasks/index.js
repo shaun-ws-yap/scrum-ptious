@@ -18,15 +18,25 @@ export default function Tasks(props) {
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
-    getUserTasks,
-  } = props
+  } = props;
+
+  const [selectedTasks, setSelectedTasks] = useState(tasks);
+
+  const filterTasksByUser = (user) => {
+    if (user.role === 1) {
+      setSelectedTasks(tasks);
+      return;
+    }
+    const userTasks = tasks.filter(task => task.employee_id === user.id);
+    setSelectedTasks(userTasks);
+  }
 
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
         <TaskProgress 
           role={role} 
-          tasks={tasks} 
+          tasks={selectedTasks} 
           teamUsers={teamUsers} 
           setTaskItem={setTaskItem} 
           createTaskItem={createTaskItem} 
@@ -38,7 +48,7 @@ export default function Tasks(props) {
         { role === 1 && 
           <MyTeam 
             teamUsers={teamUsers} 
-            getUserTasks={getUserTasks}  
+            filterTasksByUser={filterTasksByUser}  
           />}
         { role === 2 && <TaskResource />}
       </div>

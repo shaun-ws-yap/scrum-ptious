@@ -3,10 +3,10 @@ import React from 'react';
 export default function MyTeamItem(props) {
   const {
     member,
-    getUserTasks,
+    filterTasksByUser,
   } = props;
 
-  const { id, role, name, email, phone_number } = member;
+  const { role, name, email, phone_number } = member;
 
   const roles = {
     1 : 'Project Manager',
@@ -15,7 +15,7 @@ export default function MyTeamItem(props) {
 
   return (
     <li className="task-progress">
-      <button onClick={() => getUserTasks(id)}>
+      <button onClick={() => filterTasksByUser(member)}>
         Test
       </button>
       <h4>{name}</h4>

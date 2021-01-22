@@ -5,7 +5,7 @@ import MyTeamItem from './MyTeamItem';
 
 export default function MyTeam(props) {
   const {
-    getUserTasks,  
+    filterTasksByUser,  
     teamUsers,
   } = props;
 
@@ -15,7 +15,7 @@ export default function MyTeam(props) {
     <MyTeamItem
       key={member.id}
       member={member}
-      getUserTasks={getUserTasks}
+      filterTasksByUser={filterTasksByUser}
     />
     </li>
     )
