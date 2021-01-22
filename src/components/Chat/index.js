@@ -1,10 +1,11 @@
-import { React, useEffect, useState } from 'react';
+import { React, useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 import axios from "axios";
 
 import ChatLog from "./ChatLog";
 import MembersList from "./MembersList";
 import InputBox from "./InputBox";
+import ScrollToBottom from 'react-scroll-to-bottom';
 
 import '../../styles/Chat.css';
 
@@ -22,7 +23,7 @@ export default function Chat(props) {
   const [ joinMessage, setJoinMessage ] = useState("");
 
   useEffect(() => {
-    axios.get(`${MESSAGES_URL}/5`)
+    axios.get(`${MESSAGES_URL}/15`)
     .then(res => setMessages(res.data));
   }, []);
 
@@ -71,13 +72,10 @@ export default function Chat(props) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const getPrevMessages = time_iso => {
-    // const before = encodeURIComponent(time_iso || messages[0].time_iso);
-    // axios.get(`${MESSAGES_URL}/query/?before=${before}&num_msg=${5}`)
-    // .then(res => console.log(res.data));
-    // //.then(res => setMessages(prev => ([...res.data, ...prev])));
-    const before = time_iso || messages[0].time_iso;
-    socket.emit('get previous messages', before, 5);
+  const getPrevMessages = () => {
+    if (messages[0]) {
+      socket.emit('get previous messages', messages[0].time_iso, 12);
+    }
   }
 
   const sendMessage = message => {
@@ -97,7 +95,13 @@ export default function Chat(props) {
     <div className="chat-container">
       <button onClick={()=> getPrevMessages()}>Test Get Previous Messages</button>
       <div className="chat-top">
-        <ChatLog messages={messages} chatInfo={joinMessage}/>
+        <ScrollToBottom className="chat-scroll">
+          <ChatLog 
+            messages={messages} 
+            chatInfo={joinMessage} 
+            getPrevMessages={getPrevMessages}
+          />
+        </ScrollToBottom>
         <MembersList teamUsers={props.teamUsers} onlineUsers={onlineUsers} />
       </div>
       <InputBox sendMessage={sendMessage} />
