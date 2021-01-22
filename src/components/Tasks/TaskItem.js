@@ -4,29 +4,39 @@ import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 export default function TaskItem(props) {
+  const {
+    role,
+    taskData,
+    setTaskItem,
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+  } = props;
+
+  const { id, assignedTo, title, description, due_date } = taskData;
+
   const [show, setShow] = useState(false);
-  const [desc, setDesc] = useState(props.description);
+  const [desc, setDesc] = useState(description);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   return (
     <>
       <li
-        onClick={() => props.setTaskItem(props), handleShow}
+        onClick={() => setTaskItem(props), handleShow}
       >
-        <h4>{props.title}</h4>
-        <p>{props.description}</p>
-        <h6>Assigned on: {props.due_date}</h6>
+        <h4>{title}</h4>
+        <p>{description}</p>
+        <h6>Assigned on: {due_date}</h6>
       </li>
-      {props.role === 1 && 
+      {role === 1 && 
         <form
           onSubmit={event => event.preventDefault()}
         >
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>{props.title}</Modal.Title>
+              <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <input
@@ -36,15 +46,15 @@ export default function TaskItem(props) {
             />
             </Modal.Body>
             <Modal.Body>
-              <p>db id: {props.id}</p>
-              <p>Assigned to: {props.assignedTo}</p>
-              <p>On: {props.due_date}</p>
+              <p>db id: {id}</p>
+              <p>Assigned to: {assignedTo}</p>
+              <p>On: {due_date}</p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="danger" onClick={() => console.log('Delete button pressed')}>
                 Delete
               </Button>
-              <Button confirm variant="primary" onClick={() => props.editTaskItem(props.id, desc)}>
+              <Button confirm variant="primary" onClick={() => editTaskItem(id, desc)}>
                 Edit
               </Button>
             </Modal.Footer>
@@ -52,8 +62,6 @@ export default function TaskItem(props) {
       </form>
       }
     </>
-
-    
   )
   
 }

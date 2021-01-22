@@ -11,45 +11,34 @@ import TaskResource from './TaskResource';
 
 export default function Tasks(props) {
   const {
-    setTaskItem,
     role,
-    teamTasks,
     tasks,
-    setTasks,
-    createTaskItem,
-    deleteTaskItem,
-    allTasks,
-    getUserTasks,
-    user,
     teamUsers,
-    setTeamTasks
+    setTaskItem,
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+    getUserTasks,
   } = props
 
   return (
     <div className='dashboard'>
       <div className="dashboard-top">
         <TaskProgress 
-          setTaskItem={setTaskItem} 
           role={role} 
-          teamTasks={teamTasks} 
           tasks={tasks} 
-          setTasks={setTasks} 
+          teamUsers={teamUsers} 
+          setTaskItem={setTaskItem} 
           createTaskItem={createTaskItem} 
           deleteTaskItem={deleteTaskItem} 
-          allTasks={allTasks} 
+          editTaskItem={editTaskItem}
         />
       </div>
       <div className="dashboard-bottom">
         { role === 1 && 
           <MyTeam 
-            getUserTasks={getUserTasks} 
-            user={user} 
             teamUsers={teamUsers} 
-            tasks={tasks} 
-            setTasks={setTasks} 
-            teamTasks={teamTasks} 
-            setTeamTasks={setTeamTasks} 
-            allTasks={allTasks} 
+            getUserTasks={getUserTasks}  
           />}
         { role === 2 && <TaskResource />}
       </div>
