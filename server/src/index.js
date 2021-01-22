@@ -9,8 +9,10 @@ const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
 //const app        = express();
 
-const { getRecentMessages,saveMessage, queryMessages } = require("./routes/queries/messages");
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
+const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
+const { saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
+const { getLoginData } = require('./routes/queries/loginData');
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
@@ -39,12 +41,60 @@ app.use("/api", submissionRoutes(db));
 // Tasks route
 app.use("/api", taskRoutes(db));
 
-
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+// test for getting login data 
+app.get('/:id', (req, res) => {
+  const userId = req.params.id
+  getLoginData(db, userId, (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
+    const loginData = {
+      userInfo: userData.rows[0],
+      teamUsers: teamData.rows,
+      userTasks: userTasksData.rows,
+      teamTasks: teamTasksData.rows,
+      deadlines: deadlinesData.rows,
+    }
+    res.json(loginData);
+  });
 });
 
 io.on('connection', (socket) => {
+  //on login
+  socket.on('user logged in', userId => {
+    console.log('logged in');
+    getLoginData(db, userId, (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
+      const loginData = {
+        userInfo: userData.rows[0],
+        teamUsers: teamData.rows,
+        userTasks: userTasksData.rows,
+        teamTasks: teamTasksData.rows,
+        deadlines: deadlinesData.rows,
+      }
+      socket.emit('login data', loginData);
+    });
+  });
+
+  //tasks
+  socket.on('tasks add', taskItem => {
+    io.emit('tasks update', taskItem);
+    saveTask(db, taskItem)
+      .then(data => socket.emit('tasks action saved', 'saved task ' + data.rows[0]))
+      .catch(err => socket.emit('error', 'could not save task to db: ' + err));
+  });
+
+  socket.on('tasks edit', (id, taskItem) => {
+    io.emit('tasks update');
+    editTask(db, id, taskItem)
+      .then(data => socket.emit('tasks action saved', 'edited task ' + data.rows[0]))
+      .catch(err => socket.emit('error', 'could not edit task in db: ' + err));
+  });
+
+  socket.on('tasks delete', id => {
+    io.emit('tasks update');
+    deleteTask(db, id)
+      .then(data => socket.emit('tasks action saved', 'deleted task' + data.rows[0]))
+      .catch(err => socket.emit('error', 'could not delete task from db: ' + err));
+  });
+
+  //chat
   socket.on('joining msg', (username, userId) => {
     addClientToMap(userId, socket.id);
     io.emit('user joined', parseMap(), username);

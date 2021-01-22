@@ -7,9 +7,7 @@ import EmployeeProgress from './EmployeeProgress';
 import '../../styles/Dashboard.css';
 
 export default function Dashboard(props) {
-  const { tasks, teamTasks, teamUsers, allTasks, role, menu } = props;
-
-  const DASHBOARD = "Dashboard";
+  const { tasks, teamTasks, teamUsers, allTasks, role } = props;
 
   return (
     <div className='dashboard'>

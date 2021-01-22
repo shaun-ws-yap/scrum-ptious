@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 // import ProjectProgress from './ProjectProgress';
@@ -21,6 +21,10 @@ export default function Tasks(props) {
   } = props;
 
   const [selectedTasks, setSelectedTasks] = useState(tasks);
+
+  useEffect(() => {
+    setSelectedTasks(tasks);
+  }, [tasks])
 
   const filterTasksByUser = (user) => {
     if (user.role === 1) {

@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { getEmployeeById, getEmployeesByTeam } = require('./queries/employees');
 
 module.exports = (db) => {
   router.get("/employees", (req, res) => {
@@ -26,27 +27,17 @@ module.exports = (db) => {
 
   // Get user by id
   router.get("/employees/:id", (req, res) => {
-    const queryString = `
-    SELECT * FROM employees
-    WHERE id = $1
-    `;
-    db.query(queryString, [req.params.id])
+    getEmployeeById(db, req.params.id)
     .then(data => {
+      console.log(data.rows);
       res.json(data.rows);
     })
     .catch(e => res.send(e));
-
-
   });
 
   // Get team of users by team_id
   router.get("/employees/team/:id", (req, res) => {
-    const queryString = `
-    SELECT * FROM employees
-    WHERE team_id = $1
-    `
-
-    db.query(queryString, [req.params.id])
+    getEmployeesByTeam(db, req.params.id)
     .then(data => {
       res.json(data.rows);
     })

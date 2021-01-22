@@ -13,9 +13,7 @@ export default function TaskItem(props) {
     deleteTaskItem,
   } = props;
 
-  console.log(taskData);
-
-  const { id, assignedTo, title, description, due_date } = taskData;
+  const { id, projecttask_id, assignedTo, title, description, due_date } = taskData;
 
   const [show, setShow] = useState(false);
   const [desc, setDesc] = useState(description);
