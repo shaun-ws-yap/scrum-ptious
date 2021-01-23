@@ -172,12 +172,12 @@ export default function TaskItem(props) {
               <Modal.Title>{title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              {desc}
+              {description}
             </Modal.Body>
             <Modal.Body>
-              <p>db id: {id}</p>
-              <p>Assigned to: {assignedTo}</p>
-              <p>On: {due_date}</p>
+              <p>Assigned to: {getUserNameById(employee_id)}</p>
+              <label for="viewMode-due_date">Due on: </label>
+              <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
             </Modal.Body>
             <Modal.Footer>
               <Button confirm variant="primary" onClick={() => props.setTaskItem(taskData.status += 1)}>
