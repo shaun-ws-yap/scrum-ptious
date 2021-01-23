@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 
 export default function useApplicationData(socket, loginToken) {
@@ -20,10 +19,6 @@ export default function useApplicationData(socket, loginToken) {
   const setTaskItem = taskItem => setState({...state, taskItem});
   const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
   const setUserTasks = userTasks => setState(prev => ({...prev, userTasks}));
-  
-  // not being used
-  // const setUser = userId => setState({...state, userId});
-  // const setAllTasks = allTasks => setState({...state, allTasks});
 
   useEffect(() => {
     if (!loginToken) {
@@ -59,59 +54,11 @@ export default function useApplicationData(socket, loginToken) {
     }
   }, [loginToken]);
 
-  // function createTaskItem(taskItem) {
-  //   let task = {...taskItem, projecttask_id: state.userInfo.team_id }
-
-  //   return axios.put(`http://localhost:8080/api/tasks`, task)
-  //   .then(res => {
-  //     const newTasks = [ ...state.teamTasks, res.data ];
-  //     setTeamTasks(newTasks);
-  //   })
-  //   .catch(e => console.log(e));
-  // }
-
-  function editTaskItem(taskItem) {
-    return axios.put(`http://localhost:8080/api/tasks/${taskItem.id}`, taskItem)
-    .then(res => {
-      const taskItemIndex = state.allTasks.findIndex(x => x.id === taskItem.id);
-      setState(prev => ({
-        ...prev,
-        teamTasks: [
-          ...state.teamTasks.slice(0, taskItemIndex),
-          Object.assign({}, state.teamTasks[taskItemIndex], taskItem),
-          ...state.teamTasks.slice(taskItemIndex + 1)
-        ],
-        allTasks: [
-          ...state.allTasks.slice(0, taskItemIndex),
-          Object.assign({}, state.allTasks[taskItemIndex], taskItem),
-          ...state.allTasks.slice(taskItemIndex + 1)
-        ]
-      }))
-    })
-    .catch(e => console.log(e));
-  }
-
-  function deleteTaskItem(id) {
-    return axios.delete(`http://localhost:8080/api/tasks/${id}`)
-    .then((res) => {
-      const tmp = state.allTasks.filter(task => task.id !== id);
-      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}));
-    })
-    .catch(e => console.log(e));
-  }
-
   return { 
     state, 
     setMenu, 
     setTaskItem, 
     setUserTasks, 
     setTeamTasks, 
-    // createTaskItem, 
-    // editTaskItem, 
-    // deleteTaskItem, 
-    
-    // not being used
-    // setUser, 
-    // setAllTasks, 
   }
 }
