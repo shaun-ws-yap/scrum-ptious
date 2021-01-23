@@ -23,7 +23,7 @@ const userData = props.teamUsers.map((user) => {
 })
 
   return (
-    <div className="task-progress">
+    <div className="employee-progress">
       {userData}
     </div>
   )

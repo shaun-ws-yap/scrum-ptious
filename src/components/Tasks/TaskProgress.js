@@ -12,10 +12,14 @@ export default function TaskProgress(props) {
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
+    teamUsers
   } = props;
+
+  console.log('before sort: ', tasks);
 
   const sortedTasks = sortTasks(tasks);
 
+  console.log('sorted:', sortedTasks);
   for (const key in sortedTasks) {
     sortedTasks[key] = sortedTasks[key].map(task => {
       return (
@@ -27,6 +31,7 @@ export default function TaskProgress(props) {
           createTaskItem={createTaskItem}
           editTaskItem={editTaskItem}
           deleteTaskItem={deleteTaskItem}
+          teamUsers={teamUsers}
         />
       )
     })

@@ -4,6 +4,7 @@ const {
   getDeadlinesByDueDate, 
   getTasksByTeam, 
   saveTask, 
+  editTask,
   deleteTask } = require('./queries/tasks');
 
 module.exports = (db) => {
@@ -20,7 +21,9 @@ module.exports = (db) => {
 
   // Get all tasks
   router.get("/tasks", (req, res) => {
-    const queryString = 'SELECT * from tasks';
+    const queryString = `
+    SELECT id, title, description, (creation_date at time zone 'PST8PDT') as creation_date, (due_date at time zone 'PST8PDT') as due_date, employee_id, status, is_viewed, projecttask_id, is_late from tasks
+    `;
 
     db.query(queryString)
     .then(data => {
@@ -62,10 +65,19 @@ module.exports = (db) => {
   })
 
 
-  // Create and edit task
+  // Create task
   router.put("/tasks", (req, res) => {
     saveTask(db, req.body)
     .then(data => res.send(data.rows[0]))
+    .catch(e => res.send(e));
+  })
+
+  // Edit task
+  router.put("/tasks/:id", (req, res) => {
+    editTask(db, req.params.id, req.body)
+    .then(data => {
+      res.status(204).json({});
+    })
     .catch(e => res.send(e));
   })
 
@@ -73,7 +85,7 @@ module.exports = (db) => {
   router.delete("/tasks/:id", (req, res) => {
     deleteTask(db, req.params.id)
     .then(data => {
-      res.status(204);
+      res.status(204).json({});
     })
     .catch(e => res.send(e));
   })
