@@ -1,5 +1,8 @@
 const router = require("express").Router();
 
+const { saveSubmission } = require('./queries/submissions');
+
+
 module.exports = (db) => {
   // Get all submissions
   router.get("/submissions", (req, res) => {
@@ -16,15 +19,23 @@ module.exports = (db) => {
     .catch(err => res.send(err));
   });
 
-  // Create a submission
-  router.post("/submissions/:id", (req, res) => {
-    const { feedback_string, submission_date, task_id } = req.body;
+  // Get submission by id
+  router.get("/submissions/:id", (req, res) => {
     const queryString = `
-    INSERT INTO submissions (feedback_string, submission_date, task_id)
-    VALUES ($1, $2, $3)
-    RETURNING *
+    SELECT * from submissions
+    WHERE id = $1
     `;
-    db.query(queryString, [feedback_string, submission_date, task_id])
+  
+    db.query(queryString, [req.params.id])
+    .then(data => {
+      res.json(data.rows)
+    })
+    .catch(e => res.send(e));
+  })
+
+  // Create and edit submission
+  router.put("/submissions/", (req, res) => {
+    saveSubmission(db, req.body)
     .then(data => {
       res.json(data.rows[0])
     })
