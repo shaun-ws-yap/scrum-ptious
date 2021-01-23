@@ -9,8 +9,8 @@ const getTasksByEmployee = (db, uid) => {
 
 const getTasksByTeam = (db, tid) => {
   const queryString = `
-  SELECT * from tasks
-  WHERE projectTask_id = $1
+  SELECT * FROM tasks
+  WHERE projecttask_id = $1
   `;
 
   return db.query(queryString, [tid]);
@@ -26,6 +26,20 @@ const getDeadlinesByDueDate = (db, uid) => {
   return db.query(queryString, [uid]);
 }
 
+// SELECT 
+// id, 
+// title, 
+// description, 
+// to_char(creation_date at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as creation_date,
+// to_char(due_date at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as due_date,
+// employee_id, 
+// status, 
+// is_viewed, 
+// projecttask_id, 
+// is_late 
+// from tasks
+// WHERE projectTask_id = $1
+
 // Create and edit task
 const saveTask = (db, taskItem) => {
   const queryString = `
@@ -39,7 +53,7 @@ const saveTask = (db, taskItem) => {
 
 const editTask = (db, id, taskItem) => {
   const { title, description, due_date, employee_id, projecttask_id } = taskItem;
-  db.query(`
+  return db.query(`
     UPDATE tasks
     SET
       title = $2,

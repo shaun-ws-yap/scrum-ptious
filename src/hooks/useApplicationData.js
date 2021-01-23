@@ -77,16 +77,23 @@ export default function useApplicationData(socket, loginToken) {
     .catch(e => console.log(e));
   }
 
-  function editTaskItem(id, taskItem) {
-    console.log(id)
-    console.log(taskItem);
+  function editTaskItem(taskItem) {
+    return axios.put(`http://localhost:8080/api/tasks/${taskItem.id}`, taskItem)
+    .then(res => {
+      const id = taskItem.id;
+      const newTasks = [...state.allTasks];
+      newTasks[id] = taskItem;
+      setState(prev => ({...prev, allTasks: newTasks, teamTasks: newTasks}));
+      console.log(state.allTasks)
+    })
+    .catch(e => console.log(e));
   }
 
   function deleteTaskItem(id) {
     return axios.delete(`http://localhost:8080/api/tasks/${id}`)
     .then((res) => {
-      const tmp = [...state.allTasks]
-      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
+      const tmp = state.allTasks.filter(task => task.id !== id);
+      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}));
     })
     .catch(e => console.log(e));
   }

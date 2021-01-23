@@ -77,3 +77,11 @@
   flex-direction: column;
 }
 
+.user-in-progress {
+  display: flex;  
+  flex-direction: row;
+}
+
+.team-progress {
+  flex-direction: row;
+}

@@ -14,7 +14,7 @@ export default function MyTeamItem(props) {
   }
 
   return (
-    <li className="task-progress">
+    <li className="team-progress">
       <button onClick={() => filterTasksByUser(member)}>
         Test
       </button>
