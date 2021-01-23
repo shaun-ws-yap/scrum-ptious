@@ -5,13 +5,15 @@ import { Modal, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
 export default function NewTaskItem(props) {
-  const dateNow = new Date();
+  
+  // to force a bug for error messages
+  // const dateNow = new Date(); 
 
   const [taskItem, setTaskItem] = useState({
     title: "",
     description: "",
     employee_id: "",
-    due_date: dateNow.setDate(dateNow.getDate() + 7),
+    due_date: new Date(),
   });
 
   const [show, setShow] = useState(false);
