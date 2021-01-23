@@ -59,42 +59,36 @@ io.on('connection', (socket) => {
   });
 
   //tasks
-  socket.on('tasks add', taskItem => {
-    saveTask(db, taskItem)
+  socket.on('tasks update', (taskItem, op) => {
+    const CREATE = 'CREATE';
+    const EDIT   = 'EDIT';
+    const DELETE = 'DELETE';
+
+    let taskOperation;
+    switch (op) {
+      case CREATE:
+        taskOperation = saveTask(db, taskItem);
+        break;
+      case EDIT:
+        taskOperation = editTask(db, taskItem.id, taskItem);
+        break;
+      case DELETE:
+        taskOperation = deleteTask(db, taskItem.id);
+        break;
+      default:
+        socket.emit('error', 'invalid operation: ' + op);
+        return;
+    };
+    taskOperation
       .then(data => {
-        socket.emit('tasks action saved', 'saved task ', data.rows[0])
+        socket.emit('tasks action saved', op, data.rows[0])
         return getTasksByTeam(db, taskItem.projecttask_id);
       })
       .then(data => {
-        io.emit('tasks update', data.rows);
+        io.emit('tasks update', data.rows, taskItem.employee_id);
       })
-      .catch(err => socket.emit('error', 'could not save task to db: ' + err));
-  });
-
-  socket.on('tasks edit', taskItem => {
-    editTask(db, taskItem.id, taskItem)
-      .then(data => {
-        socket.emit('tasks action saved', 'edited task ' + data.rows[0]);
-        return getTasksByTeam(db, taskItem.projecttask_id);
-      })
-      .then(data => {
-        io.emit('tasks update', data.rows);
-      })
-      .catch(err => socket.emit('error', 'could not edit task in db: ' + err));
-  });
-
-  socket.on('tasks delete', taskId => {
-    deleteTask(db, taskId)
-      .then(data => {
-        const deletedTask = data.rows[0]
-        socket.emit('tasks action saved', 'deleted task' + deletedTask);
-        return getTasksByTeam(db, deletedTask.projecttask_id);
-      })
-      .then(data => {
-        io.emit('tasks update', data.rows);
-      })
-      .catch(err => socket.emit('error', 'could not delete task from db: ' + err));
-  });
+      .catch(err => socket.emit('error', `could not perform operation: ${op}` + err));
+  }) 
 
   //chat
   socket.on('joining msg', (username, userId) => {

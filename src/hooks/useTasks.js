@@ -7,15 +7,16 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
       return;
     }
 
-    socket.on('tasks update', (teamTasks) => {
+    socket.on('tasks update', (teamTasks, userToAlert) => {
+      console.log(userToAlert);
       setTeamTasks(teamTasks);
       //filter out your tasks
       const userTasks = filterTasksByUser(loginToken, teamTasks);
       setUserTasks(userTasks);
     });
 
-    socket.on('tasks action saved', (msg) => {
-      console.log(msg);
+    socket.on('tasks action saved', (op, task) => {
+      console.log(op, task);
     });
 
     return () => {
@@ -24,18 +25,21 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
     }
   }, [loginToken]);
 
+  const CREATE = 'CREATE';
+  const EDIT   = 'EDIT';
+  const DELETE = 'DELETE';
 
   const createTaskItem = taskItem => {
     let task = {...taskItem, projecttask_id: teamId }
-    socket.emit('tasks add', task);
+    socket.emit('tasks update', task, CREATE);
   };
 
   const editTaskItem = taskItem => {
-    socket.emit('tasks edit', taskItem);
+    socket.emit('tasks update', taskItem, EDIT);
   };
 
-  const deleteTaskItem = id => {
-    socket.emit('tasks delete', id);
+  const deleteTaskItem = taskItem => {
+    socket.emit('tasks update', taskItem, DELETE);
   };
 
   return {

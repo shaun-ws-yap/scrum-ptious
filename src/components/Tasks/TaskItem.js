@@ -33,8 +33,9 @@ export default function TaskItem(props) {
     setShow(true);
   }
 
-  const handleDelete = (id) => {
-    deleteTaskItem(id);
+  const handleDelete = () => {
+    console.log(taskData);
+    deleteTaskItem(taskData);
     setShow(false)
   };
 
@@ -173,7 +174,7 @@ export default function TaskItem(props) {
               
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={() => handleDelete(id)}>
+              <Button variant="danger" onClick={() => handleDelete()}>
                 Delete
               </Button>
               { editMode && 
