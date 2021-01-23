@@ -1,17 +1,17 @@
 import { useState, useEffect } from 'react';
 import filterTasksByUser from '../helpers/filterTasksByUser';
 
-export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUserTasks ) {
+export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUserTasks, setNotification ) {
   useEffect(() => {
     if (!loginToken) {
       return;
     }
 
     socket.on('tasks update', (teamTasks, userToAlert) => {
-      console.log(userToAlert);
       setTeamTasks(teamTasks);
       //filter out your tasks
       const userTasks = filterTasksByUser(loginToken, teamTasks);
+      setNotification(userToAlert)
       setUserTasks(userTasks);
     });
 
