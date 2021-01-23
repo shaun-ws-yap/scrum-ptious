@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { changeTaskStatus } from '../../helpers/taskStatus';
+import classNames from 'classnames';
 
 import { Modal, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
@@ -23,7 +24,14 @@ export default function TaskItem(props) {
   const [editMode, setEditMode] = useState(false);
   const [newTaskData, setNewTaskData] = useState(taskData);
   
-  const { id, projecttask_id, employee_id, title, description, due_date, creation_date, status } = taskData;
+  const { id, projecttask_id, employee_id, title, description, due_date, creation_date, status, is_late } = taskData;
+
+  const taskClass = classNames("task__item", {
+    'task__item--assigned' : is_late === false && status === 0,
+    'task__item--in-progress' : is_late === false && status === 1,
+    'task__item--in-review' : is_late === false && status === 2,
+    'task__item--complete' : is_late === false && status === 3
+  });
 
   /**
    *  could store all these fn into a helper file
@@ -88,7 +96,7 @@ export default function TaskItem(props) {
   return (
     <>
       <NotificationContainer />
-      <li
+      <li className={taskClass}
         onClick={event => handleShow(props)}
       >
         <h4>{title}</h4>

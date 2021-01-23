@@ -36,17 +36,17 @@ export default function TaskProgress(props) {
 
   return (
     <div className="task-progress">
-      <div className="task-assigned">
+      <div>
         <h1>Assigned</h1>
         {assigned}
       </div>
 
-      <div className="task-in-progress">
+      <div>
         <h1>In-Progress</h1>
         {inProgress}
       </div>
 
-      <div className="task-completed">
+      <div>
         <h1>Completed</h1>
         {completed}
       </div>
