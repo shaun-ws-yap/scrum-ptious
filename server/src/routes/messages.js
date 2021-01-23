@@ -1,7 +1,27 @@
 const router = require("express").Router();
-const { saveMessage, getRecentMessages } = require('./queries/messages');
+const { saveMessage, getRecentMessages, getAllMessages, queryMessages } = require('./queries/messages');
 
 module.exports = (db) => {
+  // Get messages before time in query parameter
+  router.get("/messages/query", (req, res) => {
+    const { before, num_msg } = req.query;
+    if (!before || !num_msg) {
+      res
+      .status(400)
+      .send('Missing query parameter');
+      return;
+    }
+
+    queryMessages(db, num_msg, before)
+    .then(data => {
+      res.json(data.rows);
+    })
+    .catch(err => {
+      res
+      .status(500)
+      .send('Could not get messages from database', err);
+    });
+  });
   
   // Get num_msg most recent messages
   router.get("/messages/:num_msg", (req, res) => {
@@ -13,23 +33,12 @@ module.exports = (db) => {
       res
       .status(500)
       .send('Could not get messages from database', err);
-    })
+    });
   });
   
   // Get all messages
   router.get("/messages", (req, res) => {
-    db.query(`
-      SELECT 
-        messages.team_id,
-        sender_id,
-        name as sender,
-        message,
-        time_iso,
-        to_char(time_iso, 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
-      FROM messages
-      JOIN employees ON employees.id = sender_id
-      ORDER BY time_iso
-    `)
+    getAllMessages(db)
     .then(data => {
       res.json(data.rows);
     })
@@ -37,7 +46,7 @@ module.exports = (db) => {
       res
         .status(500)
         .send('Could not get messages from database', err);
-    })
+    });
   });
 
   // Post message
@@ -48,7 +57,7 @@ module.exports = (db) => {
       res
         .status(500)
         .send('Could not write message to database', err);
-    }) 
+    }); 
     /**TODO: consider caching message and make another post
      * request at a later time when error occurs
      */

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 // import ProjectProgress from './ProjectProgress';
@@ -10,17 +10,51 @@ import TaskResource from './TaskResource';
 // import '../../styles/Dashboard.css';
 
 export default function Tasks(props) {
+  const {
+    role,
+    tasks,
+    teamUsers,
+    setTaskItem,
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+  } = props;
+
+  const [selectedTasks, setSelectedTasks] = useState(tasks);
+
+  useEffect(() => {
+    setSelectedTasks(tasks);
+  }, [tasks])
+
+  const filterTasksByUser = (user) => {
+    if (user.role === 1) {
+      setSelectedTasks(tasks);
+      return;
+    }
+    const userTasks = tasks.filter(task => task.employee_id === user.id);
+    setSelectedTasks(userTasks);
+  }
 
   return (
     <div className='dashboard'>
-
-
       <div className="dashboard-top">
-        <TaskProgress tasks={props.tasks} setTaskItem={props.setTaskItem} role={props.role} teamTasks={props.teamTasks} tasks={props.tasks} setTasks={props.setTasks} createTaskItem={props.createTaskItem} deleteTaskItem={props.deleteTaskItem} />
+        <TaskProgress 
+          role={role} 
+          tasks={selectedTasks} 
+          teamUsers={teamUsers} 
+          setTaskItem={setTaskItem} 
+          createTaskItem={createTaskItem} 
+          deleteTaskItem={deleteTaskItem} 
+          editTaskItem={editTaskItem}
+        />
       </div>
       <div className="dashboard-bottom">
-        { props.role === 1 && <MyTeam getUserTasks={props.getUserTasks} user={props.user} teamUsers={props.teamUsers} tasks={props.tasks} setTasks={props.setTasks} teamTasks={props.teamTasks} setTeamTasks={props.setTeamTasks} />}
-        { props.role === 2 && <TaskResource />}
+        { role === 1 && 
+          <MyTeam 
+            teamUsers={teamUsers} 
+            filterTasksByUser={filterTasksByUser}  
+          />}
+        { role === 2 && <TaskResource />}
       </div>
     </div>
   )

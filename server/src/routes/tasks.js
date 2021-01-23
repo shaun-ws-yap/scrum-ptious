@@ -1,17 +1,18 @@
 const router = require("express").Router();
+const { 
+  getTasksByEmployee, 
+  getDeadlinesByDueDate, 
+  getTasksByTeam, 
+  saveTask, 
+  editTask,
+  deleteTask } = require('./queries/tasks');
 
 module.exports = (db) => {
 
 
   // Get deadlines by due_date
   router.get("/tasks/deadlines/:id", (req, res) => {
-    const queryString = `
-    SELECT * FROM tasks
-    WHERE employee_id = $1
-    AND due_date > now()
-    `;
-
-    db.query(queryString, [req.params.id])
+    getDeadlinesByDueDate(db, req.params.id)
     .then(data => {
       res.json(data.rows);
     })
@@ -20,7 +21,9 @@ module.exports = (db) => {
 
   // Get all tasks
   router.get("/tasks", (req, res) => {
-    const queryString = 'SELECT * from tasks';
+    const queryString = `
+    SELECT id, title, description, (creation_date at time zone 'PST8PDT') as creation_date, (due_date at time zone 'PST8PDT') as due_date, employee_id, status, is_viewed, projecttask_id, is_late from tasks
+    `;
 
     db.query(queryString)
     .then(data => {
@@ -31,12 +34,7 @@ module.exports = (db) => {
 
   // Get task by employee id
   router.get("/tasks/user/:id", (req, res) => {
-    const queryString = `
-    SELECT * FROM tasks
-    WHERE employee_id = $1
-    `;
-    
-    db.query(queryString, [req.params.id])
+    getTasksByEmployee(db, req.params.id)
     .then(data => {
       res.json(data.rows)
     })
@@ -59,12 +57,7 @@ module.exports = (db) => {
 
   // Get task by team_id
   router.get("/tasks/team/:id", (req, res) => {
-    const queryString = `
-    SELECT * from tasks
-    WHERE projectTask_id = $1
-    `;
-
-    db.query(queryString, [req.params.id])
+    getTasksByTeam(db, req.params.id)
     .then(data => {
       res.json(data.rows)
     })
@@ -72,30 +65,27 @@ module.exports = (db) => {
   })
 
 
-  // Create and edit task
+  // Create task
   router.put("/tasks", (req, res) => {
-    const params = req.body;
+    saveTask(db, req.body)
+    .then(data => res.send(data.rows[0]))
+    .catch(e => res.send(e));
+  })
 
-    // console.log(params)
-
-    const queryString = `
-      INSERT INTO tasks (title, description, due_date, employee_id, projecttask_id)
-      VALUES ($1, $2, $3, $4, $5)
-      RETURNING id
-    `;
-
-    db.query(queryString, [params.title, params.description, params.due_date, params.employee_id, params.projecttask_id])
+  // Edit task
+  router.put("/tasks/:id", (req, res) => {
+    editTask(db, req.params.id, req.body)
     .then(data => {
-      res.send(data.rows[0])
+      res.status(204).json({});
     })
     .catch(e => res.send(e));
   })
 
   // Delete task by id
   router.delete("/tasks/:id", (req, res) => {
-    db.query("DELETE FROM tasks WHERE id = $1", [req.params.id])
+    deleteTask(db, req.params.id)
     .then(data => {
-      res.status(204);
+      res.status(204).json({});
     })
     .catch(e => res.send(e));
   })

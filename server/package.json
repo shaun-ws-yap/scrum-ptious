@@ -7,13 +7,13 @@
     "start": "nodemon ./src/index.js",
     "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "error": "TEST_ERROR=true node ./src/index.js",
-    "reset-elephant": "node ./src/reset-db.js",
-    "reset": "psql -U development -d scheduler_development < ./src/db/schema/create.sql && psql -U development -d scheduler_development < ./src/db/schema/development.sql",
+    "reset-elephant": "node ./src/db/reset-db.js",
     "test:server": "NODE_ENV=test npm start"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",

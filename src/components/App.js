@@ -6,65 +6,117 @@ import axios from 'axios';
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
+import PerformanceReview from './Performance-Review/';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
-import TaskResource from './Dashboard/TaskResource';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
+import useSocket from '../hooks/useSocket';
 import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
+import 'react-notifications/lib/notifications.css';
 
+const DASHBOARD = "Dashboard";
+const TASKS = "Tasks";
+const CHAT = "Chat";
+const PERFORMANCE_REVIEW = "Performance Review"
 
 function App() {
+  const [loginToken, setLoginToken] = useState(0);
+  const { socket } = useSocket();
 
   const { 
     state,
     setMenu,
-    setUser,
     setTaskItem,
-    setTasks,
-    setTeamTasks,
-    setAllTasks,
     createTaskItem,
+    editTaskItem,
     deleteTaskItem
-  } = useApplicationData();
+  } = useApplicationData(socket, loginToken);
+
+  const {
+    menu,
+    userTasks,
+    userInfo,
+    taskItem,
+    role,
+    teamTasks,
+    teamUsers,
+    allTasks,
+    deadlines
+  } = state;
+
+  console.log(state);
+
+  if ( loginToken === 0 ) {
+    return (
+      <section className="main">
+        { loginToken === 0 && <Login setLogin={setLoginToken}/> }
+      </section>
+    )
+  }
 
   return (
     <div className="container">
-      { state.user !== 0 && (
-        <>
-          <section className="sidebar">
-            <img 
-              alt="Scrum-ptious Logo"
-              className="sidebar-centered"
-              src="https://logoipsum.com/logo/logo-25.svg"
-            />
-            <nav className="sidebar__menu">
-              <Sidebar
-                menu={state.menu}
-                setMenu={setMenu}
-                userInfo={state.userInfo}
-                teamUsers={state.teamUsers}
-                createTaskItem={createTaskItem}
-              />
-            </nav>
-          </section>
-        </>
-        
-      )}
-      <section className="main">
-        
-        { state.user === 0 && <Login setUser={setUser} user={state.user} /> }
-        { state.user !== 0 && <Dashboard user={state.user} userInfo={state.userInfo} menu={state.menu} tasks={state.tasks} setTasks={setTasks} setTaskItem={setTaskItem} taskItem={state.taskItem} role={state.role} teamTasks={state.teamTasks} teamUsers={state.teamUsers} setTeamTasks={setTeamTasks} setAllTasks={setAllTasks} allTasks={state.allTasks} createTaskItem={createTaskItem} deleteTaskItem={deleteTaskItem} /> }
-
+      <section className="sidebar">
+        <img 
+          alt="Scrum-ptious Logo"
+          className="sidebar-centered"
+          src="https://logoipsum.com/logo/logo-25.svg"
+        />
+        <nav className="sidebar__menu">
+          <Sidebar
+            menu={menu}
+            setMenu={setMenu}
+            userInfo={userInfo}
+            teamUsers={teamUsers}
+            createTaskItem={createTaskItem.bind(this)}
+          />
+        </nav>
+        <button onClick={() => setLoginToken(0)}>
+          Log out
+        </button>
       </section>
-      
+      <section className="main">
+        { menu === DASHBOARD && 
+          <Dashboard
+            tasks={userTasks} 
+            role={role} 
+            teamTasks={teamTasks}
+            teamUsers={teamUsers}
+            allTasks={allTasks}
+          /> }
+        { menu === TASKS && 
+          <Tasks 
+            socket={socket} 
+            role={role} 
+            tasks={role === 1 ? teamTasks : userTasks} 
+            teamUsers={teamUsers} 
+            setTaskItem={setTaskItem} 
+            createTaskItem={createTaskItem} 
+            deleteTaskItem={deleteTaskItem} 
+            editTaskItem={editTaskItem}
+          />}
+        { menu === CHAT && 
+          <Chat 
+            socket={socket} 
+            userInfo={userInfo} 
+            teamUsers={teamUsers}
+          />}
+        { menu === PERFORMANCE_REVIEW &&
+        <PerformanceReview
+          teamUsers={teamUsers}
+          teamTasks={teamTasks}
+          setTaskItem={setTaskItem}
+          taskItem={taskItem}
+        />}
+      </section>
       <section className="user__info">
-        { state.user !== 0 && <UserInfo userInfo={state.userInfo} deadlines={state.deadlines} /> }
+        <UserInfo userInfo={userInfo} deadlines={deadlines} /> 
       </section>
     </div>
   );

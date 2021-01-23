@@ -4,10 +4,6 @@ import MembersListItem from "./MembersListItem";
 
 const roles = ["Project Manager", "Developer"];
 
-const reorderArray = (arr, from, to) => {
-  arr.splice(to, 0, this.splice(from, 1)[0]);
-}
-
 export default function MembersList(props) {
   const { teamUsers, onlineUsers } = props;
 

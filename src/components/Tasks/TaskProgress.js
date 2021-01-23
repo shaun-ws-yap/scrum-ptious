@@ -2,136 +2,55 @@ import React from 'react';
 
 import TaskItem from './TaskItem';
 
-export default function TaskProgress(props) {
+import sortTasks from '../../helpers/sortTasks';
 
-  // console.log("from task view", props.tasks)
+export default function TaskProgress(props) {
+  const {
+    role,
+    tasks,
+    setTaskItem, 
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+    teamUsers
+  } = props;
+
+  const sortedTasks = sortTasks(tasks);
+
+  for (const key in sortedTasks) {
+    sortedTasks[key] = sortedTasks[key].map(task => {
+      return (
+        <TaskItem 
+          key={task.id}
+          taskData={task}
+          role={role}
+          setTaskItem={setTaskItem}
+          createTaskItem={createTaskItem}
+          editTaskItem={editTaskItem}
+          deleteTaskItem={deleteTaskItem}
+          teamUsers={teamUsers}
+        />
+      )
+    })
+  }
+
+  const { assigned, inProgress, completed } = sortedTasks;
 
   return (
     <div className="task-progress">
       <div className="task-assigned">
         <h1>Assigned</h1>
-        { props.role === 1 && props.teamTasks.map((item, index) => {
-          if (item.status === 0) {
-            return (
-              <TaskItem 
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                due_date={item.due_date}
-                setTaskItem={props.setTaskItem}
-                role={props.role}
-                assignedTo={item.employee_id}
-                createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers}
-                deleteTaskItem={props.deleteTaskItem}
-              />
-            )
-          }
-        }) }
-        { props.role === 2 && props.tasks.map((item, index) => {
-          if (item.status === 0) {
-            return (
-              <TaskItem 
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                due_date={item.due_date}
-                setTaskItem={props.setTaskItem}
-                role={props.role}
-                assignedTo={item.employee_id}
-                createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers}
-                deleteTaskItem={props.deleteTaskItem}
-              />
-            )
-          }
-        }) }
+        {assigned}
       </div>
 
       <div className="task-in-progress">
-      <h1>In-Progress</h1>
-        { props.role === 1 && props.teamTasks.map((item, index) => {
-          if (item.status === 1 || item.status === 2) {
-            return (
-              <TaskItem 
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                due_date={item.due_date}
-                setTaskItem={props.setTaskItem}
-                role={props.role}
-                assignedTo={item.employee_id}
-                createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers}
-                deleteTaskItem={props.deleteTaskItem}
-              />
-            )
-          }
-        }) }
-        { props.role === 2 && props.tasks.map((item, index) => {
-          if (item.status === 1 || item.status === 2) {
-            return (
-              <TaskItem 
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                due_date={item.due_date}
-                setTaskItem={props.setTaskItem}
-                role={props.role}
-                assignedTo={item.employee_id}
-                createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers}
-                deleteTaskItem={props.deleteTaskItem}
-              />
-            )
-          }
-        }) }
+        <h1>In-Progress</h1>
+        {inProgress}
       </div>
 
       <div className="task-completed">
-      <h1>Completed</h1>
-        { props.role === 1 && props.teamTasks.map((item, index) => {
-          if (item.status === 3) {
-            return (
-              <TaskItem 
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                due_date={item.due_date}
-                setTaskItem={props.setTaskItem}
-                role={props.role}
-                assignedTo={item.employee_id}
-                createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers}
-                deleteTaskItem={props.deleteTaskItem}
-              />
-            )
-          }
-        }) }
-        { props.role === 2 && props.tasks.map((item, index) => {
-          if (item.status === 3) {
-            return (
-              <TaskItem 
-                key={item.id}
-                id={item.id}
-                title={item.title}
-                description={item.description}
-                due_date={item.due_date}
-                setTaskItem={props.setTaskItem}
-                role={props.role}
-                assignedTo={item.employee_id}
-                createTaskItem={props.createTaskItem}
-                teamUsers={props.teamUsers}
-                deleteTaskItem={props.deleteTaskItem}
-              />
-            )
-          }
-        }) }
+        <h1>Completed</h1>
+        {completed}
       </div>
     </div>
   )
