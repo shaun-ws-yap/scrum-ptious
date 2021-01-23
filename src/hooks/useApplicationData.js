@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
 export default function useApplicationData(socket, loginToken) {
   const [state, setState] = useState({
@@ -12,17 +13,16 @@ export default function useApplicationData(socket, loginToken) {
     teamTasks: [],
     allTasks: [],
     deadlines: [],
-    userId: 0, // not used
     team: 0, // not used
   });
 
   const setMenu = menu => setState({...state, menu});
   const setTaskItem = taskItem => setState({...state, taskItem});
   const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
+  const setUserTasks = userTasks => setState(prev => ({...prev, userTasks}));
   
   // not being used
   // const setUser = userId => setState({...state, userId});
-  // const setUserTasks = userTasks => setState({...state, userTasks});
   // const setAllTasks = allTasks => setState({...state, allTasks});
 
   useEffect(() => {
@@ -59,43 +59,43 @@ export default function useApplicationData(socket, loginToken) {
     }
   }, [loginToken]);
 
-  function createTaskItem(taskItem) {
-    let task = {...taskItem, projecttask_id: state.userInfo.team_id }
+  // function createTaskItem(taskItem) {
+  //   let task = {...taskItem, projecttask_id: state.userInfo.team_id }
 
-    return axios.put(`http://localhost:8080/api/tasks`, task)
-    .then(res => {
-      const newTasks = [ ...state.teamTasks, res.data ];
-      setTeamTasks(newTasks);
-    })
-    .catch(e => console.log(e));
-  }
+  //   return axios.put(`http://localhost:8080/api/tasks`, task)
+  //   .then(res => {
+  //     const newTasks = [ ...state.teamTasks, res.data ];
+  //     setTeamTasks(newTasks);
+  //   })
+  //   .catch(e => console.log(e));
+  // }
 
-  function editTaskItem(id, taskItem) {
-    console.log(id)
-    console.log(taskItem);
-  }
+  // function editTaskItem(id, taskItem) {
+  //   console.log(id)
+  //   console.log(taskItem);
+  // }
 
-  function deleteTaskItem(id) {
-    return axios.delete(`http://localhost:8080/api/tasks/${id}`)
-    .then((res) => {
-      const tmp = [...state.allTasks]
-      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
-    })
-    .catch(e => console.log(e));
-  }
+  // function deleteTaskItem(id) {
+  //   return axios.delete(`http://localhost:8080/api/tasks/${id}`)
+  //   .then((res) => {
+  //     const tmp = [...state.allTasks]
+  //     setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}))
+  //   })
+  //   .catch(e => console.log(e));
+  // }
 
   return { 
     state, 
     setMenu, 
     setTaskItem, 
-    createTaskItem, 
-    editTaskItem, 
-    deleteTaskItem, 
+    setUserTasks, 
+    setTeamTasks, 
+    // createTaskItem, 
+    // editTaskItem, 
+    // deleteTaskItem, 
     
     // not being used
     // setUser, 
-    // setUserTasks, 
-    // setTeamTasks, 
     // setAllTasks, 
   }
 }
