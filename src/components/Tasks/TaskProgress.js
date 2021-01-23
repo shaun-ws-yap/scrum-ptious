@@ -15,11 +15,8 @@ export default function TaskProgress(props) {
     teamUsers
   } = props;
 
-  console.log('before sort: ', tasks);
-
   const sortedTasks = sortTasks(tasks);
 
-  console.log('sorted:', sortedTasks);
   for (const key in sortedTasks) {
     sortedTasks[key] = sortedTasks[key].map(task => {
       return (
