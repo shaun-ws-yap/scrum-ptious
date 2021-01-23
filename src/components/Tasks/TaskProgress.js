@@ -12,6 +12,7 @@ export default function TaskProgress(props) {
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
+    teamUsers
   } = props;
 
   console.log('before sort: ', tasks);
@@ -30,6 +31,7 @@ export default function TaskProgress(props) {
           createTaskItem={createTaskItem}
           editTaskItem={editTaskItem}
           deleteTaskItem={deleteTaskItem}
+          teamUsers={teamUsers}
         />
       )
     })
