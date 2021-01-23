@@ -1,7 +1,6 @@
 import '../styles/App.css';
 import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
@@ -39,9 +38,6 @@ function App() {
     setTaskItem,
     setUserTasks, 
     setTeamTasks,
-    // createTaskItem,
-    // editTaskItem,
-    // deleteTaskItem
   } = useApplicationData(socket, loginToken);
 
   const {
