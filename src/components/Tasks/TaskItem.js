@@ -3,6 +3,10 @@ import React, { useState } from 'react';
 
 import { Modal, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
+import Moment from 'react-moment';
+import 'moment-timezone'
+
+// import { formatDateString } from './utilities/format-date';
 
 export default function TaskItem(props) {
   const {
@@ -19,11 +23,13 @@ export default function TaskItem(props) {
   const [editMode, setEditMode] = useState(false);
   const [newTaskData, setNewTaskData] = useState(taskData);
   
-  const { id, projecttask_id, employee_id, title, description, due_date } = taskData;
+  const { id, projecttask_id, employee_id, title, description, due_date, creation_date } = taskData;
 
   /**
    *  could store all these fn into a helper file
    * */
+
+   const UTC = 'UTC';
 
   const handleShow = (props) => {
     setTaskItem(props);
@@ -57,6 +63,10 @@ export default function TaskItem(props) {
     setShow(false);
   }
 
+  const formatDateString = (date) => {
+    return new Date(new Date(date));
+  }
+
   return (
     <>
       <li
@@ -64,7 +74,14 @@ export default function TaskItem(props) {
       >
         <h4>{title}</h4>
         <p>{description}</p>
-        <h6>Assigned on: {due_date}</h6>
+        <label for="creation_date">Assigned on:</label>
+        <br />
+        <Moment format="Do MMM YYYY h:mm A" >{formatDateString(creation_date).toString()}</Moment> 
+        <br />
+        <label for="due_date">Due on:</label>
+        <br />
+        <Moment format="Do MMM YYYY h:mm A" >{formatDateString(due_date).toString()}</Moment> 
+        <br />
       </li>
       {role === 1 && 
         <form
@@ -89,8 +106,8 @@ export default function TaskItem(props) {
                 <>
                   <p>{description}</p>
                   <p>Assigned to: { getUserNameById(employee_id) }</p>
-                  <p>Due on: {new Date(due_date).toString()}</p>
-                  <p>db id: {id}</p>
+                  <label for="viewMode-due_date">Due on: </label>
+                  <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{formatDateString(due_date)}</Moment> 
                 </>
               ) }
 
@@ -127,13 +144,12 @@ export default function TaskItem(props) {
                   <DatePicker 
                     className="form-control" 
                     locale="en-US"
-                    selected={new Date(newTaskData.due_date)} 
+                    selected={formatDateString(newTaskData.due_date)} 
                     showTimeInput
                     onChange={(date) => onDateChange(date)}
                     dateFormat="MMMM d, yyyy h:mm aa"
 
                   />
-                  <p>db id: {id}</p>
                 </>
               ) }
               

@@ -36,6 +36,10 @@ export default function NewTaskItem(props) {
     reset();
   }
 
+  const formatDateString = (date) => {
+    return new Date(new Date(date));
+  }
+
   return (
     <div>
 
@@ -70,7 +74,7 @@ export default function NewTaskItem(props) {
         <label for ="due-date">Due on: </label>
         <DatePicker 
           className="form-control" 
-          selected={taskItem.due_date} 
+          selected={formatDateString(taskItem.due_date)} 
           showTimeSelect
           onChange={date => setTaskItem(prevTaskItem => ({...prevTaskItem, due_date: date}))}
         />
