@@ -5,7 +5,7 @@ import { getEmployeeName } from '../../helpers/getEmployeeName';
 
 export default function TaskList(props) {
 
-  const { teamUsers, teamTasks, setTaskItem } = props;
+  const { teamUsers, teamTasks, setTaskItem, setShow } = props;
 
   const listedTeamTasks = teamTasks.map((task) => {
     return (
@@ -20,6 +20,7 @@ export default function TaskList(props) {
           is_viewed={task.is_viewed}
           taskData={task}
           setTaskItem={setTaskItem}
+          setShow={setShow}
         />
       </li>
     )
@@ -33,17 +34,3 @@ export default function TaskList(props) {
     </div>
   )
 }
-
-// const allDeadlines = props.deadlines.map((deadline) => {
-//   return (
-//     <li className="task-in-progress">
-//     <DeadlineListItem
-//       key={deadline.id}
-//       title={deadline.title}
-//       description={deadline.description}
-//       due_date={deadline.due_date}
-//       creation_date={deadline.creation_date}
-//     />
-//     </li>
-//   )
-// })
