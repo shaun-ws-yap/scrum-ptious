@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import DatePicker from "react-datepicker";
 import { Modal, Button } from 'react-bootstrap';
+import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
 export default function NewTaskItem(props) {
   const [taskItem, setTaskItem] = useState({
@@ -32,12 +33,26 @@ export default function NewTaskItem(props) {
 
   function validate() {
     const { title, description, employee_id, due_date } = taskItem;
-    if (title === "" || description === "" || employee_id === "" || due_date === undefined) {
-      console.log("fields cannot be blank");
-      return
+
+    if (title === "") {
+      NotificationManager.error('Title must be valid', 'Error');
+      return;
+    }
+    if (description === "") {
+      NotificationManager.error('Description must be valid', 'Error');
+      return;
+    }
+    if (employee_id === "") {
+      NotificationManager.error('Employee assigned must be valid', 'Error');
+      return;
+    }
+    if (due_date < new Date()) {
+      NotificationManager.error('Due date cannot be in the past', 'Error');
+      return;
     }
 
     props.createTaskItem(taskItem);
+    NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
     reset();
     setShow(false);
   }
@@ -46,6 +61,7 @@ export default function NewTaskItem(props) {
     <div>
       <p onClick={() => setShow(true)}>Create New Task</p>
 
+      <NotificationContainer />
       <form 
         className="form-group"
         onSubmit={event => event.preventDefault()}
