@@ -5,9 +5,8 @@ import React, { useState, useEffect } from 'react';
 import TaskProgress from './TaskProgress';
 import MyTeam from './MyTeam';
 import TaskResource from './TaskResource';
-// import UserInfo from './UserInfo';
 
-// import '../../styles/Dashboard.css';
+import filterTasksByUser from '../../helpers/filterTasksByUser';
 
 export default function Tasks(props) {
   const {
@@ -15,7 +14,6 @@ export default function Tasks(props) {
     tasks,
     teamUsers,
     setTaskItem,
-    createTaskItem,
     editTaskItem,
     deleteTaskItem,
   } = props;
@@ -26,12 +24,12 @@ export default function Tasks(props) {
     setSelectedTasks(tasks);
   }, [tasks])
 
-  const filterTasksByUser = (user) => {
+  const selectTasks = (user) => {
     if (user.role === 1) {
       setSelectedTasks(tasks);
       return;
     }
-    const userTasks = tasks.filter(task => task.employee_id === user.id);
+    const userTasks = filterTasksByUser(user.id, tasks);
     setSelectedTasks(userTasks);
   }
 
@@ -43,7 +41,6 @@ export default function Tasks(props) {
           tasks={selectedTasks} 
           teamUsers={teamUsers} 
           setTaskItem={setTaskItem} 
-          createTaskItem={createTaskItem} 
           deleteTaskItem={deleteTaskItem} 
           editTaskItem={editTaskItem}
         />
@@ -52,7 +49,7 @@ export default function Tasks(props) {
         { role === 1 && 
           <MyTeam 
             teamUsers={teamUsers} 
-            filterTasksByUser={filterTasksByUser}  
+            selectTasks={selectTasks}
           />}
         { role === 2 && <TaskResource />}
       </div>

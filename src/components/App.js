@@ -13,6 +13,7 @@ import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useSocket from '../hooks/useSocket';
+import useTasks from '../hooks/useTasks'
 import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -33,9 +34,11 @@ function App() {
     state,
     setMenu,
     setTaskItem,
-    createTaskItem,
-    editTaskItem,
-    deleteTaskItem
+    setUserTasks, 
+    setTeamTasks,
+    // createTaskItem,
+    // editTaskItem,
+    // deleteTaskItem
   } = useApplicationData(socket, loginToken);
 
   const {
@@ -50,6 +53,12 @@ function App() {
     deadlines
   } = state;
 
+  const {
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+  } = useTasks(loginToken, userInfo.team_id, socket, setTeamTasks, setUserTasks);
+  
   console.log(state);
 
   if ( loginToken === 0 ) {
@@ -74,7 +83,7 @@ function App() {
             setMenu={setMenu}
             userInfo={userInfo}
             teamUsers={teamUsers}
-            createTaskItem={createTaskItem.bind(this)}
+            createTaskItem={createTaskItem}
           />
         </nav>
         <button onClick={() => setLoginToken(0)}>
@@ -97,7 +106,6 @@ function App() {
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
             setTaskItem={setTaskItem} 
-            createTaskItem={createTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
           />}

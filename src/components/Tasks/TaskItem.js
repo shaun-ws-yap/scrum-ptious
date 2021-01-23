@@ -14,7 +14,6 @@ export default function TaskItem(props) {
     role,
     taskData,
     setTaskItem,
-    createTaskItem,
     editTaskItem,
     deleteTaskItem,
     teamUsers
@@ -78,7 +77,7 @@ export default function TaskItem(props) {
       NotificationManager.error('Due date cannot be in the past', 'Error');
       return;
     }
-
+    console.log(newTaskData);
     editTaskItem(newTaskData)
     NotificationManager.success(`${newTaskData.title}`, 'Updated');
     reset();
