@@ -12,7 +12,6 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
       //filter out your tasks
       const userTasks = filterTasksByUser(loginToken, teamTasks);
       setUserTasks(userTasks);
-      console.log('task updated');
     });
 
     socket.on('tasks action saved', (msg) => {
@@ -31,8 +30,8 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
     socket.emit('tasks add', task);
   };
 
-  const editTaskItem = (id, taskItem) => {
-    socket.emit('tasks edit', id, taskItem);
+  const editTaskItem = taskItem => {
+    socket.emit('tasks edit', taskItem);
   };
 
   const deleteTaskItem = id => {

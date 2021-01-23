@@ -106,7 +106,6 @@ function App() {
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
             setTaskItem={setTaskItem} 
-            createTaskItem={createTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
           />}

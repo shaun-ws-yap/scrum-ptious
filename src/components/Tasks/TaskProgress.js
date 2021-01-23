@@ -9,7 +9,6 @@ export default function TaskProgress(props) {
     role,
     tasks,
     setTaskItem, 
-    createTaskItem,
     editTaskItem,
     deleteTaskItem,
     teamUsers
@@ -25,7 +24,6 @@ export default function TaskProgress(props) {
           taskData={task}
           role={role}
           setTaskItem={setTaskItem}
-          createTaskItem={createTaskItem}
           editTaskItem={editTaskItem}
           deleteTaskItem={deleteTaskItem}
           teamUsers={teamUsers}

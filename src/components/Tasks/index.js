@@ -14,7 +14,6 @@ export default function Tasks(props) {
     tasks,
     teamUsers,
     setTaskItem,
-    createTaskItem,
     editTaskItem,
     deleteTaskItem,
   } = props;
@@ -42,7 +41,6 @@ export default function Tasks(props) {
           tasks={selectedTasks} 
           teamUsers={teamUsers} 
           setTaskItem={setTaskItem} 
-          createTaskItem={createTaskItem} 
           deleteTaskItem={deleteTaskItem} 
           editTaskItem={editTaskItem}
         />
