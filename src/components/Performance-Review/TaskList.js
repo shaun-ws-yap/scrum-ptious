@@ -1,23 +1,11 @@
 import React from 'react';
 
 import TaskListItem from './TaskListItem';
+import { getEmployeeName } from '../../helpers/getEmployeeName';
 
 export default function TaskList(props) {
 
   const { teamUsers, teamTasks, setTaskItem } = props;
-
-  console.log(teamUsers);
-
-  const employeeName = (data, empID) => {
-    let result = '';
-
-    for (const index of data) {
-      if (index.id === empID) {
-        result = index.name;
-      }
-    }
-    return result;
-  }
 
   const listedTeamTasks = teamTasks.map((task) => {
     return (
@@ -27,7 +15,7 @@ export default function TaskList(props) {
           key={task.id}
           title={task.title}
           description={task.description}
-          employee_id={employeeName(teamUsers, task.employee_id)}
+          employee_id={getEmployeeName(teamUsers, task.employee_id)}
           is_late={task.is_late}
           is_viewed={task.is_viewed}
           taskData={task}
