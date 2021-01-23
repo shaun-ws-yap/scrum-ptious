@@ -62,27 +62,37 @@ io.on('connection', (socket) => {
   socket.on('tasks add', taskItem => {
     saveTask(db, taskItem)
       .then(data => {
-        const taskData = data.rows[0]
-        return getTasksByTeam(db, taskData.projecttask_id);
+        socket.emit('tasks action saved', 'saved task ', data.rows[0])
+        return getTasksByTeam(db, taskItem.projecttask_id);
       })
       .then(data => {
-        socket.emit('tasks action saved', 'saved task ', taskItem)
         io.emit('tasks update', data.rows);
       })
       .catch(err => socket.emit('error', 'could not save task to db: ' + err));
   });
 
-  socket.on('tasks edit', (taskId, taskItem) => {
-    io.emit('tasks update');
-    editTask(db, taskId, taskItem)
-      .then(data => socket.emit('tasks action saved', 'edited task ' + data.rows[0]))
+  socket.on('tasks edit', taskItem => {
+    editTask(db, taskItem.id, taskItem)
+      .then(data => {
+        socket.emit('tasks action saved', 'edited task ' + data.rows[0]);
+        return getTasksByTeam(db, taskItem.projecttask_id);
+      })
+      .then(data => {
+        io.emit('tasks update', data.rows);
+      })
       .catch(err => socket.emit('error', 'could not edit task in db: ' + err));
   });
 
   socket.on('tasks delete', taskId => {
-    io.emit('tasks update');
     deleteTask(db, taskId)
-      .then(data => socket.emit('tasks action saved', 'deleted task' + data.rows[0]))
+      .then(data => {
+        const deletedTask = data.rows[0]
+        socket.emit('tasks action saved', 'deleted task' + deletedTask);
+        return getTasksByTeam(db, deletedTask.projecttask_id);
+      })
+      .then(data => {
+        io.emit('tasks update', data.rows);
+      })
       .catch(err => socket.emit('error', 'could not delete task from db: ' + err));
   });
 
