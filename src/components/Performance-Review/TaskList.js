@@ -21,6 +21,7 @@ export default function TaskList(props) {
 
   const listedTeamTasks = teamTasks.map((task) => {
     return (
+      task.status === 3 &&
       <li className="task-in-progress">
         <TaskListItem
           key={task.id}
