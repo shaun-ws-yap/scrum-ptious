@@ -15,7 +15,7 @@ export default function TaskList(props) {
           key={task.id}
           title={task.title}
           description={task.description}
-          employee_id={getEmployeeName(teamUsers, task.employee_id)}
+          name={getEmployeeName(teamUsers, task.employee_id)}
           is_late={task.is_late}
           is_viewed={task.is_viewed}
           taskData={task}

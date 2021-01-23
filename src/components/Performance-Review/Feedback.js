@@ -1,5 +1,6 @@
 import React from 'react';
 import { getEmployeeName } from '../../helpers/getEmployeeName';
+import { Button } from 'react-bootstrap';
 
 export default function Feedback(props) {
 
@@ -14,7 +15,14 @@ export default function Feedback(props) {
       <h4>{taskItem.is_late && 'LATE'}</h4>
       </ul>
       <div className="feedback-textbox">
+        <form>
         <textarea />
+      <Button
+      confirm variant="primary"
+      onClick={() => console.log('Pressed')}>
+        Submit
+        </Button>
+        </form>
       </div>
     </div>
   )
