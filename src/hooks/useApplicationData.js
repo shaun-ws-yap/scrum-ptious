@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 
-export default function useApplicationData(socket, loginToken) {
+export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
     menu: "Dashboard",
     userInfo: {},
@@ -49,6 +49,7 @@ export default function useApplicationData(socket, loginToken) {
 
     socket.on('error', function(error) {
       console.log('error received: ', error);
+      setError(error);
     });
 
     return () => {
