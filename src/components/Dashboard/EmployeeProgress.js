@@ -4,7 +4,7 @@ import EmployeeProgressItem from './EmployeeProgressItem';
 
 export default function EmployeeProgress(props) {
 
-const userData = props.teamUsers.map((user) => {
+const userData = props.teamUsers.filter(user => user.role !== 1).map((user) => {
   const taskData = teamTaskStatus(props.teamTasks, user.team_id, user.id);
 
   return (

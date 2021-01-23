@@ -6,7 +6,7 @@ import axios from 'axios';
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
-import PerformanceReview from './Performance-Review/PerformanceReview';
+import PerformanceReview from './Performance-Review/';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import Login from './Login';
@@ -19,6 +19,7 @@ import { taskStatus } from '../helpers/taskStatus';
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
+import 'react-notifications/lib/notifications.css';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -57,6 +58,8 @@ function App() {
     editTaskItem,
     deleteTaskItem,
   } = useTasks(loginToken, userInfo.team_id, socket, setTeamTasks, setUserTasks);
+  
+  console.log(state);
 
   if ( loginToken === 0 ) {
     return (
@@ -113,7 +116,13 @@ function App() {
             userInfo={userInfo} 
             teamUsers={teamUsers}
           />}
-        { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
+        { menu === PERFORMANCE_REVIEW &&
+        <PerformanceReview
+          teamUsers={teamUsers}
+          teamTasks={teamTasks}
+          setTaskItem={setTaskItem}
+          taskItem={taskItem}
+        />}
       </section>
       <section className="user__info">
         <UserInfo userInfo={userInfo} deadlines={deadlines} /> 
