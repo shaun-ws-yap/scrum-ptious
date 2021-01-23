@@ -90,13 +90,8 @@ export default function TaskItem(props) {
       document.getElementById("edit-task-date").focus();
       return;
     }
-    console.log(newTaskData);
     editTaskItem(newTaskData)
-    .then(res => {
-      console.log("success");
-      NotificationManager.success(`${newTaskData.title}`, 'Updated');
-    })
-    .catch(e => console.log(e));
+    NotificationManager.success(`${newTaskData.title}`, 'Updated');
     reset();
     setShow(false);
   }

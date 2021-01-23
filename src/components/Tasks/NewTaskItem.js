@@ -58,13 +58,10 @@ export default function NewTaskItem(props) {
     }
 
     props.createTaskItem(taskItem)
-    .then(() => {
-      console.log("success");
-      NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
-      reset();
-      setShow(false);
-    })
-    .catch(e => console.log(e));
+    console.log("success");
+    NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
+    reset();
+    setShow(false);
   }
 
   return (
