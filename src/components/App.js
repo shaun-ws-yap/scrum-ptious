@@ -15,6 +15,7 @@ import useApplicationData from '../hooks/useApplicationData';
 import useSocket from '../hooks/useSocket';
 import useTasks from '../hooks/useTasks'
 import { taskStatus } from '../helpers/taskStatus';
+import { NotificationManager, NotificationContainer } from 'react-notifications';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -30,6 +31,7 @@ const PERFORMANCE_REVIEW = "Performance Review"
 function App() {
   const [loginToken, setLoginToken] = useState(0);
   const { socket } = useSocket();
+  const [notification, setNotification] = useState(0);
 
   const { 
     state,
@@ -58,9 +60,16 @@ function App() {
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
-  } = useTasks(loginToken, userInfo.team_id, socket, setTeamTasks, setUserTasks);
+  } = useTasks(loginToken, userInfo.team_id, socket, setTeamTasks, setUserTasks, setNotification);
   
-  console.log(state);
+  useEffect(() => {
+    if (notification && notification === userInfo.id) {
+      NotificationManager.warning('Click to view', 'New Task Assigned', 5000, () => {
+        setMenu(TASKS)
+      });
+    }
+    setNotification(0);
+  }, [notification])
 
   if ( loginToken === 0 ) {
     return (
@@ -72,6 +81,7 @@ function App() {
 
   return (
     <div className="container">
+      <NotificationContainer />
       <section className="sidebar">
         <img 
           alt="Scrum-ptious Logo"
