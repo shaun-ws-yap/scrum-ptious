@@ -6,7 +6,7 @@ import axios from 'axios';
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
-import PerformanceReview from './Performance-Review/PerformanceReview';
+import PerformanceReview from './Performance-Review/';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import Login from './Login';
@@ -48,6 +48,8 @@ function App() {
     allTasks,
     deadlines
   } = state;
+
+  console.log(state);
 
   if ( loginToken === 0 ) {
     return (
@@ -104,7 +106,13 @@ function App() {
             userInfo={userInfo} 
             teamUsers={teamUsers}
           />}
-        { menu === PERFORMANCE_REVIEW && <PerformanceReview />}
+        { menu === PERFORMANCE_REVIEW &&
+        <PerformanceReview
+          teamUsers={teamUsers}
+          teamTasks={teamTasks}
+          setTaskItem={setTaskItem}
+          taskItem={taskItem}
+        />}
       </section>
       <section className="user__info">
         <UserInfo userInfo={userInfo} deadlines={deadlines} /> 
