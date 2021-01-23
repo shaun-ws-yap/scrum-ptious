@@ -13,6 +13,7 @@ import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useSocket from '../hooks/useSocket';
+import useTasks from '../hooks/useTasks'
 import { taskStatus } from '../helpers/taskStatus';
 
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -32,9 +33,11 @@ function App() {
     state,
     setMenu,
     setTaskItem,
-    createTaskItem,
-    editTaskItem,
-    deleteTaskItem
+    setUserTasks, 
+    setTeamTasks,
+    // createTaskItem,
+    // editTaskItem,
+    // deleteTaskItem
   } = useApplicationData(socket, loginToken);
 
   const {
@@ -48,6 +51,12 @@ function App() {
     allTasks,
     deadlines
   } = state;
+
+  const {
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+  } = useTasks(loginToken, userInfo.team_id, socket, setTeamTasks, setUserTasks);
 
   if ( loginToken === 0 ) {
     return (
@@ -71,7 +80,7 @@ function App() {
             setMenu={setMenu}
             userInfo={userInfo}
             teamUsers={teamUsers}
-            createTaskItem={createTaskItem.bind(this)}
+            createTaskItem={createTaskItem}
           />
         </nav>
         <button onClick={() => setLoginToken(0)}>
