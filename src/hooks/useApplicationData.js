@@ -15,8 +15,8 @@ export default function useApplicationData(socket, loginToken) {
     team: 0, // not used
   });
 
-  const setMenu = menu => setState({...state, menu});
-  const setTaskItem = taskItem => setState({...state, taskItem});
+  const setMenu = menu => setState(prev => ({...prev, menu}));
+  const setTaskItem = taskItem => setState(prev => ({...prev, taskItem}));
   const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
   const setUserTasks = userTasks => setState(prev => ({...prev, userTasks}));
 
