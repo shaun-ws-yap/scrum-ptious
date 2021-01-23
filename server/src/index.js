@@ -11,7 +11,7 @@ const io         = require('socket.io')(http);
 
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
-const { saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
+const { getTasksByTeam, saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
 const { getLoginData } = require('./routes/queries/loginData');
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
@@ -60,9 +60,15 @@ io.on('connection', (socket) => {
 
   //tasks
   socket.on('tasks add', taskItem => {
-    io.emit('tasks update', taskItem);
     saveTask(db, taskItem)
-      .then(data => socket.emit('tasks action saved', 'saved task ' + data.rows[0]))
+      .then(data => {
+        const taskData = data.rows[0]
+        return getTasksByTeam(db, taskData.projecttask_id);
+      })
+      .then(data => {
+        socket.emit('tasks action saved', 'saved task ', taskItem)
+        io.emit('tasks update', data.rows);
+      })
       .catch(err => socket.emit('error', 'could not save task to db: ' + err));
   });
 

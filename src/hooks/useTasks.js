@@ -1,13 +1,21 @@
 import { useState, useEffect } from 'react';
+import filterTasksByUser from '../helpers/filterTasksByUser';
 
-export default function useTasks(socket, setTeamTasks, setUserTasks ) {
+export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUserTasks ) {
   useEffect(() => {
-    socket.on('tasks update', (userTasks) => {
+    if (!loginToken) {
+      return;
+    }
+
+    socket.on('tasks update', (teamTasks) => {
+      setTeamTasks(teamTasks);
+      //filter out your tasks
+      const userTasks = filterTasksByUser(loginToken, teamTasks);
+      setUserTasks(userTasks);
       console.log('task updated');
-      //setUserTasks(userTasks);
     });
 
-    socket.on('action saved', (msg) => {
+    socket.on('tasks action saved', (msg) => {
       console.log(msg);
     });
 
@@ -15,10 +23,12 @@ export default function useTasks(socket, setTeamTasks, setUserTasks ) {
       socket.off('tasks update');
       socket.off('tasks action saved');
     }
-  }, []);
+  }, [loginToken]);
+
 
   const createTaskItem = taskItem => {
-    socket.emit('tasks add', taskItem);
+    let task = {...taskItem, projecttask_id: teamId }
+    socket.emit('tasks add', task);
   };
 
   const editTaskItem = (id, taskItem) => {
