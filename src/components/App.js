@@ -19,6 +19,7 @@ import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-notifications/lib/notifications.css';
+import 'react-tabs/style/react-tabs.css';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
