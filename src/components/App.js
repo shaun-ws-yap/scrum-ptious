@@ -64,7 +64,7 @@ function App() {
   
   useEffect(() => {
     if (notification && notification === userInfo.id) {
-      NotificationManager.warning('Click to view', 'New Task Assigned', 5000, () => {
+      NotificationManager.warning('Click to view', 'Your Tasks Have Been Updated', 5000, () => {
         setMenu(TASKS)
       });
     }
