@@ -1,7 +1,8 @@
 const getTasksByEmployee = (db, uid) => {
   const queryString = `
-  SELECT * FROM tasks
-  WHERE employee_id = $1
+    SELECT *
+    from tasks
+    WHERE employee_id = $1
   `;
   
   return db.query(queryString, [uid])
@@ -9,8 +10,9 @@ const getTasksByEmployee = (db, uid) => {
 
 const getTasksByTeam = (db, tid) => {
   const queryString = `
-  SELECT * FROM tasks
-  WHERE projecttask_id = $1
+    SELECT *
+    from tasks
+    WHERE projectTask_id = $1
   `;
 
   return db.query(queryString, [tid]);

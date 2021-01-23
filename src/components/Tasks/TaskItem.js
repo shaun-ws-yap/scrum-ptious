@@ -63,10 +63,6 @@ export default function TaskItem(props) {
     setShow(false);
   }
 
-  const formatDateString = (date) => {
-    return new Date(new Date(date));
-  }
-
   return (
     <>
       <li
@@ -76,11 +72,11 @@ export default function TaskItem(props) {
         <p>{description}</p>
         <label for="creation_date">Assigned on:</label>
         <br />
-        <Moment format="Do MMM YYYY h:mm A" >{formatDateString(creation_date).toString()}</Moment> 
+        <Moment format="Do MMM YYYY h:mm A" >{creation_date}</Moment> 
         <br />
         <label for="due_date">Due on:</label>
         <br />
-        <Moment format="Do MMM YYYY h:mm A" >{formatDateString(due_date).toString()}</Moment> 
+        <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
         <br />
       </li>
       {role === 1 && 
@@ -107,7 +103,7 @@ export default function TaskItem(props) {
                   <p>{description}</p>
                   <p>Assigned to: { getUserNameById(employee_id) }</p>
                   <label for="viewMode-due_date">Due on: </label>
-                  <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{formatDateString(due_date)}</Moment> 
+                  <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
                 </>
               ) }
 
@@ -144,7 +140,7 @@ export default function TaskItem(props) {
                   <DatePicker 
                     className="form-control" 
                     locale="en-US"
-                    selected={formatDateString(newTaskData.due_date)} 
+                    selected={new Date(newTaskData.due_date)} 
                     showTimeInput
                     onChange={(date) => onDateChange(date)}
                     dateFormat="MMMM d, yyyy h:mm aa"
