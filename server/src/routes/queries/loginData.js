@@ -6,6 +6,7 @@ const {
   getDeadlinesByDueDate } = require('./tasks');
 
 const getLoginData = (db, uid, callback) => {
+
   const userData = getEmployeeById(db, uid);
   
   const teamData = userData
