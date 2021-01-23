@@ -7,7 +7,8 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
       return;
     }
 
-    socket.on('tasks update', (teamTasks) => {
+    socket.on('tasks update', (teamTasks, userToAlert) => {
+      console.log(userToAlert);
       setTeamTasks(teamTasks);
       //filter out your tasks
       const userTasks = filterTasksByUser(loginToken, teamTasks);
