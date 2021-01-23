@@ -5,6 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import Moment from 'react-moment';
 import 'moment-timezone'
+import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
 // import { formatDateString } from './utilities/format-date';
 
@@ -55,13 +56,38 @@ export default function TaskItem(props) {
     return teamUsers.filter(user => user.id === id)[0].name;
   }
 
-  const handleEdit = (newTaskData) => {
-    editTaskItem(newTaskData);
+  function reset() {
+
+  }
+
+  function validate() {
+
+    if (newTaskData.title === "") {
+      NotificationManager.error('Title must be valid', 'Error');
+      return;
+    }
+    if (newTaskData.description === "") {
+      NotificationManager.error('Description must be valid', 'Error');
+      return;
+    }
+    if (newTaskData.employee_id === "") {
+      NotificationManager.error('Employee assigned must be valid', 'Error');
+      return;
+    }
+    if (newTaskData.due_date < new Date()) {
+      NotificationManager.error('Due date cannot be in the past', 'Error');
+      return;
+    }
+
+    editTaskItem(newTaskData)
+    NotificationManager.success(`${newTaskData.title}`, 'Updated');
+    reset();
     setShow(false);
   }
 
   return (
     <>
+      <NotificationContainer />
       <li
         onClick={event => handleShow(props)}
       >
@@ -152,7 +178,7 @@ export default function TaskItem(props) {
                 Delete
               </Button>
               { editMode && 
-                  <Button confirm variant="success" onClick={() => handleEdit(newTaskData)}>
+                  <Button confirm variant="success" onClick={() => validate()}>
                     Save
                   </Button> 
               }
