@@ -8,7 +8,6 @@ export default function useApplicationData(socket, loginToken, setError) {
     userInfo: {},
     role: 0,
     userTasks: [],
-    taskItem: [],
     teamUsers: [],
     teamTasks: [],
     allTasks: [],
@@ -17,17 +16,13 @@ export default function useApplicationData(socket, loginToken, setError) {
   });
 
   const setMenu = menu => setState(prev => ({...prev, menu}));
-  const setTaskItem = taskItem => setState(prev => ({...prev, taskItem}));
   
   const setTasks = teamTasks => {
     const userTasks = filterTasksByUser(loginToken, teamTasks);
     setState(prev => ({...prev, teamTasks, userTasks}));
   }
-  const setSubmissions = submission => setState(prev => {
-    return {
-      ...prev,
-      submissions: [...prev.submissions, submission]
-    }
+  const setSubmissions = submissions => setState(prev => {
+    return {...prev, submissions }
   })
 
   useEffect(() => {
@@ -68,7 +63,6 @@ export default function useApplicationData(socket, loginToken, setError) {
   return { 
     state, 
     setMenu, 
-    setTaskItem, 
     taskSetters: {
       setTasks,  
       setSubmissions,

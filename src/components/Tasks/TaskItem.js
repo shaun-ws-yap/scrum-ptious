@@ -38,7 +38,7 @@ export default function TaskItem(props) {
     'task__item--assigned' : is_late === false && status === 0,
     'task__item--in-progress' : is_late === false && status === 1,
     'task__item--in-review' : is_late === false && status === 2,
-    'task__item--complete' : is_late === false && status === 3
+    'task__item--complete' : status === 3
   });
 
   /**

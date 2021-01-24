@@ -11,9 +11,9 @@ const io         = require('socket.io')(http);
 
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
-const { getTasksByTeam, saveTask, editTask, deleteTask, updateTaskStatus } = require('./routes/queries/tasks');
+const { getTasksByTeam, saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
 const { getLoginData } = require('./routes/queries/loginData');
-const { submitTask } = require('./routes/queries/submissions');
+const { submitTaskForReview, saveFeedback } = require('./routes/queries/submit-for-review');
 
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
@@ -94,13 +94,22 @@ io.on('connection', (socket) => {
 
   socket.on('employee submit', submitTaskData => {
     //save to db 
-    submitTask(db, submitTaskData)
+    submitTaskForReview(db, submitTaskData)
       .then(res => {
-        //emit to all clients
         socket.emit('tasks action saved', 'SUBMIT', submitTaskData);
+        //emit to all clients
         io.emit('employee submit', res);
       })
       .catch(err => socket.emit('error', 'could not submit task: ' + err, submitTaskData));
+  })
+
+  socket.on('feedback', feedbackData => {
+    saveFeedback(db, feedbackData)
+      .then(res => {
+        socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
+        io.emit('feedback', res);
+      })
+      .catch(err => socket.emit('error', 'could not save feedback ' + err, feedbackData));
   })
 
   //chat

@@ -36,7 +36,6 @@ function App() {
   const { 
     state,
     setMenu,
-    setTaskItem,
     taskSetters
   } = useApplicationData(socket, loginToken);
 
@@ -44,12 +43,12 @@ function App() {
     menu,
     userTasks,
     userInfo,
-    taskItem,
     role,
     teamTasks,
     teamUsers,
     allTasks,
-    deadlines
+    deadlines,
+    submissions
   } = state;
 
   const {
@@ -57,7 +56,8 @@ function App() {
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
-  } = useTasks(loginToken, socket, taskSetters, setNotification);
+    giveFeedback,
+  } = useTasks(loginToken, socket, submissions, taskSetters, setNotification);
   
   useEffect(() => {
     if (notification && notification === userInfo.id) {
@@ -115,7 +115,6 @@ function App() {
             role={role} 
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
-            setTaskItem={setTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
@@ -130,8 +129,7 @@ function App() {
         <PerformanceReview
           teamUsers={teamUsers}
           teamTasks={teamTasks}
-          setTaskItem={setTaskItem}
-          taskItem={taskItem}
+          giveFeedback={giveFeedback}
         />}
       </section>
       <section className="user__info">

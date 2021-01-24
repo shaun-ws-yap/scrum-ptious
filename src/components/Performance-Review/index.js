@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 
 import Feedback from './Feedback';
-import TaskList from './TaskList';
+import SubmissionList from './SubmissionList';
 
 export default function PerformanceReview(props) {
 
-  const { teamUsers, teamTasks, setTaskItem, taskItem } = props;
+  const { 
+    teamUsers, 
+    teamTasks, 
+    giveFeedback,
+  } = props;
+  const [selectedTask, setSelectedTask] = useState({});
   const [show, setShow] = useState(false);
 
   return (
     <div className="dashboard">
       <div className="dashboard-top">
-        <TaskList
+        <SubmissionList
           teamUsers={teamUsers}
           teamTasks={teamTasks}
-          setTaskItem={setTaskItem}
-          taskItem={taskItem}
+          setSelectedTask={setSelectedTask}
           setShow={setShow}
         />
       </div>
       <div className="dashboard-bottom">
         <Feedback
           teamUsers={teamUsers}
-          taskItem={taskItem}
+          selectedTask={selectedTask}
           show={show}
           setShow={setShow}
+          giveFeedback={giveFeedback}
         />
       </div>
     </div>
