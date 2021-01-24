@@ -8,9 +8,9 @@ export default function TaskProgress(props) {
   const {
     role,
     tasks,
-    setTaskItem, 
     editTaskItem,
     deleteTaskItem,
+    submitTaskItem,
     teamUsers
   } = props;
 
@@ -21,11 +21,11 @@ export default function TaskProgress(props) {
       return (
         <TaskItem 
           key={task.id}
-          taskData={task}
+          taskItem={task}
           role={role}
-          setTaskItem={setTaskItem}
           editTaskItem={editTaskItem}
           deleteTaskItem={deleteTaskItem}
+          submitTaskItem={submitTaskItem}
           teamUsers={teamUsers}
         />
       )

@@ -13,19 +13,27 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 export default function TaskItem(props) {
   const {
     role,
-    taskData,
-    setTaskItem,
+    taskItem,
     editTaskItem,
     deleteTaskItem,
+    submitTaskItem,
     teamUsers
   } = props;
-
+  
+  const { 
+    employee_id, 
+    title, 
+    description, 
+    due_date, 
+    creation_date, 
+    status, 
+    is_late
+  } = taskItem;
+  
   const [show, setShow] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [newTaskData, setNewTaskData] = useState(taskData);
+  const [newTaskData, setNewTaskData] = useState(taskItem);
   
-  const { id, projecttask_id, employee_id, title, description, due_date, creation_date, status, is_late } = taskData;
-
   const taskClass = classNames("task__item", {
     'task__item--assigned' : is_late === false && status === 0,
     'task__item--in-progress' : is_late === false && status === 1,
@@ -36,18 +44,15 @@ export default function TaskItem(props) {
   /**
    *  could store all these fn into a helper file
    * */
-  const handleShow = (props) => {
-    setTaskItem(props);
-    setShow(true);
-  }
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const handleDelete = () => {
-    console.log(taskData);
-    deleteTaskItem(taskData);
+    console.log(taskItem);
+    deleteTaskItem(taskItem);
     setShow(false)
   };
 
-  const handleClose = () => setShow(false);
 
   const handleEditToggle = () => {
     editMode ? setEditMode(false) : setEditMode(true);
@@ -97,7 +102,7 @@ export default function TaskItem(props) {
     <>
       <NotificationContainer />
       <li className={taskClass}
-        onClick={event => handleShow(props)}
+        onClick={event => handleShow()}
       >
         <h4>{title}</h4>
         <p>{description}</p>
@@ -110,6 +115,7 @@ export default function TaskItem(props) {
         <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
         <br />
       </li>
+
       {role === 1 && status !== 3 &&
         <form
           onSubmit={event => event.preventDefault()}
@@ -194,7 +200,8 @@ export default function TaskItem(props) {
           </Modal>
       </form>
       }
-      {role === 2 && (taskData.status === 0 || taskData.status === 1) &&
+
+      {role === 2 && (status === 0 || status === 1) &&
         <form
           onSubmit={event => event.preventDefault()}
         >
@@ -211,7 +218,7 @@ export default function TaskItem(props) {
               <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
             </Modal.Body>
             <Modal.Footer>
-              <Button confirm variant="primary" onClick={() => props.setTaskItem(taskData.status += 1)}>
+              <Button confirm variant="primary" onClick={() => submitTaskItem(taskItem)}>
                 Submit
               </Button>
             </Modal.Footer>
