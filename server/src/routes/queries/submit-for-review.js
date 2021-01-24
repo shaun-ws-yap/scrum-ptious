@@ -12,14 +12,16 @@ const updateTaskStatus = (db, taskId, status) => {
   return db.query(queryString, [taskId, status]);
 };
 
-const updateSubmissionById = (db, sid, message) => {
+const updateSubmissionById = (db, sid, message, status) => {
   const queryString = `
     UPDATE submissions
-    SET feedback_string = $2
+    SET 
+      feedback_string = $2,
+      status = $3
     WHERE id = $1
     RETURNING *
   `;
-  return db.query(queryString, [sid, message]);
+  return db.query(queryString, [sid, message, status]);
 };
 
 const updateStatusAndGetTasks = (db, tid, status) => {
@@ -29,13 +31,17 @@ const updateStatusAndGetTasks = (db, tid, status) => {
 
 // use this for giving feedback
 // returns updated submissions and tasks
-const saveFeedback = (db, sid, message, taskId, status) => {
-  const getUpdatedSubmissions = updateSubmissionById(db, sid, message)
+const saveFeedback = (db, feedbackData) => {
+  const { feedback, taskItem } = feedbackData;
+  const { id: sid, message, status: subStatus } = feedback;
+  const { id: tid, status: tStatus} = taskItem;
+
+  const getUpdatedSubmissions = updateSubmissionById(db, sid, message, subStatus)
     .then(data => getAllSubmissions(db));
 
   return Promise.all([
     getUpdatedSubmissions,
-    updateStatusAndGetTasks(db, taskId, status)
+    updateStatusAndGetTasks(db, tid, tStatus)
   ])
     .then(([submissionsData, teamTasksData]) => {
       return {
