@@ -28,13 +28,12 @@ export default function NewTaskItem(props) {
   const handleClose = () => setShow(false);
 
   function reset() {
-    setTaskItem({
-      projecttask_id: team,
+    setTaskItem(prev => ({
+      ...prev,
       title: "",
       description: "",
       employee_id: "",
-      due_date: new Date(), 
-    })
+    }))
   }
 
   const getUserNameById = (id) => {
