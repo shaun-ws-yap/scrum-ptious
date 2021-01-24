@@ -53,6 +53,10 @@ export default function TaskItem(props) {
     setShow(false)
   };
 
+  const handleSubmit= () => {
+    setShow(false);
+    submitTaskItem(taskItem)
+  }
 
   const handleEditToggle = () => {
     editMode ? setEditMode(false) : setEditMode(true);
@@ -218,7 +222,7 @@ export default function TaskItem(props) {
               <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
             </Modal.Body>
             <Modal.Footer>
-              <Button confirm variant="primary" onClick={() => submitTaskItem(taskItem)}>
+              <Button confirm variant="primary" onClick={() => handleSubmit()}>
                 Submit
               </Button>
             </Modal.Footer>
