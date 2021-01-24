@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 export default function Feedback(props) {
   const {
     teamUsers,
-    submissions,
     selectedTask,
     show,
     setShow,
@@ -30,13 +29,10 @@ export default function Feedback(props) {
     setShow(false);
   }
 
-  const handleReject = () => {
-
-  }
-
-  const handleAccept = () => {
+  const handleSubmit = (accepted) => {
     console.log(selectedTask, feedback.message)
-    // TODO: send to server
+
+    giveFeedback(feedback.message, selectedTask, accepted);    
     setFeedback(prev => ({...prev, message: ""}));
     setShow(false);
   }
@@ -77,13 +73,13 @@ export default function Feedback(props) {
           <Modal.Footer>
             <Button 
               variant="danger"
-              onClick={(event) => handleReject()}
+              onClick={(event) => handleSubmit(false)}
             >
               Reject
             </Button>
             <Button 
               variant="success"
-              onClick={(event) => handleAccept()}
+              onClick={(event) => handleSubmit(true)}
             >
               Accept
             </Button>
