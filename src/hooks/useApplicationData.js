@@ -12,13 +12,19 @@ export default function useApplicationData(socket, loginToken) {
     teamTasks: [],
     allTasks: [],
     deadlines: [],
-    team: 0, // not used
+    submissions: [],
   });
 
   const setMenu = menu => setState(prev => ({...prev, menu}));
   const setTaskItem = taskItem => setState(prev => ({...prev, taskItem}));
   const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
   const setUserTasks = userTasks => setState(prev => ({...prev, userTasks}));
+  const setSubmissions = submission => setState(prev => {
+    return {
+      ...prev,
+      submissions: [...prev.submissions, submission]
+    }
+  })
 
   useEffect(() => {
     if (!loginToken) {
@@ -28,17 +34,17 @@ export default function useApplicationData(socket, loginToken) {
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
-      const { userTasks, userInfo, teamTasks, teamUsers, deadlines } = loginData;
+      const { userTasks, userInfo, teamTasks, teamUsers, deadlines, submissions } = loginData;
       setState(prev => ({ 
         ...prev, 
         userTasks, 
         userInfo, 
         teamTasks, 
-        deadlines, 
         teamUsers, 
+        deadlines,
+        submissions, 
         allTasks: teamTasks, 
         role: userInfo.role, 
-        team: userInfo.team_id, 
       }));
     });
 
@@ -58,7 +64,10 @@ export default function useApplicationData(socket, loginToken) {
     state, 
     setMenu, 
     setTaskItem, 
-    setUserTasks, 
-    setTeamTasks, 
+    taskSetters: {
+      setUserTasks, 
+      setTeamTasks, 
+      setSubmissions,
+    }
   }
 }
