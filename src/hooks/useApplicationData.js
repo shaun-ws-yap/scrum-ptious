@@ -21,11 +21,8 @@ export default function useApplicationData(socket, loginToken, setError) {
     const userTasks = filterTasksByUser(loginToken, teamTasks);
     setState(prev => ({...prev, teamTasks, userTasks}));
   }
-  const setSubmissions = submission => setState(prev => {
-    return {
-      ...prev,
-      submissions: [...prev.submissions, submission]
-    }
+  const setSubmissions = submissions => setState(prev => {
+    return {...prev, submissions }
   })
 
   useEffect(() => {
