@@ -36,7 +36,6 @@ function App() {
   const { 
     state,
     setMenu,
-    setTaskItem,
     taskSetters
   } = useApplicationData(socket, loginToken);
 
@@ -44,7 +43,6 @@ function App() {
     menu,
     userTasks,
     userInfo,
-    taskItem,
     role,
     teamTasks,
     teamUsers,
@@ -115,7 +113,6 @@ function App() {
             role={role} 
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
-            setTaskItem={setTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
@@ -130,8 +127,6 @@ function App() {
         <PerformanceReview
           teamUsers={teamUsers}
           teamTasks={teamTasks}
-          setTaskItem={setTaskItem}
-          taskItem={taskItem}
         />}
       </section>
       <section className="user__info">
