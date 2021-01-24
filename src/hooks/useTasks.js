@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import filterTasksByUser from '../helpers/filterTasksByUser';
 
 export default function useTasks(loginToken, socket, taskSetters, setNotification ) {
   const TASK_STATUS = {
@@ -9,7 +8,7 @@ export default function useTasks(loginToken, socket, taskSetters, setNotificatio
     COMPLETE: 3,
   }
 
-  const { setTeamTasks, setUserTasks, setSubmissions } = taskSetters;
+  const { setTasks, setSubmissions } = taskSetters;
 
   useEffect(() => {
     if (!loginToken) {
@@ -17,11 +16,8 @@ export default function useTasks(loginToken, socket, taskSetters, setNotificatio
     }
 
     socket.on('tasks update', (teamTasks, userToAlert) => {
-      setTeamTasks(teamTasks);
-      //filter out your tasks
-      const userTasks = filterTasksByUser(loginToken, teamTasks);
+      setTasks(teamTasks);
       setNotification(userToAlert)
-      setUserTasks(userTasks);
     });
     
     socket.on('tasks action saved', (op, task) => {
@@ -30,7 +26,7 @@ export default function useTasks(loginToken, socket, taskSetters, setNotificatio
 
     socket.on('employee submit', result => {
       console.log(result);
-      setTeamTasks(result.teamTasks);
+      setTasks(result.teamTasks);
       setSubmissions(result.submission);
       // TODO: also need to set teamTasks here
       //setSubmissions(result.submission);

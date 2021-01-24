@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import filterTasksByUser from '../helpers/filterTasksByUser';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 
 export default function useApplicationData(socket, loginToken) {
@@ -17,8 +18,11 @@ export default function useApplicationData(socket, loginToken) {
 
   const setMenu = menu => setState(prev => ({...prev, menu}));
   const setTaskItem = taskItem => setState(prev => ({...prev, taskItem}));
-  const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
-  const setUserTasks = userTasks => setState(prev => ({...prev, userTasks}));
+  
+  const setTasks = teamTasks => {
+    const userTasks = filterTasksByUser(loginToken, teamTasks);
+    setState(prev => ({...prev, teamTasks, userTasks}));
+  }
   const setSubmissions = submission => setState(prev => {
     return {
       ...prev,
@@ -65,8 +69,7 @@ export default function useApplicationData(socket, loginToken) {
     setMenu, 
     setTaskItem, 
     taskSetters: {
-      setUserTasks, 
-      setTeamTasks, 
+      setTasks,  
       setSubmissions,
     }
   }
