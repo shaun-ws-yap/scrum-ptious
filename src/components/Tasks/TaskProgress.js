@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import TaskItem from './TaskItem';
 
@@ -14,10 +14,17 @@ export default function TaskProgress(props) {
     teamUsers
   } = props;
 
-  const sortedTasks = sortTasks(tasks);
+  const [sortedTasks, setSortedTasks] = useState({});
+
+  useEffect(()=> {
+    const updated = sortTasks(tasks);
+    setSortedTasks(updated);
+  }, [tasks])
+
+  const sortedComponents = {};
 
   for (const key in sortedTasks) {
-    sortedTasks[key] = sortedTasks[key].map(task => {
+    sortedComponents[key] = sortedTasks[key].map(task => {
       return (
         <TaskItem 
           key={task.id}
@@ -32,7 +39,7 @@ export default function TaskProgress(props) {
     })
   }
 
-  const { assigned, inProgress, completed } = sortedTasks;
+  const { assigned, inProgress, completed } = sortedComponents;
 
   return (
     <div className="task-progress">
