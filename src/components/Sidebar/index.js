@@ -5,7 +5,6 @@ import Moment from 'react-moment';
 
 import SidebarItem from './SidebarItem';
 import NewTaskItem from '../Tasks/NewTaskItem';
-import Submissions from '../Submissions';
 
 export default function Sidebar(props) {
   const {
