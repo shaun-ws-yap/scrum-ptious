@@ -80,17 +80,6 @@ const deleteTask = (db, id) => {
   `, [id]);
 };
 
-const updateTaskStatus = (db, taskId, status) => {
-  const queryString = `
-    UPDATE tasks
-    SET
-      status = $2
-    WHERE id = $1
-    RETURNING *;
-  `;
-  return db.query(queryString, [taskId, status]);
-};
-
 module.exports = {
   getTasksByEmployee,
   getTasksByTeam,
@@ -98,5 +87,4 @@ module.exports = {
   saveTask,
   editTask,
   deleteTask,
-  updateTaskStatus,
 }
