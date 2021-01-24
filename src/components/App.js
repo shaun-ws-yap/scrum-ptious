@@ -28,6 +28,7 @@ const CHAT = "Chat";
 const SUBMISSIONS = "Submissions"
 
 function App() {
+  const [selectedMenu, setMenu] = useState(DASHBOARD);
   const [loginToken, setLoginToken] = useState(0);
   const { socket } = useSocket();
   const [notification, setNotification] = useState(0);
@@ -35,18 +36,16 @@ function App() {
 
   const { 
     state,
-    setMenu,
-    taskSetters
+    setTasks,  
+    setSubmissions,
   } = useApplicationData(socket, loginToken);
 
   const {
-    menu,
     userTasks,
     userInfo,
     role,
     teamTasks,
     teamUsers,
-    allTasks,
     deadlines,
     submissions
   } = state;
@@ -57,7 +56,7 @@ function App() {
     deleteTaskItem,
     submitTaskItem,
     giveFeedback,
-  } = useTasks(loginToken, socket, submissions, taskSetters, setNotification);
+  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setNotification);
   
   useEffect(() => {
     if (notification && notification === userInfo.id) {
@@ -90,9 +89,10 @@ function App() {
         />
         <nav className="sidebar__menu">
           <Sidebar
-            setMenu={setMenu}
+            selectedMenu={selectedMenu}
             userInfo={userInfo}
             teamUsers={teamUsers}
+            setMenu={setMenu}
             createTaskItem={createTaskItem}
           />
         </nav>
@@ -101,15 +101,14 @@ function App() {
         </button>
       </section>
       <section className="main">
-        { menu === DASHBOARD && 
+        { selectedMenu === DASHBOARD && 
           <Dashboard
             tasks={userTasks} 
             role={role} 
             teamTasks={teamTasks}
             teamUsers={teamUsers}
-            allTasks={allTasks}
           /> }
-        { menu === TASKS && 
+        { selectedMenu === TASKS && 
           <Tasks 
             socket={socket} 
             role={role} 
@@ -119,13 +118,13 @@ function App() {
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
           />}
-        { menu === CHAT && 
+        { selectedMenu === CHAT && 
           <Chat 
             socket={socket} 
             userInfo={userInfo} 
             teamUsers={teamUsers}
           />}
-        { menu === SUBMISSIONS &&
+        { selectedMenu === SUBMISSIONS &&
         <Submissions
           teamUsers={teamUsers}
           teamTasks={teamTasks}
