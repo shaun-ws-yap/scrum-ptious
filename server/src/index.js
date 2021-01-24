@@ -98,7 +98,7 @@ io.on('connection', (socket) => {
       .then(res => {
         socket.emit('tasks action saved', 'SUBMIT', submitTaskData);
         //emit to all clients
-        io.emit('employee submit', res);
+        io.emit('submt/feedback', res);
       })
       .catch(err => socket.emit('error', 'could not submit task: ' + err, submitTaskData));
   })
@@ -107,7 +107,7 @@ io.on('connection', (socket) => {
     saveFeedback(db, feedbackData)
       .then(res => {
         socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
-        io.emit('feedback', res);
+        io.emit('submt/feedback', res);
       })
       .catch(err => socket.emit('error', 'could not save feedback ' + err, feedbackData));
   })

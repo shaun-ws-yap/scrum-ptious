@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
 import findSubmissionByTask from '../helpers/findSubmissionByTask';
 
-export default function useTasks(loginToken, socket, submissions, taskSetters, setNotification ) {
+export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setNotification ) {
   const TASK_STATUS = {
     ASSIGNED: 0,
     IN_PROGRESS: 1,
     IN_REVIEW: 2,
     COMPLETE: 3,
   }
-
-  const { setTasks, setSubmissions } = taskSetters;
 
   useEffect(() => {
     if (!loginToken) {
@@ -25,24 +23,16 @@ export default function useTasks(loginToken, socket, submissions, taskSetters, s
       console.log(op, task);
     });
 
-    socket.on('employee submit', result => {
+    socket.on('submt/feedback', result => {
       console.log(result);
       setTasks(result.teamTasks);
       setSubmissions(result.submissions);
-      //setSubmissions(result.submission);
     });
-
-    socket.on('feedback', result => {
-      console.log(result);
-      setTasks(result.teamTasks);
-      setSubmissions(result.submissions);
-    })
       
     return () => {
       socket.off('tasks update');
       socket.off('tasks action saved');
-      socket.off('employee submit');
-      socket.off('feedback');
+      socket.off('submit/feedback');
     }
   }, [loginToken]);
 

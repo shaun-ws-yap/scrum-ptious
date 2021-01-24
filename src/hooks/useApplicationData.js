@@ -4,18 +4,14 @@ import { Prev } from 'react-bootstrap/esm/PageItem';
 
 export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
-    menu: "Dashboard",
     userInfo: {},
     role: 0,
     userTasks: [],
     teamUsers: [],
     teamTasks: [],
-    allTasks: [],
     deadlines: [],
     submissions: [],
   });
-
-  const setMenu = menu => setState(prev => ({...prev, menu}));
   
   const setTasks = teamTasks => {
     const userTasks = filterTasksByUser(loginToken, teamTasks);
@@ -42,7 +38,6 @@ export default function useApplicationData(socket, loginToken, setError) {
         teamUsers, 
         deadlines,
         submissions, 
-        allTasks: teamTasks, 
         role: userInfo.role, 
       }));
     });
@@ -62,10 +57,7 @@ export default function useApplicationData(socket, loginToken, setError) {
 
   return { 
     state, 
-    setMenu, 
-    taskSetters: {
-      setTasks,  
-      setSubmissions,
-    }
+    setTasks,  
+    setSubmissions,
   }
 }
