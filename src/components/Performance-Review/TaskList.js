@@ -9,7 +9,7 @@ export default function TaskList(props) {
 
   const listedTeamTasks = teamTasks.map((task) => {
     return (
-      task.status === 3 &&
+      task.status === 2 &&
       <li className="task-in-progress">
         <TaskListItem
           key={task.id}
