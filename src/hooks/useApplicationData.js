@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import filterTasksByUser from '../helpers/filterTasksByUser';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 
 export default function useApplicationData(socket, loginToken, setError) {
@@ -12,13 +13,22 @@ export default function useApplicationData(socket, loginToken, setError) {
     teamTasks: [],
     allTasks: [],
     deadlines: [],
-    team: 0, // not used
+    submissions: [],
   });
 
   const setMenu = menu => setState(prev => ({...prev, menu}));
   const setTaskItem = taskItem => setState(prev => ({...prev, taskItem}));
-  const setTeamTasks = teamTasks => setState(prev => ({...prev, teamTasks}));
-  const setUserTasks = userTasks => setState(prev => ({...prev, userTasks}));
+  
+  const setTasks = teamTasks => {
+    const userTasks = filterTasksByUser(loginToken, teamTasks);
+    setState(prev => ({...prev, teamTasks, userTasks}));
+  }
+  const setSubmissions = submission => setState(prev => {
+    return {
+      ...prev,
+      submissions: [...prev.submissions, submission]
+    }
+  })
 
   useEffect(() => {
     if (!loginToken) {
@@ -28,22 +38,22 @@ export default function useApplicationData(socket, loginToken, setError) {
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
-      const { userTasks, userInfo, teamTasks, teamUsers, deadlines } = loginData;
+      const { userTasks, userInfo, teamTasks, teamUsers, deadlines, submissions } = loginData;
       setState(prev => ({ 
         ...prev, 
         userTasks, 
         userInfo, 
         teamTasks, 
-        deadlines, 
         teamUsers, 
+        deadlines,
+        submissions, 
         allTasks: teamTasks, 
         role: userInfo.role, 
-        team: userInfo.team_id, 
       }));
     });
 
-    socket.on('error', function(error) {
-      console.log('error received: ', error);
+    socket.on('error', (error, data) => {
+      console.log('error received: ', error, data);
       setError(error);
     });
 
@@ -59,7 +69,9 @@ export default function useApplicationData(socket, loginToken, setError) {
     state, 
     setMenu, 
     setTaskItem, 
-    setUserTasks, 
-    setTeamTasks, 
+    taskSetters: {
+      setTasks,  
+      setSubmissions,
+    }
   }
 }

@@ -1,27 +1,41 @@
 import { useState, useEffect } from 'react';
-import filterTasksByUser from '../helpers/filterTasksByUser';
 
-export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUserTasks, setNotification ) {
+export default function useTasks(loginToken, socket, taskSetters, setNotification ) {
+  const TASK_STATUS = {
+    ASSIGNED: 0,
+    IN_PROGRESS: 1,
+    IN_REVIEW: 2,
+    COMPLETE: 3,
+  }
+
+  const { setTasks, setSubmissions } = taskSetters;
+
   useEffect(() => {
     if (!loginToken) {
       return;
     }
 
     socket.on('tasks update', (teamTasks, userToAlert) => {
-      setTeamTasks(teamTasks);
-      //filter out your tasks
-      const userTasks = filterTasksByUser(loginToken, teamTasks);
+      setTasks(teamTasks);
       setNotification(userToAlert)
-      setUserTasks(userTasks);
     });
-
+    
     socket.on('tasks action saved', (op, task) => {
       console.log(op, task);
     });
 
+    socket.on('employee submit', result => {
+      console.log(result);
+      setTasks(result.teamTasks);
+      setSubmissions(result.submission);
+      // TODO: also need to set teamTasks here
+      //setSubmissions(result.submission);
+    });
+      
     return () => {
       socket.off('tasks update');
       socket.off('tasks action saved');
+      socket.off('employee submit');
     }
   }, [loginToken]);
 
@@ -30,8 +44,7 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
   const DELETE = 'DELETE';
 
   const createTaskItem = taskItem => {
-    let task = {...taskItem, projecttask_id: teamId }
-    socket.emit('tasks update', task, CREATE);
+    socket.emit('tasks update', taskItem, CREATE);
   };
 
   const editTaskItem = taskItem => {
@@ -42,9 +55,23 @@ export default function useTasks(loginToken, teamId, socket, setTeamTasks, setUs
     socket.emit('tasks update', taskItem, DELETE);
   };
 
+  const submitTaskItem = taskItem => {
+    const toSubmit = {...taskItem, status: TASK_STATUS.IN_REVIEW}
+    const submitTaskData = {
+      submission: {
+        feedback_string: '', 
+        submission_date: new Date().toISOString(), 
+        task_id: taskItem.id
+      },
+      taskItem: toSubmit
+    }
+    socket.emit('employee submit', submitTaskData);
+  }
+
   return {
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
+    submitTaskItem,
   };
 }

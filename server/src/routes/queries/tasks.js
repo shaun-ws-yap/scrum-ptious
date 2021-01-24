@@ -1,3 +1,5 @@
+
+
 const getTasksByEmployee = (db, uid) => {
   const queryString = `
     SELECT *
@@ -66,7 +68,7 @@ const editTask = (db, id, taskItem) => {
     WHERE id = $1
     RETURNING *;
   `, [id, title, description, due_date, employee_id, projecttask_id])
-}
+};
 
 // Delete task by id
 const deleteTask = (db, id) => {
@@ -76,7 +78,18 @@ const deleteTask = (db, id) => {
     WHERE id = $1
     RETURNING *
   `, [id]);
-}
+};
+
+const updateTaskStatus = (db, taskId, status) => {
+  const queryString = `
+    UPDATE tasks
+    SET
+      status = $2
+    WHERE id = $1
+    RETURNING *;
+  `;
+  return db.query(queryString, [taskId, status]);
+};
 
 module.exports = {
   getTasksByEmployee,
@@ -85,4 +98,5 @@ module.exports = {
   saveTask,
   editTask,
   deleteTask,
+  updateTaskStatus,
 }

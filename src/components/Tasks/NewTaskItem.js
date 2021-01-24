@@ -9,7 +9,14 @@ export default function NewTaskItem(props) {
   // to force a bug for error messages
   // const dateNow = new Date(); 
 
+  const {
+    team,
+    teamUsers,
+    createTaskItem, 
+  } = props;
+
   const [taskItem, setTaskItem] = useState({
+    projecttask_id: team,
     title: "",
     description: "",
     employee_id: "",
@@ -18,21 +25,21 @@ export default function NewTaskItem(props) {
 
   const [show, setShow] = useState(false);
 
-  const teamMembersList = props.teamUsers.filter(user => user.role !== 1);
+  const teamMembersList = teamUsers.filter(user => user.role !== 1);
 
   const handleClose = () => setShow(false);
 
   function reset() {
-    setTaskItem({
+    setTaskItem(prev => ({
+      ...prev,
       title: "",
       description: "",
       employee_id: "",
-      due_date: new Date(), 
-    })
+    }))
   }
 
   const getUserNameById = (id) => {
-    return props.teamUsers.filter(user => user.id === id)[0].name;
+    return teamUsers.filter(user => user.id === id)[0].name;
   }
 
   function validate() {
@@ -59,8 +66,7 @@ export default function NewTaskItem(props) {
       return;
     }
 
-    props.createTaskItem(taskItem)
-    console.log("success");
+    createTaskItem(taskItem);
     NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
     reset();
     setShow(false);

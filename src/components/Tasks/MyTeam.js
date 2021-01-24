@@ -5,7 +5,7 @@ import MyTeamItem from './MyTeamItem';
 
 export default function MyTeam(props) {
   const {
-    selectTasks,
+    selectTasksByUser,
     teamUsers,
   } = props;
 
@@ -15,7 +15,7 @@ export default function MyTeam(props) {
     <MyTeamItem
       key={member.id}
       member={member}
-      selectTasks={selectTasks}
+      selectTasksByUser={selectTasksByUser}
     />
     </li>
     )

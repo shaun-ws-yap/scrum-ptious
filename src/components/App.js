@@ -37,13 +37,8 @@ function App() {
     state,
     setMenu,
     setTaskItem,
-    setUserTasks, 
-    setTeamTasks,
-    // createTaskItem,
-    // editTaskItem,
-    // deleteTaskItem
-  } = useApplicationData(socket, loginToken, setError);
-
+    taskSetters
+  } = useApplicationData(socket, loginToken);
 
   const {
     menu,
@@ -61,7 +56,8 @@ function App() {
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
-  } = useTasks(loginToken, userInfo.team_id, socket, setTeamTasks, setUserTasks, setNotification);
+    submitTaskItem,
+  } = useTasks(loginToken, socket, taskSetters, setNotification);
   
   useEffect(() => {
     if (notification && notification === userInfo.id) {
@@ -94,7 +90,6 @@ function App() {
         />
         <nav className="sidebar__menu">
           <Sidebar
-            menu={menu}
             setMenu={setMenu}
             userInfo={userInfo}
             teamUsers={teamUsers}
@@ -123,6 +118,7 @@ function App() {
             setTaskItem={setTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
+            submitTaskItem={submitTaskItem}
           />}
         { menu === CHAT && 
           <Chat 

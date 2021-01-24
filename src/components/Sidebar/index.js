@@ -35,42 +35,54 @@ const managerMenuItems = [
 ]
 
 export default function Sidebar(props) {
+  const {
+    setMenu,
+    userInfo,
+    teamUsers,
+    createTaskItem,
+    selected,
+  } = props
+
   const menuClass = classNames("sidebar__item", {
-    'sidebar__item--selected': props.selected
+    'sidebar__item--selected': selected
   })
 
   // console.log(props)
 
   return (
     <ul>
-     { props.userInfo && props.userInfo.role === 2 && menuItems.map(menu => {
+     { userInfo && userInfo.role === 2 && menuItems.map(menu => {
         return (
           <SidebarItem
             key={menu.name}
             name={menu.name}
-            selected={menu.name === props.menu}
-            setMenu={props.setMenu}
+            selected={menu.name === menu}
+            setMenu={setMenu}
           />
         )
       }) }
 
-      { props.userInfo && props.userInfo.role === 1 && managerMenuItems.map(menu => {
+      { userInfo && userInfo.role === 1 && managerMenuItems.map(menu => {
         return (
           <>
           <SidebarItem
             key={menu.name}
             name={menu.name}
-            selected={menu.name === props.menu}
-            setMenu={props.setMenu}
+            selected={menu.name === menu}
+            setMenu={setMenu}
           />
           </>
         )
       }) 
       } 
-      { props.userInfo && props.userInfo.role === 1 && (
+      { userInfo && userInfo.role === 1 && (
 
         <div>
-          <NewTaskItem teamUsers={props.teamUsers} createTaskItem={props.createTaskItem} />
+          <NewTaskItem 
+            team={userInfo.team_id}
+            teamUsers={teamUsers} 
+            createTaskItem={createTaskItem} 
+          />
         </div>
       )}
 

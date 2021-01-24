@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import TaskItem from './TaskItem';
 
@@ -8,31 +8,38 @@ export default function TaskProgress(props) {
   const {
     role,
     tasks,
-    setTaskItem, 
     editTaskItem,
     deleteTaskItem,
+    submitTaskItem,
     teamUsers
   } = props;
 
-  const sortedTasks = sortTasks(tasks);
+  const [sortedTasks, setSortedTasks] = useState({});
+
+  useEffect(()=> {
+    const updated = sortTasks(tasks);
+    setSortedTasks(updated);
+  }, [tasks])
+
+  const sortedComponents = {};
 
   for (const key in sortedTasks) {
-    sortedTasks[key] = sortedTasks[key].map(task => {
+    sortedComponents[key] = sortedTasks[key].map(task => {
       return (
         <TaskItem 
           key={task.id}
-          taskData={task}
+          taskItem={task}
           role={role}
-          setTaskItem={setTaskItem}
           editTaskItem={editTaskItem}
           deleteTaskItem={deleteTaskItem}
+          submitTaskItem={submitTaskItem}
           teamUsers={teamUsers}
         />
       )
     })
   }
 
-  const { assigned, inProgress, completed } = sortedTasks;
+  const { assigned, inProgress, completed } = sortedComponents;
 
   return (
     <div className="task-progress">

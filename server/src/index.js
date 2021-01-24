@@ -11,8 +11,10 @@ const io         = require('socket.io')(http);
 
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
-const { getTasksByTeam, saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
+const { getTasksByTeam, saveTask, editTask, deleteTask, updateTaskStatus } = require('./routes/queries/tasks');
 const { getLoginData } = require('./routes/queries/loginData');
+const { submitTask } = require('./routes/queries/submissions');
+
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
@@ -76,7 +78,7 @@ io.on('connection', (socket) => {
         taskOperation = deleteTask(db, taskItem.id);
         break;
       default:
-        socket.emit('error', 'invalid operation: ' + op);
+        socket.emit('error', 'invalid operation: ' + op, taskItem);
         return;
     };
     taskOperation
@@ -87,8 +89,19 @@ io.on('connection', (socket) => {
       .then(data => {
         io.emit('tasks update', data.rows, taskItem.employee_id);
       })
-      .catch(err => socket.emit('error', `could not perform operation: ${op}` + err));
+      .catch(err => socket.emit('error', `could not perform operation: ${op}` + err, taskItem));
   }) 
+
+  socket.on('employee submit', submitTaskData => {
+    //save to db 
+    submitTask(db, submitTaskData)
+      .then(res => {
+        //emit to all clients
+        socket.emit('tasks action saved', 'SUBMIT', submitTaskData);
+        io.emit('employee submit', res);
+      })
+      .catch(err => socket.emit('error', 'could not submit task: ' + err, submitTaskData));
+  })
 
   //chat
   socket.on('joining msg', (username, userId) => {
@@ -105,7 +118,7 @@ io.on('connection', (socket) => {
     io.emit('chat message', messageData);
     saveMessage(db, messageData)
       .then(data => socket.emit('message saved', data.rows[0]))
-      .catch(err => socket.emit('error', 'could not save message to db: ' + err));
+      .catch(err => socket.emit('error', 'could not save message to db: ' + err, messageData));
   });
 
   socket.on('get previous messages', (time_iso, numMsg) => {
@@ -117,7 +130,7 @@ io.on('connection', (socket) => {
         //   socket.emit('get previous messages', data.rows)
         // }, 500);
       })
-      .catch(err => socket.emit('error', 'could not get previous messages: ' + err))
+      .catch(err => socket.emit('error', 'could not get previous messages: ' + err, 'no data'))
   })
 
   socket.on('disconnect', () => {

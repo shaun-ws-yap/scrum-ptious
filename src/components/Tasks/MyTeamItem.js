@@ -3,7 +3,7 @@ import React from 'react';
 export default function MyTeamItem(props) {
   const {
     member,
-    selectTasks,
+    selectTasksByUser,
   } = props;
 
   const { role, name, email, phone_number } = member;
@@ -15,7 +15,7 @@ export default function MyTeamItem(props) {
 
   return (
     <li className="team-progress">
-      <button onClick={() => selectTasks(member)}>
+      <button onClick={() => selectTasksByUser(member)}>
         Test
       </button>
       <h4>{name}</h4>
