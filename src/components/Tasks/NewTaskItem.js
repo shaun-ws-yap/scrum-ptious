@@ -5,7 +5,9 @@ import { Modal, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
 export default function NewTaskItem(props) {
-  const dateNow = new Date();
+  
+  // to force a bug for error messages
+  // const dateNow = new Date(); 
 
   const {
     team,
@@ -18,7 +20,7 @@ export default function NewTaskItem(props) {
     title: "",
     description: "",
     employee_id: "",
-    due_date: dateNow.setDate(dateNow.getDate() + 7),
+    due_date: new Date(),
   });
 
   const [show, setShow] = useState(false);
@@ -44,19 +46,23 @@ export default function NewTaskItem(props) {
     const { title, description, employee_id, due_date } = taskItem;
 
     if (title === "") {
-      NotificationManager.error('Title must be valid', 'Error');
+      NotificationManager.warning('Title must be valid', 'Error');
+      document.getElementById("new-task-title").focus();
       return;
     }
     if (description === "") {
-      NotificationManager.error('Description must be valid', 'Error');
+      NotificationManager.warning('Description must be valid', 'Error');
+      document.getElementById("new-task-description").focus();
       return;
     }
     if (employee_id === "") {
-      NotificationManager.error('Employee assigned must be valid', 'Error');
+      NotificationManager.warning('Employee assigned must be valid', 'Error');
+      document.getElementById("new-task-assign").focus();
       return;
     }
     if (due_date < new Date()) {
-      NotificationManager.error('Due date cannot be in the past', 'Error');
+      NotificationManager.warning('Due date cannot be in the past', 'Error');
+      document.getElementById("new-task-date").focus();
       return;
     }
 
@@ -75,7 +81,7 @@ export default function NewTaskItem(props) {
         className="form-group"
         onSubmit={event => event.preventDefault()}
       >
-        <Modal show={show}  onHide={handleClose}>
+        <Modal show={show} onHide={handleClose} onEntered={() => document.getElementById("new-task-title").focus()} >
           <Modal.Header closeButton>
             <Modal.Title>
               <h3>New Task</h3>
@@ -85,6 +91,7 @@ export default function NewTaskItem(props) {
           <Modal.Body>
             <label for="title">Title: </label>
             <input
+              id="new-task-title"
               name="title"
               className="form-control"
               value={taskItem.title}
@@ -93,6 +100,7 @@ export default function NewTaskItem(props) {
 
             <label for="description">Description: </label>
             <textarea
+              id="new-task-description"
               name="description"
               className="form-control"
               value={taskItem.description}
@@ -101,6 +109,7 @@ export default function NewTaskItem(props) {
 
             <label for="assignTo">Assign to: </label>
             <select class="form-control"
+              id="new-task-assign"
               onChange={event => setTaskItem(prevTaskItem => ({...prevTaskItem, employee_id: Number(event.target.value)}))}
             >
               <option selected value={""}></option>
@@ -113,6 +122,7 @@ export default function NewTaskItem(props) {
 
             <label for ="due-date">Due on: </label>
             <DatePicker 
+              id="new-task-date"
               className="form-control" 
               selected={new Date(taskItem.due_date)} 
               showTimeSelect

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import filterTasksByUser from '../helpers/filterTasksByUser';
 import { Prev } from 'react-bootstrap/esm/PageItem';
 
-export default function useApplicationData(socket, loginToken) {
+export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
     menu: "Dashboard",
     userInfo: {},
@@ -54,6 +54,7 @@ export default function useApplicationData(socket, loginToken) {
 
     socket.on('error', (error, data) => {
       console.log('error received: ', error, data);
+      setError(error);
     });
 
     return () => {

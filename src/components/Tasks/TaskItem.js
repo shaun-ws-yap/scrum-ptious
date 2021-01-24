@@ -80,22 +80,25 @@ export default function TaskItem(props) {
   function validate() {
 
     if (newTaskData.title === "") {
-      NotificationManager.error('Title must be valid', 'Error');
+      NotificationManager.warning('Title must be valid', 'Error');
+      document.getElementById("edit-task-title").focus();
       return;
     }
     if (newTaskData.description === "") {
-      NotificationManager.error('Description must be valid', 'Error');
+      NotificationManager.warning('Description must be valid', 'Error');
+      document.getElementById("edit-task-description").focus();
       return;
     }
     if (newTaskData.employee_id === "") {
-      NotificationManager.error('Employee assigned must be valid', 'Error');
+      NotificationManager.warning('Employee assigned must be valid', 'Error');
+      document.getElementById("edit-task-assign").focus();
       return;
     }
     if (newTaskData.due_date < new Date()) {
-      NotificationManager.error('Due date cannot be in the past', 'Error');
+      NotificationManager.warning('Due date cannot be in the past', 'Error');
+      document.getElementById("edit-task-date").focus();
       return;
     }
-    console.log(newTaskData);
     editTaskItem(newTaskData)
     NotificationManager.success(`${newTaskData.title}`, 'Updated');
     reset();
@@ -125,7 +128,7 @@ export default function TaskItem(props) {
           onSubmit={event => event.preventDefault()}
           className="form-group"
         >
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} >
             <Modal.Header closeButton>
               <Modal.Title>
                 { editMode ? newTaskData.title : title }
@@ -152,12 +155,14 @@ export default function TaskItem(props) {
                 <>
                   <label for="newTitle">Title: </label>
                   <input
-                    className="form-control"
+                    autofocus
+                    className="form-control edit-task-title"
                     value={newTaskData.title}
                     onChange={(event) => setNewTaskData(prev => ({...prev, title: event.target.value}))}
                   />
                   <label for="newDescription">Description: </label>
                   <textarea
+                    id="edit-task-description"
                     value={newTaskData.description}
                     onChange={(event) => setNewTaskData(prev => ({...prev, description: event.target.value}))}
                     type="text"
@@ -166,6 +171,7 @@ export default function TaskItem(props) {
                   />
                   <label for="assigned">Re-assign to:</label>
                   <select
+                    id="edit-task-assign"
                     name="assigned"
                     className="form-control"
                     onChange={(event) => setNewTaskData(prev => ({...prev, employee_id: event.target.value}))}
@@ -179,6 +185,7 @@ export default function TaskItem(props) {
                   </select>
                   <label for="due_date">Due date:</label>
                   <DatePicker 
+                    id="edit-task-date"
                     className="form-control" 
                     locale="en-US"
                     selected={new Date(newTaskData.due_date)} 

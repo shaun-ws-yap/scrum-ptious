@@ -31,6 +31,7 @@ function App() {
   const [loginToken, setLoginToken] = useState(0);
   const { socket } = useSocket();
   const [notification, setNotification] = useState(0);
+  const [error, setError] = useState("");
 
   const { 
     state,
@@ -65,7 +66,10 @@ function App() {
       });
     }
     setNotification(0);
-  }, [notification])
+    if (error) {
+      console.log(error);
+    }
+  }, [notification, error])
 
   if ( loginToken === 0 ) {
     return (
