@@ -74,7 +74,7 @@ export default function TaskItem(props) {
   }
 
   function reset() {
-
+    setEditMode(false);
   }
 
   function validate() {
