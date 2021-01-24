@@ -103,9 +103,8 @@ io.on('connection', (socket) => {
       .catch(err => socket.emit('error', 'could not submit task: ' + err, submitTaskData));
   })
 
-  socket.on('feedback', (submissionId, message, taskId, status) => {
-    const feedbackData = {submissionId, message, taskId, status}
-    saveFeedback(db, submissionId, message, taskId, status)
+  socket.on('feedback', feedbackData => {
+    saveFeedback(db, feedbackData)
       .then(res => {
         socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
         io.emit('feedback', res);
