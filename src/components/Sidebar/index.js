@@ -5,6 +5,7 @@ import Moment from 'react-moment';
 
 import SidebarItem from './SidebarItem';
 import NewTaskItem from '../Tasks/NewTaskItem';
+import Submissions from '../Submissions';
 
 export default function Sidebar(props) {
   const {
@@ -19,11 +20,8 @@ export default function Sidebar(props) {
     'Dashboard',
     'Tasks',
     'Chat',
+    userInfo.role === 1 ? 'Submissions' : ''
   ];
-  // console.log(props)
-  if (userInfo.role === 1) {
-    menuItems.push('Submissions');
-  }
 
   return (
     <ul>
