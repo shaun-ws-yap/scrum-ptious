@@ -25,18 +25,11 @@ export default function useTasks(loginToken, socket, submissions, taskSetters, s
       console.log(op, task);
     });
 
-    socket.on('employee submit', result => {
+    socket.on('submt/feedback', result => {
       console.log(result);
       setTasks(result.teamTasks);
       setSubmissions(result.submissions);
-      //setSubmissions(result.submission);
     });
-
-    socket.on('feedback', result => {
-      console.log(result);
-      setTasks(result.teamTasks);
-      setSubmissions(result.submissions);
-    })
       
     return () => {
       socket.off('tasks update');
