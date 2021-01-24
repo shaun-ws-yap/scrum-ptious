@@ -27,10 +27,7 @@ const updateStatusAndGetTasks = (db, tid, status) => {
     .then(data => getTasksByTeam(db, data.rows[0].projecttask_id));
 }
 
-//update submission by id
-//update task status
-//get all submissions
-//get all tasks
+// use this for giving feedback
 const saveFeedback = (db, sid, message, taskId, status) => {
   const getUpdatedSubmissions = updateSubmissionById(db, sid, message)
     .then(data => getAllSubmissions(db));
