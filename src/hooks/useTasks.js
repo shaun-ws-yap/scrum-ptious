@@ -28,14 +28,18 @@ export default function useTasks(loginToken, socket, taskSetters, setNotificatio
       console.log(result);
       setTasks(result.teamTasks);
       setSubmissions(result.submission);
-      // TODO: also need to set teamTasks here
       //setSubmissions(result.submission);
     });
+
+    socket.on('feedback', result => {
+      console.log(result);
+    })
       
     return () => {
       socket.off('tasks update');
       socket.off('tasks action saved');
       socket.off('employee submit');
+      socket.off('feedback');
     }
   }, [loginToken]);
 
@@ -66,6 +70,11 @@ export default function useTasks(loginToken, socket, taskSetters, setNotificatio
       taskItem: toSubmit
     }
     socket.emit('employee submit', submitTaskData);
+  };
+
+  const giveFeedback = (submissionId, message, taskId, accepted) => {
+    const status = accepted ? 3 : 1;
+    socket.emit('feedback', submissionId, message, taskId, status);
   }
 
   return {
@@ -73,5 +82,6 @@ export default function useTasks(loginToken, socket, taskSetters, setNotificatio
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
+    giveFeedback,
   };
 }
