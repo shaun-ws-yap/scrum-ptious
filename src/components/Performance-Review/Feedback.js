@@ -4,43 +4,63 @@ import { Button, Modal } from 'react-bootstrap';
 import Moment from 'react-moment';
 
 export default function Feedback(props) {
+  const {
+    teamUsers,
+    submissions,
+    selectedTask,
+    show,
+    setShow,
+    giveFeedback
+  } = props; 
 
-  const { teamUsers, taskItem } = props;
+  const {
+    title,
+    description,
+    employee_id,
+    creation_date,
+    due_date,
+    is_late,
+  } = selectedTask;
+
   const [feedback, setFeedback] = useState({
     message: "",
   });
 
   const handleClose = () => {
-    props.setShow(false);
+    setShow(false);
   }
 
-  const handleSubmit = () => {
-    console.log(taskItem, feedback.message)
+  const handleReject = () => {
+
+  }
+
+  const handleAccept = () => {
+    console.log(selectedTask, feedback.message)
     // TODO: send to server
     setFeedback(prev => ({...prev, message: ""}));
-    props.setShow(false);
+    setShow(false);
   }
 
   return (
 
     <div className="feedback-container">
-      <Modal show={props.show} onHide={handleClose} >
+      <Modal show={show} onHide={handleClose} >
         <Modal.Header closeButton>
           <Modal.Title>
-            {taskItem.title}
+            {title}
           </Modal.Title>
         </Modal.Header>
 
         <form class="form-group" onSubmit={event => event.preventDefault()}>
           <Modal.Body>
-            <p>{taskItem.description}</p>
-            <p>Assigned to: {getEmployeeName(teamUsers, taskItem.employee_id)}</p>
+            <p>{description}</p>
+            <p>Assigned to: {getEmployeeName(teamUsers, employee_id)}</p>
             <p>On: 
-              <Moment format="Do MMM YYYY h:mm A" >{taskItem.creation_date}</Moment>
+              <Moment format="Do MMM YYYY h:mm A" >{creation_date}</Moment>
             </p>
             <p>Due on: 
-              <Moment format="Do MMM YYYY h:mm A" >{taskItem.due_date}</Moment>
-              { taskItem.is_late && (<span className="badge badge-danger">LATE</span>) }
+              <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment>
+              { is_late && (<span className="badge badge-danger">LATE</span>) }
             </p>
             
             <div>
@@ -56,10 +76,16 @@ export default function Feedback(props) {
 
           <Modal.Footer>
             <Button 
-              variant="primary"
-              onClick={(event) => handleSubmit()}
+              variant="danger"
+              onClick={(event) => handleReject()}
             >
-              Submit
+              Reject
+            </Button>
+            <Button 
+              variant="success"
+              onClick={(event) => handleAccept()}
+            >
+              Accept
             </Button>
           </Modal.Footer>
         </form>
