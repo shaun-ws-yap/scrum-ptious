@@ -36,8 +36,7 @@ function App() {
     state,
     setMenu,
     setTaskItem,
-    setUserTasks, 
-    setTeamTasks,
+    taskSetters
   } = useApplicationData(socket, loginToken);
 
   const {
@@ -57,7 +56,7 @@ function App() {
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
-  } = useTasks(loginToken, socket, setTeamTasks, setUserTasks, setNotification);
+  } = useTasks(loginToken, socket, taskSetters, setNotification);
   
   useEffect(() => {
     if (notification && notification === userInfo.id) {
