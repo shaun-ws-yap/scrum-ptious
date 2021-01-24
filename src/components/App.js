@@ -57,7 +57,7 @@ function App() {
     deleteTaskItem,
     submitTaskItem,
     giveFeedback,
-  } = useTasks(loginToken, socket, taskSetters, setNotification);
+  } = useTasks(loginToken, socket, submissions, taskSetters, setNotification);
   
   useEffect(() => {
     if (notification && notification === userInfo.id) {
@@ -129,7 +129,6 @@ function App() {
         <PerformanceReview
           teamUsers={teamUsers}
           teamTasks={teamTasks}
-          submissions={submissions}
           giveFeedback={giveFeedback}
         />}
       </section>
