@@ -4,79 +4,40 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Moment from 'react-moment';
 
 import SidebarItem from './SidebarItem';
-import classNames from 'classnames';
 import NewTaskItem from '../Tasks/NewTaskItem';
-
-const menuItems = [
-  {
-    name: 'Dashboard'
-  },
-  {
-    name: 'Tasks'
-  },
-  {
-    name: 'Chat'
-  }
-];
-
-const managerMenuItems = [
-  {
-    name: 'Dashboard'
-  },
-  {
-    name: 'Tasks'
-  },
-  {
-    name: 'Chat'
-  },
-  {
-    name: 'Submissions'
-  }
-]
 
 export default function Sidebar(props) {
   const {
-    setMenu,
+    selectedMenu,
     userInfo,
     teamUsers,
+    setMenu,
     createTaskItem,
-    selected,
   } = props
 
-  const menuClass = classNames("sidebar__item", {
-    'sidebar__item--selected': selected
-  })
-
+  const menuItems = [
+    'Dashboard',
+    'Tasks',
+    'Chat',
+  ];
   // console.log(props)
+  if (userInfo.role === 1) {
+    menuItems.push('Submissions');
+  }
 
   return (
     <ul>
-     { userInfo && userInfo.role === 2 && menuItems.map(menu => {
+     { menuItems.map((item, index) => {
         return (
           <SidebarItem
-            key={menu.name}
-            name={menu.name}
-            selected={menu.name === menu}
+            key={index}
+            name={item}
+            selected={selectedMenu === item}
             setMenu={setMenu}
           />
         )
-      }) }
-
-      { userInfo && userInfo.role === 1 && managerMenuItems.map(menu => {
-        return (
-          <>
-          <SidebarItem
-            key={menu.name}
-            name={menu.name}
-            selected={menu.name === menu}
-            setMenu={setMenu}
-          />
-          </>
-        )
-      }) 
-      } 
-      { userInfo && userInfo.role === 1 && (
-
+      })}
+      { userInfo.role === 1 && (
         <div>
           <NewTaskItem 
             team={userInfo.team_id}
@@ -85,8 +46,6 @@ export default function Sidebar(props) {
           />
         </div>
       )}
-
-      
     </ul>
   )
 }
