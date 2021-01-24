@@ -4,7 +4,7 @@ const getAllSubmissions = db => {
   SELECT
   *
   FROM submissions
-  ORDER BY submission_date
+  ORDER BY submission_date DESC
   `;
   return db.query(queryString);
 }
