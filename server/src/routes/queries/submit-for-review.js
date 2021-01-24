@@ -28,6 +28,7 @@ const updateStatusAndGetTasks = (db, tid, status) => {
 }
 
 // use this for giving feedback
+// returns updated submissions and tasks
 const saveFeedback = (db, sid, message, taskId, status) => {
   const getUpdatedSubmissions = updateSubmissionById(db, sid, message)
     .then(data => getAllSubmissions(db));
@@ -45,6 +46,7 @@ const saveFeedback = (db, sid, message, taskId, status) => {
 }
 
 // use this for submitting task
+// returns updated tasks and submission
 const submitTaskForReview = (db, submitTaskData) => {
   const { submission, taskItem } = submitTaskData;
 
