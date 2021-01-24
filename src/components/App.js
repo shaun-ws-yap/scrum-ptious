@@ -47,7 +47,8 @@ function App() {
     teamTasks,
     teamUsers,
     allTasks,
-    deadlines
+    deadlines,
+    submissions
   } = state;
 
   const {
@@ -55,6 +56,7 @@ function App() {
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
+    giveFeedback,
   } = useTasks(loginToken, socket, taskSetters, setNotification);
   
   useEffect(() => {
@@ -127,6 +129,8 @@ function App() {
         <PerformanceReview
           teamUsers={teamUsers}
           teamTasks={teamTasks}
+          submissions={submissions}
+          giveFeedback={giveFeedback}
         />}
       </section>
       <section className="user__info">

@@ -5,7 +5,12 @@ import SubmissionList from './SubmissionList';
 
 export default function PerformanceReview(props) {
 
-  const { teamUsers, teamTasks } = props;
+  const { 
+    teamUsers, 
+    teamTasks, 
+    submissions,
+    giveFeedback,
+  } = props;
   const [selectedTask, setSelectedTask] = useState({});
   const [show, setShow] = useState(false);
 
@@ -22,9 +27,11 @@ export default function PerformanceReview(props) {
       <div className="dashboard-bottom">
         <Feedback
           teamUsers={teamUsers}
+          submissions={submissions}
           selectedTask={selectedTask}
           show={show}
           setShow={setShow}
+          giveFeedback={giveFeedback}
         />
       </div>
     </div>
