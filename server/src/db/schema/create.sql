@@ -30,12 +30,13 @@ CREATE TABLE tasks (
 );
 
 DROP TABLE IF EXISTS submissions CASCADE;
+DROP TYPE submit_status;
 CREATE TYPE submit_status AS ENUM ('pending', 'rejected', 'accepted');
 CREATE TABLE submissions (
   id SERIAL PRIMARY KEY NOT NULL,
   feedback_string VARCHAR(500) DEFAULT NULL,
   submission_date TIMESTAMP NOT NULL,
-  task_id INTEGER  NOT NULL REFERENCES tasks(id) ON DELETE CASCADE 
+  task_id INTEGER  NOT NULL REFERENCES tasks(id) ON DELETE CASCADE, 
   status submit_status DEFAULT 'pending'
 );
 
