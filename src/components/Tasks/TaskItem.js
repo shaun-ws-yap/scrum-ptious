@@ -70,7 +70,7 @@ export default function TaskItem(props) {
   }
 
   const getUserNameById = (id) => {
-    return teamUsers.filter(user => user.id === id)[0].name;
+    return teamUsers.find(user => user.id === id).name;
   }
 
   function reset() {
