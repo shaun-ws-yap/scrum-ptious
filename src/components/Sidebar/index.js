@@ -30,7 +30,7 @@ const managerMenuItems = [
     name: 'Chat'
   },
   {
-    name: 'Performance Review'
+    name: 'Submissions'
   }
 ]
 

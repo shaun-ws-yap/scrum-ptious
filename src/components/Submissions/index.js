@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Feedback from './Feedback';
 import SubmissionList from './SubmissionList';
 
-export default function PerformanceReview(props) {
+export default function Submissions(props) {
 
   const { 
     teamUsers, 

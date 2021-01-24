@@ -5,7 +5,7 @@ import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
-import PerformanceReview from './Performance-Review/';
+import Submissions from './Submissions';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import Login from './Login';
@@ -25,7 +25,7 @@ import 'react-tabs/style/react-tabs.css';
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
 const CHAT = "Chat";
-const PERFORMANCE_REVIEW = "Performance Review"
+const SUBMISSIONS = "Submissions"
 
 function App() {
   const [loginToken, setLoginToken] = useState(0);
@@ -125,8 +125,8 @@ function App() {
             userInfo={userInfo} 
             teamUsers={teamUsers}
           />}
-        { menu === PERFORMANCE_REVIEW &&
-        <PerformanceReview
+        { menu === SUBMISSIONS &&
+        <Submissions
           teamUsers={teamUsers}
           teamTasks={teamTasks}
           giveFeedback={giveFeedback}
