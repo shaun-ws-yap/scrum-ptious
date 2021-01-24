@@ -29,6 +29,7 @@ export default function NewTaskItem(props) {
 
   function reset() {
     setTaskItem({
+      projecttask_id: team,
       title: "",
       description: "",
       employee_id: "",
