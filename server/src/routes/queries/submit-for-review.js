@@ -33,7 +33,7 @@ const updateStatusAndGetTasks = (db, tid, status) => {
 // returns updated submissions and tasks
 const saveFeedback = (db, feedbackData) => {
   const { feedback, taskItem } = feedbackData;
-  const { id: sid, message, status: subStatus } = feedback;
+  const { id: sid, feedback_string: message, status: subStatus } = feedback;
   const { id: tid, status: tStatus} = taskItem;
 
   const getUpdatedSubmissions = updateSubmissionById(db, sid, message, subStatus)
@@ -56,14 +56,17 @@ const saveFeedback = (db, feedbackData) => {
 const submitTaskForReview = (db, submitTaskData) => {
   const { submission, taskItem } = submitTaskData;
 
+  const getUpdatedSubmissions = saveSubmission(db, submission)
+    .then(data => getAllSubmissions(db));
+
   return Promise.all([
+    getUpdatedSubmissions,
     updateStatusAndGetTasks(db, taskItem.id, taskItem.status),
-    saveSubmission(db, submission)
   ])
-    .then(([teamTasksData, submissionData]) => {
+    .then(([submissionData, teamTasksData]) => {
       return {
-        teamTasks: teamTasksData.rows,
-        submission: submissionData.rows[0]
+        submissions: submissionData.rows,
+        teamTasks: teamTasksData.rows
       };
     });
 }
