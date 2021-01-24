@@ -8,3 +8,7 @@ const saveSubmission = (db, submission) => {
   const { feedback_string, submission_date, task_id } = submission;
   return db.query(queryString, [feedback_string, submission_date, task_id]);
 };
+
+module.exports = {
+  saveSubmission
+}
