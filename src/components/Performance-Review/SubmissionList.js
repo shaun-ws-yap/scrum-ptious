@@ -1,17 +1,22 @@
 import React from 'react';
 
-import TaskListItem from './TaskListItem';
+import SubmissionItem from './SubmissionItem';
 import { getEmployeeName } from '../../helpers/getEmployeeName';
 
-export default function TaskList(props) {
+export default function SubmisionList(props) {
 
-  const { teamUsers, teamTasks, setTaskItem, setShow } = props;
+  const { 
+    teamUsers, 
+    teamTasks, 
+    setSelectedTask, 
+    setShow 
+  } = props;
 
   const listedTeamTasks = teamTasks.map((task) => {
     return (
       task.status === 2 &&
       <li className="task-in-progress">
-        <TaskListItem
+        <SubmissionItem
           key={task.id}
           title={task.title}
           description={task.description}
@@ -19,7 +24,7 @@ export default function TaskList(props) {
           is_late={task.is_late}
           is_viewed={task.is_viewed}
           taskData={task}
-          setTaskItem={setTaskItem}
+          setSelectedTask={setSelectedTask}
           setShow={setShow}
         />
       </li>

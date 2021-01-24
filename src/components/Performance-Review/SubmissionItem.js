@@ -1,11 +1,11 @@
 import React from 'react';
 
-export default function TaskListItem(props) {
+export default function SubmissionItem(props) {
 
-  const { title, name, description, is_late, is_viewed, taskData, setTaskItem, setShow } = props;
+  const { title, name, description, is_late, is_viewed, taskData, setSelectedTask, setShow } = props;
 
   const handleOpen = () => {
-    setTaskItem(taskData);
+    setSelectedTask(taskData);
     setShow(true);
   }
 
