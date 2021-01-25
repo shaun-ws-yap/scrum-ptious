@@ -8,6 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 import FeedbackList from './FeedbackList';
 import getUserNameById from '../../helpers/getUserNameById';
 import getTaskStatus from '../../helpers/getTaskStatus';
+import { NotificationManager } from 'react-notifications';
 
 export default function EmployeeModal(props) {
   const {
@@ -30,6 +31,7 @@ export default function EmployeeModal(props) {
   } = taskItem;
 
   const handleSubmit= () => {
+    NotificationManager.success('Task sent for review', 'Submitted');
     handleClose();
     submitTaskItem(taskItem);
   }
@@ -54,13 +56,13 @@ export default function EmployeeModal(props) {
       />
     </Modal.Body>
     <Modal.Footer>
-      {(status === 0 || status === 1) &&
+      { <span className={`badge badge-${taskInfo.type}`}>{taskInfo.status}</span> }
+      { is_late && <span className="badge badge-danger">LATE</span> } 
+      { status === 1 &&
           <Button confirm variant="primary" onClick={() => handleSubmit()}>
             Submit
           </Button>
       }
-      { <span className={`badge badge-${taskInfo.type}`}>{taskInfo.status}</span> }
-      { is_late && <span className="badge badge-danger">LATE</span> } 
     </Modal.Footer>
   </Modal>
   </>)
