@@ -4,6 +4,8 @@ import DatePicker from "react-datepicker";
 import { Modal, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
+import getUserNameById from '../../helpers/getUserNameById';
+
 export default function NewTaskItem(props) {
   
   // to force a bug for error messages
@@ -40,10 +42,6 @@ export default function NewTaskItem(props) {
     }))
   }
 
-  const getUserNameById = (id) => {
-    return teamUsers.filter(user => user.id === id)[0].name;
-  }
-
   function validate() {
     const { title, description, employee_id, due_date } = taskItem;
 
@@ -76,7 +74,7 @@ export default function NewTaskItem(props) {
     //   setError(prev => ({...prev, title: "", message: ""}));
     // }
     if (error.message === "") {
-      NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
+      NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(teamUsers, taskItem.employee_id)}`, 'Created');
       reset();
       setShow(false);
     }

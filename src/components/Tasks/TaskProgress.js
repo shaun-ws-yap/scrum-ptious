@@ -9,6 +9,7 @@ export default function TaskProgress(props) {
   const {
     role,
     tasks,
+    submissions,
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
@@ -46,6 +47,7 @@ export default function TaskProgress(props) {
                   key={task.id}
                   taskItem={task}
                   role={role}
+                  submissions={submissions}
                   editTaskItem={editTaskItem}
                   deleteTaskItem={deleteTaskItem}
                   submitTaskItem={submitTaskItem}
@@ -63,6 +65,7 @@ export default function TaskProgress(props) {
             key={task.id}
             taskItem={task}
             role={role}
+            submissions={submissions}
             editTaskItem={editTaskItem}
             deleteTaskItem={deleteTaskItem}
             submitTaskItem={submitTaskItem}
