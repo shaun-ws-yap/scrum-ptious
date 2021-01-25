@@ -20,6 +20,7 @@ export default function TaskProgress(props) {
   } = props;
 
   const [sortedTasks, setSortedTasks] = useState({});
+  const [trashVisible, setTrashVisible] = useState(false);
 
   useEffect(()=> {
     const updated = sortTasks(tasks);
@@ -30,8 +31,10 @@ export default function TaskProgress(props) {
 
   for (const key in sortedTasks) {
     sortedComponents[key] = sortedTasks[key].map((task, index) => {
+      const draggable = task.status === 3 ? true : false;
+      
       return (
-        <Draggable draggableId={task.id + ""} index={index} >
+        <Draggable draggableId={task.id + ""} index={index} isDragDisabled={draggable} >
           {(provided, snapshot) => (
             <div 
               {...provided.draggableProps}
@@ -60,10 +63,10 @@ export default function TaskProgress(props) {
   const { assigned, inProgress, completed } = sortedComponents;
 
   const onDragEnd = (res) => {
+    setTrashVisible(false);
     const { destination, source, draggableId, droppableId } = res;
 
     const task = findTaskItemById(tasks, Number(draggableId));
-    console.log(task);
     if (!destination) {
       return;
     }
@@ -74,13 +77,22 @@ export default function TaskProgress(props) {
     if (role === 2 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
       moveTask(task, 0);
     }
+
+    if (role === 1 && destination.droppableId === "trash") {
+      deleteTaskItem(task);
+    }
     
+  }
+
+  const onBeforeCapture = () => {
+    setTrashVisible(true);
   }
 
   return (
     <div className="task-progress">
       <DragDropContext
         onDragEnd={onDragEnd}
+        onBeforeCapture={onBeforeCapture}
       >
         <div key="assigned">
           <h1>Assigned</h1>
@@ -129,7 +141,25 @@ export default function TaskProgress(props) {
             )}
           </Droppable>
         </div>
+
+        { role === 1 && (
+          <div key="trash" id="trash" className={trashVisible ? "trash--visible" : "trash--hidden"} >
+            <Droppable droppableId="trash">
+              {(provided, snapshot) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  isDraggingOver={snapshot.isDraggingOver}
+                >
+                  <h1>Delete</h1>
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
+        )} 
       </DragDropContext>
+
     </div>
   )
 }

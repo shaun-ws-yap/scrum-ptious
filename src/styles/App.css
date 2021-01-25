@@ -85,3 +85,11 @@
 .team-progress {
   flex-direction: row;
 }
+
+.trash--visible {
+  display: flex;
+}
+
+.trash--hidden {
+  display: none;
+}
