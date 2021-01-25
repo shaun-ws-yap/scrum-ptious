@@ -7,6 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 
 import FeedbackList from './FeedbackList';
 import getUserNameById from '../../helpers/getUserNameById';
+import getTaskStatus from '../../helpers/getTaskStatus';
 
 export default function EmployeeModal(props) {
   const {
@@ -33,13 +34,12 @@ export default function EmployeeModal(props) {
     submitTaskItem(taskItem);
   }
 
+  const taskInfo = getTaskStatus(status);
+
   return (<>
     <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton>
       <Modal.Title>{title}</Modal.Title>
-      { status === 2 && <span className="badge badge-warning">IN REVIEW</span> } 
-      { status === 3 && <span className="badge badge-success">COMPLETE</span> } 
-      { (status !== 3 && is_late) && <span className="badge badge-danger">LATE</span> } 
     </Modal.Header>
     <Modal.Body>
       {description}
@@ -53,13 +53,15 @@ export default function EmployeeModal(props) {
         feedbacks={submissions}
       />
     </Modal.Body>
-    {(status === 0 || status === 1) &&
-      <Modal.Footer>
-        <Button confirm variant="primary" onClick={() => handleSubmit()}>
-          Submit
-        </Button>
-      </Modal.Footer>
-    }
+    <Modal.Footer>
+      {(status === 0 || status === 1) &&
+          <Button confirm variant="primary" onClick={() => handleSubmit()}>
+            Submit
+          </Button>
+      }
+      { <span className={`badge badge-${taskInfo.type}`}>{taskInfo.status}</span> }
+      { is_late && <span className="badge badge-danger">LATE</span> } 
+    </Modal.Footer>
   </Modal>
   </>)
 }
