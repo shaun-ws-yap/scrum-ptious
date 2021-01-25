@@ -31,7 +31,7 @@ export default function TaskProgress(props) {
   for (const key in sortedTasks) {
     sortedComponents[key] = sortedTasks[key].map((task, index) => {
       return (
-        <Draggable draggableId={task.id.toString()} index={index} >
+        <Draggable draggableId={task.id + ""} index={index} >
           {(provided, snapshot) => (
             <div 
               {...provided.draggableProps}
