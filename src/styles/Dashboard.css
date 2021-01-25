@@ -94,6 +94,16 @@
   margin-bottom: 1em;
 }
 
+.task__item--in-review-late {
+  display: flex;
+  border: 5px solid pink;
+  border-radius: 20px;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+}
+
 .task__item--complete {
   display: flex;
   border: 5px solid green;

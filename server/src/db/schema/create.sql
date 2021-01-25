@@ -12,7 +12,8 @@ CREATE TABLE employees (
   email VARCHAR(255) NOT NULL,
   phone_number VARCHAR(255) NOT NULL,
   role INTEGER NOT NULL,
-  team_id INTEGER REFERENCES teams(id)
+  team_id INTEGER REFERENCES teams(id),
+  avatar VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS tasks CASCADE;
@@ -25,8 +26,8 @@ CREATE TABLE tasks (
   employee_id INTEGER NOT NULL REFERENCES employees(id) ON DELETE CASCADE,
   status INTEGER NOT NULL DEFAULT 0,
   is_viewed BOOLEAN NOT NULL DEFAULT FALSE,
-  projecttask_id INTEGER REFERENCES teams(id) NOT NULL,
-  is_late BOOLEAN NOT NULL DEFAULT FALSE
+  projecttask_id INTEGER REFERENCES teams(id) NOT NULL
+  -- is_late BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 DROP TABLE IF EXISTS submissions CASCADE;

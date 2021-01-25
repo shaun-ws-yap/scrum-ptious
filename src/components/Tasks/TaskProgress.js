@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import TaskItem from './TaskItem';
-import TaskColumns from './TaskColumns';
 import sortTasks from '../../helpers/sortTasks';
 import findTaskItemById from '../../helpers/findTaskItemById';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
@@ -98,7 +97,6 @@ export default function TaskProgress(props) {
     if (role === 1 && destination.droppableId === "trash") {
       deleteTaskItem(task);
     }
-    
   }
 
   const onBeforeCapture = () => {

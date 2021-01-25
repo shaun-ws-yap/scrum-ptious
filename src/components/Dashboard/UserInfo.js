@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DeadlineList from './DeadlineList';
+import filterDeadlineTasks from '../../helpers/filterDeadlineTasks';
 
 const roles = {
   1: "Project Manager",
@@ -8,23 +9,24 @@ const roles = {
 }
 
 export default function UserInfo(props) {
+
+  const { userInfo, tasks, teamUsers } = props;
+  const filteredTasks = filterDeadlineTasks(tasks);
+
   return (
     <div className="user-info">
-
-      { !props.userInfo && <h1>Please login with your user ID to continue</h1> }
-      { props.userInfo && ( 
+      { userInfo && ( 
         <>
         <h1>User</h1> 
-        <img src="https://randomuser.me/api/portraits/men/73.jpg" className="user-avatar"></img>
-        <h4>{props.userInfo.name} </h4>
-        <h5>{roles[props.userInfo.role]}</h5>
+        <img src={userInfo.avatar} className="user-avatar"></img>
+        <h4>{userInfo.name} </h4>
+        <h5>{roles[userInfo.role]}</h5>
         <div>
-          <DeadlineList deadlines={props.deadlines} />
+          <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
         </div>
         </>
         ) 
       }
-      
     </div>
   )
-}
+} 
