@@ -7,7 +7,7 @@ export default function DeadlineList(props) {
 
   const allDeadlines = props.deadlines.map((deadline) => {
     return (
-      <li className="task-in-progress">
+      <li className="deadlines-item">
       <DeadlineListItem
         key={deadline.id}
         title={deadline.title}
@@ -20,7 +20,7 @@ export default function DeadlineList(props) {
   })
 
   return (
-    <div className="task-progress">
+    <div className="deadlines">
       <ul>
         {allDeadlines}
       </ul>
