@@ -21,3 +21,7 @@ export default function DeadlineListItem(props) {
   )
   
 }
+
+// TO DO 
+
+// CHECK if the filtered deadlines are correct
