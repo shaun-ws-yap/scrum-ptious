@@ -123,6 +123,7 @@ function App() {
             role={role} 
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
+            submissions={submissions}
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
