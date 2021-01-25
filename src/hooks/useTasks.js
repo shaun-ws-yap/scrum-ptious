@@ -88,7 +88,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
   }
 
   return {
-    moveToInProgress,
+    moveTask,
     createTaskItem,
     editTaskItem,
     deleteTaskItem,

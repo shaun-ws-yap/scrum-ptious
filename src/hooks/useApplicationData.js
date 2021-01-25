@@ -43,8 +43,8 @@ export default function useApplicationData(socket, loginToken, setError) {
     });
 
     socket.on('error', (error, data) => {
-      console.log('error received: ', error, data);
-      setError(error);
+      console.log('error received: ', error, data.title);
+      setError(prev => ({...prev, title: data.title, message: error}));
     });
 
     return () => {

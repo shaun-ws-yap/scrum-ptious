@@ -17,7 +17,9 @@ export default function TaskItem(props) {
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
-    teamUsers
+    teamUsers,
+    error,
+    setError
   } = props;
   
   const { 
@@ -74,14 +76,13 @@ export default function TaskItem(props) {
   }
 
   function reset() {
-
+    setEditMode(false);
   }
 
   function validate() {
 
     if (newTaskData.title === "") {
       NotificationManager.warning('Title must be valid', 'Error');
-      document.getElementById("edit-task-title").focus();
       return;
     }
     if (newTaskData.description === "") {
@@ -99,10 +100,13 @@ export default function TaskItem(props) {
       document.getElementById("edit-task-date").focus();
       return;
     }
+
     editTaskItem(newTaskData)
-    NotificationManager.success(`${newTaskData.title}`, 'Updated');
-    reset();
-    setShow(false);
+    if (error.message === "") {
+      NotificationManager.success(`${newTaskData.title}`, 'Updated');
+      reset();
+      setShow(false);
+    }
   }
 
   return (

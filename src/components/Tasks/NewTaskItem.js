@@ -7,12 +7,14 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 export default function NewTaskItem(props) {
   
   // to force a bug for error messages
-  // const dateNow = new Date(); 
+  const dateNow = new Date(); 
 
   const {
     team,
     teamUsers,
     createTaskItem, 
+    error,
+    setError
   } = props;
 
   const [taskItem, setTaskItem] = useState({
@@ -20,7 +22,7 @@ export default function NewTaskItem(props) {
     title: "",
     description: "",
     employee_id: "",
-    due_date: new Date(),
+    due_date: dateNow.setDate(dateNow.getDate() + 7),
   });
 
   const [show, setShow] = useState(false);
@@ -66,10 +68,19 @@ export default function NewTaskItem(props) {
       return;
     }
 
-    createTaskItem(taskItem);
-    NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
-    reset();
-    setShow(false);
+    createTaskItem(taskItem)
+    console.log("Created");
+    console.log(props.error)
+    // if (error.title !== "" || error.message !== "") {
+    //   NotificationManager.error(`${error.title}: ${error.message}`, 'Error');
+    //   setError(prev => ({...prev, title: "", message: ""}));
+    // }
+    if (error.message === "") {
+      NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
+      reset();
+      setShow(false);
+    }
+    console.log(error)
   }
 
   return (

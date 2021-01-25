@@ -13,6 +13,8 @@ export default function Sidebar(props) {
     teamUsers,
     setMenu,
     createTaskItem,
+    error,
+    setError
   } = props
 
   const menuItems = [
@@ -40,6 +42,8 @@ export default function Sidebar(props) {
             team={userInfo.team_id}
             teamUsers={teamUsers} 
             createTaskItem={createTaskItem} 
+            error={error}
+            setError={setError}
           />
         </div>
       )}

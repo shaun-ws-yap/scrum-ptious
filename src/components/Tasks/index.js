@@ -16,6 +16,9 @@ export default function Tasks(props) {
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
+    error,
+    setError,
+    moveTask
   } = props;
 
   const [selectedTasks, setSelectedTasks] = useState(tasks);
@@ -43,6 +46,9 @@ export default function Tasks(props) {
           deleteTaskItem={deleteTaskItem} 
           editTaskItem={editTaskItem}
           submitTaskItem={submitTaskItem}
+          error={error}
+          setError={setError}
+          moveTask={moveTask}
         />
       </div>
       <div className="dashboard-bottom">
