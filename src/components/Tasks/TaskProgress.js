@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import TaskItem from './TaskItem';
-import TaskColumns from './TaskColumns';
 import sortTasks from '../../helpers/sortTasks';
 import findTaskItemById from '../../helpers/findTaskItemById';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
