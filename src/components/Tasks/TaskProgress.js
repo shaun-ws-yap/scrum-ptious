@@ -94,15 +94,11 @@ export default function TaskProgress(props) {
 
     if (role === 2 && source.droppableId === "assigned" && destination.droppableId === "inProgress") {
       console.log(task);
-      // console.log(tasks.id['2'])
       moveTask(task, 1);
-      
-      // setTasks(prev => ({...prev}))
-    }
+          }
     if (role === 2 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
       moveTask(task, 0);
     }
-
     if (role === 1 && destination.droppableId === "trash") {
       deleteTaskItem(task);
     }
