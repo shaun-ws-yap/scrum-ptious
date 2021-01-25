@@ -12,7 +12,8 @@ CREATE TABLE employees (
   email VARCHAR(255) NOT NULL,
   phone_number VARCHAR(255) NOT NULL,
   role INTEGER NOT NULL,
-  team_id INTEGER REFERENCES teams(id)
+  team_id INTEGER REFERENCES teams(id),
+  avatar VARCHAR(255)
 );
 
 DROP TABLE IF EXISTS tasks CASCADE;

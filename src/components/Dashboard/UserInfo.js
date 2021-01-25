@@ -18,7 +18,7 @@ export default function UserInfo(props) {
       { userInfo && ( 
         <>
         <h1>User</h1> 
-        <img src="https://randomuser.me/api/portraits/men/73.jpg" className="user-avatar"></img>
+        <img src={userInfo.avatar} className="user-avatar"></img>
         <h4>{userInfo.name} </h4>
         <h5>{roles[userInfo.role]}</h5>
         <div>

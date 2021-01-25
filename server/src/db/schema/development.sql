@@ -14,13 +14,14 @@ INSERT INTO employees (
   email,
   phone_number,
   role,
-  team_id
+  team_id,
+  avatar
 )
-VALUES ('Andy Lindsay', 'andy.lindsay@hotmail.com', '778-823-1085', 1, 1),
-('Shaun Yap', 'shaun.yap@outlook.com', '604-232-1850', 2, 1),
-('Kevin Li', 'kevin.li@yahoo.ca', '778-878-5678', 2, 1),
-('Clarence Chiu', 'clarence.chiu@gmail.com', '604-258-1828', 2, 1),
-('Aaron Dufall', 'aaron.dufall@hotmail.com', '604-338-1955', 2, 1);
+VALUES ('Andy Lindsay', 'andy.lindsay@hotmail.com', '778-823-1085', 1, 1, 'https://i.pravatar.cc/150?img=57'),
+('Shaun Yap', 'shaun.yap@outlook.com', '604-232-1850', 2, 1, 'https://i.pravatar.cc/150?img=60'),
+('Kevin Li', 'kevin.li@yahoo.ca', '778-878-5678', 2, 1, 'https://i.pravatar.cc/150?img=20'),
+('Clarence Chiu', 'clarence.chiu@gmail.com', '604-258-1828', 2, 1, 'https://i.pravatar.cc/150?img=56'),
+('Aaron Dufall', 'aaron.dufall@hotmail.com', '604-338-1955', 2, 1, 'https://i.pravatar.cc/150?img=7');
 
 INSERT INTO tasks (
   title,
