@@ -51,6 +51,7 @@ function App() {
   } = state;
 
   const {
+    moveToInProgress,
     createTaskItem,
     editTaskItem,
     deleteTaskItem,

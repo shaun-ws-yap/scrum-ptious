@@ -40,6 +40,10 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
   const EDIT   = 'EDIT';
   const DELETE = 'DELETE';
 
+  const moveToInProgress = taskItem => {
+    socket.emit('move task', taskItem, TASK_STATUS.IN_PROGRESS);
+  }
+
   const createTaskItem = taskItem => {
     socket.emit('tasks update', taskItem, CREATE);
   };
@@ -84,6 +88,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
   }
 
   return {
+    moveToInProgress,
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
