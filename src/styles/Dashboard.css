@@ -24,17 +24,6 @@
   flex-direction: row;
 }
 
-.task-progress {
-  display: flex;
-  border-radius: 20px;
-  background-color: #E6E6E6;
-  flex-direction: row;
-  padding: 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
-  transition: 300ms;
-}
-
 .project-progress {
   display: flex;
   border: 1px solid white;
