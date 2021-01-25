@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import Moment from 'react-moment';
 import 'moment-timezone';
 import { NotificationManager } from 'react-notifications'; 
+import getTaskStatus from '../../helpers/getTaskStatus';
 
 export default function ManagerModal(props) {
   const {
@@ -23,11 +24,14 @@ export default function ManagerModal(props) {
     employee_id, 
     title, 
     description, 
-    due_date, 
+    due_date,
+    status,
+    is_late
   } = taskItem;
 
   const [editMode, setEditMode] = useState(false);
   const [newTaskData, setNewTaskData] = useState(taskItem);
+  const taskInfo = getTaskStatus(status);
 
   function reset() {
     setEditMode(false);
@@ -87,12 +91,15 @@ export default function ManagerModal(props) {
       <Modal.Header closeButton>
         <Modal.Title>
           { editMode ? newTaskData.title : title }
-          <Button 
-            onClick={() => handleEditToggle()}
-            variant="warning"
-          > 
-            { editMode ? <>Cancel</> : <>Edit</> } 
-          </Button>
+          { status !== 3 && (
+            <Button 
+              onClick={() => handleEditToggle()}
+              variant="warning"
+            > 
+              { editMode ? <>Cancel</> : <>Edit</> } 
+            </Button>
+          )}
+          
           </Modal.Title>
       </Modal.Header>
 
@@ -154,14 +161,18 @@ export default function ManagerModal(props) {
         
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="danger" onClick={() => handleDelete()}>
+        { status !== 3 && <Button variant="danger" onClick={() => handleDelete()}>
           Delete
         </Button>
+        }
+        
         { editMode && 
           <Button confirm variant="success" onClick={() => validate()}>
             Save
           </Button> 
         }
+        { !editMode && status === 3 && <span className={`badge badge-${taskInfo.type}`}>{taskInfo.status}</span> } 
+        { status === 3 && is_late && <span className="badge badge-danger">Late</span> }
       </Modal.Footer>
     </Modal>
   )

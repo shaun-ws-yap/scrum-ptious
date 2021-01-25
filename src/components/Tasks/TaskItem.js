@@ -71,7 +71,7 @@ export default function TaskItem(props) {
         onSubmit={event => event.preventDefault()}
         className="form-group"
       >
-        { role === 1 && status !== 3 &&
+        { role === 1 &&
           <ManagerModal 
             teamUsers={teamUsers}
             taskItem={taskItem}

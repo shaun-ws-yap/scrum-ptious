@@ -17,11 +17,10 @@ export default function UserInfo(props) {
     <div className="user-info">
       { userInfo && ( 
         <>
-        <h1>User</h1> 
         <img src={userInfo.avatar} className="user-avatar"></img>
         <h4>{userInfo.name} </h4>
         <h5>{roles[userInfo.role]}</h5>
-        <div>
+        <div className="deadlines">
           <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
         </div>
         </>
