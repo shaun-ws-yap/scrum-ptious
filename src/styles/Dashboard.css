@@ -11,7 +11,6 @@
 
 .dashboard-top {
   display: flex;
-  flex-direction: row;
 }
 
 .user-info {
@@ -35,7 +34,7 @@
 .deadlines-item {
   border: 1px solid white;
   border-radius: 20px;
-  background-color: #FFBFBF;
+  background-color: #D4F3F5;
   padding: 1em;
   margin-top: 0.5em;
   list-style: none;
@@ -46,7 +45,7 @@
 .deadlines-item:hover {
   border: 1px solid white;
   border-radius: 20px;
-  background-color: #FF7171;
+  background-color: #A9F6FA;
   padding-top: 1em;
   padding-left: 1em;
   padding-right: 1em;
@@ -115,6 +114,7 @@
   border-radius: 20px;
   background-color: #E6E6E6;
   flex-direction: column;
+  text-align: center;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
@@ -125,6 +125,7 @@
   border: 1px solid white;
   border-radius: 20px;
   background-color: #B0BDFF;
+  margin-left: 12em;
   padding: 1em;
   margin-top: 0.5em;
   list-style: none;
@@ -150,18 +151,44 @@
 
 .task__item {
   display: flex;
-  border: 5px solid red;
+  border: 1px solid #E6E6E6;
   border-radius: 20px;
+  background-color: #FFBFBF;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+  transition: 300ms;
+}
+
+.task__item:hover {
+  display: flex;
+  border: 1px solid #E6E6E6;
+  border-radius: 20px;
+  background-color: #FF7171;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+  transition: 300ms;
+}
+
+.task__item--assigned {
+  display: flex;
+  border: 5px solid #B2C8FF;
+  border-radius: 20px;
+  background-color: #B2C8FF;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
 }
 
-.task__item--assigned {
+.task__item--assigned:hover {
   display: flex;
-  border: 5px solid blue;
+  border: 5px solid #6792FF;
   border-radius: 20px;
+  background-color: #6792FF;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
@@ -170,8 +197,20 @@
 
 .task__item--in-progress {
   display: flex;
-  border: 5px solid yellow;
+  border: 5px solid #E6E79C;
   border-radius: 20px;
+  background-color: #E6E79C;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+}
+
+.task__item--in-progress:hover {
+  display: flex;
+  border: 5px solid #E5E737;
+  border-radius: 20px;
+  background-color: #E5E737;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
@@ -180,8 +219,20 @@
 
 .task__item--in-review {
   display: flex;
-  border: 5px solid orange;
+  border: 5px solid #F0D58E;
   border-radius: 20px;
+  background-color: #F0D58E;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+}
+
+.task__item--in-review:hover {
+  display: flex;
+  border: 5px solid #F0BA2D;
+  border-radius: 20px;
+  background-color: #F0BA2D;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
@@ -190,8 +241,20 @@
 
 .task__item--in-review-late {
   display: flex;
-  border: 5px solid pink;
+  border: 5px solid #C4ACFC;
   border-radius: 20px;
+  background-color: #C4ACFC;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+}
+
+.task__item--in-review-late:hover {
+  display: flex;
+  border: 5px solid #8856FD;
+  border-radius: 20px;
+  background-color: #8856FD;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
@@ -200,8 +263,20 @@
 
 .task__item--complete {
   display: flex;
-  border: 5px solid green;
+  border: 5px solid #A8EEA7;
   border-radius: 20px;
+  background-color: #A8EEA7;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1em;
+}
+
+.task__item--complete:hover {
+  display: flex;
+  border: 5px solid #57DC55;
+  border-radius: 20px;
+  background-color: #57DC55;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
@@ -271,10 +346,6 @@
   border-top-right-radius:5px;
   transform:translateY(100%);
 }
-
-/* .pro-sidebar {
-  text-align: right;
-} */
 
 .pro-sidebar-header {
   display: flex;
