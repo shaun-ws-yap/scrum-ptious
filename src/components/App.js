@@ -1,56 +1,79 @@
 import '../styles/App.css';
 import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
-import axios from 'axios';
 
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
 import Chat from './Chat';
-import PerformanceReview from './Performance-Review/';
+import Submissions from './Submissions';
 import Sidebar from './Sidebar';
 import UserInfo from './Dashboard/UserInfo';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useSocket from '../hooks/useSocket';
+import useTasks from '../hooks/useTasks'
 import { taskStatus } from '../helpers/taskStatus';
+import { NotificationManager, NotificationContainer } from 'react-notifications';
 
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-notifications/lib/notifications.css';
+import 'react-tabs/style/react-tabs.css';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
 const CHAT = "Chat";
-const PERFORMANCE_REVIEW = "Performance Review"
+const SUBMISSIONS = "Submissions"
 
 function App() {
+  const [selectedMenu, setMenu] = useState(DASHBOARD);
   const [loginToken, setLoginToken] = useState(0);
   const { socket } = useSocket();
+  const [notification, setNotification] = useState(0);
+  const [error, setError] = useState({
+    title: "",
+    message: "",
+  });
 
   const { 
     state,
-    setMenu,
-    setTaskItem,
-    createTaskItem,
-    editTaskItem,
-    deleteTaskItem
-  } = useApplicationData(socket, loginToken);
+    setTasks,  
+    setSubmissions,
+  } = useApplicationData(socket, loginToken, setError);
 
   const {
-    menu,
     userTasks,
     userInfo,
-    taskItem,
     role,
     teamTasks,
     teamUsers,
-    allTasks,
-    deadlines
+    deadlines,
+    submissions
   } = state;
 
-  console.log(state);
+  const {
+    moveTask,
+    createTaskItem,
+    editTaskItem,
+    deleteTaskItem,
+    submitTaskItem,
+    giveFeedback,
+  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setNotification);
+  
+  useEffect(() => {
+    if (notification && notification === userInfo.id) {
+      NotificationManager.warning('Click to view', 'Your Tasks Have Been Updated', 5000, () => {
+        setMenu(TASKS)
+      });
+    }
+    setNotification(0);
+    // if (error.message !== "" || error.title !== "") {
+    //   NotificationManager.error(`${error.title}: ${error.message}`, 'Error');
+    //   setError(prev => ({...prev, title: "", message: ""}));
+    // }
+  }, [notification, error])
 
   if ( loginToken === 0 ) {
     return (
@@ -60,8 +83,11 @@ function App() {
     )
   }
 
+  console.log(error);
+
   return (
     <div className="container">
+      <NotificationContainer />
       <section className="sidebar">
         <img 
           alt="Scrum-ptious Logo"
@@ -70,11 +96,13 @@ function App() {
         />
         <nav className="sidebar__menu">
           <Sidebar
-            menu={menu}
-            setMenu={setMenu}
+            selectedMenu={selectedMenu}
             userInfo={userInfo}
             teamUsers={teamUsers}
-            createTaskItem={createTaskItem.bind(this)}
+            setMenu={setMenu}
+            createTaskItem={createTaskItem}
+            error={error}
+            setError={setError}
           />
         </nav>
         <button onClick={() => setLoginToken(0)}>
@@ -82,38 +110,38 @@ function App() {
         </button>
       </section>
       <section className="main">
-        { menu === DASHBOARD && 
+        { selectedMenu === DASHBOARD && 
           <Dashboard
             tasks={userTasks} 
             role={role} 
             teamTasks={teamTasks}
             teamUsers={teamUsers}
-            allTasks={allTasks}
           /> }
-        { menu === TASKS && 
+        { selectedMenu === TASKS && 
           <Tasks 
             socket={socket} 
             role={role} 
             tasks={role === 1 ? teamTasks : userTasks} 
             teamUsers={teamUsers} 
-            setTaskItem={setTaskItem} 
-            createTaskItem={createTaskItem} 
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
+            submitTaskItem={submitTaskItem}
+            error={error}
+            setError={setError}
+            moveTask={moveTask}
           />}
-        { menu === CHAT && 
+        { selectedMenu === CHAT && 
           <Chat 
             socket={socket} 
             userInfo={userInfo} 
             teamUsers={teamUsers}
           />}
-        { menu === PERFORMANCE_REVIEW &&
-        <PerformanceReview
-          teamUsers={teamUsers}
-          teamTasks={teamTasks}
-          setTaskItem={setTaskItem}
-          taskItem={taskItem}
-        />}
+        { selectedMenu === SUBMISSIONS &&
+          <Submissions
+            teamUsers={teamUsers}
+            teamTasks={teamTasks}
+            giveFeedback={giveFeedback}
+          />}
       </section>
       <section className="user__info">
         <UserInfo userInfo={userInfo} deadlines={deadlines} /> 

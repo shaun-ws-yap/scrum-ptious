@@ -1,12 +1,12 @@
 const Promise = require("bluebird");
 const { getEmployeeById, getEmployeesByTeam } = require('./employees');
+const { getAllSubmissions } = require('./submissions');
 const { 
   getTasksByEmployee,
   getTasksByTeam,
   getDeadlinesByDueDate } = require('./tasks');
 
 const getLoginData = (db, uid, callback) => {
-
   const userData = getEmployeeById(db, uid);
   
   const teamData = userData
@@ -27,11 +27,28 @@ const getLoginData = (db, uid, callback) => {
   return Promise.join(
     userData, 
     teamData, 
-    getTasksByEmployee(db, uid), 
     teamTasksData,
-    getDeadlinesByDueDate(db, uid), 
-    callback
-  );
+    getTasksByEmployee(db, uid), 
+    getDeadlinesByDueDate(db, uid),
+    getAllSubmissions(db), 
+    (
+      userData, 
+      teamData, 
+      teamTasksData, 
+      userTasksData, 
+      deadlinesData,
+      submissionsData
+    ) => {
+      const loginData = {
+        userInfo: userData.rows[0],
+        teamUsers: teamData.rows,
+        userTasks: userTasksData.rows,
+        teamTasks: teamTasksData.rows,
+        deadlines: deadlinesData.rows,
+        submissions: submissionsData.rows
+      }
+      callback(loginData);
+    });
 }
 
 module.exports = {

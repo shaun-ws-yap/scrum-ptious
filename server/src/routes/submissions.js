@@ -1,18 +1,12 @@
 const router = require("express").Router();
 
-const { saveSubmission } = require('./queries/submissions');
+const { getAllSubmissions, saveSubmission } = require('./queries/submissions');
 
 
 module.exports = (db) => {
   // Get all submissions
   router.get("/submissions", (req, res) => {
-    const queryString = `
-    SELECT
-    *
-    FROM submissions
-    ORDER BY submission_date
-    `;
-    db.query(queryString)
+    getAllSubmissions(db)
     .then(data => {
       res.json(data.rows);
     })

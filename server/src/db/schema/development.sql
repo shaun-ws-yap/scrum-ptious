@@ -57,19 +57,29 @@ INSERT INTO submissions (
   task_id
 ) 
 VALUES (
-  'LGTM!',
+  '',
   '2021-01-05 12:15:00',
-  5
+  3
 ),
 (
-  'Task is LATE. Will need revision: missing packages.',
+  '',
   '2021-01-15 12:15:00',
   4
 ),
 (
-  'Issue with creating tables. SQL query failed: missing semicolons.',
-  '2021-01-05 12:15:00',
-  2
+  '',
+  '2021-01-06 12:15:00',
+  9
+), 
+(
+  '',
+  '2021-01-07 12:15:00',
+  10
+),
+(
+  '',
+  '2021-01-08 12:15:00',
+  13
 );
 
 INSERT INTO messages (

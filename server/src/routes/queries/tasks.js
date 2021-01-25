@@ -1,3 +1,5 @@
+
+
 const getTasksByEmployee = (db, uid) => {
   const queryString = `
     SELECT *
@@ -63,14 +65,20 @@ const editTask = (db, id, taskItem) => {
       due_date = $4,
       employee_id = $5,
       projecttask_id = $6
-    WHERE id = $1;
+    WHERE id = $1
+    RETURNING *;
   `, [id, title, description, due_date, employee_id, projecttask_id])
-}
+};
 
 // Delete task by id
 const deleteTask = (db, id) => {
-  return db.query("DELETE FROM tasks WHERE id = $1", [id]);
-}
+  return db.query(`
+    DELETE 
+    FROM tasks
+    WHERE id = $1
+    RETURNING *
+  `, [id]);
+};
 
 module.exports = {
   getTasksByEmployee,

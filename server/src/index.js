@@ -11,8 +11,10 @@ const io         = require('socket.io')(http);
 
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
-const { saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
+const { getTasksByTeam, saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
 const { getLoginData } = require('./routes/queries/loginData');
+const { updateStatusAndGetTasks, submitTaskForReview, saveFeedback } = require('./routes/queries/submit-for-review');
+
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
@@ -44,14 +46,7 @@ app.use("/api", taskRoutes(db));
 // test for getting login data 
 app.get('/:id', (req, res) => {
   const userId = req.params.id
-  getLoginData(db, userId, (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
-    const loginData = {
-      userInfo: userData.rows[0],
-      teamUsers: teamData.rows,
-      userTasks: userTasksData.rows,
-      teamTasks: teamTasksData.rows,
-      deadlines: deadlinesData.rows,
-    }
+  getLoginData(db, userId, loginData => {
     res.json(loginData);
   });
 });
@@ -60,39 +55,71 @@ io.on('connection', (socket) => {
   //on login
   socket.on('user logged in', userId => {
     console.log('logged in');
-    getLoginData(db, userId, (userData, teamData, userTasksData, teamTasksData, deadlinesData) => {
-      const loginData = {
-        userInfo: userData.rows[0],
-        teamUsers: teamData.rows,
-        userTasks: userTasksData.rows,
-        teamTasks: teamTasksData.rows,
-        deadlines: deadlinesData.rows,
-      }
+    getLoginData(db, userId, loginData => {
       socket.emit('login data', loginData);
     });
   });
 
   //tasks
-  socket.on('tasks add', taskItem => {
-    io.emit('tasks update', taskItem);
-    saveTask(db, taskItem)
-      .then(data => socket.emit('tasks action saved', 'saved task ' + data.rows[0]))
-      .catch(err => socket.emit('error', 'could not save task to db: ' + err));
-  });
+  socket.on('tasks update', (taskItem, op) => {
+    const CREATE = 'CREATE';
+    const EDIT   = 'EDIT';
+    const DELETE = 'DELETE';
 
-  socket.on('tasks edit', (id, taskItem) => {
-    io.emit('tasks update');
-    editTask(db, id, taskItem)
-      .then(data => socket.emit('tasks action saved', 'edited task ' + data.rows[0]))
-      .catch(err => socket.emit('error', 'could not edit task in db: ' + err));
-  });
+    let taskOperation;
+    switch (op) {
+      case CREATE:
+        taskOperation = saveTask(db, taskItem);
+        break;
+      case EDIT:
+        taskOperation = editTask(db, taskItem.id, taskItem);
+        break;
+      case DELETE:
+        taskOperation = deleteTask(db, taskItem.id);
+        break;
+      default:
+        socket.emit('error', 'invalid operation: ' + op, taskItem);
+        return;
+    };
+    taskOperation
+      .then(data => {
+        socket.emit('tasks action saved', op, data.rows[0])
+        return getTasksByTeam(db, taskItem.projecttask_id);
+      })
+      .then(data => {
+        io.emit('tasks update', data.rows, taskItem.employee_id);
+      })
+      .catch(err => socket.emit('error', `could not perform operation: ${op}` + err, taskItem));
+  }) 
 
-  socket.on('tasks delete', id => {
-    io.emit('tasks update');
-    deleteTask(db, id)
-      .then(data => socket.emit('tasks action saved', 'deleted task' + data.rows[0]))
-      .catch(err => socket.emit('error', 'could not delete task from db: ' + err));
-  });
+  socket.on('move task', (taskItem, IN_PROGRESS) => {
+    updateStatusAndGetTasks(db, taskItem.id, IN_PROGRESS)
+      .then(taskData => {
+        socket.emit('tasks action saved', 'MOVE TO IN PROGRESS', taskItem);
+        io.emit('tasks update', taskData.rows);
+      })
+      .catch(err => socket.emit('error', `could not perform operation: MOVE` + err, taskItem));
+  })
+
+  socket.on('employee submit', submitTaskData => {
+    //save to db 
+    submitTaskForReview(db, submitTaskData)
+      .then(res => {
+        socket.emit('tasks action saved', 'SUBMIT', submitTaskData);
+        //emit to all clients
+        io.emit('submt/feedback', res);
+      })
+      .catch(err => socket.emit('error', 'could not submit task: ' + err, submitTaskData));
+  })
+
+  socket.on('feedback', feedbackData => {
+    saveFeedback(db, feedbackData)
+      .then(res => {
+        socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
+        io.emit('submt/feedback', res);
+      })
+      .catch(err => socket.emit('error', 'could not save feedback ' + err, feedbackData));
+  })
 
   //chat
   socket.on('joining msg', (username, userId) => {
@@ -109,7 +136,7 @@ io.on('connection', (socket) => {
     io.emit('chat message', messageData);
     saveMessage(db, messageData)
       .then(data => socket.emit('message saved', data.rows[0]))
-      .catch(err => socket.emit('error', 'could not save message to db: ' + err));
+      .catch(err => socket.emit('error', 'could not save message to db: ' + err, messageData));
   });
 
   socket.on('get previous messages', (time_iso, numMsg) => {
@@ -121,7 +148,7 @@ io.on('connection', (socket) => {
         //   socket.emit('get previous messages', data.rows)
         // }, 500);
       })
-      .catch(err => socket.emit('error', 'could not get previous messages: ' + err))
+      .catch(err => socket.emit('error', 'could not get previous messages: ' + err, 'no data'))
   })
 
   socket.on('disconnect', () => {

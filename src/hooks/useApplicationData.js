@@ -1,31 +1,25 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import filterTasksByUser from '../helpers/filterTasksByUser';
+import { Prev } from 'react-bootstrap/esm/PageItem';
 
-export default function useApplicationData(socket, loginToken) {
+export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
-    menu: "Dashboard",
     userInfo: {},
     role: 0,
     userTasks: [],
-    taskItem: [],
     teamUsers: [],
     teamTasks: [],
-    allTasks: [],
     deadlines: [],
-    userId: 0, // not used
-    team: 0, // not used
+    submissions: [],
   });
-
-  //const [tasks, setTasks] = useState([]);
-
-  const setMenu = menu => setState({...state, menu});
-  const setTaskItem = taskItem => setState({...state, taskItem});
   
-  // not being used
-  const setUser = userId => setState({...state, userId});
-  const setUserTasks = userTasks => setState({...state, userTasks});
-  const setTeamTasks = teamTasks => setState({...state, teamTasks});
-  const setAllTasks = allTasks => setState({...state, allTasks});
+  const setTasks = teamTasks => {
+    const userTasks = filterTasksByUser(loginToken, teamTasks);
+    setState(prev => ({...prev, teamTasks, userTasks}));
+  }
+  const setSubmissions = submissions => setState(prev => {
+    return {...prev, submissions }
+  })
 
   useEffect(() => {
     if (!loginToken) {
@@ -35,22 +29,22 @@ export default function useApplicationData(socket, loginToken) {
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
-      const { userTasks, userInfo, teamTasks, teamUsers, deadlines } = loginData;
+      const { userTasks, userInfo, teamTasks, teamUsers, deadlines, submissions } = loginData;
       setState(prev => ({ 
         ...prev, 
         userTasks, 
         userInfo, 
         teamTasks, 
-        deadlines, 
         teamUsers, 
-        allTasks: teamTasks, 
+        deadlines,
+        submissions, 
         role: userInfo.role, 
-        team: userInfo.team_id, 
       }));
     });
 
-    socket.on('error', function(error) {
-      console.log('error received: ', error);
+    socket.on('error', (error, data) => {
+      console.log('error received: ', error, data.title);
+      setError(prev => ({...prev, title: data.title, message: error}));
     });
 
     return () => {
@@ -61,64 +55,9 @@ export default function useApplicationData(socket, loginToken) {
     }
   }, [loginToken]);
 
-  function createTaskItem(taskItem) {
-    let task = {...taskItem, projecttask_id: state.userInfo.team_id }
-
-    return axios.put(`http://localhost:8080/api/tasks`, task)
-    .then(res => {
-      console.log(res.data)
-      // const id = res.data.id;
-      // task = {...task, id: id};
-      // const tmp = [...state.allTasks];
-      // tmp.push(task);
-      const newTasks = [ ...state.teamTasks, res.data ];
-      setTeamTasks(newTasks);
-    })
-    .catch(e => console.log(e));
-  }
-
-  function editTaskItem(taskItem) {
-    return axios.put(`http://localhost:8080/api/tasks/${taskItem.id}`, taskItem)
-    .then(res => {
-      const taskItemIndex = state.allTasks.findIndex(x => x.id === taskItem.id);
-      setState(prev => ({
-        ...prev,
-        teamTasks: [
-          ...state.teamTasks.slice(0, taskItemIndex),
-          Object.assign({}, state.teamTasks[taskItemIndex], taskItem),
-          ...state.teamTasks.slice(taskItemIndex + 1)
-        ],
-        allTasks: [
-          ...state.allTasks.slice(0, taskItemIndex),
-          Object.assign({}, state.allTasks[taskItemIndex], taskItem),
-          ...state.allTasks.slice(taskItemIndex + 1)
-        ]
-      }))
-    })
-    .catch(e => console.log(e));
-  }
-
-  function deleteTaskItem(id) {
-    return axios.delete(`http://localhost:8080/api/tasks/${id}`)
-    .then((res) => {
-      const tmp = state.allTasks.filter(task => task.id !== id);
-      setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}));
-    })
-    .catch(e => console.log(e));
-  }
-
   return { 
     state, 
-    setMenu, 
-    setUser, 
-    setTaskItem, 
-    createTaskItem, 
-    editTaskItem, 
-    deleteTaskItem, 
-    
-    // not being used
-    setUserTasks, 
-    setTeamTasks, 
-    setAllTasks, 
+    setTasks,  
+    setSubmissions,
   }
 }

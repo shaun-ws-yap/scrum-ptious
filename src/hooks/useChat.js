@@ -52,7 +52,6 @@ export default function useChat(socket, userInfo) {
       socket.off('get previous messages');
       socket.off('message saved');
       socket.emit('leaving msg', name, id );
-      //socket.close(); // TODO: need to ask mentor about this and useRef
     };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

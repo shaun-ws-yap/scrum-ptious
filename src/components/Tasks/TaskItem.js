@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { changeTaskStatus } from '../../helpers/taskStatus';
+import classNames from 'classnames';
 
 import { Modal, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
@@ -12,34 +13,52 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 export default function TaskItem(props) {
   const {
     role,
-    taskData,
-    setTaskItem,
-    createTaskItem,
+    taskItem,
     editTaskItem,
     deleteTaskItem,
-    teamUsers
+    submitTaskItem,
+    teamUsers,
+    error,
+    setError
   } = props;
-
+  
+  const { 
+    employee_id, 
+    title, 
+    description, 
+    due_date, 
+    creation_date, 
+    status, 
+    is_late
+  } = taskItem;
+  
   const [show, setShow] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [newTaskData, setNewTaskData] = useState(taskData);
+  const [newTaskData, setNewTaskData] = useState(taskItem);
   
-  const { id, projecttask_id, employee_id, title, description, due_date, creation_date, status } = taskData;
+  const taskClass = classNames("task__item", {
+    'task__item--assigned' : is_late === false && status === 0,
+    'task__item--in-progress' : is_late === false && status === 1,
+    'task__item--in-review' : is_late === false && status === 2,
+    'task__item--complete' : status === 3
+  });
 
   /**
    *  could store all these fn into a helper file
    * */
-  const handleShow = (props) => {
-    setTaskItem(props);
-    setShow(true);
-  }
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
-  const handleDelete = (id) => {
-    deleteTaskItem(id);
+  const handleDelete = () => {
+    console.log(taskItem);
+    deleteTaskItem(taskItem);
     setShow(false)
   };
 
-  const handleClose = () => setShow(false);
+  const handleSubmit= () => {
+    setShow(false);
+    submitTaskItem(taskItem)
+  }
 
   const handleEditToggle = () => {
     editMode ? setEditMode(false) : setEditMode(true);
@@ -53,43 +72,48 @@ export default function TaskItem(props) {
   }
 
   const getUserNameById = (id) => {
-    return teamUsers.filter(user => user.id === id)[0].name;
+    return teamUsers.find(user => user.id === id).name;
   }
 
   function reset() {
-
+    setEditMode(false);
   }
 
   function validate() {
 
     if (newTaskData.title === "") {
-      NotificationManager.error('Title must be valid', 'Error');
+      NotificationManager.warning('Title must be valid', 'Error');
       return;
     }
     if (newTaskData.description === "") {
-      NotificationManager.error('Description must be valid', 'Error');
+      NotificationManager.warning('Description must be valid', 'Error');
+      document.getElementById("edit-task-description").focus();
       return;
     }
     if (newTaskData.employee_id === "") {
-      NotificationManager.error('Employee assigned must be valid', 'Error');
+      NotificationManager.warning('Employee assigned must be valid', 'Error');
+      document.getElementById("edit-task-assign").focus();
       return;
     }
     if (newTaskData.due_date < new Date()) {
-      NotificationManager.error('Due date cannot be in the past', 'Error');
+      NotificationManager.warning('Due date cannot be in the past', 'Error');
+      document.getElementById("edit-task-date").focus();
       return;
     }
 
     editTaskItem(newTaskData)
-    NotificationManager.success(`${newTaskData.title}`, 'Updated');
-    reset();
-    setShow(false);
+    if (error.message === "") {
+      NotificationManager.success(`${newTaskData.title}`, 'Updated');
+      reset();
+      setShow(false);
+    }
   }
 
   return (
     <>
       <NotificationContainer />
-      <li
-        onClick={event => handleShow(props)}
+      <li className={taskClass}
+        onClick={event => handleShow()}
       >
         <h4>{title}</h4>
         <p>{description}</p>
@@ -102,12 +126,13 @@ export default function TaskItem(props) {
         <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
         <br />
       </li>
+
       {role === 1 && status !== 3 &&
         <form
           onSubmit={event => event.preventDefault()}
           className="form-group"
         >
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} >
             <Modal.Header closeButton>
               <Modal.Title>
                 { editMode ? newTaskData.title : title }
@@ -134,12 +159,14 @@ export default function TaskItem(props) {
                 <>
                   <label for="newTitle">Title: </label>
                   <input
-                    className="form-control"
+                    autofocus
+                    className="form-control edit-task-title"
                     value={newTaskData.title}
                     onChange={(event) => setNewTaskData(prev => ({...prev, title: event.target.value}))}
                   />
                   <label for="newDescription">Description: </label>
                   <textarea
+                    id="edit-task-description"
                     value={newTaskData.description}
                     onChange={(event) => setNewTaskData(prev => ({...prev, description: event.target.value}))}
                     type="text"
@@ -148,6 +175,7 @@ export default function TaskItem(props) {
                   />
                   <label for="assigned">Re-assign to:</label>
                   <select
+                    id="edit-task-assign"
                     name="assigned"
                     className="form-control"
                     onChange={(event) => setNewTaskData(prev => ({...prev, employee_id: event.target.value}))}
@@ -161,6 +189,7 @@ export default function TaskItem(props) {
                   </select>
                   <label for="due_date">Due date:</label>
                   <DatePicker 
+                    id="edit-task-date"
                     className="form-control" 
                     locale="en-US"
                     selected={new Date(newTaskData.due_date)} 
@@ -174,7 +203,7 @@ export default function TaskItem(props) {
               
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="danger" onClick={() => handleDelete(id)}>
+              <Button variant="danger" onClick={() => handleDelete()}>
                 Delete
               </Button>
               { editMode && 
@@ -186,7 +215,8 @@ export default function TaskItem(props) {
           </Modal>
       </form>
       }
-      {role === 2 && (taskData.status === 0 || taskData.status === 1) &&
+
+      {role === 2 && (status === 0 || status === 1) &&
         <form
           onSubmit={event => event.preventDefault()}
         >
@@ -203,7 +233,7 @@ export default function TaskItem(props) {
               <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
             </Modal.Body>
             <Modal.Footer>
-              <Button confirm variant="primary" onClick={() => props.setTaskItem(taskData.status += 1)}>
+              <Button confirm variant="primary" onClick={() => handleSubmit()}>
                 Submit
               </Button>
             </Modal.Footer>

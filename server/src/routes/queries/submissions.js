@@ -1,3 +1,14 @@
+//TODO: get by team
+const getAllSubmissions = db => {
+  const queryString = `
+  SELECT
+  *
+  FROM submissions
+  ORDER BY submission_date DESC
+  `;
+  return db.query(queryString);
+}
+
 // Create submission
 const saveSubmission = (db, submission) => {
   const queryString = `
@@ -8,3 +19,8 @@ const saveSubmission = (db, submission) => {
   const { feedback_string, submission_date, task_id } = submission;
   return db.query(queryString, [feedback_string, submission_date, task_id]);
 };
+
+module.exports = {
+  getAllSubmissions,
+  saveSubmission,
+}
