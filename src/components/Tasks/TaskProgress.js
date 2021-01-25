@@ -98,7 +98,6 @@ export default function TaskProgress(props) {
     if (role === 1 && destination.droppableId === "trash") {
       deleteTaskItem(task);
     }
-    
   }
 
   const onBeforeCapture = () => {
