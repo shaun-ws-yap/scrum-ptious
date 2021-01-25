@@ -11,7 +11,7 @@ export default function DeadlineList(props) {
     .filter(task => task.employee_id === userInfo.id)
     .map((task) => {
       return (
-        <li className="task-in-progress">
+        <li className="deadlines-item">
           <DeadlineListItem
             key={task.id}
             title={task.title}
