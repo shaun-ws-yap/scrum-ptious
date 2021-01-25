@@ -101,22 +101,22 @@ io.on('connection', (socket) => {
       .catch(err => socket.emit('error', `could not perform operation: MOVE` + err, taskItem));
   })
 
-  socket.on('employee submit', submitTaskData => {
+  socket.on('employee submit', (submitTaskData, uid) => {
     //save to db 
     submitTaskForReview(db, submitTaskData)
       .then(res => {
         socket.emit('tasks action saved', 'SUBMIT', submitTaskData);
         //emit to all clients
-        io.emit('submt/feedback', res);
+        io.emit('submt/feedback', res, uid);
       })
       .catch(err => socket.emit('error', 'could not submit task: ' + err, submitTaskData));
   })
 
-  socket.on('feedback', feedbackData => {
+  socket.on('feedback', (feedbackData, uid) => {
     saveFeedback(db, feedbackData)
       .then(res => {
         socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
-        io.emit('submt/feedback', res);
+        io.emit('submt/feedback', res, uid);
       })
       .catch(err => socket.emit('error', 'could not save feedback ' + err, feedbackData));
   })
