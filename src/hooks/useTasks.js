@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import findSubmissionByTask from '../helpers/findSubmissionByTask';
 
-export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification) {
+export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification, userInfo) {
   const TASK_STATUS = {
     ASSIGNED: 0,
     IN_PROGRESS: 1,
@@ -30,12 +30,16 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
         case 'DELETE':
           setManagerNotification(prev => ({...prev, message: task.title, title: "Task Deleted", type: "success", user: Number(loginToken) }))
           break;
+        case 'FEEDBACK':
+          setManagerNotification(prev => ({...prev, message: "Submission has been updated", title: "Feedback Sent", type: "success", user: Number(loginToken) }))
+          break;
       }
     });
 
     socket.on('submt/feedback', (result, userToAlert) => {
-      console.log(userToAlert)
-      setUserNotification(prev => ({...prev, message: "Your have new feedback", user: userToAlert, title: "Click to view", type: "info"}))
+      if (userInfo.role !== 1) {
+        setUserNotification(prev => ({...prev, message: "You have new feedback", user: userToAlert, title: "Click to view", type: "info"}))
+      }
       setTasks(result.teamTasks);
       setSubmissions(result.submissions);
     });

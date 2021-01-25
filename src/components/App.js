@@ -22,6 +22,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-notifications/lib/notifications.css';
 import 'react-tabs/style/react-tabs.css';
+import { Button } from 'react-bootstrap';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -67,7 +68,7 @@ function App() {
     deleteTaskItem,
     submitTaskItem,
     giveFeedback,
-  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification);
+  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification, userInfo);
 
 
   if ( loginToken === 0 ) {
@@ -98,9 +99,10 @@ function App() {
             setErrorNotification={setErrorNotification}
           />
         </nav>
-        <button onClick={() => setLoginToken(0)}>
+        <Button variant="outline-light"
+        onClick={() => setLoginToken(0)}>
           Log out
-        </button>
+        </Button>
       </section>
       <section className="main">
         { selectedMenu === DASHBOARD && 
@@ -123,6 +125,7 @@ function App() {
             errorNotification={errorNotification}
             setErrorNotification={setErrorNotification}
             moveTask={moveTask}
+            setTasks={setTasks}
           />}
         { selectedMenu === CHAT && 
           <Chat 

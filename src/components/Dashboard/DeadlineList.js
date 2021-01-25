@@ -11,7 +11,7 @@ export default function DeadlineList(props) {
     .filter(task => task.employee_id === userInfo.id)
     .map((task) => {
       return (
-        <li className="task-in-progress">
+        <li className="deadlines-item">
           <DeadlineListItem
             key={task.id}
             title={task.title}
@@ -29,7 +29,7 @@ export default function DeadlineList(props) {
 
   const filteredUserDeadlines = deadlines.map(task => {
     return (
-      <li className="task-in-progress">
+      <li className="deadlines-item">
         <DeadlineListItem
           key={task.id}
           title={task.title}
@@ -46,7 +46,7 @@ export default function DeadlineList(props) {
   })
 
   return (
-    <div className="task-progress">
+    <div className="deadlines">
       <ul>
         { userInfo.role === 1 ? filteredUserDeadlines : filteredUserDeadlinesByUser }
       </ul>

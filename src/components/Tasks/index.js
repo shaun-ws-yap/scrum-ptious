@@ -8,6 +8,8 @@ import TaskResource from './TaskResource';
 
 import filterTasksByUser from '../../helpers/filterTasksByUser';
 
+import '../../styles/Tasks.css';
+
 export default function Tasks(props) {
   const {
     role,
@@ -19,7 +21,8 @@ export default function Tasks(props) {
     submitTaskItem,
     error,
     setError,
-    moveTask
+    moveTask,
+    setTasks
   } = props;
 
   const [selectedTasks, setSelectedTasks] = useState(tasks);
@@ -51,6 +54,7 @@ export default function Tasks(props) {
           error={error}
           setError={setError}
           moveTask={moveTask}
+          setTasks={setTasks}
         />
       </div>
       <div className="dashboard-bottom">

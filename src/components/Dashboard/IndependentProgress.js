@@ -12,7 +12,7 @@ export default function IndependentProgress(props) {
 
 
   return (
-    <div className="task-progress">
+    <div className="independent-progress">
       <Bar
         data={{
           labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],

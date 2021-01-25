@@ -14,14 +14,14 @@ export default function MyTeamItem(props) {
   }
 
   return (
-    <li className="team-progress">
-      <button onClick={() => selectTasksByUser(member)}>
-        Test
-      </button>
-      <h4>{name}</h4>
-      <h5>{email}</h5>
-      <h5>{phone_number}</h5>
-      <h6>{roles[role]}</h6>
+    <li
+    className="team-progress"
+    onClick={() => selectTasksByUser(member)}
+    >
+        <h4>{name}</h4>
+        <h5>{email}</h5>
+        <h5>{phone_number}</h5>
+        <h6>{roles[role]}</h6>
     </li>
   )
 }
