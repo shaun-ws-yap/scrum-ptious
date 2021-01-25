@@ -2,9 +2,10 @@ import { React, useCallback, useState, useEffect, useRef } from 'react';
 import { useObserveScrollPosition } from 'react-scroll-to-bottom';
 
 import ChatLogItem from "./ChatLogItem";
+import getUserById from '../../helpers/getUserById';
 
 export default function ChatLog(props) {
-  const { messages, chatInfo, getPrevMessages } = props;
+  const { messages, chatInfo, getPrevMessages, teamUsers } = props;
 
   const [visible, setVisible] = useState(false);
   const [page, setPage] = useState(1);
@@ -48,7 +49,7 @@ export default function ChatLog(props) {
     return (
       <ChatLogItem 
         key={`${sender_id}: ${time_iso}`}
-        avatar="https://randomuser.me/api/portraits/men/73.jpg"
+        avatar={getUserById(teamUsers, sender_id).avatar}
         sender={sender} 
         message={message}
         time_locale={time_locale}

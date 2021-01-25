@@ -29,6 +29,7 @@ export default function Chat(props) {
             messages={messages} 
             chatInfo={joinMessage} 
             getPrevMessages={getPrevMessages}
+            teamUsers={teamUsers}
           />
         </ScrollToBottom>
         <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />
