@@ -89,7 +89,7 @@ io.on('connection', (socket) => {
       .then(data => {
         io.emit('tasks update', data.rows, taskItem.employee_id);
       })
-      .catch(err => socket.emit('error', `could not perform operation: ${op}` + err, taskItem));
+      .catch(err => socket.emit('error', `could not perform operation "${op}" ${err}` , taskItem));
   }) 
 
   socket.on('move task', (taskItem, IN_PROGRESS) => {

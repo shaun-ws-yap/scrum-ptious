@@ -103,11 +103,8 @@ export default function TaskItem(props) {
     }
 
     editTaskItem(newTaskData)
-    if (error.message === "") {
-      NotificationManager.success(`${newTaskData.title}`, 'Updated');
-      reset();
-      setShow(false);
-    }
+    reset();
+    setShow(false);
   }
 
   return (
@@ -197,7 +194,6 @@ export default function TaskItem(props) {
                     showTimeInput
                     onChange={(date) => onDateChange(date)}
                     dateFormat="MMMM d, yyyy h:mm aa"
-
                   />
                 </>
               ) }

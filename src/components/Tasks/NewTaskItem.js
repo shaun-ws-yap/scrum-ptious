@@ -7,7 +7,10 @@ import { NotificationContainer, NotificationManager } from 'react-notifications'
 export default function NewTaskItem(props) {
   
   // to force a bug for error messages
-  const dateNow = new Date(); 
+  const dateNow = new Date();
+  dateNow.setDate(dateNow.getDate() + 7);
+  dateNow.setHours(17); 
+  dateNow.setMinutes(0);
 
   const {
     team,
@@ -22,7 +25,7 @@ export default function NewTaskItem(props) {
     title: "",
     description: "",
     employee_id: "",
-    due_date: dateNow.setDate(dateNow.getDate() + 7),
+    due_date: dateNow,
   });
 
   const [show, setShow] = useState(false);
@@ -69,18 +72,8 @@ export default function NewTaskItem(props) {
     }
 
     createTaskItem(taskItem)
-    console.log("Created");
-    console.log(props.error)
-    // if (error.title !== "" || error.message !== "") {
-    //   NotificationManager.error(`${error.title}: ${error.message}`, 'Error');
-    //   setError(prev => ({...prev, title: "", message: ""}));
-    // }
-    if (error.message === "") {
-      NotificationManager.success(`${taskItem.title}, assigned to ${getUserNameById(taskItem.employee_id)}`, 'Created');
-      reset();
-      setShow(false);
-    }
-    console.log(error)
+    reset();
+    setShow(false);
   }
 
   return (
@@ -136,8 +129,9 @@ export default function NewTaskItem(props) {
               id="new-task-date"
               className="form-control" 
               selected={new Date(taskItem.due_date)} 
-              showTimeSelect
+              showTimeInput
               onChange={date => setTaskItem(prevTaskItem => ({...prevTaskItem, due_date: date}))}
+              dateFormat="MMMM d, yyyy h:mm aa"
             />
 
           </Modal.Body>

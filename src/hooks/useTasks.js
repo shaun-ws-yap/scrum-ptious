@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import findSubmissionByTask from '../helpers/findSubmissionByTask';
 
-export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setNotification ) {
+export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification) {
   const TASK_STATUS = {
     ASSIGNED: 0,
     IN_PROGRESS: 1,
@@ -16,11 +16,11 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
 
     socket.on('tasks update', (teamTasks, userToAlert) => {
       setTasks(teamTasks);
-      setNotification(userToAlert)
+      setUserNotification(prev => ({...prev, message: "Your tasks have updated", user: userToAlert, title: "Click to view", type: "warning"}))
     });
     
     socket.on('tasks action saved', (op, task) => {
-      console.log(op, task);
+      setManagerNotification(prev => ({...prev, message: task.title, title: "New Task Updated", type: "success", user: Number(loginToken) }))
     });
 
     socket.on('submt/feedback', result => {

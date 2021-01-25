@@ -11,6 +11,7 @@ import UserInfo from './Dashboard/UserInfo';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
+import useNotifications from '../hooks/useNotifications';
 import useSocket from '../hooks/useSocket';
 import useTasks from '../hooks/useTasks'
 import { taskStatus } from '../helpers/taskStatus';
@@ -31,8 +32,7 @@ function App() {
   const [selectedMenu, setMenu] = useState(DASHBOARD);
   const [loginToken, setLoginToken] = useState(0);
   const { socket } = useSocket();
-  const [notification, setNotification] = useState(0);
-  const [error, setError] = useState({
+  const [errorNotification, setErrorNotification] = useState({
     title: "",
     message: "",
   });
@@ -41,8 +41,8 @@ function App() {
     state,
     setTasks,  
     setSubmissions,
-  } = useApplicationData(socket, loginToken, setError);
-
+  } = useApplicationData(socket, loginToken, setErrorNotification);
+  
   const {
     userTasks,
     userInfo,
@@ -53,6 +53,13 @@ function App() {
     submissions
   } = state;
 
+  const { 
+    userNotification,
+    managerNotification,
+    setUserNotification,
+    setManagerNotification
+  } = useNotifications(userInfo, setMenu, NotificationManager);
+
   const {
     moveTask,
     createTaskItem,
@@ -60,20 +67,8 @@ function App() {
     deleteTaskItem,
     submitTaskItem,
     giveFeedback,
-  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setNotification);
-  
-  useEffect(() => {
-    if (notification && notification === userInfo.id) {
-      NotificationManager.warning('Click to view', 'Your Tasks Have Been Updated', 5000, () => {
-        setMenu(TASKS)
-      });
-    }
-    setNotification(0);
-    // if (error.message !== "" || error.title !== "") {
-    //   NotificationManager.error(`${error.title}: ${error.message}`, 'Error');
-    //   setError(prev => ({...prev, title: "", message: ""}));
-    // }
-  }, [notification, error])
+  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification);
+
 
   if ( loginToken === 0 ) {
     return (
@@ -82,8 +77,6 @@ function App() {
       </section>
     )
   }
-
-  console.log(error);
 
   return (
     <div className="container">
@@ -101,8 +94,8 @@ function App() {
             teamUsers={teamUsers}
             setMenu={setMenu}
             createTaskItem={createTaskItem}
-            error={error}
-            setError={setError}
+            errorNotification={errorNotification}
+            setErrorNotification={setErrorNotification}
           />
         </nav>
         <button onClick={() => setLoginToken(0)}>
@@ -126,8 +119,8 @@ function App() {
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
-            error={error}
-            setError={setError}
+            errorNotification={errorNotification}
+            setErrorNotification={setErrorNotification}
             moveTask={moveTask}
           />}
         { selectedMenu === CHAT && 
