@@ -5,7 +5,7 @@ import { getEmployeeName } from '../../helpers/getEmployeeName';
 
 export default function DeadlineListItem(props) {
 
-  const { title, description, due_date, creation_date, assignedTo, userInfo, teamUsers } = props;
+  const { title, description, due_date, creation_date, assignedTo, userInfo, teamUsers, is_late } = props;
 
   return (
     <li>
@@ -16,7 +16,7 @@ export default function DeadlineListItem(props) {
       <br />
       <label for="due_date">Due:</label>
       <Moment name="due_date" format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
-      <span className="badge badge-danger">LATE</span>
+      { is_late && <span className="badge badge-danger">LATE</span> }
     </li>
   )
   
