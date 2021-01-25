@@ -33,30 +33,47 @@ export default function TaskProgress(props) {
     sortedComponents[key] = sortedTasks[key].map((task, index) => {
       const draggable = task.status === 3 ? true : false;
       
-      return (
-        <Draggable draggableId={task.id + ""} index={index} isDragDisabled={draggable} >
-          {(provided, snapshot) => (
-            <div 
-              {...provided.draggableProps}
-              {...provided.dragHandleProps}
-              ref={provided.innerRef}
-              isDragging={snapshot.isDragging}
-            >
-              <TaskItem 
-                key={task.id}
-                taskItem={task}
-                role={role}
-                editTaskItem={editTaskItem}
-                deleteTaskItem={deleteTaskItem}
-                submitTaskItem={submitTaskItem}
-                teamUsers={teamUsers}
-                error={error}
-                setError={setError}
-              />
-            </div>
-          )}
-        </Draggable>
-      )
+      if (task.status !== 3) {
+        return (
+          <Draggable draggableId={task.id + ""} index={index} isDragDisabled={draggable} >
+            {(provided, snapshot) => (
+              <div 
+                {...provided.draggableProps}
+                {...provided.dragHandleProps}
+                ref={provided.innerRef}
+                isDragging={snapshot.isDragging}
+              >
+                <TaskItem 
+                  key={task.id}
+                  taskItem={task}
+                  role={role}
+                  editTaskItem={editTaskItem}
+                  deleteTaskItem={deleteTaskItem}
+                  submitTaskItem={submitTaskItem}
+                  teamUsers={teamUsers}
+                  error={error}
+                  setError={setError}
+                />
+              </div>
+            )}
+          </Draggable>
+        )
+      } else {
+        return (
+          <TaskItem 
+            key={task.id}
+            taskItem={task}
+            role={role}
+            editTaskItem={editTaskItem}
+            deleteTaskItem={deleteTaskItem}
+            submitTaskItem={submitTaskItem}
+            teamUsers={teamUsers}
+            error={error}
+            setError={setError}
+          />
+        )
+      }
+      
     })
   }
 
@@ -126,7 +143,7 @@ export default function TaskProgress(props) {
           </Droppable>
         </div>
 
-        <div key="completed">
+        {/* <div key="completed">
           <h1>Completed</h1>
           <Droppable droppableId="completed">
             {(provided, snapshot) => (
@@ -140,10 +157,10 @@ export default function TaskProgress(props) {
               </div>
             )}
           </Droppable>
-        </div>
+        </div> */}
 
         { role === 1 && (
-          <div key="trash" id="trash" className={trashVisible ? "trash--visible" : "trash--hidden"} >
+          <div key="trash" className={trashVisible ? "trash--visible" : "trash--hidden"} >
             <Droppable droppableId="trash">
               {(provided, snapshot) => (
                 <div
@@ -160,6 +177,10 @@ export default function TaskProgress(props) {
         )} 
       </DragDropContext>
 
+      <div>
+        <h1>Completed</h1>
+        { completed }
+      </div>
     </div>
   )
 }
