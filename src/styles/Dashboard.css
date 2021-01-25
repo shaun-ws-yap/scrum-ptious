@@ -3,6 +3,8 @@
   margin-top: 0.5em;
   margin-bottom: 0.5em;
   margin-left: 0.5em;
+  width: 100% !important;
+  height: 100% !important;
 }
 
 .dashboard {
@@ -20,6 +22,13 @@
   margin-right: 1em;
   padding: 1em;
   text-align: center;
+}
+
+.user-avatar {
+  border-radius: 30px;
+  height: 100px;
+  width: 100px;
+  margin-bottom: 1em;
 }
 
 .deadlines {
@@ -52,6 +61,11 @@
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
+}
+
+.employee-progress {
+  display: flex;
+  flex-direction: row;
 }
 
 .task-progress {
@@ -291,7 +305,6 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
   background-color: #2f00ff;
   text-align: center;
   border-radius: 20px;
@@ -299,6 +312,7 @@
 
 .sidebar__menu {
   flex: 1;
+  width: 15em;
 }
 
 .sidebar__menu > ul {
@@ -309,42 +323,28 @@
   list-style-type: none;
 }
 
-.sidebar-list__item > h2{
+.sidebar-list__item > h2 {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   margin-top: 0.5em;
   margin-left: 0;
-  transition: 300ms;
+  color: white;
+  background-color: #2f00ff;
+  box-shadow: inset 0 0 0 0 white;
+  transition: ease-out 0.5s;
+  outline: none;
 }
 
-.sidebar-list__item :hover {
+
+.sidebar-list__item > h2:hover {
+  color: black;
+  cursor: pointer;
+  box-shadow: inset 240px 0px 0px 0px white;
+}
+
+.sidebar-list__item--selected > h2 {
   background-color: white;
-  margin-left: 20px;
-  transition: 300ms;
-  border-radius: 50px 0px 0px 50px;
-}
-
-.sidebar-list__item--selected {
-  background-color: white;
-  border-radius: 50px 0px 0px 50px;
-  margin-left: 20px;
-}
-
-.sidebar-list__item--selected:after, .sidebar-list__item--selected:before {
-  border-right:1px solid #2f00ff;
-  content:'';
-  height:32px;
-  right:-2px;
-  position:absolute;
-  width:80px;
-}
-.sidebar-list__item--selected:after {
-  border-bottom-right-radius: 5px;
-  transform:translateY(-100%);
-}
-.sidebar-list__item--selected:before {
-  border-top-right-radius:5px;
-  transform:translateY(100%);
+  color: black;
 }
 
 .pro-sidebar-header {
@@ -358,13 +358,16 @@
   margin-left: 2em;
 }
 
-.user-avatar {
-  border-radius: 30px;
-  height: 100px;
-  width: 100px;
+.react-tabs__tab-list {
+  margin-right: 1.5em !important;
 }
 
-.employee-progress {
-  display: flex;
-  flex-direction: row;
+.react-tabs__tab {
+  transition: 300ms;
+}
+
+.react-tabs__tab:hover {
+  background-color: #E6E6E6;
+  transition: 300ms;
+  border-radius: 4px;
 }
