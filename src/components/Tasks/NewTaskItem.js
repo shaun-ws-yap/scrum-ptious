@@ -4,6 +4,8 @@ import DatePicker from "react-datepicker";
 import { Modal, Button } from 'react-bootstrap';
 import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
+import getUserNameById from '../../helpers/getUserNameById';
+
 export default function NewTaskItem(props) {
   
   // to force a bug for error messages
@@ -41,10 +43,6 @@ export default function NewTaskItem(props) {
       description: "",
       employee_id: "",
     }))
-  }
-
-  const getUserNameById = (id) => {
-    return teamUsers.filter(user => user.id === id)[0].name;
   }
 
   function validate() {

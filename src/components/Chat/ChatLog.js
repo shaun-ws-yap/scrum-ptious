@@ -6,6 +6,7 @@ import ChatLogItem from "./ChatLogItem";
 export default function ChatLog(props) {
   const { messages, chatInfo, getPrevMessages } = props;
 
+  const [visible, setVisible] = useState(false);
   const [page, setPage] = useState(1);
   const loader = useRef(null);
   const container = useRef(null);
@@ -31,18 +32,16 @@ export default function ChatLog(props) {
     }
   }, []);
 
-  // const observer = useCallback(({ scrollTop }) => {
-  //   console.log(scrollTop);
-  //   if (scrollTop < 60 ) {
-  //     setPage(prev => prev + 1);
-  //   }
-  // }, []);
-
-  // useObserveScrollPosition(observer);
-
   useEffect(() => {
     getPrevMessages();
   }, [page]);
+
+  useEffect(() => {
+    setVisible(true);
+    setTimeout(() => {
+      setVisible(false);
+    }, 2000);
+  }, [chatInfo])
 
   const messageComponents = messages.map((messageData, index) => {
     const { sender, message, sender_id, time_iso, time_locale } = messageData;
@@ -61,11 +60,13 @@ export default function ChatLog(props) {
     <div className="chat-log" ref={container}>
       <div className="loading" ref={loader}></div>
       {messageComponents}
-      <div className="chat-log-bottom">
-        <span className="clat=info">
-          {chatInfo}
-        </span>
-      </div>
+      { visible && 
+        <div className="chat-log-bottom">
+          <span className="clat=info">
+            {chatInfo}
+          </span>
+        </div>
+      }
     </div>
   )
 }
