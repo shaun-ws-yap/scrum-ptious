@@ -16,8 +16,11 @@ export default function TaskProgress(props) {
     teamUsers,
     error,
     setError,
-    moveTask
+    moveTask,
+    setTasks
   } = props;
+
+  // local states
 
   const [sortedTasks, setSortedTasks] = useState({});
   const [trashVisible, setTrashVisible] = useState(false);
@@ -35,13 +38,13 @@ export default function TaskProgress(props) {
       
       if (task.status !== 3) {
         return (
-          <Draggable draggableId={task.id + ""} index={index} isDragDisabled={draggable} >
+          <Draggable key={task.id} draggableId={"" + task.id} index={index} isDragDisabled={draggable} >
             {(provided, snapshot) => (
               <div 
+                key={task.id}
                 {...provided.draggableProps}
                 {...provided.dragHandleProps}
                 ref={provided.innerRef}
-                isDragging={snapshot.isDragging}
               >
                 <TaskItem 
                   key={task.id}
@@ -75,7 +78,6 @@ export default function TaskProgress(props) {
           />
         )
       }
-      
     })
   }
 
@@ -91,7 +93,11 @@ export default function TaskProgress(props) {
     }
 
     if (role === 2 && source.droppableId === "assigned" && destination.droppableId === "inProgress") {
+      console.log(task);
+      // console.log(tasks.id['2'])
       moveTask(task, 1);
+      
+      // setTasks(prev => ({...prev}))
     }
     if (role === 2 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
       moveTask(task, 0);
@@ -117,9 +123,10 @@ export default function TaskProgress(props) {
           <Droppable droppableId="assigned">
             {(provided, snapshot) => (
               <div 
+                key="assigned"
+                index="1"
                 ref={provided.innerRef} 
                 {...provided.droppableProps}
-                isDrggingOver={snapshot.isDraggingOver}
               >
                 { assigned }
                 {provided.placeholder}
@@ -133,9 +140,10 @@ export default function TaskProgress(props) {
           <Droppable droppableId="inProgress">
             {(provided, snapshot) => (
               <div 
+                key="inProgress"
+                index="2"
                 ref={provided.innerRef} 
                 {...provided.droppableProps}
-                isDrggingOver={snapshot.isDraggingOver}
               >
                 { inProgress }
                 {provided.placeholder}
@@ -149,9 +157,10 @@ export default function TaskProgress(props) {
             <Droppable droppableId="trash">
               {(provided, snapshot) => (
                 <div
+                  key="trash"
+                  index="3"
                   ref={provided.innerRef}
                   {...provided.droppableProps}
-                  isDraggingOver={snapshot.isDraggingOver}
                 >
                   <h1>Delete</h1>
                   {provided.placeholder}
