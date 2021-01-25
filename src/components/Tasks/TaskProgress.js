@@ -65,6 +65,9 @@ export default function TaskProgress(props) {
     if (role === 2 && res.source.droppableId === "assigned" && res.destination.droppableId === "inProgress") {
       moveToInProgress(task);
     }
+    if (role === 2 && res.source.droppableId === "inProgress" && res.destination.droppableId === "assigned") {
+      moveToAssigned(task);
+    }
   }
 
   return (
