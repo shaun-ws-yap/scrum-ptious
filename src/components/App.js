@@ -128,6 +128,7 @@ function App() {
             submitTaskItem={submitTaskItem}
             error={error}
             setError={setError}
+            moveToInProgress={moveToInProgress}
           />}
         { selectedMenu === CHAT && 
           <Chat 
@@ -136,11 +137,11 @@ function App() {
             teamUsers={teamUsers}
           />}
         { selectedMenu === SUBMISSIONS &&
-        <Submissions
-          teamUsers={teamUsers}
-          teamTasks={teamTasks}
-          giveFeedback={giveFeedback}
-        />}
+          <Submissions
+            teamUsers={teamUsers}
+            teamTasks={teamTasks}
+            giveFeedback={giveFeedback}
+          />}
       </section>
       <section className="user__info">
         <UserInfo userInfo={userInfo} deadlines={deadlines} /> 

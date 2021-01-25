@@ -15,7 +15,8 @@ export default function TaskProgress(props) {
     submitTaskItem,
     teamUsers,
     error,
-    setError
+    setError,
+    moveToInProgress,
   } = props;
 
   const [sortedTasks, setSortedTasks] = useState({});
@@ -60,8 +61,8 @@ export default function TaskProgress(props) {
 
   const onDragEnd = (res) => {
     const task = findTaskItemById(tasks, Number(res.draggableId));
-    if (res.source.droppableId === "assigned" && res.destination.droppableId === "inProgress") {
-      // submitTaskItem(...task);
+    if (role === 2 && res.source.droppableId === "assigned" && res.destination.droppableId === "inProgress") {
+      moveToInProgress(...task);
     }
   }
 
