@@ -99,10 +99,14 @@ function App() {
             setErrorNotification={setErrorNotification}
           />
         </nav>
-        <Button className="logout" variant="outline-light"
+        <span className="logout"
         onClick={() => setLoginToken(0)}>
           Log out
-        </Button>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        </span>
       </section>
       <section className="main">
         { selectedMenu === DASHBOARD && 
