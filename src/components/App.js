@@ -54,7 +54,7 @@ function App() {
   } = state;
 
   const {
-    moveToInProgress,
+    moveTask,
     createTaskItem,
     editTaskItem,
     deleteTaskItem,
@@ -128,7 +128,7 @@ function App() {
             submitTaskItem={submitTaskItem}
             error={error}
             setError={setError}
-            moveToInProgress={moveToInProgress}
+            moveTask={moveTask}
           />}
         { selectedMenu === CHAT && 
           <Chat 
