@@ -8,6 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 import FeedbackList from './FeedbackList';
 import getUserNameById from '../../helpers/getUserNameById';
 import getTaskStatus from '../../helpers/getTaskStatus';
+import { NotificationManager } from 'react-notifications';
 
 export default function EmployeeModal(props) {
   const {
@@ -30,6 +31,7 @@ export default function EmployeeModal(props) {
   } = taskItem;
 
   const handleSubmit= () => {
+    NotificationManager.success('Task sent for review', 'Submitted');
     handleClose();
     submitTaskItem(taskItem);
   }
