@@ -11,7 +11,7 @@ export default function MyTeam(props) {
 
   const teamMembers = teamUsers.map((member) => {
     return (
-    <li className="task-in-progress">
+    <li className="team-item">
     <MyTeamItem
       key={member.id}
       member={member}
@@ -22,7 +22,7 @@ export default function MyTeam(props) {
   })
 
   return (
-    <div className="task-progress">
+    <div className="team-list">
       <h1>My Team</h1>
       <ul>
       {teamMembers}

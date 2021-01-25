@@ -30,7 +30,6 @@
   padding: 1em;
   padding-left: 0;
   padding-right: 2em;
-  text-align: center;
 }
 
 .deadlines-item {
@@ -41,6 +40,7 @@
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
+  width: 400px;
 }
 
 .deadlines-item:hover {
@@ -57,11 +57,13 @@
 
 .task-progress {
   display: flex;
-  border: 1px solid white;
   border-radius: 20px;
+  background-color: #E6E6E6;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  transition: 300ms;
 }
 
 .project-progress {
@@ -106,6 +108,39 @@
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   transition: 300ms;
+}
+
+.team-list {
+  display: flex;
+  border-radius: 20px;
+  background-color: #E6E6E6;
+  flex-direction: column;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  transition: 300ms;
+}
+
+.team-item {
+  border: 1px solid white;
+  border-radius: 20px;
+  background-color: #B0BDFF;
+  padding: 1em;
+  margin-top: 0.5em;
+  list-style: none;
+  transition: 300ms;
+  width: 1000px;
+}
+
+.team-item:hover {
+  border: 1px solid white;
+  border-radius: 20px;
+  background-color: #4374FF;
+  padding: 1em;
+  margin-top: 0.5em;
+  list-style: none;
+  transition: 300ms;
+  width: 1000px;
 }
 
 .task-assigned {
