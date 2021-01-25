@@ -19,7 +19,9 @@ export default function useNotifications(userInfo, setMenu, NotificationManager)
     if (userNotification.message !== "" && userNotification.user === userInfo.id) {
       switch(userNotification.type) {
         case 'info':
-          NotificationManager.info(userNotification.message, userNotification.title);
+          NotificationManager.info(userNotification.message, userNotification.title, 5000, () => {
+            setMenu("Tasks");
+          });
           break;
         case 'success':
           NotificationManager.success(userNotification.message, userNotification.title);

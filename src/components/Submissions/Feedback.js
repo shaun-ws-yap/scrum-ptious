@@ -30,8 +30,6 @@ export default function Feedback(props) {
   }
 
   const handleSubmit = (accepted) => {
-    console.log(selectedTask, feedback.message)
-
     giveFeedback(feedback.message, selectedTask, accepted);    
     setFeedback(prev => ({...prev, message: ""}));
     setShow(false);

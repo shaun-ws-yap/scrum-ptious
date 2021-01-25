@@ -95,7 +95,7 @@ io.on('connection', (socket) => {
   socket.on('move task', (taskItem, IN_PROGRESS) => {
     updateStatusAndGetTasks(db, taskItem.id, IN_PROGRESS)
       .then(taskData => {
-        socket.emit('tasks action saved', 'MOVE TO IN PROGRESS', taskItem);
+        socket.emit('tasks action saved', 'MOVE TO IN PROGRESS', taskItem, taskItem.employee_id);
         io.emit('tasks update', taskData.rows);
       })
       .catch(err => socket.emit('error', `could not perform operation: MOVE` + err, taskItem));
@@ -114,9 +114,10 @@ io.on('connection', (socket) => {
 
   socket.on('feedback', feedbackData => {
     saveFeedback(db, feedbackData)
-      .then(res => {
+    .then(res => {
+        console.log(feedbackData)
         socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
-        io.emit('submt/feedback', res);
+        io.emit('submt/feedback', res, feedbackData.employee_id);
       })
       .catch(err => socket.emit('error', 'could not save feedback ' + err, feedbackData));
   })
