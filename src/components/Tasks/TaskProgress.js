@@ -143,22 +143,6 @@ export default function TaskProgress(props) {
           </Droppable>
         </div>
 
-        {/* <div key="completed">
-          <h1>Completed</h1>
-          <Droppable droppableId="completed">
-            {(provided, snapshot) => (
-              <div 
-                ref={provided.innerRef} 
-                {...provided.droppableProps}
-                isDrggingOver={snapshot.isDraggingOver}
-              >
-                { completed }
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div> */}
-
         { role === 1 && (
           <div key="trash" className={trashVisible ? "trash--visible" : "trash--hidden"} >
             <Droppable droppableId="trash">
