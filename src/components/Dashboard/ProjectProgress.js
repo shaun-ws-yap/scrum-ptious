@@ -14,7 +14,7 @@ export default function ProjectProgress(props) {
 
 
   return (
-    <div className="task-progress">
+    <div className="project-progress">
       <Doughnut
         data={{
           labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],

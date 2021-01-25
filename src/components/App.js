@@ -22,6 +22,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-notifications/lib/notifications.css';
 import 'react-tabs/style/react-tabs.css';
+import { Button } from 'react-bootstrap';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -98,9 +99,10 @@ function App() {
             setErrorNotification={setErrorNotification}
           />
         </nav>
-        <button onClick={() => setLoginToken(0)}>
+        <Button variant="outline-light"
+        onClick={() => setLoginToken(0)}>
           Log out
-        </button>
+        </Button>
       </section>
       <section className="main">
         { selectedMenu === DASHBOARD && 
