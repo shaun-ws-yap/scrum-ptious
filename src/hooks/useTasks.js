@@ -52,6 +52,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
   const DELETE = 'DELETE';
 
   const moveTask = (taskItem, STATUS) => {
+    taskItem.status = STATUS;
     socket.emit('move task', taskItem, STATUS);
   }
 
