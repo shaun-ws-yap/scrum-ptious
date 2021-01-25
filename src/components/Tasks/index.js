@@ -13,6 +13,7 @@ export default function Tasks(props) {
     role,
     tasks,
     teamUsers,
+    submissions,
     editTaskItem,
     deleteTaskItem,
     submitTaskItem,
@@ -43,6 +44,7 @@ export default function Tasks(props) {
           role={role} 
           tasks={selectedTasks} 
           teamUsers={teamUsers} 
+          submissions={submissions}
           deleteTaskItem={deleteTaskItem} 
           editTaskItem={editTaskItem}
           submitTaskItem={submitTaskItem}
