@@ -31,7 +31,7 @@ export default function TaskProgress(props) {
 
   for (const key in sortedTasks) {
     sortedComponents[key] = sortedTasks[key].map((task, index) => {
-      const draggable = task.status === 3 ? true : false;
+      const draggable = task.status === 3 || task.status === 2 ? true : false;
       
       if (task.status !== 3) {
         return (

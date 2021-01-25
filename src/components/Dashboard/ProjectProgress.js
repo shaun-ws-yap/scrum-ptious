@@ -39,7 +39,7 @@ export default function ProjectProgress(props) {
           title: {
             display: true,
             text: 'Project Progress',
-            fontSize: 25
+            fontSize: 25,
           },
           legend: {
             display: true,
