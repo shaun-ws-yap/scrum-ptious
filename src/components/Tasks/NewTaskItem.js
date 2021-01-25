@@ -76,6 +76,10 @@ export default function NewTaskItem(props) {
 
   return (
     <div className="create-task">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
       <p onClick={() => setShow(true)}>Create New Task</p>
 
       <NotificationContainer />
