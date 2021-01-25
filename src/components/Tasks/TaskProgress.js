@@ -60,12 +60,18 @@ export default function TaskProgress(props) {
   const { assigned, inProgress, completed } = sortedComponents;
 
   const onDragEnd = (res) => {
-    const task = findTaskItemById(tasks, Number(res.draggableId));
+    const { destination, source, draggableId, droppableId } = res;
+
+    const task = findTaskItemById(tasks, Number(draggableId));
     console.log(task);
-    if (role === 2 && res.source.droppableId === "assigned" && res.destination.droppableId === "inProgress") {
+    if (!destination) {
+      return;
+    }
+
+    if (role === 2 && source.droppableId === "assigned" && destination.droppableId === "inProgress") {
       moveTask(task, 1);
     }
-    if (role === 2 && res.source.droppableId === "inProgress" && res.destination.droppableId === "assigned") {
+    if (role === 2 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
       moveTask(task, 0);
     }
     
