@@ -72,6 +72,7 @@ const submitTaskForReview = (db, submitTaskData) => {
 }
 
 module.exports = {
+  updateStatusAndGetTasks,
   submitTaskForReview,
   saveFeedback,
 }
