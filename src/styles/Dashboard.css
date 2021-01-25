@@ -67,3 +67,22 @@
   margin-bottom: 1.5em;
   transition: 300ms;
 }
+
+.create-task {
+  margin-top: 2em;
+  background-color: #286FEA;
+  color: white;
+  font-size: 24px;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 20px;
+  transition: 300ms;
+  cursor: pointer;
+}
+
+.create-task:hover {
+  background-color: white;
+  color: black;
+  border-radius: 20px;
+  transition: 300ms;
+}

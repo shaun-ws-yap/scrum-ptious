@@ -32,7 +32,8 @@ export default function EmployeeProgress(props) {
           title: {
             display: true,
             text: props.name,
-            fontSize: 25
+            fontSize: 25,
+            fontFamily: 'Poppins'
           },
           legend: {
             display: true,

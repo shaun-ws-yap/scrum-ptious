@@ -37,7 +37,8 @@ export default function IndependentProgress(props) {
           title: {
             display: true,
             text: 'Your Progress',
-            fontSize: 25
+            fontSize: 25,
+            fontFamily: 'Poppins'
           },
           legend: {
             display: true,
