@@ -13,7 +13,7 @@ const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/sock
 const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
 const { getTasksByTeam, saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
 const { getLoginData } = require('./routes/queries/loginData');
-const { submitTaskForReview, saveFeedback } = require('./routes/queries/submit-for-review');
+const { updateStatusAndGetTasks, submitTaskForReview, saveFeedback } = require('./routes/queries/submit-for-review');
 
 const messageRoutes = require("./routes/messages");
 const employeeRoutes = require("./routes/employees");
@@ -91,6 +91,15 @@ io.on('connection', (socket) => {
       })
       .catch(err => socket.emit('error', `could not perform operation: ${op}` + err, taskItem));
   }) 
+
+  socket.on('move task', (taskItem, IN_PROGRESS) => {
+    updateStatusAndGetTasks(db, taskItem.id, IN_PROGRESS)
+      .then(taskData => {
+        socket.emit('task action saved', 'MOVE TO IN PROGRESS', taskItem);
+        io.emit('tasks update', taskData.rows);
+      })
+      .catch(err => socket.emit('error', `could not perform operation: MOVE` + err, taskItem));
+  })
 
   socket.on('employee submit', submitTaskData => {
     //save to db 
