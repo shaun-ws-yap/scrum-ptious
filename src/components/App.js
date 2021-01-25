@@ -32,13 +32,16 @@ function App() {
   const [loginToken, setLoginToken] = useState(0);
   const { socket } = useSocket();
   const [notification, setNotification] = useState(0);
-  const [error, setError] = useState("");
+  const [error, setError] = useState({
+    title: "",
+    message: "",
+  });
 
   const { 
     state,
     setTasks,  
     setSubmissions,
-  } = useApplicationData(socket, loginToken);
+  } = useApplicationData(socket, loginToken, setError);
 
   const {
     userTasks,
@@ -65,9 +68,10 @@ function App() {
       });
     }
     setNotification(0);
-    if (error) {
-      console.log(error);
-    }
+    // if (error.message !== "" || error.title !== "") {
+    //   NotificationManager.error(`${error.title}: ${error.message}`, 'Error');
+    //   setError(prev => ({...prev, title: "", message: ""}));
+    // }
   }, [notification, error])
 
   if ( loginToken === 0 ) {
@@ -77,6 +81,8 @@ function App() {
       </section>
     )
   }
+
+  console.log(error);
 
   return (
     <div className="container">
@@ -94,6 +100,8 @@ function App() {
             teamUsers={teamUsers}
             setMenu={setMenu}
             createTaskItem={createTaskItem}
+            error={error}
+            setError={setError}
           />
         </nav>
         <button onClick={() => setLoginToken(0)}>
@@ -117,6 +125,8 @@ function App() {
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
+            error={error}
+            setError={setError}
           />}
         { selectedMenu === CHAT && 
           <Chat 
