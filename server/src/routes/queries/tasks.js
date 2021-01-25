@@ -2,7 +2,9 @@
 
 const getTasksByEmployee = (db, uid) => {
   const queryString = `
-    SELECT *
+    SELECT 
+      *,
+      (due_date < NOW()) as is_late
     from tasks
     WHERE employee_id = $1
   `;
@@ -12,7 +14,9 @@ const getTasksByEmployee = (db, uid) => {
 
 const getTasksByTeam = (db, tid) => {
   const queryString = `
-    SELECT *
+    SELECT 
+      *,
+      (due_date < NOW()) as is_late
     from tasks
     WHERE projectTask_id = $1
   `;
@@ -22,9 +26,11 @@ const getTasksByTeam = (db, tid) => {
 
 const getDeadlinesByDueDate = (db, uid) => {
   const queryString = `
-    SELECT * FROM tasks
+    SELECT 
+      *,
+      (due_date < NOW()) as is_late
+    FROM tasks
     WHERE employee_id = $1
-    AND due_date > now()
   `;
 
   return db.query(queryString, [uid]);
