@@ -20,6 +20,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
     });
     
     socket.on('tasks action saved', (op, task) => {
+      console.log(op)
       switch(op) {
         case 'CREATE':
           setManagerNotification(prev => ({...prev, message: task.title, title: "Task Created", type: "success", user: Number(loginToken) }))
@@ -34,8 +35,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
     });
 
     socket.on('submt/feedback', (result, userToAlert) => {
-      console.log(userToAlert)
-      setUserNotification(prev => ({...prev, message: "Your have new feedback", user: userToAlert, title: "Click to view", type: "info"}))
+      setUserNotification(prev => ({...prev, message: "You have new feedback", user: userToAlert, title: "Click to view", type: "info"}))
       setTasks(result.teamTasks);
       setSubmissions(result.submissions);
     });
