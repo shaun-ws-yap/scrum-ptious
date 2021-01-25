@@ -99,7 +99,7 @@ function App() {
             setErrorNotification={setErrorNotification}
           />
         </nav>
-        <Button variant="outline-light"
+        <Button className="logout" variant="outline-light"
         onClick={() => setLoginToken(0)}>
           Log out
         </Button>
