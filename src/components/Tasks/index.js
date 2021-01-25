@@ -8,6 +8,8 @@ import TaskResource from './TaskResource';
 
 import filterTasksByUser from '../../helpers/filterTasksByUser';
 
+import '../../styles/Tasks.css';
+
 export default function Tasks(props) {
   const {
     role,
