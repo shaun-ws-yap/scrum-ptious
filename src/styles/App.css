@@ -165,7 +165,7 @@
   list-style-type: none;
 }
 
-/* .sidebar-list__item > h2 {
+.sidebar-list__item > h2 {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   margin-top: 0.5em;
@@ -182,7 +182,7 @@
   color: black;
   cursor: pointer;
   box-shadow: inset 320px 0px 0px 0px white;
-} */
+}
 
 .sidebar-list__item--selected > h2 {
   color: black;
@@ -190,7 +190,7 @@
   transition: 300ms;
 }
 
-.sidebar-list__item {
+/* .sidebar-list__item {
   padding-bottom: 0.5em;
   padding-top: 0.5em;
   margin-left: 0;
@@ -207,7 +207,7 @@
 .sidebar-list__item:hover {
   color: black;
   background: white;
-  /* box-shadow: 0 0 10px white, 0 0 40px white, 0 0 80px white; */
+  box-shadow: 0 0 10px white, 0 0 40px white, 0 0 80px white;
   transition-delay: 0.5s;
 }
 
@@ -240,7 +240,7 @@
 .sidebar-list__item:hover > span:nth-child(3) {
   right: 100%;
   transition: 1s;
-}
+} */
 
 .pro-sidebar-header {
   display: flex;
@@ -274,7 +274,7 @@
   font-size: 24px;
   padding-top: 0.5em;
   margin: 1em;
-  transition: 300ms;
+  transition: 0.3s;
   cursor: pointer;
   position: relative;
   text-decoration: none;
@@ -286,11 +286,10 @@
 }
 
 .create-task:hover {
-  transition: 300ms;
   color: black;
   background: white;
   box-shadow: 0 0 10px white, 0 0 40px white, 0 0 80px white;
-  transition-delay: 1.75s;
+  transition-delay: 0.6s;
   border-radius: 6px;
 }
 
@@ -313,20 +312,6 @@
   transition-delay: 0.25s;
 }
 
-.create-task > span:nth-child(2) {
-  top: -100%;
-  right: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg,transparent,white);
-}
-
-.create-task:hover > span:nth-child(2) {
-  top: 100%;
-  transition: 1s;
-  transition-delay: 0.5s;
-}
-
 .create-task > span:nth-child(3) {
   bottom: 0;
   right: -100%;
@@ -338,21 +323,7 @@
 .create-task:hover > span:nth-child(3) {
   right: 100%;
   transition: 1s;
-  transition-delay: 0.75s;
-}
-
-.create-task > span:nth-child(4) {
-  bottom: -100%;
-  left: 0;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(360deg,transparent,white);
-}
-
-.create-task:hover > span:nth-child(4) {
-  bottom: 100%;
-  transition: 1s;
-  transition-delay: 1s;
+  transition-delay: 0.25s;
 }
 
 .logout {
@@ -370,7 +341,7 @@
   background-color: #286FEA;
   color: white;
   padding-top: 1.5em;
-  transition: 300ms;
+  transition: 0.3s;
 }
 
 .logout:hover {
@@ -382,7 +353,7 @@
   color: black;
   background: red;
   box-shadow: 0 0 10px red, 0 0 40px red, 0 0 80px red;
-  transition-delay: 1.75s;
+  transition-delay: 0.8s;
   border-radius: 6px;
   padding-top: 1.5em;
 }
@@ -402,8 +373,8 @@
 
 .logout:hover > span:nth-child(1) {
   left: 100%;
-  transition: 1s;
-  transition-delay: 0.25s;
+  transition: 0.5s;
+  transition-delay: 0.2s;
 }
 
 .logout > span:nth-child(2) {
@@ -416,8 +387,8 @@
 
 .logout:hover > span:nth-child(2) {
   top: 100%;
-  transition: 1s;
-  transition-delay: 0.5s;
+  transition: 0.5s;
+  transition-delay: 0.4s;
 }
 
 .logout > span:nth-child(3) {
@@ -430,8 +401,8 @@
 
 .logout:hover > span:nth-child(3) {
   right: 100%;
-  transition: 1s;
-  transition-delay: 0.75s;
+  transition: 0.5s;
+  transition-delay: 0.2s;
 }
 
 .logout > span:nth-child(4) {
@@ -444,6 +415,6 @@
 
 .logout:hover > span:nth-child(4) {
   bottom: 100%;
-  transition: 1s;
-  transition-delay: 1s;
+  transition: 0.5s;
+  transition-delay: 0.4s;
 }
