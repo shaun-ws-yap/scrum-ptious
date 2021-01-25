@@ -77,7 +77,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
       },
       taskItem: toSubmit
     }
-    socket.emit('employee submit', submitTaskData);
+    socket.emit('employee submit', submitTaskData, 1);
   };
 
   const giveFeedback = (message, task, accepted) => {
@@ -95,7 +95,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
       status: accepted ? 3 : 1
     }
 
-    socket.emit('feedback', {feedback, taskItem});
+    socket.emit('feedback', {feedback, taskItem}, taskItem.employee_id);
   }
 
   return {
