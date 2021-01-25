@@ -77,11 +77,9 @@ export default function ManagerModal(props) {
     }
 
     editTaskItem(newTaskData)
-    if (error.message === "") {
-      NotificationManager.success(`${newTaskData.title}`, 'Updated');
-      reset();
-      handleClose();
-    }
+    reset();
+    handleClose();
+    
   }
 
   return (
