@@ -20,7 +20,7 @@ export default function Tasks(props) {
     deleteTaskItem,
     submitTaskItem,
     error,
-    setError,
+    setErrorNotification,
     moveTask,
     setTasks
   } = props;
@@ -52,7 +52,7 @@ export default function Tasks(props) {
           editTaskItem={editTaskItem}
           submitTaskItem={submitTaskItem}
           error={error}
-          setError={setError}
+          setErrorNotification={setErrorNotification}
           moveTask={moveTask}
           setTasks={setTasks}
         />
