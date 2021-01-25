@@ -123,6 +123,7 @@ function App() {
             errorNotification={errorNotification}
             setErrorNotification={setErrorNotification}
             moveTask={moveTask}
+            setTasks={setTasks}
           />}
         { selectedMenu === CHAT && 
           <Chat 
