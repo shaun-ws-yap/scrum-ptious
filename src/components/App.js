@@ -67,7 +67,7 @@ function App() {
     deleteTaskItem,
     submitTaskItem,
     giveFeedback,
-  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification);
+  } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification, userInfo);
 
 
   if ( loginToken === 0 ) {
