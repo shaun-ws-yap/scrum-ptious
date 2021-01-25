@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import findSubmissionByTask from '../helpers/findSubmissionByTask';
 
-export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setNotification ) {
+export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification) {
   const TASK_STATUS = {
     ASSIGNED: 0,
     IN_PROGRESS: 1,
@@ -16,15 +16,26 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
 
     socket.on('tasks update', (teamTasks, userToAlert) => {
       setTasks(teamTasks);
-      setNotification(userToAlert)
+      setUserNotification(prev => ({...prev, message: "Your tasks have updated", user: userToAlert, title: "Click to view", type: "warning"}))
     });
     
     socket.on('tasks action saved', (op, task) => {
-      console.log(op, task);
+      switch(op) {
+        case 'CREATE':
+          setManagerNotification(prev => ({...prev, message: task.title, title: "Task Created", type: "success", user: Number(loginToken) }))
+          break;
+        case 'EDIT':
+          setManagerNotification(prev => ({...prev, message: task.title, title: "Task Updated", type: "success", user: Number(loginToken) }))
+          break;
+        case 'DELETE':
+          setManagerNotification(prev => ({...prev, message: task.title, title: "Task Deleted", type: "success", user: Number(loginToken) }))
+          break;
+      }
     });
 
-    socket.on('submt/feedback', result => {
-      console.log(result);
+    socket.on('submt/feedback', (result, userToAlert) => {
+      console.log(userToAlert)
+      setUserNotification(prev => ({...prev, message: "Your have new feedback", user: userToAlert, title: "Click to view", type: "info"}))
       setTasks(result.teamTasks);
       setSubmissions(result.submissions);
     });

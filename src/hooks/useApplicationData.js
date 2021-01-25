@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import filterTasksByUser from '../helpers/filterTasksByUser';
-import { Prev } from 'react-bootstrap/esm/PageItem';
+// import { Prev } from 'react-bootstrap/esm/PageItem';
 
 export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
@@ -43,7 +43,6 @@ export default function useApplicationData(socket, loginToken, setError) {
     });
 
     socket.on('error', (error, data) => {
-      console.log('error received: ', error, data.title);
       setError(prev => ({...prev, title: data.title, message: error}));
     });
 
@@ -54,6 +53,7 @@ export default function useApplicationData(socket, loginToken, setError) {
       }
     }
   }, [loginToken]);
+
 
   return { 
     state, 
