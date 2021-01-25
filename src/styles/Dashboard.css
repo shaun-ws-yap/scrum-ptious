@@ -331,7 +331,7 @@
   color: white;
   background-color: #2f00ff;
   box-shadow: inset 0 0 0 0 white;
-  transition: ease-out 0.5s;
+  transition: 0.3s all ease;
   outline: none;
 }
 
@@ -343,7 +343,9 @@
 }
 
 .sidebar-list__item--selected > h2 {
+  margin-left: 20px;
   background-color: white;
+  border-radius: 20px 0px 0px 20px;
   color: black;
 }
 
