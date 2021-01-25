@@ -15,7 +15,8 @@ export default function DeadlineListItem(props) {
       <Moment name="creation_date" format="Do MMM YYYY h:mm A" >{creation_date}</Moment> 
       <br />
       <label for="due_date">Due:</label>
-      <Moment name="due_date" format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
+      <Moment name="due_date" format="Do MMM YYYY h:mm A" >{due_date}</Moment>
+      <br />
       { is_late && <span className="badge badge-danger">LATE</span> }
     </li>
   )

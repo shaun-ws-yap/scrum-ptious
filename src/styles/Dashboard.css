@@ -67,3 +67,8 @@
   margin-bottom: 1.5em;
   transition: 300ms;
 }
+
+.badge-danger {
+  margin: 0.5em;
+  font-size: 20px !important;
+}
