@@ -9,6 +9,8 @@ export default function Submissions(props) {
     teamUsers, 
     teamTasks, 
     giveFeedback,
+    setUserNotification,
+    user
   } = props;
   
   const [selectedTask, setSelectedTask] = useState({});
@@ -31,6 +33,8 @@ export default function Submissions(props) {
           show={show}
           setShow={setShow}
           giveFeedback={giveFeedback}
+          setUserNotification={setUserNotification}
+          user={user}
         />
       </div>
     </div>

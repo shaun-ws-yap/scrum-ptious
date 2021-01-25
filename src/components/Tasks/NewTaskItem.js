@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import DatePicker from "react-datepicker";
 import { Modal, Button } from 'react-bootstrap';
-import { NotificationContainer, NotificationManager } from 'react-notifications'; 
 
 import getUserNameById from '../../helpers/getUserNameById';
 
@@ -19,7 +18,7 @@ export default function NewTaskItem(props) {
     teamUsers,
     createTaskItem, 
     error,
-    setError
+    setErrorNotification
   } = props;
 
   const [taskItem, setTaskItem] = useState({
@@ -49,26 +48,25 @@ export default function NewTaskItem(props) {
     const { title, description, employee_id, due_date } = taskItem;
 
     if (title === "") {
-      NotificationManager.warning('Title must be valid', 'Error');
+      setErrorNotification(prev => ({...prev, title: "Error", message: "Title must be valid"}))
       document.getElementById("new-task-title").focus();
       return;
     }
     if (description === "") {
-      NotificationManager.warning('Description must be valid', 'Error');
+      setErrorNotification(prev => ({...prev, title: "Error", message: "Description must be valid"}))
       document.getElementById("new-task-description").focus();
       return;
     }
     if (employee_id === "") {
-      NotificationManager.warning('Employee assigned must be valid', 'Error');
+      setErrorNotification(prev => ({...prev, title: "Error", message: "Employee assigned must be valid"}))
       document.getElementById("new-task-assign").focus();
       return;
     }
     if (due_date < new Date()) {
-      NotificationManager.warning('Due date cannot be in the past', 'Error');
+      setErrorNotification(prev => ({...prev, title: "Error", message: "Due date cannot be in the past"}))
       document.getElementById("new-task-date").focus();
       return;
     }
-
     createTaskItem(taskItem)
     reset();
     setShow(false);
@@ -78,7 +76,6 @@ export default function NewTaskItem(props) {
     <div>
       <span className="new-task-btn" onClick={() => setShow(true)}><i class="fas fa-plus new-task-btn"></i> New Task</span>
 
-      <NotificationContainer />
       <form 
         className="form-group"
         onSubmit={event => event.preventDefault()}
