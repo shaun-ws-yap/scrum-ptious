@@ -221,7 +221,7 @@
   background-color: #286FEA;
   color: white;
   font-size: 24px;
-  padding: 1em;
+  padding-top: 0.5em;
   margin: 1em;
   transition: 300ms;
   cursor: pointer;
