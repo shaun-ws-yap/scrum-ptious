@@ -40,8 +40,8 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
   const EDIT   = 'EDIT';
   const DELETE = 'DELETE';
 
-  const moveToInProgress = taskItem => {
-    socket.emit('move task', taskItem, taskItem.status);
+  const moveTask = (taskItem, STATUS) => {
+    socket.emit('move task', taskItem, STATUS);
   }
 
   const createTaskItem = taskItem => {
