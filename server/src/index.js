@@ -95,7 +95,7 @@ io.on('connection', (socket) => {
   socket.on('move task', (taskItem, IN_PROGRESS) => {
     updateStatusAndGetTasks(db, taskItem.id, IN_PROGRESS)
       .then(taskData => {
-        socket.emit('task action saved', 'MOVE TO IN PROGRESS', taskItem);
+        socket.emit('tasks action saved', 'MOVE TO IN PROGRESS', taskItem);
         io.emit('tasks update', taskData.rows);
       })
       .catch(err => socket.emit('error', `could not perform operation: MOVE` + err, taskItem));
