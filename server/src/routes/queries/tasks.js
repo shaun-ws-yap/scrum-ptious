@@ -36,20 +36,6 @@ const getDeadlinesByDueDate = (db, uid) => {
   return db.query(queryString, [uid]);
 }
 
-// SELECT 
-// id, 
-// title, 
-// description, 
-// to_char(creation_date at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as creation_date,
-// to_char(due_date at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as due_date,
-// employee_id, 
-// status, 
-// is_viewed, 
-// projecttask_id, 
-// is_late 
-// from tasks
-// WHERE projectTask_id = $1
-
 // Create and edit task
 const saveTask = (db, taskItem) => {
   const queryString = `

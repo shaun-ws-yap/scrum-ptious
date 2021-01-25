@@ -144,7 +144,7 @@ function App() {
           />}
       </section>
       <section className="user__info">
-        <UserInfo userInfo={userInfo} deadlines={deadlines} /> 
+        <UserInfo userInfo={userInfo} tasks={teamTasks} teamUsers={teamUsers} /> 
       </section>
     </div>
   );

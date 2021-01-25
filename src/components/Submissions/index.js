@@ -10,6 +10,7 @@ export default function Submissions(props) {
     teamTasks, 
     giveFeedback,
   } = props;
+  
   const [selectedTask, setSelectedTask] = useState({});
   const [show, setShow] = useState(false);
 

@@ -49,7 +49,7 @@ export default function useApplicationData(socket, loginToken, setError) {
 
     return () => {
       if (!loginToken) {
-        socket.off('login data');
+        socket.off('login data'); 
         socket.off('error');
       }
     }
