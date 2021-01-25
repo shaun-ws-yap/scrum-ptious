@@ -22,7 +22,7 @@ module.exports = (db) => {
   // Get all tasks
   router.get("/tasks", (req, res) => {
     const queryString = `
-    SELECT id, title, description, (creation_date at time zone 'PST8PDT') as creation_date, (due_date at time zone 'PST8PDT') as due_date, employee_id, status, is_viewed, projecttask_id, is_late from tasks
+    SELECT id, title, description, (creation_date at time zone 'PST8PDT') as creation_date, (due_date at time zone 'PST8PDT') as due_date, employee_id, status, is_viewed, projecttask_id from tasks
     `;
 
     db.query(queryString)
