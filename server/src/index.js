@@ -117,7 +117,7 @@ io.on('connection', (socket) => {
     .then(res => {
         console.log(feedbackData)
         socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
-        io.emit('submt/feedback', res, feedbackData.employee_id);
+        io.emit('submt/feedback', res);
       })
       .catch(err => socket.emit('error', 'could not save feedback ' + err, feedbackData));
   })
