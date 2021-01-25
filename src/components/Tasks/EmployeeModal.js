@@ -25,6 +25,7 @@ export default function EmployeeModal(props) {
     description, 
     due_date,
     status,
+    is_late
   } = taskItem;
 
   const handleSubmit= () => {
@@ -36,6 +37,9 @@ export default function EmployeeModal(props) {
     <Modal show={show} onHide={handleClose}>
     <Modal.Header closeButton>
       <Modal.Title>{title}</Modal.Title>
+      { status === 2 && <span className="badge badge-warning">IN REVIEW</span> } 
+      { status === 3 && <span className="badge badge-success">COMPLETE</span> } 
+      { (status !== 3 && is_late) && <span className="badge badge-danger">LATE</span> } 
     </Modal.Header>
     <Modal.Body>
       {description}
@@ -43,7 +47,7 @@ export default function EmployeeModal(props) {
     <Modal.Body>
       <p>Assigned to: {getUserNameById(teamUsers, employee_id)}</p>
       <label for="viewMode-due_date">Due on: </label>
-      <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
+      <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment>
       <FeedbackList
         taskId={id}
         feedbacks={submissions}
