@@ -217,6 +217,8 @@
   color: black;
   background: white;
   transition: 300ms;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 /* .sidebar-list__item {
@@ -270,18 +272,6 @@
   right: 100%;
   transition: 1s;
 } */
-
-.pro-sidebar-header {
-  display: flex;
-  justify-content: center;
-}
-
-.pro-inner-item {
-  display: flex;
-  align-content: flex-end;
-  margin-left: 2em;
-}
-
 .react-tabs__tab-list {
   margin-right: 1.5em !important;
 }
@@ -379,7 +369,7 @@
   margin-left: 2.5em;
   margin-bottom: 2em;
   transition: 300ms;
-  color: black;
+  color: white;
   background: red;
   box-shadow: 0 0 10px red, 0 0 40px red, 0 0 80px red;
   transition-delay: 0.5s;

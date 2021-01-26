@@ -150,4 +150,6 @@
 .react-tabs__tab:hover {
   border-color: #286FEA !important;
   background-color: white;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
 }

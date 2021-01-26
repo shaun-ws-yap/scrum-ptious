@@ -55,7 +55,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding: 1em;
-  margin-right: 1.5em;
+  margin: 0.5em 0.5em;
   margin-bottom: 1em;
   transition: 300ms;
   cursor: pointer;
