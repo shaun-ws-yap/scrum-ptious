@@ -18,7 +18,7 @@
 .user__info {
   position: fixed;
   display: flex;
-  background-color: #E6E6E6;
+  background-color: rgba(229, 233, 236, 0.7);
   border-radius: 20px;
   text-align: center;
   height: 100%;
