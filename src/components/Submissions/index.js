@@ -20,7 +20,7 @@ export default function Submissions(props) {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-top">
+      <div className="submissions">
         <SubmissionList
           teamUsers={teamUsers}
           teamTasks={teamTasks}
@@ -28,7 +28,7 @@ export default function Submissions(props) {
           setShow={setShow}
         />
       </div>
-      <div className="dashboard-bottom">
+      <div>
         <Feedback
           teamUsers={teamUsers}
           selectedTask={selectedTask}

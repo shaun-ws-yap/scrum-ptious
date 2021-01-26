@@ -46,10 +46,8 @@ export default function DeadlineList(props) {
   })
 
   return (
-    <div>
-      <ul>
-        { userInfo.role === 1 ? filteredUserDeadlines : filteredUserDeadlinesByUser }
-      </ul>
-    </div>
+    <ul className="deadline-ul">
+      { userInfo.role === 1 ? filteredUserDeadlines : filteredUserDeadlinesByUser }
+    </ul>
   )
 }

@@ -1,8 +1,14 @@
+.submissions {
+  display: flex;
+  height: 100vh;
+  width: 100vh;
+}
+
 .submissions-list {
   display: flex;
   border-radius: 20px;
   background-color: #E6E6E6;
-  flex-direction: row;
+  flex-direction: column;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
