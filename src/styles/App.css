@@ -120,10 +120,9 @@
   flex-direction: column;
   background-color: white;
   border-radius: 20px;
-  padding: 1em;
-  padding-left: 0;
-  padding-right: 2em;
-  height: 80vh;
+  padding: 0.5em;
+  padding-right: 0;
+  height: 83vh;
   overflow: auto;
 }
 
@@ -135,20 +134,33 @@
   border: 1px solid white;
   border-radius: 20px;
   background-color: #D4F3F5;
-  padding: 1em;
+  padding: 0.5em;
+  padding-right: 0;
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
-  width: 400px;
+  width: 15em;
+}
+
+.deadlines-item > li > h5 {
+  font-size: 1rem;
+}
+
+.deadlines-item > li > label {
+  font-size: 0.8rem;
+}
+
+.deadline-ul {
+  padding: 0;
+  margin: 0;
 }
 
 .deadlines-item:hover {
   border: 1px solid white;
   border-radius: 20px;
   background-color: #A9F6FA;
-  padding-top: 1em;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding: 0.5em;
+  padding-right: 0;
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
