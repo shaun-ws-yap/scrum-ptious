@@ -7,7 +7,6 @@
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   text-align: center;
-  max-height: 50vh;
   overflow: hidden;
 }
 
@@ -23,7 +22,6 @@
   margin-bottom: 1.5em;
   transition: 300ms;
   align-content: center;
-  max-height: 50vh;
   overflow: auto;
 }
 
@@ -208,10 +206,12 @@
 
 .task-inprogress {
   width: 33%;
+  overflow: auto;
 }
 
 .task-completed {
   width: 33%;
+  overflow: auto;
 }
 
 .task-droppable-inprogress {

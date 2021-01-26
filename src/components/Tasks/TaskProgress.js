@@ -122,7 +122,7 @@ export default function TaskProgress(props) {
                 key="assigned"
                 index="1"
                 ref={provided.innerRef} 
-                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'lightgray'}}
+                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'white'}}
                 {...provided.droppableProps}
               >
                 { assigned }
