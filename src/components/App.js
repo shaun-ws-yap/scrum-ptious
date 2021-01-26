@@ -70,6 +70,13 @@ function App() {
     giveFeedback,
   } = useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification, userInfo);
 
+  useEffect(() => {
+    if (errorNotification.message !== "") {
+      NotificationManager.error(errorNotification.title, errorNotification.message);
+      setErrorNotification(prev => ({...prev, title: "", message: ""}))
+    }
+  }, [errorNotification])
+
 
   if ( loginToken === 0 ) {
     return (
@@ -126,7 +133,6 @@ function App() {
             deleteTaskItem={deleteTaskItem} 
             editTaskItem={editTaskItem}
             submitTaskItem={submitTaskItem}
-            errorNotification={errorNotification}
             setErrorNotification={setErrorNotification}
             moveTask={moveTask}
             setTasks={setTasks}
@@ -142,6 +148,8 @@ function App() {
             teamUsers={teamUsers}
             teamTasks={teamTasks}
             giveFeedback={giveFeedback}
+            setUserNotification={setUserNotification}
+            user={userInfo}
           />}
       </section>
       <section className="user__info">

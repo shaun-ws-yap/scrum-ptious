@@ -8,13 +8,13 @@ export default function MembersList(props) {
   const { teamUsers, onlineUsers } = props;
 
   const memberComponents = teamUsers.map(member => {
-    const {id, name, role} = member;
+    const {id, name, role, avatar} = member;
     return (
       <MembersListItem 
         key={id}
         name={name} 
         role={roles[role-1]}
-        avatar="https://randomuser.me/api/portraits/men/73.jpg"
+        avatar={avatar}
         online={onlineUsers.includes(id)}
       />
     );

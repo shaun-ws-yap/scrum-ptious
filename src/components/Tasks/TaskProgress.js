@@ -15,7 +15,7 @@ export default function TaskProgress(props) {
     submitTaskItem,
     teamUsers,
     error,
-    setError,
+    setErrorNotification,
     moveTask,
     setTasks
   } = props;
@@ -56,7 +56,7 @@ export default function TaskProgress(props) {
                   submitTaskItem={submitTaskItem}
                   teamUsers={teamUsers}
                   error={error}
-                  setError={setError}
+                  setErrorNotification={setErrorNotification}
                 />
               </div>
             )}
@@ -74,7 +74,7 @@ export default function TaskProgress(props) {
             submitTaskItem={submitTaskItem}
             teamUsers={teamUsers}
             error={error}
-            setError={setError}
+            setErrorNotification={setErrorNotification}
           />
         )
       }

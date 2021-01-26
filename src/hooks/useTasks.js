@@ -31,15 +31,16 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
           setManagerNotification(prev => ({...prev, message: task.title, title: "Task Deleted", type: "success", user: Number(loginToken) }))
           break;
         case 'FEEDBACK':
-          setManagerNotification(prev => ({...prev, message: "Submission has been updated", title: "Feedback Sent", type: "success", user: Number(loginToken) }))
+          setManagerNotification(prev => ({...prev, message: "Submission Updated", title: "Feedback Sent", type: "success", user: Number(loginToken) }))
+          break;
+        case 'MOVE':
+          setUserNotification(prev => ({...prev, message: task.title, user: Number(loginToken), title: "Task Moved", type: "success"}))
           break;
       }
     });
 
     socket.on('submt/feedback', (result, userToAlert) => {
-      if (userInfo.role !== 1) {
-        setUserNotification(prev => ({...prev, message: "You have new feedback", user: userToAlert, title: "Click to view", type: "info"}))
-      }
+      setUserNotification(prev => ({...prev, message: "You have task updates", user: userToAlert, title: "Submission Updated", type: "info"}))
       setTasks(result.teamTasks);
       setSubmissions(result.submissions);
     });
