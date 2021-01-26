@@ -11,11 +11,7 @@ export default function SidebarItem(props) {
       className={menuClass}
       onClick={() => props.setMenu(props.name)}
     >
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <h2>{props.name}</h2>
+      <h3>{props.name}</h3>
     </li>
   )
 }
