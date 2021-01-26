@@ -1,4 +1,6 @@
 import { React, useState } from 'react';
+import TextareaAutosize from 'react-textarea-autosize';
+
 
 export default function InputBox(props) {
   const { sendMessage } = props;
@@ -18,13 +20,17 @@ export default function InputBox(props) {
         autoComplete="off"
         onSubmit={e => submitForm(e)}
       >
-        <textarea 
+        <TextareaAutosize 
           className="chat-input"
           name="msg"
           type="text"
           placeholder="Your message"
           value={message}
           onChange={e => setMessage(e.target.value)}
+          onKeyPress={e => {
+            if(e.key === 'Enter')
+               submitForm(e);
+            }}
         />
         <button className="chat-send" type="submit"><i class="material-icons">send</i></button>
       </form>
