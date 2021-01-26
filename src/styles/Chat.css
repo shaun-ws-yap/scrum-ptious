@@ -1,11 +1,9 @@
 .chat-container {
   display: flex;
   flex-direction: row;
-  margin: 3em 5em 3em 5em;
   height: 75vh;
   width: 50vw;
-  margin-left: auto;
-  margin-top: 10vh;
+  margin: auto 20vw;
 }
 
 .chat-left {

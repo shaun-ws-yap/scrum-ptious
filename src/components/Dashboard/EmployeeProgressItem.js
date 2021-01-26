@@ -1,6 +1,6 @@
 import React from 'react';
  
-import { Doughnut, Bar } from 'react-chartjs-2';
+import { Doughnut, Bar, Line } from 'react-chartjs-2';
 import { TabPanel } from 'react-tabs';
  
 export default function EmployeeProgress(props) {
@@ -8,7 +8,7 @@ export default function EmployeeProgress(props) {
 
   return (
     <div className="employee-progress">
-      <Bar
+      <Line
         data={{
           labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],
           datasets: [
