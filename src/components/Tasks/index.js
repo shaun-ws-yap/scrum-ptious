@@ -42,7 +42,7 @@ export default function Tasks(props) {
 
   return (
     <div className='dashboard'>
-      <div className="dashboard-top">
+      <div className="task-dashboard-top">
         <TaskProgress 
           role={role} 
           tasks={selectedTasks} 
@@ -57,7 +57,7 @@ export default function Tasks(props) {
           setTasks={setTasks}
         />
       </div>
-      <div className="dashboard-bottom">
+      <div className="task-dashboard-bottom">
         { role === 1 && 
           <MyTeam 
             teamUsers={teamUsers} 

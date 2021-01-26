@@ -3,6 +3,8 @@ body {
   font-family: 'Poppins', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 code {
