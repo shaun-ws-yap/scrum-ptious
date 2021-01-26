@@ -18,7 +18,7 @@
 .user__info {
   position: fixed;
   display: flex;
-  background-color: #E6E6E6;
+  background-color: rgba(229, 233, 236, 0.7);
   border-radius: 20px;
   text-align: center;
   height: 100%;
@@ -59,26 +59,29 @@
   display: flex;
   width: 100%;
   border: 1px solid white;
-  border-radius: 20px;
+  border-radius: 25px;
+  background-color: white;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   transition: 300ms;
   height: 100%;
-  width: 100%;
+  width: 75%;
+  margin: auto;
+  margin-bottom: 1em;
 }
 
-.project-progress:hover {
+/* .project-progress:hover {
   display: flex;
-  border-radius: 20px;
+  border-radius: 20px; */
   /* background-color: #E6E6E6; */
-  flex-direction: row;
+  /* flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   transition: 300ms;
-}
+} */
 
 .react-tabs {
   height: 100%;
@@ -88,7 +91,7 @@
 .employee-progress {
   display: flex;
   border: 1px solid  white;
-  border-radius: 20px;
+  border-radius: 25px;
   flex-direction: row;
   padding: 1em;
   margin-right: 1.5em;
@@ -96,11 +99,13 @@
   transition: 300ms;
   height: 48vh;
   width: 100%;
+  background-color: white;
 }
 
 .employee-progress:hover {
   display: flex;
-  border-radius: 20px;
+
+  border-top-radius: 20px;
   /* background-color: #E6E6E6; */
   flex-direction: row;
   padding: 1em;
@@ -140,15 +145,22 @@
 }
 
 .react-tabs__tab-list {
-  border-bottom: 1px solid #286FEA !important;
+  border-bottom: none !important;
+  margin-bottom: 0 !important;
+  margin-right: 0 !important;
+}
+
+.react-tabs__tab {
+  left: 3em;
+  margin: 0 0.25em;
 }
 
 .react-tabs__tab--selected {
-  border-color: #286FEA !important;
+  border-color: white !important;
 }
 
 .react-tabs__tab:hover {
-  border-color: #286FEA !important;
+  border-color: white !important;
   background-color: white;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
