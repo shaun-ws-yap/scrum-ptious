@@ -1,0 +1,33 @@
+.submissions-list {
+  display: flex;
+  border-radius: 20px;
+  background-color: #E6E6E6;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  text-align: center;
+  width: 1200px;
+}
+
+.submissions-list-item {
+  list-style: none;
+  margin-right: 2em;
+  margin-top: 2em;
+  border-radius: 20px;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #F0D58E;
+  border-color: #F0D58E;
+  transition: 300ms;
+}
+
+.submissions-list-item:hover {
+  list-style: none;
+  margin-right: 2em;
+  margin-top: 2em;
+  border-radius: 20px;
+  background-color: #F0BA2D;
+  border-color: #F0BA2D;
+  transition: 300ms;
+}

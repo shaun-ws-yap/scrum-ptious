@@ -15,7 +15,7 @@ export default function SubmisionList(props) {
   const listedTeamTasks = teamTasks.map((task) => {
     return (
       task.status === 2 &&
-      <li className="task-in-progress">
+      <li className="submissions-list-item">
         <SubmissionItem
           key={task.id}
           title={task.title}
@@ -32,7 +32,7 @@ export default function SubmisionList(props) {
   })
 
   return (
-    <div className="task-progress">
+    <div className="submissions-list">
       <ul>
         {listedTeamTasks}
       </ul>
