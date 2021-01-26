@@ -128,9 +128,8 @@
   overflow: auto;
 }
 
-.deadlines > ul {
-  overflow: auto;
-  max-height: 70vh;
+.deadlines::-webkit-scrollbar {
+  width: 12px;
 }
 
 .deadlines-item {
