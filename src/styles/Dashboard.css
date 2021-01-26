@@ -13,15 +13,14 @@
 
 .dashboard-top {
   display: flex;
+  height: 45vh;
+  width: 100vh;
 }
 
 .dashboard-bottom {
   display: flex;
-}
-
-.employee-progress {
-  display: flex;
-  flex-direction: row;
+  height: 55vh;
+  width: 98vh;
 }
 
 .project-progress {
@@ -33,6 +32,8 @@
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   transition: 300ms;
+  height: 100%;
+  width: 100%;
 }
 
 .project-progress:hover {
@@ -46,6 +47,11 @@
   transition: 300ms;
 }
 
+.react-tabs {
+  height: 100%;
+  width: 100%;
+}
+
 .employee-progress {
   display: flex;
   border: 1px solid  white;
@@ -55,6 +61,8 @@
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   transition: 300ms;
+  height: 48vh;
+  width: 100%;
 }
 
 .employee-progress:hover {
