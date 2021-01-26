@@ -10,5 +10,4 @@ coverage/
 node_modules
 .eslintcache
 
-build/
 dist/
