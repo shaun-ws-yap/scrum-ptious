@@ -40,7 +40,7 @@ export default function ProjectProgress(props) {
             display: true,
             text: 'Project Progress',
             fontSize: 25,
-            fontFamily: 'Poppins'
+            fontFamily: 'Poppins',
           },
           legend: {
             display: true,
