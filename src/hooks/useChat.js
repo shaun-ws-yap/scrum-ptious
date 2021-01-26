@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
-import axios from "axios";
 
 import formatDateString from "../utilities/format-date";
-
-const MESSAGES_URL = "http://localhost:8080/api/messages";
 
 export default function useChat(socket, userInfo) {
   const { id, name, team_id } = userInfo;
@@ -11,11 +8,6 @@ export default function useChat(socket, userInfo) {
   const [ messages, setMessages ] = useState([]);
   const [ onlineUsers, setOnlineUsers ] = useState([]);
   const [ joinMessage, setJoinMessage ] = useState("");
-
-  // useEffect(() => {
-  //   axios.get(`${MESSAGES_URL}/15`)
-  //   .then(res => setMessages(res.data));
-  // }, []);
 
   useEffect(() => {
     //socket = io();

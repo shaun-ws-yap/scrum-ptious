@@ -1,5 +1,6 @@
 import { React, useCallback, useState, useEffect, useRef } from 'react';
 import { useObserveScrollPosition } from 'react-scroll-to-bottom';
+import classNames from 'classnames';
 
 import ChatLogItem from "./ChatLogItem";
 import getUserById from '../../helpers/getUserById';
@@ -42,7 +43,9 @@ export default function ChatLog(props) {
     setTimeout(() => {
       setVisible(false);
     }, 2000);
-  }, [chatInfo])
+  }, [chatInfo]);
+
+  const chatBottomClass = classNames("chat-log-bottom", {expanded: visible});
 
   const messageComponents = messages.map((messageData, index) => {
     const { sender, message, sender_id, time_iso, time_locale } = messageData;
@@ -63,8 +66,8 @@ export default function ChatLog(props) {
     <div className="chat-log" ref={container}>
       <div className="loading" ref={loader}></div>
       {messageComponents}
-      { visible && 
-        <div className="chat-log-bottom">
+      { /* visible && */
+        <div className={chatBottomClass}>
           <span className="clat=info">
             {chatInfo}
           </span>

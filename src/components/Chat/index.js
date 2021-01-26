@@ -23,7 +23,7 @@ export default function Chat(props) {
   return (
     <div className="chat-container">
       <div className="chat-left">
-          <div className="chat-log-container">
+          <ScrollToBottom className="chat-log-container">
             <ChatLog 
               userId={userInfo.id}
               messages={messages} 
@@ -31,7 +31,7 @@ export default function Chat(props) {
               getPrevMessages={getPrevMessages}
               teamUsers={teamUsers}
             />
-          </div>
+          </ScrollToBottom>
           <InputBox sendMessage={sendMessage} />
       </div>
       <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />

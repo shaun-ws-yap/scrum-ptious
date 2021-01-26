@@ -1,31 +1,46 @@
 .chat-container {
   display: flex;
   flex-direction: row;
-  margin: 1.5em;
-  height: 800px;
-  width: 600px;
+  margin: 3em 5em 3em 5em;
+  height: 600px;
+  width: 700px;
 }
 
 .chat-left {
   display: flex;
   flex-direction: column;
-  margin-bottom: 0.5em;
+  margin-right: 1em;
   height: 100%;
+  width: 70%;
 }
 
 .chat-log-container {
   width: 100%;
-  height: 100;
+  height: 90%;
   border: 2px solid rgb(189, 189, 189);
   border-radius: 20px;
-  overflow-y: scroll;
 }
 
 .chat-log {
   display: flex;
   flex-direction: column;
-  padding: 1em;
+  padding: 1em 1em 0.75em 1em;
   /* background-color: rgb(242, 240, 240); */
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.chat-log-bottom {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.15s linear;
+}
+
+.chat-log-bottom.expanded {
+  height: 2em;
 }
 
 .chat-item {
@@ -33,11 +48,16 @@
   flex-direction: row;
   position: relative;
   padding: 10px 0 10px 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 5em;
 }
 
 .chat-item.own-message {
   display: flex;
   flex-direction: row-reverse;
+  padding-right: 0;
+  padding-left: 5em;
 }
 
 .chat-item-right {
@@ -64,6 +84,7 @@
   border-radius: 25px;
   /* background-color: white; */
   background-color: rgb(242, 240, 240);
+  /* max-width: 70%; */
 }
 
 .own-message .chat-message {
@@ -96,52 +117,30 @@
   font-size: 12px;
 }
 
-
-.members-list {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid rgb(189, 189, 189);
-  border-radius: 20px;
-  padding: 1em;
-  width: 30%;
-}
-
-.members-list-item {
-  display: flex;
-  flex-direction: row;
-}
-
-.members-list-avatar {
-  border: 3px solid sandybrown;
-  width: 50px;
-  height: 50px;
-}
-
-.avatar-online {
-  border: 3px solid greenyellow;
-}
-
-.member-item-online {
-  order: -1;
-}
-
 .chat-input-box {
   display: flex;
   /* border: 1px solid black; */
-  border-radius: 20px;
+  border-radius: 25px;
   flex-direction: row;
   width: 100%;
+  padding-top: 1em;
+  padding-left: 0.5em;
 }
 
 .chat-input-box form {
   width: 100%;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .chat-input {
   padding: 10px 25px 10px 25px;
-  border-radius: 25px;
+  border-radius: 20px;
   resize: none;
-  width: auto;
+  width: 90%;
+  background-color: rgb(242, 240, 240);
+  border: none;
+  padding-left: 1.5em;
 }
 
 .chat-input:focus {
@@ -152,7 +151,7 @@
   background-color: transparent;
   color: #286FEA;
   border: none;
-  width: 2em;
+  width: 10%;
 }
 
 .chat-send .material-icons {
@@ -162,4 +161,53 @@
 .chat-send:hover,
 .chat-send:active {
   color: #3d5886;
+}
+
+.members-list {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid rgb(189, 189, 189);
+  border-radius: 20px;
+  padding: 1em;
+  width: 30%;
+  height: 90%;
+  overflow-y: auto;
+}
+
+.members-list-item {
+  display: flex;
+  flex-direction: row;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.members-list-avatar {
+  border: 3px solid sandybrown;
+  width: 2.2em;
+  height: 2.2em;
+}
+
+.avatar-online {
+  border: 3px solid rgb(72, 209, 54);
+}
+
+.member-item-online {
+  order: -1;
+}
+
+.member-item-right {
+  padding-left: 1em;
+  position: relative;
+}
+
+.member-item-role {
+  display: none;
+
+}
+
+.members-list-item:hover .member-item-role {
+  display: flex;
+  font-size: 0.8em;
+  color: darkgrey;
+  position: fixed;
 }
