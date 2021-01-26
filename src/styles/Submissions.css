@@ -20,6 +20,7 @@
   background-color: #F0D58E;
   border-color: #F0D58E;
   transition: 300ms;
+  cursor: pointer;
 }
 
 .submissions-list-item:hover {
@@ -30,4 +31,5 @@
   background-color: #F0BA2D;
   border-color: #F0BA2D;
   transition: 300ms;
+  cursor: pointer;
 }
