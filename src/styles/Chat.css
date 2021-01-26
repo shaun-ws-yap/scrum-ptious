@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   margin: 3em 5em 3em 5em;
-  height: 600px;
-  width: 700px;
+  height: 75vh;
+  width: 50vw;
+  margin-left: auto;
+  margin-top: 10vh;
 }
 
 .chat-left {
@@ -12,12 +14,14 @@
   margin-right: 1em;
   height: 100%;
   width: 70%;
+  background-color: white;
+  border-radius: 20px;
 }
 
 .chat-log-container {
   width: 100%;
   height: 90%;
-  border: 2px solid rgb(189, 189, 189);
+  border: 2px solid white;
   border-radius: 20px;
 }
 
@@ -145,6 +149,11 @@
 
 .chat-input:focus {
   outline: none;
+  box-shadow: 5px 6px gray;
+}
+
+.chat-input:hover {
+  box-shadow: 5px 6px gray;
 }
 
 .chat-send {
@@ -166,10 +175,11 @@
 .members-list {
   display: flex;
   flex-direction: column;
-  border: 2px solid rgb(189, 189, 189);
+  background-color: white;
+  border: 2px solid white;
   border-radius: 20px;
   padding: 1em;
-  width: 30%;
+  width: 20%;
   height: 90%;
   overflow-y: auto;
 }
