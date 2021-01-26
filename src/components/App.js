@@ -7,13 +7,15 @@ import Tasks from './Tasks';
 import Chat from './Chat';
 import Submissions from './Submissions';
 import Sidebar from './Sidebar';
-import UserInfo from './UserInfo';
+import UserPanel from './UserPanel';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useNotifications from '../hooks/useNotifications';
 import useSocket from '../hooks/useSocket';
 import useTasks from '../hooks/useTasks';
+import useSidePanel from '../hooks/useSidePanel';
+
 import { taskStatus } from '../helpers/taskStatus';
 import { NotificationManager, NotificationContainer } from 'react-notifications';
 
@@ -39,7 +41,7 @@ function App() {
   });
   
   const { socket } = useSocket();
-  
+
   const { 
     state,
     setTasks,  
@@ -156,7 +158,12 @@ function App() {
           />}
       </section>
       <section className="user__info">
-          <UserInfo userInfo={userInfo} tasks={teamTasks} teamUsers={teamUsers} /> 
+        <UserPanel 
+          // wide={windowWidth > 1300}
+          userInfo={userInfo} 
+          tasks={teamTasks} 
+          teamUsers={teamUsers} 
+        /> 
       </section>
       {/* </div> */}
     </div>
