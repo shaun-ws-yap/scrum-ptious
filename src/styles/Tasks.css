@@ -6,8 +6,10 @@
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
-  transition: 300ms;
   text-align: center;
+  max-height: 50vh;
+  max-width: 100vh;
+  overflow: auto;
 }
 
 .team-list {
@@ -20,21 +22,20 @@
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   transition: 300ms;
-  width: 2000px;
+  width: 100vh;
   align-content: center;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .team-item {
   border: 1px solid white;
   border-radius: 20px;
   background-color: #B0BDFF;
-  margin-left: 12em;
   padding: 1em;
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
-  margin-left: 28em;
-  width: 1000px;
   cursor: pointer;
 }
 
@@ -46,7 +47,6 @@
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
-  width: 1000px;
   cursor: pointer;
 }
 
@@ -61,6 +61,7 @@
   border-radius: 20px;
   background-color: #FFBFBF;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -87,6 +88,7 @@
   border-radius: 20px;
   background-color: #B2C8FF;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -111,6 +113,7 @@
   border-radius: 20px;
   background-color: #E6E79C;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -135,6 +138,7 @@
   border-radius: 20px;
   background-color: #F0D58E;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -159,6 +163,7 @@
   border-radius: 20px;
   background-color: #C4ACFC;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -183,6 +188,7 @@
   border-radius: 20px;
   background-color: #A8EEA7;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;

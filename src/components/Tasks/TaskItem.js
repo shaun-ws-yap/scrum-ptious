@@ -57,14 +57,7 @@ export default function TaskItem(props) {
       >
         <h4>{title}</h4>
         <p>{description}</p>
-        <label for="creation_date">Assigned on:</label>
-        <br />
-        <Moment format="Do MMM YYYY h:mm A" >{creation_date}</Moment> 
-        <br />
-        <label for="due_date">Due on:</label>
-        <br />
-        <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
-        <br />
+        <label for="due_date">DUE: <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment></label>
       </li>
 
       <form

@@ -73,7 +73,10 @@ export default function NewTaskItem(props) {
   }
 
   return (
-    <div>
+    <div className="create-task">
+      <span></span>
+      <span></span>
+      <p onClick={() => setShow(true)}>Create New Task</p>
       <span className="new-task-btn" onClick={() => setShow(true)}><i class="fas fa-plus new-task-btn"></i> New Task</span>
 
       <form 
@@ -118,7 +121,7 @@ export default function NewTaskItem(props) {
                 )
               })  }
             </select>
-
+            <br />
             <label for ="due-date">Due on: </label>
             <DatePicker 
               id="new-task-date"
