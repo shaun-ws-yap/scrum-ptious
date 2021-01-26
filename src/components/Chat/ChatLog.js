@@ -5,7 +5,7 @@ import ChatLogItem from "./ChatLogItem";
 import getUserById from '../../helpers/getUserById';
 
 export default function ChatLog(props) {
-  const { messages, chatInfo, getPrevMessages, teamUsers } = props;
+  const { userId, messages, chatInfo, getPrevMessages, teamUsers } = props;
 
   const [visible, setVisible] = useState(false);
   const [page, setPage] = useState(1);
@@ -48,9 +48,11 @@ export default function ChatLog(props) {
     const { sender, message, sender_id, time_iso, time_locale } = messageData;
     return (
       <ChatLogItem 
+        userId={userId}
         key={`${sender_id}: ${time_iso}`}
         avatar={getUserById(teamUsers, sender_id).avatar}
         sender={sender} 
+        senderId={sender_id}
         message={message}
         time_locale={time_locale}
       />

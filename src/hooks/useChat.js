@@ -12,19 +12,20 @@ export default function useChat(socket, userInfo) {
   const [ onlineUsers, setOnlineUsers ] = useState([]);
   const [ joinMessage, setJoinMessage ] = useState("");
 
-  useEffect(() => {
-    axios.get(`${MESSAGES_URL}/15`)
-    .then(res => setMessages(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios.get(`${MESSAGES_URL}/15`)
+  //   .then(res => setMessages(res.data));
+  // }, []);
 
   useEffect(() => {
     //socket = io();
 
     socket.emit('joining msg', name, id);
 
-    socket.on('user joined', (users, username) => {
+    socket.on('user joined', (users, username, messages) => {
       setOnlineUsers(users);
       setJoinMessage(username + " joined the chat")
+      setMessages(messages);
     });
 
     socket.on('user left', (users, username) => {

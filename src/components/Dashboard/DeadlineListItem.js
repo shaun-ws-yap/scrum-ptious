@@ -9,12 +9,12 @@ export default function DeadlineListItem(props) {
 
   return (
     <li>
-      <h4>{props.title}</h4>
-      { userInfo.role === 1 && <p>Assigned to: {getEmployeeName(teamUsers, assignedTo)}</p> } 
-      <label for="creation_date">On:</label>
+      <h5>{props.title}</h5>
+      { userInfo.role === 1 && <p>{getEmployeeName(teamUsers, assignedTo)}</p> } 
+      <label for="creation_date">A</label>
       <Moment name="creation_date" format="Do MMM YYYY h:mm A" >{creation_date}</Moment> 
       <br />
-      <label for="due_date">Due:</label>
+      <label for="due_date">D</label>
       <Moment name="due_date" format="Do MMM YYYY h:mm A" >{due_date}</Moment>
       <br />
       { is_late && <span className="badge badge-danger">LATE</span> }

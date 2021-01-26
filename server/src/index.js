@@ -115,7 +115,6 @@ io.on('connection', (socket) => {
   socket.on('feedback', (feedbackData, uid) => {
     saveFeedback(db, feedbackData)
     .then(res => {
-        console.log(feedbackData)
         socket.emit('tasks action saved', 'FEEDBACK', feedbackData);
         io.emit('submt/feedback', res, uid);
       })
@@ -125,7 +124,10 @@ io.on('connection', (socket) => {
   //chat
   socket.on('joining msg', (username, userId) => {
     addClientToMap(userId, socket.id);
-    io.emit('user joined', parseMap(), username);
+    getRecentMessages(db, 12)
+      .then(data => {
+        io.emit('user joined', parseMap(), username, data.rows);
+      })
   });
 
   socket.on('leaving msg', (username, userId) => {

@@ -33,6 +33,7 @@ export default function SubmisionList(props) {
 
   return (
     <div className="submissions-list">
+      <h3>Submitted Tasks</h3>
       <ul>
         {listedTeamTasks}
       </ul>
