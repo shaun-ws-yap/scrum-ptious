@@ -4,6 +4,12 @@ import '../../styles/Login.css';
 
 export default function Login(props) {
   const { setLogin } = props;
+  const [loginId, setLoginId] = useState(0);
+
+  function handleLogin() {
+    setLogin(loginId);
+  }
+
   return (
     <div className="login-container">
       <ul className="box-area">
@@ -13,25 +19,20 @@ export default function Login(props) {
         <li></li>
         <li></li>
         <li></li>
-        <form>
-      <div className="login">
-      <h1>Enter your user ID </h1>
-      <input
-        onChange={event => setLogin(event.target.value)}
-      />
-      <br />
-      <span
-        className="login-button"
-        onSubmit={event => setLogin(event.target.value)}
-      >
-        Submit
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      </span>
-      </div>
-    </form>
+        <div className="login">
+          <h1>Enter your user ID </h1>
+          <input
+            onChange={event => setLoginId(event.target.value)}
+          />
+          <br />
+          <span className="login-button" onClick={handleLogin}> 
+            Submit
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </div>
       </ul>
     </div>
   )
