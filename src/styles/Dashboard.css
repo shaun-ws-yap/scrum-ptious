@@ -45,14 +45,14 @@
 
 .dashboard-top {
   display: flex;
-  height: 45vh;
-  width: 100vh;
+  height: 50%;
+  width: 100%;
 }
 
 .dashboard-bottom {
   display: flex;
-  height: 55vh;
-  width: 98vh;
+  height: 50%;
+  width: 100%;
 }
 
 .project-progress {
@@ -137,4 +137,17 @@
 }
 
 .task-dashboard-bottom {
+}
+
+.react-tabs__tab-list {
+  border-bottom: 1px solid #286FEA !important;
+}
+
+.react-tabs__tab--selected {
+  border-color: #286FEA !important;
+}
+
+.react-tabs__tab:hover {
+  border-color: #286FEA !important;
+  background-color: white;
 }
