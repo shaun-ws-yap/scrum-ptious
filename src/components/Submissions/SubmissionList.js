@@ -15,7 +15,7 @@ export default function SubmisionList(props) {
   const listedTeamTasks = teamTasks.map((task) => {
     return (
       task.status === 2 &&
-      <li className="task-in-progress">
+      <li className="task-in-progress" key={task.id}>
         <SubmissionItem
           key={task.id}
           title={task.title}

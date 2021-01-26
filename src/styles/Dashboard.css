@@ -67,3 +67,7 @@
   margin-bottom: 1.5em;
   transition: 300ms;
 }
+
+.new-task-btn {
+  color: white;
+}

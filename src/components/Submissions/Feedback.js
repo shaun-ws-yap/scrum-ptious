@@ -9,7 +9,9 @@ export default function Feedback(props) {
     selectedTask,
     show,
     setShow,
-    giveFeedback
+    giveFeedback,
+    setUserNotification,
+    user
   } = props; 
 
   const {
@@ -30,6 +32,10 @@ export default function Feedback(props) {
   }
 
   const handleSubmit = (accepted) => {
+    if (feedback.message === "") {
+      setUserNotification(prev => ({...prev, title: "Error", message: "Please enter a feedback", type: "error", user: user.id}))
+      return;
+    }
     giveFeedback(feedback.message, selectedTask, accepted);    
     setFeedback(prev => ({...prev, message: ""}));
     setShow(false);
