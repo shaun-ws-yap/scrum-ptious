@@ -123,7 +123,7 @@ export default function NewTaskItem(props) {
                 )
               })  }
             </select>
-
+            <br />
             <label for ="due-date">Due on: </label>
             <DatePicker 
               id="new-task-date"

@@ -60,6 +60,7 @@
   border-radius: 20px;
   background-color: #FFBFBF;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -86,6 +87,7 @@
   border-radius: 20px;
   background-color: #B2C8FF;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -110,6 +112,7 @@
   border-radius: 20px;
   background-color: #E6E79C;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -134,6 +137,7 @@
   border-radius: 20px;
   background-color: #F0D58E;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -158,6 +162,7 @@
   border-radius: 20px;
   background-color: #C4ACFC;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;
@@ -182,6 +187,7 @@
   border-radius: 20px;
   background-color: #A8EEA7;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   margin-right: 1.5em;
   margin-bottom: 1em;

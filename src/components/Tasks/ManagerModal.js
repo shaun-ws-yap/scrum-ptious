@@ -87,13 +87,7 @@ export default function ManagerModal(props) {
       <Modal.Header closeButton>
         <Modal.Title>
           { editMode ? newTaskData.title : title }
-          <Button 
-            onClick={() => handleEditToggle()}
-            variant="warning"
-          > 
-            { editMode ? <>Cancel</> : <>Edit</> } 
-          </Button>
-          </Modal.Title>
+        </Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
@@ -154,6 +148,12 @@ export default function ManagerModal(props) {
         
       </Modal.Body>
       <Modal.Footer>
+      <Button 
+            onClick={() => handleEditToggle()}
+            variant="warning"
+          > 
+            { editMode ? <>Cancel</> : <>Edit</> } 
+          </Button>
         <Button variant="danger" onClick={() => handleDelete()}>
           Delete
         </Button>
