@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   margin: 3em 5em 3em 5em;
-  height: 600px;
-  width: 700px;
+  height: 75vh;
+  width: 50vw;
+  margin-left: auto;
+  margin-top: 10vh;
 }
 
 .chat-left {
@@ -145,6 +147,11 @@
 
 .chat-input:focus {
   outline: none;
+  box-shadow: 5px 6px gray;
+}
+
+.chat-input:hover {
+  box-shadow: 5px 6px gray;
 }
 
 .chat-send {
@@ -169,7 +176,7 @@
   border: 2px solid rgb(189, 189, 189);
   border-radius: 20px;
   padding: 1em;
-  width: 30%;
+  width: 20%;
   height: 90%;
   overflow-y: auto;
 }

@@ -124,6 +124,9 @@
 
 .trash--visible {
   display: flex;
+  position: fixed;
+  right: 150;
+  bottom: 100;
 }
 
 .trash--hidden {
@@ -150,23 +153,29 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  /* background-color: white; */
   border-radius: 20px;
-
   height: 75vh;
   overflow: auto;
 }
 
+.deadlines::-webkit-scrollbar {
+  display: none;
+}
+ 
 .deadlines > ul {
   max-height: 70vh;
   width: 100%;
 }
 
+.deadline-ul {
+  padding: 0;
+}
+
 .deadlines-item {
-  border: 1px solid white;
+  border: 1px solid #D4F3F5;
   border-radius: 20px;
   background-color: #D4F3F5;
-
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
@@ -174,16 +183,17 @@
 }
 
 .deadlines-item:hover {
-  border: 1px solid white;
+  border: 1px solid #A9F6FA;
   border-radius: 20px;
   background-color: #A9F6FA;
-  padding: 0.5em;
-  padding-right: 0;
   margin-top: 0.5em;
   list-style: none;
   transition: 300ms;
 }
 
+.deadlines-item > li {
+  padding: 0;
+}
 
 .sidebar__menu {
   flex: 1;
