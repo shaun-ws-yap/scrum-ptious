@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import Feedback from './Feedback';
 import SubmissionList from './SubmissionList';
 
+import '../../styles/Submissions.css';
+
 export default function Submissions(props) {
 
   const { 

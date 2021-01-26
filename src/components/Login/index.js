@@ -1,16 +1,38 @@
 import React, { useState } from 'react';
 
+import '../../styles/Login.css';
+
 export default function Login(props) {
   const { setLogin } = props;
   return (
-    <form>
-      <h1>Enter your user ID: </h1>
+    <div className="login-container">
+      <ul className="box-area">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <form>
+      <div className="login">
+      <h1>Enter your user ID </h1>
       <input
         onChange={event => setLogin(event.target.value)}
       />
-      <button
+      <br />
+      <span
+        className="login-button"
         onSubmit={event => setLogin(event.target.value)}
-      >Submit</button>
+      >
+        Submit
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+      </span>
+      </div>
     </form>
+      </ul>
+    </div>
   )
 }
