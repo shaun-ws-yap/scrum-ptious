@@ -22,19 +22,19 @@ export default function Chat(props) {
 
   return (
     <div className="chat-container">
-      <button onClick={()=> getPrevMessages()}>Test Get Previous Messages</button>
-      <div className="chat-top">
-        <ScrollToBottom className="chat-scroll">
-          <ChatLog 
-            messages={messages} 
-            chatInfo={joinMessage} 
-            getPrevMessages={getPrevMessages}
-            teamUsers={teamUsers}
-          />
-        </ScrollToBottom>
-        <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />
+      <div className="chat-left">
+          <div className="chat-log-container">
+            <ChatLog 
+              userId={userInfo.id}
+              messages={messages} 
+              chatInfo={joinMessage} 
+              getPrevMessages={getPrevMessages}
+              teamUsers={teamUsers}
+            />
+          </div>
+          <InputBox sendMessage={sendMessage} />
       </div>
-      <InputBox sendMessage={sendMessage} />
+      <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />
     </div>
   )
 };
