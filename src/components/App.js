@@ -7,15 +7,16 @@ import Tasks from './Tasks';
 import Chat from './Chat';
 import Submissions from './Submissions';
 import Sidebar from './Sidebar';
-import UserInfo from './Dashboard/UserInfo';
+import UserInfo from './UserInfo';
 import Login from './Login';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useNotifications from '../hooks/useNotifications';
 import useSocket from '../hooks/useSocket';
-import useTasks from '../hooks/useTasks'
+import useTasks from '../hooks/useTasks';
 import { taskStatus } from '../helpers/taskStatus';
 import { NotificationManager, NotificationContainer } from 'react-notifications';
+
 
 import 'react-pro-sidebar/dist/css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -32,12 +33,13 @@ const SUBMISSIONS = "Submissions"
 function App() {
   const [selectedMenu, setMenu] = useState(DASHBOARD);
   const [loginToken, setLoginToken] = useState(0);
-  const { socket } = useSocket();
   const [errorNotification, setErrorNotification] = useState({
     title: "",
     message: "",
   });
-
+  
+  const { socket } = useSocket();
+  
   const { 
     state,
     setTasks,  
@@ -75,14 +77,12 @@ function App() {
       NotificationManager.error(errorNotification.title, errorNotification.message);
       setErrorNotification(prev => ({...prev, title: "", message: ""}))
     }
-  }, [errorNotification])
+  }, [errorNotification]);
 
 
   if ( loginToken === 0 ) {
     return (
-      <section className="main">
-        { loginToken === 0 && <Login setLogin={setLoginToken}/> }
-      </section>
+      <Login setLogin={setLoginToken}/> 
     )
   }
 
@@ -106,57 +106,59 @@ function App() {
             setErrorNotification={setErrorNotification}
           />
         </nav>
-        <span className="logout"
-        onClick={() => setLoginToken(0)}>
-          Log out
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span 
+          className="logout"
+          onClick={() => setLoginToken(0)}
+        >
+            Log out
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </span>
       </section>
-      <div className="wrapper">
-        <section className="dashboard-main">
-          { selectedMenu === DASHBOARD && 
-            <Dashboard
-              tasks={userTasks} 
-              role={role} 
-              teamTasks={teamTasks}
-              teamUsers={teamUsers}
-            /> }
-          { selectedMenu === TASKS && 
-            <Tasks 
-              socket={socket} 
-              role={role} 
-              tasks={role === 1 ? teamTasks : userTasks} 
-              teamUsers={teamUsers} 
-              submissions={submissions}
-              deleteTaskItem={deleteTaskItem} 
-              editTaskItem={editTaskItem}
-              submitTaskItem={submitTaskItem}
-              setErrorNotification={setErrorNotification}
-              moveTask={moveTask}
-              setTasks={setTasks}
-            />}
-          { selectedMenu === CHAT && 
-            <Chat 
-              socket={socket} 
-              userInfo={userInfo} 
-              teamUsers={teamUsers}
-            />}
-          { selectedMenu === SUBMISSIONS &&
-            <Submissions
-              teamUsers={teamUsers}
-              teamTasks={teamTasks}
-              giveFeedback={giveFeedback}
-              setUserNotification={setUserNotification}
-              user={userInfo}
-            />}
-        </section>
-        <section className="user__info">
+      {/* <div className="wrapper"> */}
+      <section className="main">
+        { selectedMenu === DASHBOARD && 
+          <Dashboard
+            tasks={userTasks} 
+            role={role} 
+            teamTasks={teamTasks}
+            teamUsers={teamUsers}
+          /> }
+        { selectedMenu === TASKS && 
+          <Tasks 
+            socket={socket} 
+            role={role} 
+            tasks={role === 1 ? teamTasks : userTasks} 
+            teamUsers={teamUsers} 
+            submissions={submissions}
+            deleteTaskItem={deleteTaskItem} 
+            editTaskItem={editTaskItem}
+            submitTaskItem={submitTaskItem}
+            setErrorNotification={setErrorNotification}
+            moveTask={moveTask}
+            setTasks={setTasks}
+          />}
+        { selectedMenu === CHAT && 
+          <Chat 
+            socket={socket} 
+            userInfo={userInfo} 
+            teamUsers={teamUsers}
+          />}
+        { selectedMenu === SUBMISSIONS &&
+          <Submissions
+            teamUsers={teamUsers}
+            teamTasks={teamTasks}
+            giveFeedback={giveFeedback}
+            setUserNotification={setUserNotification}
+            user={userInfo}
+          />}
+      </section>
+      <section className="user__info">
           <UserInfo userInfo={userInfo} tasks={teamTasks} teamUsers={teamUsers} /> 
-        </section>
-      </div>
+      </section>
+      {/* </div> */}
     </div>
   );
 }
