@@ -5,8 +5,15 @@ import '../../styles/Login.css';
 export default function Login(props) {
   const { setLogin } = props;
   return (
-    <div className="tmp">
-    <form>
+    <div className="login-container">
+      <ul className="box-area">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <form>
       <div className="login">
       <h1>Enter your user ID </h1>
       <input
@@ -25,6 +32,7 @@ export default function Login(props) {
       </span>
       </div>
     </form>
+      </ul>
     </div>
   )
 }
