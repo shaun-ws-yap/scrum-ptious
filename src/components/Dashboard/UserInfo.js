@@ -1,0 +1,31 @@
+import React from 'react';
+
+import DeadlineList from './DeadlineList';
+import filterDeadlineTasks from '../../helpers/filterDeadlineTasks';
+
+const roles = {
+  1: "Project Manager",
+  2: "Employee"
+}
+
+export default function UserInfo(props) {
+
+  const { userInfo, tasks, teamUsers } = props;
+  const filteredTasks = filterDeadlineTasks(tasks);
+
+  return (
+    <div className="user-info">
+      { userInfo && ( 
+        <>
+        <img src={userInfo.avatar} className="user-avatar"></img>
+        <h4>{userInfo.name} </h4>
+        <h5>{roles[userInfo.role]}</h5>
+        <div className="deadlines">
+          <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
+        </div>
+        </>
+        ) 
+      }
+    </div>
+  )
+} 
