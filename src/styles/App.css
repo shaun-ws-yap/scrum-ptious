@@ -130,6 +130,14 @@
   display: none;
 }
 
+.user-info {
+  flex-direction: column;
+  background-color: #E6E6E6;
+  border-radius: 20px;
+  padding: 1em;
+  text-align: center;
+  height: 100vh;
+}
 
 .user-avatar {
   border-radius: 30px;
