@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 
-export default function useSidebar() {
-  const [windowWidth, setWindowWidth] = useState(0)
+export default function useSidePanel() {
+  const [windowWidth, setWindowWidth] = useState(0);
+  const [openPanel, setOpenPanel] = useState(false);
 
   useEffect(() => {
     window.addEventListener('resize', updateWindowDimensions)
@@ -10,11 +11,14 @@ export default function useSidebar() {
   }, [])
 
   useEffect(() => {
-    if (windowWidth < 950) {
-      console.log('close')
+    if (windowWidth > 1300 && openPanel) {
+      setOpenPanel(false);
       return
     }
-    console.log('open');
+    if (windowWidth <= 1300 && openPanel ) {
+      setOpenPanel(false);
+      return;
+    }
   }, [windowWidth])
 
   const updateWindowDimensions = () => {
@@ -23,5 +27,7 @@ export default function useSidebar() {
 
   return {
     windowWidth,
+    openPanel,
+    setOpenPanel,
   }
 }
