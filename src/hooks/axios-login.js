@@ -28,3 +28,8 @@ export default function axiosLogin(loginToken, setState) {
     })
     .catch(e => console.log(e));
 }
+
+  // useEffect(() => {
+  //   axios.get(`${MESSAGES_URL}/15`)
+  //   .then(res => setMessages(res.data));
+  // }, []);

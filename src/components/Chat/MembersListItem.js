@@ -9,9 +9,9 @@ export default function MembersListItem(props) {
   return (
     <div className={itemClass}>
       <img src={avatar} alt= "User Avatar" className={imgClass}></img>
-      <div>
-        <div>{name}</div>
-        <div>{role}</div>
+      <div className='member-item-right'>
+        <div className='member-item-name'>{name}</div>
+        <div className='member-item-role'>{role}</div>
       </div>
     </div>
   )
