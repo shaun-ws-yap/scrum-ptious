@@ -114,7 +114,7 @@ export default function TaskProgress(props) {
         onDragEnd={onDragEnd}
         onBeforeCapture={onBeforeCapture}
       >
-        <div key="assigned">
+        <div key="assigned" className="task-assigned">
           <h1>Assigned</h1>
           <Droppable droppableId="assigned">
             {(provided, snapshot) => (
@@ -122,6 +122,7 @@ export default function TaskProgress(props) {
                 key="assigned"
                 index="1"
                 ref={provided.innerRef} 
+                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'lightgray'}}
                 {...provided.droppableProps}
               >
                 { assigned }
@@ -131,21 +132,23 @@ export default function TaskProgress(props) {
           </Droppable>
         </div>
 
-        <div key="inProgress">
+        <div key="inProgress" className="task-inprogress">
           <h1>In-Progress</h1>
-          <Droppable droppableId="inProgress">
-            {(provided, snapshot) => (
-              <div 
-                key="inProgress"
-                index="2"
-                ref={provided.innerRef} 
-                {...provided.droppableProps}
-              >
-                { inProgress }
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
+          <div className="task-droppable-inprogress">
+            <Droppable droppableId="inProgress">
+              {(provided, snapshot) => (
+                <div 
+                  key="inProgress"
+                  index="2"
+                  ref={provided.innerRef} 
+                  {...provided.droppableProps}
+                >
+                  { inProgress }
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </div>
         </div>
 
         { role === 1 && (
@@ -167,7 +170,7 @@ export default function TaskProgress(props) {
         )} 
       </DragDropContext>
 
-      <div>
+      <div className="task-completed">
         <h1>Completed</h1>
         { completed }
       </div>

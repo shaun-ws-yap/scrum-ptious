@@ -29,7 +29,7 @@ export default function EmployeeProgress(props) {
 
   return (
     
-    <Tabs defaultIndex={0} onSelect={index => setIndex(index)}>
+    <Tabs defaultIndex={0} onSelect={index => setIndex(index)} className="employee-chart" >
       <TabList>
         { props.teamUsers.filter(user => user.role !== 1).map(user => {
           return (
