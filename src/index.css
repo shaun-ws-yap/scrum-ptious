@@ -5,6 +5,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   flex-direction: row;
   justify-content: space-between;
+  height: 100%;
 }
 
 code {
