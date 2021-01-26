@@ -124,7 +124,10 @@ io.on('connection', (socket) => {
   //chat
   socket.on('joining msg', (username, userId) => {
     addClientToMap(userId, socket.id);
-    io.emit('user joined', parseMap(), username);
+    getRecentMessages(db, 12)
+      .then(data => {
+        io.emit('user joined', parseMap(), username, data.rows);
+      })
   });
 
   socket.on('leaving msg', (username, userId) => {
