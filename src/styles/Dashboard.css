@@ -8,25 +8,8 @@
 } */
 
 .dashboard-main {
-  position: fixed;
   display: flex;
   flex-direction: column;
-  left: 320px;
-  right: 400px;
-}
-
-.user__info {
-  position: fixed;
-  display: flex;
-  background-color: rgba(229, 233, 236, 0.7);
-  border-radius: 20px;
-  text-align: center;
-  height: 100%;
-  min-height: 100vh;
-  right: 0;
-  width: 400px;
-  /* width: calc(100% - 325px - 325px);
-  left: 1500px; */
 }
 
 .user-info {
@@ -164,4 +147,18 @@
   background-color: white;
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
+}
+
+.react-tabs__tab-list {
+  margin-right: 1.5em !important;
+}
+
+.react-tabs__tab {
+  transition: 300ms;
+}
+
+.react-tabs__tab:hover {
+  background-color: #E6E6E6;
+  transition: 300ms;
+  border-radius: 4px;
 }
