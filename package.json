@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",
-    "bootstrap": "^4.5.3",
+    "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "classnames": "^2.2.6",
     "moment": "^2.29.1",
@@ -30,7 +30,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
@@ -51,12 +53,15 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.4.3",
-    "@storybook/addon-actions": "^5.0.10",
+    "@babel/core": "^7.12.10",
+    "@storybook/addon-actions": "^6.1.15",
     "@storybook/addon-backgrounds": "^5.0.10",
-    "@storybook/addon-links": "^5.0.10",
+    "@storybook/addon-essentials": "^6.1.15",
+    "@storybook/addon-links": "^6.1.15",
     "@storybook/addons": "^5.0.10",
-    "@storybook/react": "^5.0.10",
+    "@storybook/node-logger": "^6.1.15",
+    "@storybook/preset-create-react-app": "^3.1.5",
+    "@storybook/react": "^6.1.15",
     "@testing-library/jest-dom": "^4.0.0",
     "@testing-library/react": "^8.0.9",
     "node-sass": "^4.14.1",
