@@ -14,7 +14,7 @@ export function lateTaskStatus (data) {
   let counter = 0;
 
   for (const index of data) {
-    if (index.is_late === true) {
+    if (index.is_late === true && index.status !== 3) {
       counter += 1;
     }
   }
@@ -42,7 +42,7 @@ export function teamTaskStatus (data, team, empID) {
       } else if (index.status === 3) {
         result.complete += 1;
       }
-      if (index.is_late === true) {
+      if (index.is_late === true && index.status !== 3) {
         result.late += 1;
       }
     }
