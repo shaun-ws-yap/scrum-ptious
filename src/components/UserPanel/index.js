@@ -28,6 +28,7 @@ export default function UserPanel(props) {
           <div className="bar3">
           </div>
         </div>
+
         <div className="user-panel">
           <UserInfo
             userInfo={userInfo} 
