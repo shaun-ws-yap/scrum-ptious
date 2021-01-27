@@ -36,7 +36,7 @@ export default function EmployeeProgress(props) {
           )
         }) }
       </TabList>
-        { userData }
+      { userData }
     </Tabs>
   )
 }

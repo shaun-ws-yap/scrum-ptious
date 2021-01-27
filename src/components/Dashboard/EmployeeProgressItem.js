@@ -57,7 +57,7 @@ export default function EmployeeProgress(props) {
 
   return (
     <div className="employee-progress">
-      <div className="pie-container">
+      <div className="pie-chart">
         <Doughnut
           data={{
             labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],
@@ -90,12 +90,11 @@ export default function EmployeeProgress(props) {
               display: true,
               position: 'left'
             }
-            
           }}
         />
       </div>
 
-      <div className="radar-container">
+      <div className="radar-chart">
         <Radar
           data={{
             labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],
@@ -125,7 +124,6 @@ export default function EmployeeProgress(props) {
                 suggestedMax: 2,
               }
             }
-            
           }}
         />
       </div>
