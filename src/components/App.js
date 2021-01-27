@@ -84,6 +84,7 @@ function App() {
     setManagerNotification({message: "", title: "", type: "", user: undefined})
     setUserNotification({message: "", user: undefined, title: "", type: ""})
     setLoginToken(0);
+    setMenu('');
   }
 
   if ( loginToken === 0 ) {
