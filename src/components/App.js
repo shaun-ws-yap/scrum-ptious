@@ -27,6 +27,7 @@ import 'react-notifications/lib/notifications.css';
 import 'react-tabs/style/react-tabs.css';
 import { Button } from 'react-bootstrap';
 import { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -43,15 +44,15 @@ function App() {
   });
 
   const LightTheme = {
-    pageBackground: "white",
+    sidebarBackground: "linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));",
     titleColor: "#dc658b",
     tagLineColor: "black"
   };
 
   const DarkTheme = {
-    pageBackground: "#282c36",
+    sidebarBackground: "#282c36",
     titleColor: "lightpink",
-    tagLineColor: "lavender"
+    tagLineColor: "lavender",
   };
 
   const themes = {
@@ -59,6 +60,19 @@ function App() {
     dark: DarkTheme,
   }
   
+  const Navsidebar = styled.div`
+  background: ${props => props.theme.sidebarBackground};
+  transition: all .5s ease;
+  `;
+
+  const appContainer = styled.div`
+  
+  `;
+
+  const userPanel = styled.div`
+  background: ${props => props.theme.pageBackground};
+  `;
+
   const { socket } = useSocket();
 
   const { 
@@ -100,6 +114,14 @@ function App() {
     }
   }, [errorNotification]);
 
+  function changeTheme() {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+
 
   if ( loginToken === 0 ) {
     return (
@@ -111,7 +133,8 @@ function App() {
     <ThemeProvider theme={themes[theme]}>
     <div className="app-container">
       <NotificationContainer />
-      <section className="sidebar">
+      <Navsidebar className="sidebar">
+      {/* <section className="sidebar"> */}
         <img 
           alt="Scrum-ptious Logo"
           className="sidebar-centered"
@@ -126,9 +149,10 @@ function App() {
             createTaskItem={createTaskItem}
             errorNotification={errorNotification}
             setErrorNotification={setErrorNotification}
-            theme={theme}
-            setTheme={setTheme}
           />
+          <button onClick={changeTheme}>
+            Yeet mode
+          </button>
         </nav>
         <span 
           className="logout"
@@ -140,7 +164,8 @@ function App() {
           <span></span>
           <span></span>
         </span>
-      </section>
+        </Navsidebar>
+      {/* </section> */}
       {/* <div className="wrapper"> */}
         <section className="dashboard-main">
           { selectedMenu === DASHBOARD && 
