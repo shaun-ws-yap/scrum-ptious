@@ -90,17 +90,6 @@
   height: 100%;
   width: 100%;
 }
-
-.employee-progress {
-  display: flex;
-  border: 1px solid  white;
-  border-radius: 25px;
-  flex-direction: row;
-  transition: 300ms;
-  height: 100%;
-  width: 100%;
-  background-color: white;
-}
 /* 
 .employee-progress:hover {
   display: flex;
@@ -114,10 +103,12 @@
   transition: 300ms;
 } */
 
-.employee-progress > canvas {
+/* .employee-progress > canvas {
+  display: flex;
+  flex-direction: row;
   margin: auto;
-  width: 75%;
-}
+  width: 1%;
+} */
 
 .badge-danger {
   margin: 0.5em;
@@ -133,12 +124,15 @@
 }
 
 .employee-chart {
+  display: flex;
+  flex-direction: column;
   margin: auto;
-  width: 75%;
-  height: 100%;
-  min-width: 50%;
-  padding: 1em;
-  min-height: 100%;
+  /* width: 75% !important; */
+  height: 100vh;
+  /* min-width: 75%; */
+  min-height: 100vh;
+  position: relative;
+  width: 100vw;
 }
 
 .task-dashboard-top {
@@ -171,6 +165,8 @@
 
 .react-tabs__tab-list {
   margin-right: 1.5em !important;
+  position: relative;
+  margin-left: 10vw !important;
 }
 
 .react-tabs__tab {
@@ -181,4 +177,30 @@
   background-color: #E6E6E6;
   transition: 300ms;
   border-radius: 4px;
+}
+
+.react-tabs__tab-panel > react-tabs__tab-panel--selected {
+  width: 100%;
+}
+
+.employee-progress {
+  display: flex;
+  justify-content: center;
+  border: 1px solid  white;
+  border-radius: 25px;
+  flex-direction: row;
+  transition: 300ms;
+  /* background-color: white; */
+  position: relative;
+  height: 100%;
+}
+
+.pie-container {
+  position: relative;
+  background-color: white;
+}
+
+.radar-container {
+  position: relative;
+  background-color: white;
 }
