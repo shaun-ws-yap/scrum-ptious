@@ -16,47 +16,35 @@ export default function Sidebar(props) {
     setMenu,
     createTaskItem,
     error,
-    setErrorNotification,
-    logout,
-    setLoginToken,
+    setErrorNotification
   } = props
 
-  const menuItems = [
-    'Dashboard',
-    'Tasks',
-    'Chat',
-    userInfo.role === 1 ? 'Submissions' : ''
-  ];
+  const menuItems = userInfo.role === 1 ? 
+    ['Dashboard', 'Tasks', 'Chat','Submissions'] : 
+    ['Dashboard', 'Tasks', 'Chat'];
 
   return (
-    <nav className="sidebar__menu">
-      <img 
-        alt="Scrum-ptious Logo"
-        className="sidebar-centered"
-        src="https://logoipsum.com/logo/logo-25.svg"
-      />
-      <ul>
-      { menuItems.map((item, index) => {
-        return (
-          <SidebarItem
-            key={index}
-            name={item}
-            selected={selectedMenu === item}
-            setMenu={setMenu}
-          />)
-        })}
-        { userInfo.role === 1 && (
-          <div key={4}>
-            <NewTaskItem
-              team={userInfo.team_id}
-              teamUsers={teamUsers} 
-              createTaskItem={createTaskItem} 
-              error={error}
-              setErrorNotification={setErrorNotification}
-            />
-          </div>
-        )}
-      </ul>
-    </nav>
+    <ul>
+    { menuItems.map((item, index) => {
+      return (
+        <SidebarItem
+          key={index}
+          name={item}
+          selected={selectedMenu === item}
+          setMenu={setMenu}
+        />)
+      })}
+      { userInfo.role === 1 && (
+        <div key={4}>
+          <NewTaskItem
+            team={userInfo.team_id}
+            teamUsers={teamUsers} 
+            createTaskItem={createTaskItem} 
+            error={error}
+            setErrorNotification={setErrorNotification}
+          />
+        </div>
+      )}
+    </ul>
   )
 }

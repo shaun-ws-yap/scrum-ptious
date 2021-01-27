@@ -91,17 +91,22 @@ function App() {
     <div className="app-container">
       <NotificationContainer />
       <section className="sidebar">
-        <Sidebar
-          selectedMenu={selectedMenu}
-          userInfo={userInfo}
-          teamUsers={teamUsers}
-          setMenu={setMenu}
-          createTaskItem={createTaskItem}
-          errorNotification={errorNotification}
-          setErrorNotification={setErrorNotification}
-          setLoginToken={setLoginToken}
-          logout={logout}
+        <img 
+          alt="Scrum-ptious Logo"
+          className="sidebar-centered"
+          src="https://logoipsum.com/logo/logo-25.svg"
         />
+        <nav className="sidebar__menu">
+          <Sidebar
+            selectedMenu={selectedMenu}
+            userInfo={userInfo}
+            teamUsers={teamUsers}
+            setMenu={setMenu}
+            createTaskItem={createTaskItem}
+            errorNotification={errorNotification}
+            setErrorNotification={setErrorNotification}
+          />
+        </nav>
         <span 
           className="logout"
           onClick={() => handleLogout()}
