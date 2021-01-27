@@ -133,9 +133,13 @@
   left: -10em;
   top: 50vh;
   color: white;
+  z-inde: 950;
 }
 
 .trash--visible:hover {
+  position: absolute;
+  left: -10em;
+  top: 50vh;
   color: orange;
   z-index: 950;
 }

@@ -1,10 +1,10 @@
 .task-dashboard-top {
   overflow: hidden;
-  height: 60%;
+  height: 100%;
 }
 
 .task-dashboard-bottom {
-  height: 40%
+  display: flex;
 }
 
 .task-progress {
@@ -13,15 +13,16 @@
   height: auto;
   border-radius: 20px;
   flex-direction: row;
-  padding: 1em 0 1em 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
+  padding: 0.5em 0 1em 1em;
+  /* margin-right: 1.5em; */
+  /* margin-bottom: 1.5em; */
   text-align: center;
+  margin: auto;
 }
 
 .task-assigned {
   width: 100%;
-  height: 50vh;
+  height: 89vh;
   overflow-y: scroll;
   border-radius: 10px;
 } 
@@ -34,14 +35,14 @@
 
 .task-inprogress {
   width: 100%;
-  height: 50vh;
+  height: 89vh;
   overflow-y: scroll;
   border-radius: 10px;
 }
 
 .task-completed {
   width: 100%;
-  height: 50vh;
+  height: 89vh;
   overflow-y: scroll;
   border-radius: 10px;
   background-color: rgba(148, 203, 179, 0.35);
@@ -237,7 +238,7 @@
 }
 
 .task__item--in-progress:hover {
-  box-shadow: 0px 4px 8px rgba(92, 92, 183, 1);
+  box-shadow: 0px 4px 8px rgba(211, 211, 211, 1);
 }
 
 .task__item--in-review {
@@ -262,4 +263,18 @@
 
 .task__item--complete:hover {
   box-shadow: 0px 4px 8px rgba(148, 203, 179, 1);
+}
+
+@media only screen and (max-width: 1550px) {
+  .task-assigned {
+    width: 80%;
+  } 
+
+  .task-inprogress {
+    width: 80%;
+  }
+
+  .task-completed {
+    width: 90%;
+  }
 }

@@ -12,18 +12,17 @@ const roles = {
 export default function UserInfo(props) {
   const { userInfo, tasks, teamUsers, transparent, selectedMenu } = props;
   const filteredTasks = filterDeadlineTasks(tasks);
-  const [openFilter, setOpenFilter] = useState(false); 
+  const [openFilter, setOpenFilter] = useState(false);
 
   const toggleFilter = (state) => {
-    document.getElementById("user-panel-wings").classList.toggle("change");
     document.getElementById("team-list-filter").classList.toggle("change");
+    
     return state ? setOpenFilter(false) : setOpenFilter(true);
   }
 
   return (
     <>
-
-      <div className={`user-info-transparent-${transparent}`}  id="user-panel-wings">
+      <div className={`user-info-transparent-${transparent}${openFilter && selectedMenu === "Tasks" ? ' change' : ''}`}  id="user-panel-wings">
         { userInfo && ( 
           <>
             { transparent === true && selectedMenu === "Tasks" && (

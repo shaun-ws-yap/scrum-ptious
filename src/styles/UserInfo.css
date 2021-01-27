@@ -298,6 +298,9 @@
   right: 1.5em;
   display: none;
   z-index: 999;
+  border-radius: 5px;
+  padding: 0.5em;
+  background-color: rgba(229, 233, 236, 1); 
 }
 
 .bar1, .bar2, .bar3 {
