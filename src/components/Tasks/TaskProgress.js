@@ -113,24 +113,26 @@ export default function TaskProgress(props) {
       <DragDropContext
         onDragEnd={onDragEnd}
         onBeforeCapture={onBeforeCapture}
-      >
-        <div key="assigned" className="task-column task-assigned">
-          <h1>Assigned</h1>
-          <Droppable droppableId="assigned">
-            {(provided, snapshot) => (
-              <div 
-                key="assigned"
-                index="1"
-                ref={provided.innerRef} 
-                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'white'}}
-                {...provided.droppableProps}
-              >
-                { assigned }
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-        </div>
+        >
+          <div className="task-progress-list-container">
+            <h1>Assigned</h1>
+            <div key="assigned" className="task-column task-assigned">
+              <Droppable droppableId="assigned">
+                {(provided, snapshot) => (
+                  <div 
+                    key="assigned"
+                    index="1"
+                    ref={provided.innerRef} 
+                    style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'white'}}
+                    {...provided.droppableProps}
+                  >
+                    { assigned }
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </div>
+          </div>
 
         <div key="inProgress" className=" task-column task-inprogress">
           <h1>In-Progress</h1>
@@ -161,7 +163,7 @@ export default function TaskProgress(props) {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
-                  <h1>Delete</h1>
+                  <span className="trash-icon"><i class="far fa-trash-alt fa-3x"></i></span>
                   {provided.placeholder}
                 </div>
               )}

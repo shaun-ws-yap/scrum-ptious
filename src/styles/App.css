@@ -129,10 +129,15 @@
 }
 
 .trash--visible {
-  display: flex;
-  position: fixed;
-  right: 150;
-  bottom: 100;
+  position: absolute;
+  left: -10em;
+  top: 50vh;
+  color: white;
+}
+
+.trash--visible:hover {
+  color: orange;
+  z-index: 950;
 }
 
 .trash--hidden {
@@ -264,3 +269,16 @@
   content: "";
 }
 
+@media only screen and (max-width: 1900px) {
+  .trash--visible {
+    right: 1.75em;
+    top: 0.75em;
+  }
+}
+
+@media only screen and (max-width: 1700px) {
+  .trash--visible {
+    right: 1em;
+    top: 0.75em;
+  }
+}

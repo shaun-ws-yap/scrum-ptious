@@ -1,5 +1,5 @@
 .task-dashboard-top {
-  overflow-y: scroll;
+  overflow: hidden;
   height: 60%;
 }
 
@@ -21,17 +21,26 @@
 
 .task-assigned {
   width: 33%;
-  overflow: auto;
+  height: 50vh;
+  overflow-y: scroll;
+} 
+
+.task-assigned::-webkit-scrollbar,
+.task-inprogress::-webkit-scrollbar,
+.task-completed::-webkit-scrollbar {
+  display: none;
 }
 
 .task-inprogress {
   width: 33%;
-  overflow: auto;
+  height: 50vh;
+  overflow-y: scroll;
 }
 
 .task-completed {
   width: 33%;
-  overflow: auto;
+  height: 50vh;
+  overflow-y: scroll;
 }
 
 .task-droppable-inprogress {
@@ -106,3 +115,10 @@
 .task__item--complete:hover {
   background-color: #57DC55;
 }
+
+.task-progress-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+}
+
