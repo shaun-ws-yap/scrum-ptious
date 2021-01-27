@@ -14,6 +14,7 @@ export default function IndependentProgress(props) {
   return (
     <div className="employee-chart">
 
+      {/* stack em against others */}
       <div className="independent-progress">
         <div className="bar-chart">
           <Bar
@@ -24,13 +25,29 @@ export default function IndependentProgress(props) {
                   label: '# of tasks',
                   data: [assignedTasks, inProgressTasks, inReviewTasks, lateTasks, completeTasks],
                   backgroundColor: [
-                    'rgba(28, 20, 255, 0.8)',
-                    'rgba(255, 247, 20, 0.8)',
-                    'rgba(232, 86, 2, 0.8)',
-                    'rgba(255, 20, 20, 0.8)',
-                    'rgba(33, 232, 2, 0.8)',
-                  ]
-                }
+                    'rgba(61, 173, 209, 0.2)',
+                    'rgba(92, 92, 183, 0.2)',
+                    'rgba(255, 181, 75, 0.2)',
+                    'rgba(212, 0, 17, 0.2)',
+                    'rgba(148, 203, 179, 0.2)',
+                  ],
+                  borderColor: [
+                    'rgba(61, 173, 209, 1)',
+                    'rgba(92, 92, 183, 1)',
+                    'rgba(255, 181, 75, 1)',
+                    'rgba(212, 0, 17, 1)',
+                    'rgba(148, 203, 179, 1)',
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(61, 173, 209, 0.5)',
+                    'rgba(92, 92, 183, 0.5)',
+                    'rgba(255, 181, 75, 0.5)',
+                    'rgba(212, 0, 17, 0.5)',
+                    'rgba(148, 203, 179, 0.5)',
+                  ],
+                  borderWidth: 1,
+                  hoverBorderWidth: 2,
+                },
               ],
             }}
             height={400}
@@ -51,6 +68,14 @@ export default function IndependentProgress(props) {
                 yAxes: [{
                   ticks: {
                     beginAtZero: true
+                  },
+                  gridLines: {
+                    color: "rgba(0, 0, 0, 0)"
+                  }
+                }],
+                xAxes: [{
+                  gridLines: {
+                    color: "rgba(0, 0, 0, 0)"
                   }
                 }]
               }
@@ -65,14 +90,32 @@ export default function IndependentProgress(props) {
               datasets: [
                 {
                   label: '# of tasks',
+                  spanGaps: false,
                   data: [assignedTasks, inProgressTasks, inReviewTasks, lateTasks, completeTasks],
+                  fill: false,
                   backgroundColor: [
-                    'rgba(28, 20, 255, 0.8)',
-                    'rgba(255, 247, 20, 0.8)',
-                    'rgba(232, 86, 2, 0.8)',
-                    'rgba(255, 20, 20, 0.8)',
-                    'rgba(33, 232, 2, 0.8)',
-                  ]
+                    'rgba(61, 173, 209, 0.2)',
+                    'rgba(92, 92, 183, 0.2)',
+                    'rgba(255, 181, 75, 0.2)',
+                    'rgba(212, 0, 17, 0.2)',
+                    'rgba(148, 203, 179, 0.2)',
+                  ],
+                  borderColor: [
+                    'rgba(61, 173, 209, 1)',
+                    'rgba(92, 92, 183, 1)',
+                    'rgba(255, 181, 75, 1)',
+                    'rgba(212, 0, 17, 1)',
+                    'rgba(148, 203, 179, 1)',
+                  ],
+                  hoverBackgroundColor: [
+                    'rgba(61, 173, 209, 0.5)',
+                    'rgba(92, 92, 183, 0.5)',
+                    'rgba(255, 181, 75, 0.5)',
+                    'rgba(212, 0, 17, 0.5)',
+                    'rgba(148, 203, 179, 0.5)',
+                  ],
+                  borderWidth: 1,
+                  hoverBorderWidth: 2,
                 }
               ],
             }}
@@ -82,7 +125,7 @@ export default function IndependentProgress(props) {
               maintainAspectRatio: false,
               title: {
                 display: true,
-                text: 'Your Progress',
+                text: 'Your Peers',
                 fontSize: 25,
                 fontFamily: 'Poppins'
               },

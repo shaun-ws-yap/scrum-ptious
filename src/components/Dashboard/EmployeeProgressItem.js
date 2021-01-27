@@ -66,12 +66,28 @@ export default function EmployeeProgress(props) {
                 label: '# of tasks',
                 data: [props.assigned, props.inProgress, props.inReview, props.late, props.complete],
                 backgroundColor: [
-                  'rgba(28, 20, 255, 0.8)',
-                  'rgba(255, 247, 20, 0.8)',
-                  'rgba(232, 86, 2, 0.8)',
-                  'rgba(255, 20, 20, 0.8)',
-                  'rgba(33, 232, 2, 0.8)',
-                ]
+                  'rgba(61, 173, 209, 0.65)',
+                  'rgba(92, 92, 183, 0.65)',
+                  'rgba(255, 181, 75, 0.65)',
+                  'rgba(212, 0, 17, 0.65)',
+                  'rgba(148, 203, 179, 0.65)',
+                ],
+                borderColor: [
+                  'rgba(61, 173, 209, 1)',
+                  'rgba(92, 92, 183, 1)',
+                  'rgba(255, 181, 75, 1)',
+                  'rgba(212, 0, 17, 1)',
+                  'rgba(148, 203, 179, 1)',
+                ],
+                hoverBackgroundColor: [
+                  'rgba(61, 173, 209, 0.85)',
+                  'rgba(92, 92, 183, 0.85)',
+                  'rgba(255, 181, 75, 0.85)',
+                  'rgba(212, 0, 17, 0.85)',
+                  'rgba(148, 203, 179, 0.85)',
+                ],
+                borderWidth: 1,
+                hoverBorderWidth: 2,
               }
             ],
           }}
@@ -88,7 +104,7 @@ export default function EmployeeProgress(props) {
             },
             legend: {
               display: true,
-              position: 'left'
+              position: 'right'
             }
           }}
         />
@@ -113,7 +129,7 @@ export default function EmployeeProgress(props) {
             },
             legend: {
               display: true,
-              position: 'left'
+              position: 'right'
             },
             scale: {
               angleLines: {
