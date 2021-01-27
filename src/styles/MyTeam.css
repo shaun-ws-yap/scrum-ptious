@@ -1,0 +1,63 @@
+.my-team-header {
+  text-align: center;
+  padding: 0.3em 0 0.6em 0;
+  height: 15%;
+  font-size: 2.5em;
+}
+
+.team-list-container {
+  height: 85%;
+  border-radius: 20px;
+  background-color: white;
+  margin: 0 1em 0 1em;
+  overflow-y: scroll;
+}
+
+.team-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  width: 100%;
+  padding: 1em 2em;
+  transition: 300ms;
+}
+
+.my-team-item {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  padding: 1em 1em 1em 2em;
+  border-radius: 1em;
+}
+
+.my-team-item-avatar {
+  border-radius: 50%;
+  width: 4em;
+  height: 4em;
+  transition: 200ms;
+}
+
+.my-team-item:hover .my-team-item-avatar {
+  width: 4.3em;
+  height: 4.3em;
+  filter: opacity(50%);
+  /* background-color: rgb(231, 231, 231); */
+}
+
+.my-team-item-right {
+  padding-left: 1em;
+}
+
+.my-team-item-name {
+  font-size: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+.my-team-item-details {
+  font-size: 0.8em;
+  padding-left: 0.5em;
+}

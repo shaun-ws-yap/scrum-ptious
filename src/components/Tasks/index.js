@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 // import ProjectProgress from './ProjectProgress';
 import TaskProgress from './TaskProgress';
 import MyTeam from './MyTeam';
-import TaskResource from './TaskResource';
 
 import filterTasksByUser from '../../helpers/filterTasksByUser';
 
@@ -57,14 +56,16 @@ export default function Tasks(props) {
           setTasks={setTasks}
         />
       </div>
+      { role === 1 && 
       <div className="task-dashboard-bottom">
-        { role === 1 && 
+        <div className="my-team-header">My Team</div>
+        <div className="team-list-container">
           <MyTeam 
             teamUsers={teamUsers} 
             selectTasksByUser={selectTasksByUser}
-          />}
-        { role === 2 && <TaskResource />}
-      </div>
+          />
+        </div>
+      </div>}
     </div>
   )
 }
