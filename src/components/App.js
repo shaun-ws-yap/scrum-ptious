@@ -51,6 +51,9 @@ function App() {
     deadlinesListBackground: "white",
     chartBackground: "white",
     chartBorder: "1px solid white",
+    chatBoxBackground: "white",
+    chatBoxFontColor: "black",
+    memberListBackground: "white",
     titleColor: "#dc658b",
     tagLineColor: "black"
   };
@@ -63,6 +66,9 @@ function App() {
     deadlinesListBackground: "#A9A9A9",
     chartBackground: "#757575",
     chartBorder: "1px solid #757575",
+    chatBoxBackground: "#757575",
+    chatBoxFontColor: "white",
+    memberListBackground: "#757575",
     titleColor: "lightpink",
     tagLineColor: "lavender",
   };
