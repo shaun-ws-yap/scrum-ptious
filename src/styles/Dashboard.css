@@ -129,6 +129,14 @@
   margin: auto;
 }
 
+.independent-progress {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  position: relative;
+  margin: auto;
+}
+
 .pie-chart {
   position: relative;
   margin: 1.5em auto;
@@ -139,6 +147,24 @@
 }
 
 .radar-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+}
+
+.line-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+}
+
+.bar-chart {
   position: relative;
   margin: 1.5em auto;
   width: 50%;
