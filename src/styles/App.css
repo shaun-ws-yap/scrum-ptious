@@ -88,6 +88,9 @@
 
 }
 
+.dark-mode-toggle {
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;

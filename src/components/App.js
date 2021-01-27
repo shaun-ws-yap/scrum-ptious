@@ -28,6 +28,8 @@ import 'react-tabs/style/react-tabs.css';
 import { Button } from 'react-bootstrap';
 import { ThemeProvider } from 'styled-components';
 import styled from 'styled-components';
+import { CgSun } from 'react-icons/cg';
+import { HiMoon } from 'react-icons/hi';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -55,6 +57,7 @@ function App() {
     chatBoxFontColor: "black",
     memberListBackground: "white",
     myTeamBackground: 'white',
+    darkModeToggle: "darkgrey",
   };
 
   const DarkTheme = {
@@ -69,6 +72,7 @@ function App() {
     chatBoxFontColor: "white",
     memberListBackground: "#757575",
     myTeamBackground: "#757575",
+    darkModeToggle: "lightpink",
   };
 
   const themes = {
@@ -78,6 +82,7 @@ function App() {
 
   const AppContainer = styled.div`
   background: ${props => props.theme.appContainerBackground};
+  transition: all .5s ease;
   `;
   
   const Navsidebar = styled.div`
@@ -89,7 +94,21 @@ function App() {
   const UserSidePanel = styled.div`
   background: ${props => props.theme.userPanelBackground};
   color: ${props => props.theme.deadlinesFontColor};
+  transition: all .5s ease;
   `;
+
+  const Toggle = styled.button`
+  background: none;
+  color: ${props => props.theme.darkModeToggle};
+  border: none;
+  border-radius: 50%;
+  &:focus {
+    outline: none;
+  }
+  transition: all .5s ease;
+  `;
+
+  const icon = theme === 'light' ? <HiMoon size={50} /> : <CgSun size={50} />
 
   const { socket } = useSocket();
 
@@ -150,10 +169,8 @@ function App() {
   return (
     <ThemeProvider theme={themes[theme]}>
       <AppContainer className="app-container">
-    {/* <div className="app-container"> */}
       <NotificationContainer />
       <Navsidebar className="sidebar">
-      {/* <section className="sidebar"> */}
         <img 
           alt="Scrum-ptious Logo"
           className="sidebar-centered"
@@ -171,9 +188,9 @@ function App() {
             theme={theme}
             setTheme={setTheme}
           />
-          <button onClick={changeTheme}>
-            Yeet mode
-          </button>
+          <Toggle onClick={changeTheme}>
+            {icon}
+          </Toggle>
         </nav>
         <span 
           className="logout"
@@ -186,7 +203,6 @@ function App() {
           <span></span>
         </span>
         </Navsidebar>
-      {/* </section> */}
       {/* <div className="wrapper"> */}
         <section className="dashboard-main">
           { selectedMenu === DASHBOARD && 
@@ -229,7 +245,6 @@ function App() {
             />}
         </section>
         <UserSidePanel className="user__info">
-        {/* <section className="user__info"> */}
           <UserPanel 
             // wide={windowWidth > 1300}
             userInfo={userInfo} 
@@ -238,9 +253,7 @@ function App() {
             theme={theme}
           />
         </UserSidePanel>
-        {/* </section> */}
       {/* </div> */}
-    {/* </div> */}
     </AppContainer>
     </ThemeProvider>
   );
