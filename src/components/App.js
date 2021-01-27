@@ -16,6 +16,7 @@ import Submissions from './Submissions';
 import Sidebar from './Sidebar';
 import UserPanel from './UserPanel';
 import Login from './Login';
+import SlidingPanel from 'react-sliding-side-panel';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useNotifications from '../hooks/useNotifications';
@@ -163,7 +164,7 @@ function App() {
             userInfo={userInfo} 
             tasks={teamTasks} 
             teamUsers={teamUsers} 
-          /> 
+          />
         </section>
       {/* </div> */}
     </div>
