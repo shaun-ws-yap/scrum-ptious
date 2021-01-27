@@ -298,6 +298,9 @@
   right: 1.5em;
   display: none;
   z-index: 999;
+  border-radius: 5px;
+  padding: 0.5em;
+  background-color: rgba(229, 233, 236, 1); 
 }
 
 .bar1, .bar2, .bar3 {
@@ -325,7 +328,7 @@
   position: fixed;
   flex-direction: column;
   background-color: rgba(229, 233, 236, 0.35);
-  border-radius: 25px;
+  border-radius: 25px ;
   padding: 1em;
   text-align: center;
   height: calc(100vh - 3em);
@@ -337,6 +340,22 @@
 
 .sliding-panel-container.active {
   z-index: 900;
+}
+
+.user-filter-btn {
+  position: absolute;
+  top: calc(0.5em + (100px / 2) - 3px);
+  left: calc(1.5em + 2px);
+  color: rgba(50, 53, 56, 0.6);
+}
+
+.user-filter-btn:hover {
+  color: rgba(50, 53, 56, 0.8);
+  cursor: pointer;
+}
+
+.user-panel .change {
+  border-top-left-radius: 0;
 }
 
 /* Media queries start here */

@@ -92,11 +92,11 @@ export default function TaskProgress(props) {
       return;
     }
 
-    if (role === 2 && source.droppableId === "assigned" && destination.droppableId === "inProgress") {
+    if (role !== 1 && source.droppableId === "assigned" && destination.droppableId === "inProgress") {
       console.log(task);
       moveTask(task, 1);
           }
-    if (role === 2 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
+    if (role !== 1 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
       moveTask(task, 0);
     }
     if (role === 1 && destination.droppableId === "trash") {
@@ -114,15 +114,17 @@ export default function TaskProgress(props) {
         onDragEnd={onDragEnd}
         onBeforeCapture={onBeforeCapture}
       >
-        <div key="assigned" className="task-column task-assigned">
+
+        <div key="assigned" className="task-progress-container-assigned">
           <h1>Assigned</h1>
           <Droppable droppableId="assigned">
             {(provided, snapshot) => (
               <div 
+                className="task-column task-assigned"
                 key="assigned"
                 index="1"
                 ref={provided.innerRef} 
-                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'white'}}
+                style={{backgroundColor: snapshot.isDraggingOver ? 'rgba(61, 173, 209, 0.5)' : 'rgba(61, 173, 209, 0.25)'}}
                 {...provided.droppableProps}
               >
                 { assigned }
@@ -131,24 +133,26 @@ export default function TaskProgress(props) {
             )}
           </Droppable>
         </div>
+        
 
-        <div key="inProgress" className=" task-column task-inprogress">
+        <div key="inProgress" className="task-progress-container-inprogress">
           <h1>In-Progress</h1>
-          <div className="task-droppable-inprogress">
-            <Droppable droppableId="inProgress">
-              {(provided, snapshot) => (
-                <div 
-                  key="inProgress"
-                  index="2"
-                  ref={provided.innerRef} 
-                  {...provided.droppableProps}
-                >
-                  { inProgress }
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </div>
+          <Droppable droppableId="inProgress">
+            {(provided, snapshot) => (
+              <div 
+                className="task-column task-inprogress"
+                key="inProgress"
+                index="2"
+                ref={provided.innerRef} 
+                {...provided.droppableProps}
+                style={{backgroundColor: snapshot.isDraggingOver ? 'rgba(92, 92, 183, 0.5)' : 'rgba(92, 92, 183, 0.25)'}}
+              {...provided.droppableProps}
+              >
+                { inProgress }
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         </div>
 
         { role === 1 && (
@@ -161,7 +165,7 @@ export default function TaskProgress(props) {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
-                  <h1>Delete</h1>
+                  <span className="trash-icon"><i class="far fa-trash-alt fa-3x"></i></span>
                   {provided.placeholder}
                 </div>
               )}
@@ -170,9 +174,11 @@ export default function TaskProgress(props) {
         )} 
       </DragDropContext>
 
-      <div className="task-column task-completed">
+      <div className="task-progress-container-completed">
         <h1>Completed</h1>
-        { completed }
+        <div className="task-column task-completed">
+          { completed }
+        </div>
       </div>
     </div>
   )

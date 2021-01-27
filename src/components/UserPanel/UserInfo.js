@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import DeadlineList from './DeadlineList';
 
@@ -10,14 +10,29 @@ const roles = {
 }
 
 export default function UserInfo(props) {
-  const { userInfo, tasks, teamUsers, transparent } = props;
+  const { userInfo, tasks, teamUsers, transparent, selectedMenu } = props;
   const filteredTasks = filterDeadlineTasks(tasks);
+  const [openFilter, setOpenFilter] = useState(false);
+
+  const toggleFilter = (state) => {
+    document.getElementById("team-list-filter").classList.toggle("change");
+    
+    return state ? setOpenFilter(false) : setOpenFilter(true);
+  }
 
   return (
     <>
-      <div className={`user-info-transparent-${transparent}`}>
+      <div className={`user-info-transparent-${transparent}${openFilter && selectedMenu === "Tasks" ? ' change' : ''}`}  id="user-panel-wings">
         { userInfo && ( 
           <>
+            { transparent === true && selectedMenu === "Tasks" && (
+              <span 
+                className="user-filter-btn"
+                onClick={event => toggleFilter(openFilter)}
+              >
+                <i class="fas fa-filter fa-2x"></i>
+              </span>
+            )}
             <img alt={userInfo.name} src={userInfo.avatar} className="user-avatar"></img>
             <h5>Welcome, {userInfo.name}</h5>
             <h6>{roles[userInfo.role]}</h6>

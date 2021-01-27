@@ -20,10 +20,12 @@ export default function MyTeamItem(props) {
     >
       <img src={avatar} alt= "User Avatar" className='my-team-item-avatar'></img>
       <div className='my-team-item-right'>
-        <div className='my-team-item-name'>{name}</div>
-        <div className='my-team-item-details'>{roles[role]}</div>
+        <div className='my-team-item-name'>{role === 1 ? 'Show All' : name}</div>
+
+        {/* <div className='my-team-item-details'>{roles[role]}</div>
         <div className='my-team-item-details'>{email}</div>
-        <div className='my-team-item-details'>{phone_number}</div>
+        <div className='my-team-item-details'>{phone_number}</div> */}
+
       </div>
     </div>
   )

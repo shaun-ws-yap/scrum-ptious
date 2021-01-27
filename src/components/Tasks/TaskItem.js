@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { changeTaskStatus } from '../../helpers/taskStatus';
+import getUserNameById from '../../helpers/getUserNameById';
 import classNames from 'classnames';
 
 import { Modal, Button } from 'react-bootstrap';
@@ -31,7 +32,8 @@ export default function TaskItem(props) {
     due_date, 
     creation_date, 
     status, 
-    is_late
+    is_late,
+    employee_id
   } = taskItem;
   
   const [show, setShow] = useState(false);
@@ -52,14 +54,30 @@ export default function TaskItem(props) {
 
   return (
     <>
-      <NotificationContainer />
-      <li className={taskClass}
+      <div className={taskClass}
         onClick={event => setShow(true)}
       >
-        <h4>{title}</h4>
-        <p>{description}</p>
-        <label for="due_date">DUE: <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment></label>
-      </li>
+        <h5 className="task-item-title">{title}</h5>
+        <p className="task-item-name'">{getUserNameById(teamUsers, employee_id)}</p>
+        <p className="task-item-description">{description}</p>
+        {/* { is_late && <span className="badge badge-danger task-item-badge">LATE</span> } */}
+        <div className="task-item-dates">
+          <div className="card-date">
+            <label for="creation_date">On: </label>
+            <Moment name="creation_date" format="Do MMM YYYY h:mm A" >{creation_date}</Moment> 
+          </div>
+          <div className="tas-item-card-date">
+            <label for="due_date">Due:</label>
+            <Moment name="due_date" format="Do MMM YYYY h:mm A" >{due_date}</Moment>
+          </div>
+        </div>
+        <div className="task-item-badge-container">
+          <div className="task-item-badge">
+            { status === 0 && <i class="fas fa-people-arrows"></i> }
+            { status === 1 && <i class="fas fa-spinner"></i> }
+          </div>
+        </div>
+      </div>
 
       <form
         onSubmit={event => event.preventDefault()}

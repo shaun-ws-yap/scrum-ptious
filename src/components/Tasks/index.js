@@ -58,8 +58,7 @@ export default function Tasks(props) {
       </div>
       { role === 1 && 
       <div className="task-dashboard-bottom">
-        <div className="my-team-header">My Team</div>
-        <div className="team-list-container">
+        <div className="team-list-container" id="team-list-filter">
           <MyTeam 
             teamUsers={teamUsers} 
             selectTasksByUser={selectTasksByUser}
