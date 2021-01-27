@@ -79,8 +79,9 @@
 .app-container {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
+  position: fixed;
   /* min-height: 100vh; */
   justify-content: center;
   background-color: rgba(229, 233, 236, 0.35);
@@ -88,29 +89,20 @@
 }
 
 .sidebar {
-  /* width: 315px;
-  margin-top: 1em;
-  margin-left: 1em;
   display: flex;
   flex-direction: column;
-  background-color: #286FEA;
-  text-align: center;
-  border-radius: 20px;
-  height: calc(100% - 2em);
-   */
-  display: flex;
-  flex-direction: column;
-  width: 20%;
-  min-width: 200px;
-  max-width: 320px;
-  height: 100%;
+  width: 275px;
+  min-width: 275px;
+  max-width: 275px;
+  height: calc(100vh - 3em);
+  min-height: calc(100vh - 3em);
   min-height: 800px;
   background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));
   text-align: center;
-  /* border-radius: 20px; */
   position: fixed;
+  border-radius: 25px;
   left: 0;
-  top: 0;
+  margin: 1.5em 1.5em;
 }
 
 .sidebar.collapsed {

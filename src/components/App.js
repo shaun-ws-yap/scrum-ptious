@@ -120,51 +120,51 @@ function App() {
         </span>
       </section>
       {/* <div className="wrapper"> */}
-      <section className="main">
-        { selectedMenu === DASHBOARD && 
-          <Dashboard
-            tasks={userTasks} 
-            role={role} 
-            teamTasks={teamTasks}
-            teamUsers={teamUsers}
-          /> }
-        { selectedMenu === TASKS && 
-          <Tasks 
-            socket={socket} 
-            role={role} 
-            tasks={role === 1 ? teamTasks : userTasks} 
-            teamUsers={teamUsers} 
-            submissions={submissions}
-            deleteTaskItem={deleteTaskItem} 
-            editTaskItem={editTaskItem}
-            submitTaskItem={submitTaskItem}
-            setErrorNotification={setErrorNotification}
-            moveTask={moveTask}
-            setTasks={setTasks}
-          />}
-        { selectedMenu === CHAT && 
-          <Chat 
-            socket={socket} 
+        <section className="dashboard-main">
+          { selectedMenu === DASHBOARD && 
+            <Dashboard
+              tasks={userTasks} 
+              role={role} 
+              teamTasks={teamTasks}
+              teamUsers={teamUsers}
+            /> }
+          { selectedMenu === TASKS && 
+            <Tasks 
+              socket={socket} 
+              role={role} 
+              tasks={role === 1 ? teamTasks : userTasks} 
+              teamUsers={teamUsers} 
+              submissions={submissions}
+              deleteTaskItem={deleteTaskItem} 
+              editTaskItem={editTaskItem}
+              submitTaskItem={submitTaskItem}
+              setErrorNotification={setErrorNotification}
+              moveTask={moveTask}
+              setTasks={setTasks}
+            />}
+          { selectedMenu === CHAT && 
+            <Chat 
+              socket={socket} 
+              userInfo={userInfo} 
+              teamUsers={teamUsers}
+            />}
+          { selectedMenu === SUBMISSIONS &&
+            <Submissions
+              teamUsers={teamUsers}
+              teamTasks={teamTasks}
+              giveFeedback={giveFeedback}
+              setUserNotification={setUserNotification}
+              user={userInfo}
+            />}
+        </section>
+        <section className="user__info">
+          <UserPanel 
+            // wide={windowWidth > 1300}
             userInfo={userInfo} 
-            teamUsers={teamUsers}
-          />}
-        { selectedMenu === SUBMISSIONS &&
-          <Submissions
-            teamUsers={teamUsers}
-            teamTasks={teamTasks}
-            giveFeedback={giveFeedback}
-            setUserNotification={setUserNotification}
-            user={userInfo}
-          />}
-      </section>
-      <section className="user__info">
-        <UserPanel 
-          // wide={windowWidth > 1300}
-          userInfo={userInfo} 
-          tasks={teamTasks} 
-          teamUsers={teamUsers} 
-        /> 
-      </section>
+            tasks={teamTasks} 
+            teamUsers={teamUsers} 
+          /> 
+        </section>
       {/* </div> */}
     </div>
   );

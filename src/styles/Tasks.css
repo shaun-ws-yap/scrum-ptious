@@ -68,7 +68,7 @@
   background-color: #FF7171;
   flex-direction: row;
   padding: 1em;
-  margin-right: 1.5em;
+  /* margin-right: 1.5em; */
   margin-bottom: 1em;
   transition: 300ms;
   cursor: pointer;
