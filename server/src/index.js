@@ -10,7 +10,7 @@ const io         = require('socket.io')(http);
 //const app        = express();
 
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
-const { getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
+const { getMessagesAfterTime, getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
 const { getTasksByTeam, saveTask, editTask, deleteTask } = require('./routes/queries/tasks');
 const { getLoginData } = require('./routes/queries/loginData');
 const { updateStatusAndGetTasks, submitTaskForReview, saveFeedback } = require('./routes/queries/submit-for-review');
@@ -123,12 +123,19 @@ io.on('connection', (socket) => {
   })
 
   //chat
-  socket.on('joining msg', (username, userId) => {
+  socket.on('joining msg', (username, userId, mostRecentMsgTime) => {
     addClientToMap(userId, socket.id);
-    getRecentMessages(db, 12)
+    if (mostRecentMsgTime === 0) {
+      getRecentMessages(db, 12)
       .then(data => {
         io.emit('user joined', parseMap(), username, data.rows);
       })
+    } else {
+      getMessagesAfterTime(db, mostRecentMsgTime)
+      .then(data => {
+        io.emit('user joined', parseMap(), username, data.rows);
+      })
+    }
   });
 
   socket.on('leaving msg', (username, userId) => {

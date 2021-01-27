@@ -12,6 +12,26 @@ const saveMessage = (db, messageData) => {
   `, [sender_id, team_id, time_iso, message]);
 };
 
+const getMessagesAfterTime = (db, time_iso) => {
+  return db.query(`
+    SELECT 
+      T1.team_id,
+      sender_id,
+      name as sender,
+      message,
+      (time_iso at time zone 'PST8PDT') as time_iso,
+      to_char(time_iso at time zone 'PST8PDT', 'Mon FMDD, YYYY at FMHH12:MI AM') as time_locale
+    FROM (
+      SELECT * 
+      FROM messages
+      WHERE time_iso > $1
+      ORDER BY time_iso DESC
+    ) T1
+    JOIN employees ON employees.id = sender_id
+    ORDER BY time_iso
+  `, [time_iso]);
+}
+
 const getRecentMessages = (db, numMsg) => {
   return db.query(`
     SELECT 
@@ -73,4 +93,5 @@ module.exports = {
   getRecentMessages,
   getAllMessages,
   queryMessages,
+  getMessagesAfterTime,
 }
