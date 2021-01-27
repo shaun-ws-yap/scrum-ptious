@@ -112,7 +112,6 @@
   flex-direction: column;
   width: 80% !important; 
   border-radius: 25px;
-  background-color: white;
   padding: 1em;
   transition: 300ms;
   height: calc(100% - 1em);

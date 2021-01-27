@@ -46,15 +46,19 @@ function App() {
   const LightTheme = {
     appContainerBackground: "rgba(229, 233, 236, 0.35)",
     sidebarBackground: "linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));",
-    userPanelBackground: "#E6E6E6",
+    userPanelBackground: "#A9A9A9",
+    chartBackground: "white",
+    chartBorder: "1px solid white",
     titleColor: "#dc658b",
     tagLineColor: "black"
   };
 
   const DarkTheme = {
-    appContainerBackground: "#E6E6E6",
+    appContainerBackground: "#A9A9A9",
     sidebarBackground: "#282c36",
     userPanelBackground: "#282c36",
+    chartBackground: "#A9A9A9",
+    chartBorder: "1px solid #A9A9A9",
     titleColor: "lightpink",
     tagLineColor: "lavender",
   };
@@ -155,6 +159,8 @@ function App() {
             createTaskItem={createTaskItem}
             errorNotification={errorNotification}
             setErrorNotification={setErrorNotification}
+            theme={theme}
+            setTheme={setTheme}
           />
           <button onClick={changeTheme}>
             Yeet mode
@@ -180,6 +186,8 @@ function App() {
               role={role} 
               teamTasks={teamTasks}
               teamUsers={teamUsers}
+              theme={theme}
+              setTheme={setTheme}
             /> }
           { selectedMenu === TASKS && 
             <Tasks 

@@ -3,12 +3,13 @@ import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
 
 import EmployeeProgressItem from './EmployeeProgressItem';
 import { teamTaskStatus } from '../../helpers/taskStatus';
+import styled from 'styled-components';
 
 export default function EmployeeProgress(props) {
   const [index, setIndex] = useState(0);
   
   const userData = props.teamUsers.filter(user => user.role !== 1).map((user) => {
-    const taskData = teamTaskStatus(props.teamTasks, user.team_id, user.id);
+  const taskData = teamTaskStatus(props.teamTasks, user.team_id, user.id);
 
     return (
       <TabPanel>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { taskStatus, lateTaskStatus } from '../../helpers/taskStatus';
+import styled from 'styled-components';
 
 // import ProjectProgressListItem from './ProjectProgressListItem';
 
@@ -12,9 +13,15 @@ export default function ProjectProgress(props) {
   const completeTasks = taskStatus(3, props.teamTasks);
   const lateTasks = lateTaskStatus(props.teamTasks);
 
+  const ProjectProgress = styled.div`
+  border: ${props => props.theme.chartBorder};
+  background: ${props => props.theme.chartBackground};
+  color: white;
+  `;
+
 
   return (
-    <div className="project-progress">
+    <ProjectProgress className="project-progress">
       <Doughnut
         data={{
           labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],
@@ -41,13 +48,18 @@ export default function ProjectProgress(props) {
             text: 'Project Progress',
             fontSize: 25,
             fontFamily: 'Poppins',
+            fontColor: props.theme === 'light' ? '' : 'white',
           },
           legend: {
             display: true,
-            position: 'right'
+            position: 'right',
+            fontColor: props.theme === 'light' ? '' : 'white',
+            labels: {
+              fontColor: props.theme === 'light' ? '' : 'white',
+            }
           }
         }}
       />
-    </div>
+      </ProjectProgress>
   )
 }
