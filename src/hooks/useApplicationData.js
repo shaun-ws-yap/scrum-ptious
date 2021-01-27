@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import filterTasksByUser from '../helpers/filterTasksByUser';
 // import { Prev } from 'react-bootstrap/esm/PageItem';
 
+
 export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
     userInfo: {},
@@ -9,8 +10,18 @@ export default function useApplicationData(socket, loginToken, setError) {
     userTasks: [],
     teamUsers: [],
     teamTasks: [],
-    deadlines: [],
     submissions: [],
+    messages: [],
+  });
+  
+  const logout = () => setState({
+    userInfo: {},
+    role: 0,
+    userTasks: [],
+    teamUsers: [],
+    teamTasks: [],
+    submissions: [],
+    messages: [],
   });
   
   const setTasks = teamTasks => {
@@ -21,22 +32,33 @@ export default function useApplicationData(socket, loginToken, setError) {
     return {...prev, submissions }
   })
 
+  const setMessages = (messages, shouldAppend) => setState(prev => {
+    if (shouldAppend) {
+      return {...prev, messages: [...prev.messages, ...messages]};
+    }
+    return {...prev, messages: [...messages, ...prev.messages]};
+  })
+
   useEffect(() => {
     if (!loginToken) {
       return;
     }
 
+    if (!socket) {
+      return;
+    }
+
+    console.log('log in');
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
-      const { userTasks, userInfo, teamTasks, teamUsers, deadlines, submissions } = loginData;
+      const { userTasks, userInfo, teamTasks, teamUsers, submissions } = loginData;
       setState(prev => ({ 
         ...prev, 
         userTasks, 
         userInfo, 
         teamTasks, 
         teamUsers, 
-        deadlines,
         submissions, 
         role: userInfo.role, 
       }));
@@ -52,12 +74,14 @@ export default function useApplicationData(socket, loginToken, setError) {
         socket.off('error');
       }
     }
-  }, [loginToken]);
+  }, [socket]);
 
 
   return { 
     state, 
+    logout,
     setTasks,  
     setSubmissions,
+    setMessages,
   }
 }

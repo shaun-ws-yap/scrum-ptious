@@ -84,11 +84,8 @@
   position: fixed;
   /* min-height: 100vh; */
   justify-content: center;
-  /* background-color: rgba(229, 233, 236, 0.35); */
+  background-color: rgba(229, 233, 236, 0.35);
 
-}
-
-.dark-mode-toggle {
 }
 
 .sidebar {
@@ -100,7 +97,7 @@
   height: calc(100vh - 3em);
   min-height: calc(100vh - 3em);
   min-height: 800px;
-  /* background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%)); */
+  background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));
   text-align: center;
   position: fixed;
   border-radius: 25px;
@@ -144,7 +141,7 @@
 
 .create-task {
   margin-top: 2em;
-  /* background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%)); */
+  background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));
   color: white;
   font-size: 24px;
   padding-top: 0.5em;

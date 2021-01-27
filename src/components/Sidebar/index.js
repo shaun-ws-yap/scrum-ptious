@@ -19,27 +19,23 @@ export default function Sidebar(props) {
     setErrorNotification
   } = props
 
-  const menuItems = [
-    'Dashboard',
-    'Tasks',
-    'Chat',
-    userInfo.role === 1 ? 'Submissions' : ''
-  ];
+  const menuItems = userInfo.role === 1 ? 
+    ['Dashboard', 'Tasks', 'Chat','Submissions'] : 
+    ['Dashboard', 'Tasks', 'Chat'];
 
   return (
     <ul>
-     { menuItems.map((item, index) => {
-        return (
-          <SidebarItem
-            key={index}
-            name={item}
-            selected={selectedMenu === item}
-            setMenu={setMenu}
-          />
-        )
+    { menuItems.map((item, index) => {
+      return (
+        <SidebarItem
+          key={index}
+          name={item}
+          selected={selectedMenu === item}
+          setMenu={setMenu}
+        />)
       })}
       { userInfo.role === 1 && (
-        <div>
+        <div key={4}>
           <NewTaskItem
             team={userInfo.team_id}
             teamUsers={teamUsers} 

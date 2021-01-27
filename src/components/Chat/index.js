@@ -4,7 +4,6 @@ import ChatLog from "./ChatLog";
 import MembersList from "./MembersList";
 import InputBox from "./InputBox";
 import ScrollToBottom from 'react-scroll-to-bottom';
-import styled from 'styled-components';
 
 import '../../styles/Chat.css';
 
@@ -18,12 +17,12 @@ export default function Chat(props) {
   `;
 
   const { 
-    messages, 
+    //messages, 
     joinMessage, 
     onlineUsers, 
     getPrevMessages, 
     sendMessage,
-  } = useChat(socket, userInfo);
+  } = useChat(socket, userInfo, messages, setMessages);
 
   return (
     <div className="chat-container">

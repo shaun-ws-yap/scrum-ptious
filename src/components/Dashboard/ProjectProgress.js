@@ -1,7 +1,6 @@
 import React from 'react';
 import { Doughnut, Bar } from 'react-chartjs-2';
 import { taskStatus, lateTaskStatus } from '../../helpers/taskStatus';
-import styled from 'styled-components';
 
 // import ProjectProgressListItem from './ProjectProgressListItem';
 
@@ -13,15 +12,9 @@ export default function ProjectProgress(props) {
   const completeTasks = taskStatus(3, props.teamTasks);
   const lateTasks = lateTaskStatus(props.teamTasks);
 
-  const ProjectProgress = styled.div`
-  border: ${props => props.theme.chartBorder};
-  background: ${props => props.theme.chartBackground};
-  color: white;
-  `;
-
 
   return (
-    <ProjectProgress className="project-progress">
+    <div className="project-progress">
       <Doughnut
         data={{
           labels: ['Assigned', 'In-progress', 'In-review', 'Late', 'Complete'],
@@ -30,12 +23,28 @@ export default function ProjectProgress(props) {
               label: '# of tasks',
               data: [assignedTasks, inProgressTasks, inReviewTasks, lateTasks, completeTasks],
               backgroundColor: [
-                'rgba(28, 20, 255, 0.8)',
-                'rgba(255, 247, 20, 0.8)',
-                'rgba(232, 86, 2, 0.8)',
-                'rgba(255, 20, 20, 0.8)',
-                'rgba(33, 232, 2, 0.8)',
-              ]
+                'rgba(61, 173, 209, 0.65)',
+                'rgba(92, 92, 183, 0.65)',
+                'rgba(255, 181, 75, 0.65)',
+                'rgba(212, 0, 17, 0.65)',
+                'rgba(148, 203, 179, 0.65)',
+              ],
+              borderColor: [
+                'rgba(61, 173, 209, 1)',
+                'rgba(92, 92, 183, 1)',
+                'rgba(255, 181, 75, 1)',
+                'rgba(212, 0, 17, 1)',
+                'rgba(148, 203, 179, 1)',
+              ],
+              hoverBackgroundColor: [
+                'rgba(61, 173, 209, 0.85)',
+                'rgba(92, 92, 183, 0.85)',
+                'rgba(255, 181, 75, 0.85)',
+                'rgba(212, 0, 17, 0.85)',
+                'rgba(148, 203, 179, 0.85)',
+              ],
+              borderWidth: 1,
+              hoverBorderWidth: 2,
             }
           ],
         }}
@@ -46,19 +55,15 @@ export default function ProjectProgress(props) {
           title: {
             display: true,
             text: 'Project Progress',
-            fontSize: 25,
+            fontSize: 30,
             fontFamily: 'Poppins',
-            fontColor: props.theme === 'light' ? '' : 'white',
           },
           legend: {
             display: true,
-            position: 'right',
-            labels: {
-              fontColor: props.theme === 'light' ? '' : 'white',
-            }
+            position: 'bottom'
           }
         }}
       />
-      </ProjectProgress>
+    </div>
   )
 }

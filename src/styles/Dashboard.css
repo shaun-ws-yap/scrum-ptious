@@ -40,7 +40,9 @@
 
 .badge-danger {
   margin: 0.5em;
-  font-size: 20px !important;
+  font-size: 16px !important;
+  width: 50%;
+  margin: auto;
 }
 
 .new-task-btn {
@@ -53,18 +55,12 @@
 
 .react-tabs__tab {
   margin: 0 0.25em;
-  color: black;
 }
 
 .react-tabs__tab--selected {
   border-color: white !important;
-}
-
-.react-tabs__tab:hover {
-  border-color: white !important;
-  background-color: white;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+  background-color: #E6E6E6 !important;
+  border-radius: 15px !important;
 }
 
 .react-tabs__tab-list {
@@ -79,7 +75,7 @@
 .react-tabs__tab:hover {
   background-color: #E6E6E6;
   transition: 300ms;
-  border-radius: 4px;
+  border-radius: 15px;
 }
 
 .react-tabs__tab-panel > react-tabs__tab-panel--selected {
@@ -107,6 +103,7 @@
   flex-direction: column;
   width: 80% !important; 
   border-radius: 25px;
+  background-color: white;
   padding: 1em;
   transition: 300ms;
   height: calc(100% - 1em);
@@ -121,7 +118,14 @@
   align-content: center;
   position: relative;
   margin: auto;
-  border-radius: 25px;
+}
+
+.independent-progress {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  position: relative;
+  /* margin: auto auto; */
 }
 
 .pie-chart {
@@ -140,4 +144,123 @@
   max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
   height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
   max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+}
+
+.line-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 2em) - 10px);
+}
+
+.bar-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 2em) - 10px);
+}
+
+/* Media queries start here */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1300px) {
+  /* for laptops */
+  .dashboard-main {
+    right: 0;
+    width: calc(100% - ((275px + 1.5em)));
+  }
+
+  .employee-progress {
+    flex-direction: column;
+    align-content: center;
+    overflow: auto;
+    height: 41vh;
+  }
+
+  .independent-progress {
+    flex-direction: column;
+    align-content: center;
+    overflow: auto;
+    height: 45vh;
+  }
+
+  .pie-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+
+  .radar-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+
+  .line-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+
+  .bar-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+}
+
+@media only screen and (max-width: 1900px) {
+  .employee-progress {
+    flex-direction: column;
+    align-content: center;
+    overflow: auto;
+    height: 41vh;
+  }
+
+  .pie-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+
+  .radar-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+
+  .independent-progress {
+    flex-direction: column;
+    align-content: center;
+    overflow: auto;
+    height: 45vh;
+  }
+
+  .line-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
+
+  .bar-chart {
+    width: 100%;
+    max-width: calc(100vw - (275px + 20%));
+  }
 }
