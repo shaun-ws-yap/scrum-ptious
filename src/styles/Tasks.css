@@ -20,9 +20,10 @@
 }
 
 .task-assigned {
-  width: 33%;
+  width: 100%;
   height: 50vh;
   overflow-y: scroll;
+  border-radius: 20px;
 } 
 
 .task-assigned::-webkit-scrollbar,
@@ -32,15 +33,18 @@
 }
 
 .task-inprogress {
-  width: 33%;
+  width: 100%;
   height: 50vh;
   overflow-y: scroll;
+  border-radius: 20px;
 }
 
 .task-completed {
-  width: 33%;
+  width: 100%;
   height: 50vh;
   overflow-y: scroll;
+  border-radius: 20px;
+  background-color: rgba(148, 203, 179, 0.35);
 }
 
 .task-droppable-inprogress {
@@ -62,11 +66,11 @@
   cursor: pointer;
 }
 
-.task__item--late:hover,
+/* .task__item--late:hover,
 .task__item--assigned:hover,
 .task__item--in-progress:hover {
   margin-right: 1em;
-}
+} */
 
 .task__item--late {
   background-color: #FFBFBF;
@@ -116,9 +120,24 @@
   background-color: #57DC55;
 }
 
-.task-progress-list-container {
+.task-progress-container-assigned {
   display: flex;
   flex-direction: column;
   width: 33%;
+  margin: 0 0.5em;
 }
 
+.task-progress-container-inprogress {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  margin: 0 0.5em;
+}
+
+.task-progress-container-completed {
+  display: flex;
+  flex-direction: column;
+  width: 33%;
+  margin: 0 0.5em;
+  margin-right: 1em;
+}
