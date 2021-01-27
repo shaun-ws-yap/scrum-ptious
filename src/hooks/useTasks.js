@@ -40,6 +40,8 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
         case 'MOVE':
           setUserNotification(prev => ({...prev, message: task.title, user: Number(loginToken), title: "Task Moved", type: "success"}))
           break;
+        default:
+          return;
       }
     });
 
