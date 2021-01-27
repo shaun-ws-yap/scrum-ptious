@@ -12,10 +12,6 @@ import useChat from '../../hooks/useChat';
 export default function Chat(props) {
   const { socket, userInfo, teamUsers, messages, setMessages } = props
 
-  const ChatBox = styled.div`
-  background: ${props => props.theme.chatBoxBackground};
-  `;
-
   const { 
     //messages, 
     joinMessage, 
@@ -26,19 +22,17 @@ export default function Chat(props) {
 
   return (
     <div className="chat-container">
-      <div style={{background: props.theme === 'light' ? 'white' : '#757575'}} className="chat-left">
-      {/* <ChatBox className="chat-left"> */}
-          <ScrollToBottom className="chat-log-container">
-            <ChatLog 
-              userId={userInfo.id}
-              messages={messages} 
-              chatInfo={joinMessage} 
-              getPrevMessages={getPrevMessages}
-              teamUsers={teamUsers}
-            />
-          </ScrollToBottom>
-          <InputBox sendMessage={sendMessage} />
-      {/* </ChatBox> */}
+      <div className="chat-left">
+        <ScrollToBottom className="chat-log-container">
+          <ChatLog 
+            userId={userInfo.id}
+            messages={messages} 
+            chatInfo={joinMessage} 
+            getPrevMessages={getPrevMessages}
+            teamUsers={teamUsers}
+          />
+        </ScrollToBottom>
+        <InputBox sendMessage={sendMessage} />
       </div>
       <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />
     </div>
