@@ -17,40 +17,43 @@ export default function EmployeeProgress(props) {
       data: [key.assigned, key.inprogress, key.inreview, key.late, key.complete],
     }
     if (i === 0) {
-      res.backgroundColor = 'rgba(151, 229, 215, 0.3)'
-      res.borderColor = 'rgba(151, 229, 215, 1)';
-      res.hoverBackgroundColor = 'rgba(151, 229, 215, 1)';
+      res.backgroundColor = 'rgba(212, 99, 78, 0.3)'
+      res.borderColor = 'rgba(212, 99, 78, 1)';
+      res.hoverBackgroundColor = 'rgba(212, 99, 78, 1)';
       res.borderCapStyle = 'butt';
       res.pointBackgroundColor = 'white';
-      res.pointBorderColor = 'rgba(151, 229, 215, 1)';
+      res.pointBorderColor = 'rgba(212, 99, 78, 1)';
       res.pointBorderWidth = '2px';
-      res.pointHoverBackgroundColor = 'rgba(151, 229, 215, 1)';
-      res.hoverPointBorderWidth = '4px';
+      res.pointHoverBackgroundColor = 'rgba(212, 99, 78, 1)';
+      res.hoverPointBorderWidth = '2px';
       res.spanGaps = true;
+      res.borderWidth = '4px';
     }
     if (i === 1) {
-      res.backgroundColor = 'rgba(252, 241, 221, 0.3)';
-      res.borderColor = 'rgba(252, 241, 221, 1)';
-      res.hoverBackgroundColor = 'rgba(252, 241, 221, 1)';
+      res.backgroundColor = 'rgba(255, 132, 191, 0.3)';
+      res.borderColor = 'rgba(255, 132, 191, 1)';
+      res.hoverBackgroundColor = 'rgba(255, 132, 191, 1)';
       res.borderCapStyle = 'butt';
       res.pointBackgroundColor = 'white';
-      res.pointBorderColor = 'rgba(252, 241, 221, 1)';
+      res.pointBorderColor = 'rgba(255, 132, 191, 1)';
       res.pointBorderWidth = '2px';
-      res.pointHoverBackgroundColor = 'rgba(252, 241, 221, 1)';
-      res.hoverPointBorderWidth = '4px';
+      res.pointHoverBackgroundColor = 'rgba(255, 132, 191, 1)';
+      res.hoverPointBorderWidth = '2px';
       res.spanGaps = true;
+      res.borderWidth = '4px';
     }
     if (i === 2) {
-      res.backgroundColor = 'rgba(254, 183, 179, 0.3)';
-      res.borderColor = 'rgba(254, 183, 179, 1)';
-      res.hoverBackgroundColor = 'rgba(254, 183, 179, 1)';
+      res.backgroundColor = 'rgba(22, 53, 83, 0.3)';
+      res.borderColor = 'rgba(22, 53, 83, 1)';
+      res.hoverBackgroundColor = 'rgba(22, 53, 83, 1)';
       res.borderCapStyle = 'butt';
       res.pointBackgroundColor = 'white';
-      res.pointBorderColor = 'rgba(254, 183, 179, 1)';
+      res.pointBorderColor = 'rgba(22, 53, 83, 1)';
       res.pointBorderWidth = '2px';
-      res.pointHoverBackgroundColor = 'rgba(254, 183, 179, 1)';
+      res.pointHoverBackgroundColor = 'rgba(22, 53, 83, 1)';
       res.hoverPointBorderWidth = '4px';
       res.spanGaps = true;
+      res.borderWidth = '4px';
     }
     dataset.push(res);
   }
@@ -66,12 +69,28 @@ export default function EmployeeProgress(props) {
                 label: '# of tasks',
                 data: [props.assigned, props.inProgress, props.inReview, props.late, props.complete],
                 backgroundColor: [
-                  'rgba(28, 20, 255, 0.8)',
-                  'rgba(255, 247, 20, 0.8)',
-                  'rgba(232, 86, 2, 0.8)',
-                  'rgba(255, 20, 20, 0.8)',
-                  'rgba(33, 232, 2, 0.8)',
-                ]
+                  'rgba(61, 173, 209, 0.65)',
+                  'rgba(92, 92, 183, 0.65)',
+                  'rgba(255, 181, 75, 0.65)',
+                  'rgba(212, 0, 17, 0.65)',
+                  'rgba(148, 203, 179, 0.65)',
+                ],
+                borderColor: [
+                  'rgba(61, 173, 209, 1)',
+                  'rgba(92, 92, 183, 1)',
+                  'rgba(255, 181, 75, 1)',
+                  'rgba(212, 0, 17, 1)',
+                  'rgba(148, 203, 179, 1)',
+                ],
+                hoverBackgroundColor: [
+                  'rgba(61, 173, 209, 0.85)',
+                  'rgba(92, 92, 183, 0.85)',
+                  'rgba(255, 181, 75, 0.85)',
+                  'rgba(212, 0, 17, 0.85)',
+                  'rgba(148, 203, 179, 0.85)',
+                ],
+                borderWidth: 1,
+                hoverBorderWidth: 2,
               }
             ],
           }}
@@ -113,15 +132,14 @@ export default function EmployeeProgress(props) {
             },
             legend: {
               display: true,
-              position: 'left'
+              position: 'right'
             },
             scale: {
               angleLines: {
                 display: false,
               },
               ticks: {
-                suggestedMin: 1,
-                suggestedMax: 2,
+                beginAtZero: true,
               }
             }
           }}

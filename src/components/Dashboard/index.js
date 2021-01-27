@@ -7,7 +7,7 @@ import EmployeeProgress from './EmployeeProgress';
 import '../../styles/Dashboard.css';
 
 export default function Dashboard(props) {
-  const { tasks, teamTasks, teamUsers, role } = props;
+  const { tasks, teamTasks, teamUsers, role, userInfo } = props;
 
   return (
     <div className='dashboard'>
@@ -16,7 +16,7 @@ export default function Dashboard(props) {
       </div>
       <div className="dashboard-bottom">
       {role === 1 && <EmployeeProgress independentTasks={tasks} teamTasks={teamTasks} teamUsers={teamUsers} />}
-      {role === 2 && <IndependentProgress independentTasks={tasks} />}
+      {role === 2 && <IndependentProgress independentTasks={tasks} userInfo={userInfo} />}
       </div>
     </div>
   )

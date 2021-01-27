@@ -112,7 +112,7 @@ function App() {
           className="logout"
           onClick={() => setLoginToken(0)}
         >
-            Log out
+          <p>Log out</p>
           <span></span>
           <span></span>
           <span></span>
@@ -127,6 +127,7 @@ function App() {
               role={role} 
               teamTasks={teamTasks}
               teamUsers={teamUsers}
+              userInfo={userInfo}
             /> }
           { selectedMenu === TASKS && 
             <Tasks 
