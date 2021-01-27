@@ -15,11 +15,14 @@
   color: white;
   transition: 0.3s all ease;
   outline: none;
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
 }
 
 
 .sidebar-list__item:hover {
   color: black;
+  background-color: white;
   cursor: pointer;
 }
 

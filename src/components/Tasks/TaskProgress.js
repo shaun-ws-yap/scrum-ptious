@@ -4,6 +4,7 @@ import TaskItem from './TaskItem';
 import sortTasks from '../../helpers/sortTasks';
 import findTaskItemById from '../../helpers/findTaskItemById';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import styled from 'styled-components';
 
 export default function TaskProgress(props) {
   const {
@@ -17,13 +18,18 @@ export default function TaskProgress(props) {
     error,
     setErrorNotification,
     moveTask,
-    setTasks
+    setTasks,
+    theme
   } = props;
 
   // local states
 
   const [sortedTasks, setSortedTasks] = useState({});
   const [trashVisible, setTrashVisible] = useState(false);
+
+  const TaskHeader = styled.h1`
+  color: ${props => props.theme.chatBoxFontColor};
+  `;
 
   useEffect(()=> {
     const updated = sortTasks(tasks);
@@ -115,14 +121,15 @@ export default function TaskProgress(props) {
         onBeforeCapture={onBeforeCapture}
       >
         <div key="assigned" className="task-column task-assigned">
-          <h1>Assigned</h1>
+          {/* <h1>Assigned</h1> */}
+          <TaskHeader>Assigned</TaskHeader>
           <Droppable droppableId="assigned">
             {(provided, snapshot) => (
               <div 
                 key="assigned"
                 index="1"
                 ref={provided.innerRef} 
-                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : 'white'}}
+                style={{backgroundColor: snapshot.isDraggingOver ? 'lightblue' : ''}}
                 {...provided.droppableProps}
               >
                 { assigned }
@@ -133,7 +140,8 @@ export default function TaskProgress(props) {
         </div>
 
         <div key="inProgress" className=" task-column task-inprogress">
-          <h1>In-Progress</h1>
+          {/* <h1>In-Progress</h1> */}
+          <TaskHeader>In-Progress</TaskHeader>
           <div className="task-droppable-inprogress">
             <Droppable droppableId="inProgress">
               {(provided, snapshot) => (
@@ -171,7 +179,8 @@ export default function TaskProgress(props) {
       </DragDropContext>
 
       <div className="task-column task-completed">
-        <h1>Completed</h1>
+        {/* <h1>Completed</h1> */}
+        <TaskHeader>Completed</TaskHeader>
         { completed }
       </div>
     </div>
