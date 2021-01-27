@@ -3,8 +3,8 @@
   flex-direction: row;
   height: 75vh;
   width: 60vw;
-  max-width: 800px;
-  margin: auto;
+  max-width: 1000px;
+  margin: 0 auto;
   margin-top: 10vh;
 }
 
@@ -189,6 +189,7 @@
 .members-list-item {
   display: flex;
   flex-direction: row;
+  width: 25%;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 }
@@ -223,3 +224,29 @@
   color: darkgrey;
   position: fixed;
 }
+
+@media only screen and (max-width: 1300px) {
+  .member-item-right {
+    display: none;
+  }
+
+  .members-list-avatar {
+    margin: auto;
+    width: 4em;
+    height: 4em;
+  }
+}
+
+@media only screen and (max-width: 1600px) {
+  .chat-container {
+    width: 49vw;
+  }
+}
+
+@media only screen and (max-width: 820px) {
+  .members-list {
+    display: none;
+  }
+}
+
+

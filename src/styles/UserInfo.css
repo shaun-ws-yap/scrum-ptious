@@ -1,4 +1,4 @@
-.user-info {
+.user-info-transparent-true {
   display: flex;
   position: fixed;
   flex-direction: column;
@@ -13,18 +13,50 @@
   margin: 1.5em 1.5em;
 }
 
-.user-info > h5 {
+.user-info-transparent-true > h5 {
   border-bottom: 1px solid black;
   padding-bottom: 0.5em;
   font-weight: 800;
   margin-bottom: 0;
 }
 
-.user-info > h6 {
+.user-info-transparent-true > h6 {
   margin-top: 0.25em;
 }
 
-.user-info > p {
+.user-info-transparent-true > p {
+  font-weight: 800;
+  margin-top: 1.5em;
+  margin-bottom: 0.25em;
+}
+
+.user-info-transparent-false {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  background-color: rgba(229, 233, 236, 1);
+  border-radius: 25px;
+  padding: 1em;
+  text-align: center;
+  height: calc(100vh - 3em);
+  min-height: calc(100vh - 3em);
+  right: 0;
+  width: 325px;
+  margin: 1.5em 1.5em;
+}
+
+.user-info-transparent-false > h5 {
+  border-bottom: 1px solid black;
+  padding-bottom: 0.5em;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+
+.user-info-transparent-false > h6 {
+  margin-top: 0.25em;
+}
+
+.user-info-transparent-false > p {
   font-weight: 800;
   margin-top: 1.5em;
   margin-bottom: 0.25em;
@@ -303,8 +335,8 @@
   margin: 1.5em 1.5em;
 }
 
-.sliding-panel-container:active {
-  z-index: 998;
+.sliding-panel-container.active {
+  z-index: 900;
 }
 
 /* Media queries start here */

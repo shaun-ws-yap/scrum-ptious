@@ -10,12 +10,12 @@ const roles = {
 }
 
 export default function UserInfo(props) {
-  const { userInfo, tasks, teamUsers } = props;
+  const { userInfo, tasks, teamUsers, transparent } = props;
   const filteredTasks = filterDeadlineTasks(tasks);
 
   return (
     <>
-      <div className="user-info">
+      <div className={`user-info-transparent-${transparent}`}>
         { userInfo && ( 
           <>
             <img alt={userInfo.name} src={userInfo.avatar} className="user-avatar"></img>

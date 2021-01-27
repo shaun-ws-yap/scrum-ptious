@@ -32,7 +32,8 @@ export default function UserPanel(props) {
           <UserInfo
             userInfo={userInfo} 
             tasks={tasks} 
-            teamUsers={teamUsers} 
+            teamUsers={teamUsers}
+            transparent={true}
           />
         </div>
         <div className="hidden-user-panel">
@@ -44,7 +45,8 @@ export default function UserPanel(props) {
             <UserInfo
               userInfo={userInfo} 
               tasks={tasks} 
-              teamUsers={teamUsers} 
+              teamUsers={teamUsers}
+              transparent={false}
             /> 
           </SlidingPanel>
         </div>
