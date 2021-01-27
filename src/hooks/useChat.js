@@ -2,22 +2,29 @@ import { useState, useEffect } from 'react';
 
 import formatDateString from "../utilities/format-date";
 
-export default function useChat(socket, userInfo) {
+export default function useChat(socket, userInfo, messages, setMessages) {
   const { id, name, team_id } = userInfo;
 
-  const [ messages, setMessages ] = useState([]);
+  //const [ messages, setMessages ] = useState([]);
   const [ onlineUsers, setOnlineUsers ] = useState([]);
   const [ joinMessage, setJoinMessage ] = useState("");
+
+  const getLastMessageTime = (messages) => {
+    const lastMsg = messages[messages.length -1];
+    return lastMsg ? lastMsg.time_iso : 0;
+  }
 
   useEffect(() => {
     //socket = io();
 
-    socket.emit('joining msg', name, id);
+    socket.emit('joining msg', name, id, getLastMessageTime(messages));
 
-    socket.on('user joined', (users, username, messages) => {
+    socket.on('user joined', (users, username, messagesData) => {
       setOnlineUsers(users);
       setJoinMessage(username + " joined the chat")
-      setMessages(messages);
+      if (messagesData.length) {
+        setMessages(messagesData, true);
+      } 
     });
 
     socket.on('user left', (users, username) => {
@@ -26,12 +33,11 @@ export default function useChat(socket, userInfo) {
     });
   
     socket.on('chat message', function(messageData) {
-      setMessages(prev => [...prev, messageData])
+      setMessages([messageData], true);
     });
 
     socket.on('get previous messages', messagesData => {
-      setMessages(prev => [...messagesData, ...prev]);
-      console.log(messagesData);
+      setMessages(messagesData, false);
     });
 
     socket.on('message saved', function(messageData) {

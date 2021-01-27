@@ -43,6 +43,7 @@ function App() {
     logout,
     setTasks,  
     setSubmissions,
+    setMessages,
   } = useApplicationData(socket, loginToken, setErrorNotification);
   
   const {
@@ -51,7 +52,8 @@ function App() {
     role,
     teamTasks,
     teamUsers,
-    submissions
+    submissions,
+    messages,
   } = state;
 
   const { 
@@ -147,6 +149,8 @@ function App() {
               socket={socket} 
               userInfo={userInfo} 
               teamUsers={teamUsers}
+              messages={messages}
+              setMessages={setMessages}
             />}
           { selectedMenu === SUBMISSIONS &&
             <Submissions
