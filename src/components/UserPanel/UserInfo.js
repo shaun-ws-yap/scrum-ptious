@@ -26,10 +26,8 @@ export default function UserInfo(props) {
           <img alt={userInfo.name} src={userInfo.avatar} className="user-avatar"></img>
           <h5>{userInfo.name} </h5>
           <h6>{roles[userInfo.role]}</h6>
-          {/* <div className="deadlines"> */}
           <Deadlines className="deadlines">
             <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
-          {/* </div> */}
           </Deadlines>
         </>
       )}
