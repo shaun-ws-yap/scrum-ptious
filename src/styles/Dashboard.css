@@ -13,12 +13,6 @@
 }
 
 
-.user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .dashboard {
   display: flex;
   flex-direction: column;
