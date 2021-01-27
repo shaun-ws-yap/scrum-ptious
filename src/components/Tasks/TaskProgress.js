@@ -114,7 +114,7 @@ export default function TaskProgress(props) {
         onDragEnd={onDragEnd}
         onBeforeCapture={onBeforeCapture}
       >
-        <div key="assigned" className="task-assigned">
+        <div key="assigned" className="task-column task-assigned">
           <h1>Assigned</h1>
           <Droppable droppableId="assigned">
             {(provided, snapshot) => (
@@ -132,7 +132,7 @@ export default function TaskProgress(props) {
           </Droppable>
         </div>
 
-        <div key="inProgress" className="task-inprogress">
+        <div key="inProgress" className=" task-column task-inprogress">
           <h1>In-Progress</h1>
           <div className="task-droppable-inprogress">
             <Droppable droppableId="inProgress">
@@ -170,7 +170,7 @@ export default function TaskProgress(props) {
         )} 
       </DragDropContext>
 
-      <div className="task-completed">
+      <div className="task-column task-completed">
         <h1>Completed</h1>
         { completed }
       </div>
