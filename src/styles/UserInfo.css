@@ -1,4 +1,4 @@
-.user__info {
+.user-info {
   display: flex;
   position: fixed;
   flex-direction: column;
@@ -8,14 +8,9 @@
   text-align: center;
   height: calc(100vh - 3em);
   min-height: calc(100vh - 3em);
-  /* min-height: 100vh; */
-  /* width: 12.5%; */
   right: 0;
   width: 325px;
   margin: 1.5em 1.5em;
-  /* width: 400px; */
-  /* width: 25%; */
-  /* max-width: 400px; */
 }
 
 .user-info > h5 {
@@ -35,21 +30,11 @@
   margin-bottom: 0.25em;
 }
 
-.user-info.opened{
-  /* right: 0;
-  width: 25%;
-  max-width: 400px; */
-}
-
-.user-info.closed{
-  right: 0;
-  width: 80px;
-}
-
 .user-avatar {
   border-radius: 30px;
   height: 100px;
   width: 100px;
+  margin: auto;
   margin-bottom: 1em;
 }
 
@@ -269,4 +254,92 @@
 .card-date > label {
   padding-right: 5px;
   margin-bottom: 0;
+}
+
+.open-user-panel {
+  cursor: pointer;
+  position: absolute;
+  color: rgba(229, 233, 236, 0.1);
+  top: 1.5em;
+  right: 1.5em;
+  display: none;
+  z-index: 999;
+}
+
+.bar1, .bar2, .bar3 {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 6px);
+  transform: rotate(-45deg) translate(-9px, 6px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -8px);
+  transform: rotate(45deg) translate(-8px, -8px);
+}
+
+.user-info-hidden {
+  display: flex;
+  position: fixed;
+  flex-direction: column;
+  background-color: rgba(229, 233, 236, 0.35);
+  border-radius: 25px;
+  padding: 1em;
+  text-align: center;
+  height: calc(100vh - 3em);
+  min-height: calc(100vh - 3em);
+  right: 0;
+  width: 325px;
+  margin: 1.5em 1.5em;
+}
+
+.sliding-panel-container:active {
+  z-index: 998;
+}
+
+/* Media queries start here */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (max-width: 1300px) {
+  .user-panel {
+    display: none;
+  }
+  .open-user-panel {
+    display: inline-block;
+    color: rgba(229, 233, 236, 0.5);
+  }
+}
+
+@media only screen and (min-width: 1301px) {
+  .hidden-user-panel {
+    display: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  
 }
