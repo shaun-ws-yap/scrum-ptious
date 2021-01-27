@@ -81,6 +81,8 @@ function App() {
 
   const handleLogout = () => {
     logout();
+    setManagerNotification({message: "", title: "", type: "", user: undefined})
+    setUserNotification({message: "", user: undefined, title: "", type: ""})
     setLoginToken(0);
   }
 
@@ -121,7 +123,6 @@ function App() {
           <span></span>
         </span>
       </section>
-      {/* <div className="wrapper"> */}
         <section className="dashboard-main">
           { selectedMenu === DASHBOARD && 
             <Dashboard
@@ -164,13 +165,11 @@ function App() {
         </section>
         <section className="user__info">
           <UserPanel 
-            // wide={windowWidth > 1300}
             userInfo={userInfo} 
             tasks={teamTasks} 
             teamUsers={teamUsers} 
           />
         </section>
-      {/* </div> */}
     </div>
   );
 }
