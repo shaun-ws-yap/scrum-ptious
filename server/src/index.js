@@ -52,6 +52,7 @@ app.get('/:id', (req, res) => {
 });
 
 io.on('connection', (socket) => {
+  console.log('Connection');
   //on login
   socket.on('user logged in', userId => {
     console.log('logged in');
