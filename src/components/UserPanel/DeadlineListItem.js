@@ -7,6 +7,8 @@ export default function DeadlineListItem(props) {
 
   const { title, description, due_date, creation_date, assignedTo, userInfo, teamUsers, is_late, status } = props;
 
+  console.log(status);
+
   return (
     <div className={`deadline-card-${status === 0 ? 'assigned' : 'inprogress'}`}>
 

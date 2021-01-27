@@ -20,6 +20,7 @@ export default function Submissions(props) {
 
   return (
     <div className="submissions-container">
+      <h1>Submitted Tasks</h1>
       <div className="submissions">
         <SubmissionList
           teamUsers={teamUsers}

@@ -178,6 +178,7 @@
   text-decoration: none;
   z-index: 0;
   overflow: hidden;
+  margin: 0.5em 0;
   /* border: 1px solid #f2f8f9; */
 }
 
@@ -221,6 +222,7 @@
   text-decoration: none;
   z-index: 0;
   overflow: hidden;
+  margin: 0.5em 0;
   /* border: 1px solid #f2f8f9; */
 }
 
