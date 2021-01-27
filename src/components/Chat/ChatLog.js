@@ -66,13 +66,11 @@ export default function ChatLog(props) {
     <div className="chat-log" ref={container}>
       <div className="loading" ref={loader}></div>
       {messageComponents}
-      { /* visible && */
-        <div className={chatBottomClass}>
-          <span className="clat=info">
-            {chatInfo}
-          </span>
-        </div>
-      }
+      <div className={chatBottomClass}>
+        <span className="clat=info">
+          {chatInfo}
+        </span>
+      </div>
     </div>
   )
 }
