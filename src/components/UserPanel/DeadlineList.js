@@ -38,6 +38,7 @@ export default function DeadlineList(props) {
         assignedTo={task.employee_id}
         is_late={task.is_late}
         teamUsers={teamUsers}
+        status={task.status}
       />
     )
   })
