@@ -1,6 +1,13 @@
 import '../styles/App.css';
+import 'react-pro-sidebar/dist/css/styles.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "react-datepicker/dist/react-datepicker.css";
+import 'react-notifications/lib/notifications.css';
+import 'react-tabs/style/react-tabs.css';
+
 import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
+import { NotificationManager, NotificationContainer } from 'react-notifications';
 
 import Dashboard from './Dashboard';
 import Tasks from './Tasks';
@@ -14,18 +21,7 @@ import useApplicationData from '../hooks/useApplicationData';
 import useNotifications from '../hooks/useNotifications';
 import useSocket from '../hooks/useSocket';
 import useTasks from '../hooks/useTasks';
-import useSidePanel from '../hooks/useSidePanel';
 
-import { taskStatus } from '../helpers/taskStatus';
-import { NotificationManager, NotificationContainer } from 'react-notifications';
-
-
-import 'react-pro-sidebar/dist/css/styles.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import "react-datepicker/dist/react-datepicker.css";
-import 'react-notifications/lib/notifications.css';
-import 'react-tabs/style/react-tabs.css';
-import { Button } from 'react-bootstrap';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -40,10 +36,11 @@ function App() {
     message: "",
   });
   
-  const { socket } = useSocket();
+  const { socket } = useSocket(loginToken);
 
   const { 
     state,
+    logout,
     setTasks,  
     setSubmissions,
   } = useApplicationData(socket, loginToken, setErrorNotification);
@@ -54,13 +51,10 @@ function App() {
     role,
     teamTasks,
     teamUsers,
-    deadlines,
     submissions
   } = state;
 
   const { 
-    userNotification,
-    managerNotification,
     setUserNotification,
     setManagerNotification
   } = useNotifications(userInfo, setMenu, NotificationManager);
@@ -82,6 +76,11 @@ function App() {
   }, [errorNotification]);
 
 
+  const handleLogout = () => {
+    logout();
+    setLoginToken(0);
+  }
+
   if ( loginToken === 0 ) {
     return (
       <Login setLogin={setLoginToken}/> 
@@ -92,25 +91,20 @@ function App() {
     <div className="app-container">
       <NotificationContainer />
       <section className="sidebar">
-        <img 
-          alt="Scrum-ptious Logo"
-          className="sidebar-centered"
-          src="https://logoipsum.com/logo/logo-25.svg"
+        <Sidebar
+          selectedMenu={selectedMenu}
+          userInfo={userInfo}
+          teamUsers={teamUsers}
+          setMenu={setMenu}
+          createTaskItem={createTaskItem}
+          errorNotification={errorNotification}
+          setErrorNotification={setErrorNotification}
+          setLoginToken={setLoginToken}
+          logout={logout}
         />
-        <nav className="sidebar__menu">
-          <Sidebar
-            selectedMenu={selectedMenu}
-            userInfo={userInfo}
-            teamUsers={teamUsers}
-            setMenu={setMenu}
-            createTaskItem={createTaskItem}
-            errorNotification={errorNotification}
-            setErrorNotification={setErrorNotification}
-          />
-        </nav>
         <span 
           className="logout"
-          onClick={() => setLoginToken(0)}
+          onClick={() => handleLogout()}
         >
             Log out
           <span></span>
