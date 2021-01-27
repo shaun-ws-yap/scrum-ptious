@@ -44,13 +44,17 @@ function App() {
   });
 
   const LightTheme = {
+    appContainerBackground: "rgba(229, 233, 236, 0.35)",
     sidebarBackground: "linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));",
+    userPanelBackground: "#E6E6E6",
     titleColor: "#dc658b",
     tagLineColor: "black"
   };
 
   const DarkTheme = {
+    appContainerBackground: "#E6E6E6",
     sidebarBackground: "#282c36",
+    userPanelBackground: "#282c36",
     titleColor: "lightpink",
     tagLineColor: "lavender",
   };
@@ -59,18 +63,19 @@ function App() {
     light: LightTheme,
     dark: DarkTheme,
   }
+
+  const AppContainer = styled.div`
+  background: ${props => props.theme.appContainerBackground};
+  `;
   
   const Navsidebar = styled.div`
   background: ${props => props.theme.sidebarBackground};
   transition: all .5s ease;
   `;
 
-  const appContainer = styled.div`
-  
-  `;
 
-  const userPanel = styled.div`
-  background: ${props => props.theme.pageBackground};
+  const UserSidePanel = styled.div`
+  background: ${props => props.theme.userPanelBackground};
   `;
 
   const { socket } = useSocket();
@@ -131,7 +136,8 @@ function App() {
 
   return (
     <ThemeProvider theme={themes[theme]}>
-    <div className="app-container">
+      <AppContainer className="app-container">
+    {/* <div className="app-container"> */}
       <NotificationContainer />
       <Navsidebar className="sidebar">
       {/* <section className="sidebar"> */}
@@ -204,16 +210,19 @@ function App() {
               user={userInfo}
             />}
         </section>
-        <section className="user__info">
+        <UserSidePanel className="user__info">
+        {/* <section className="user__info"> */}
           <UserPanel 
             // wide={windowWidth > 1300}
             userInfo={userInfo} 
             tasks={teamTasks} 
             teamUsers={teamUsers} 
-          /> 
-        </section>
+          />
+        </UserSidePanel>
+        {/* </section> */}
       {/* </div> */}
-    </div>
+    {/* </div> */}
+    </AppContainer>
     </ThemeProvider>
   );
 }
