@@ -1,15 +1,22 @@
-/* .container {
+.wrapper {
   display: flex;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  margin-left: 0.5em;
-  width: 100% !important;
-  height: 100% !important;
-} */
+  position: absolute;
+  /* left: 320px; */
+  left: 320px;
+  right: 0;
+  width: 100%;
+  height: 100vh;
+}
 
 .dashboard-main {
   display: flex;
   flex-direction: column;
+  position: fixed;
+  left: calc(275px + 1.5em);
+  right: calc(325px + 1.5em);
+  height: calc(100vh - 3em);
+  width: calc(100% - ((275px + 1.5em) + (325px + 1.5em)));
+  margin: 1.5em 0;
 }
 
 .dashboard {
@@ -17,7 +24,6 @@
   flex-direction: column;
   width: 100%;
   height: 100%;
-  /* width: calc(100% - 325px); */
 }
 
 .dashboard-top {
@@ -32,70 +38,6 @@
   width: 100%;
 }
 
-.project-progress {
-  display: flex;
-  width: 100%;
-  border: 1px solid white;
-  border-radius: 25px;
-  background-color: white;
-  flex-direction: row;
-  padding: 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
-  transition: 300ms;
-  height: 100%;
-  width: 75%;
-  margin: auto;
-  margin-bottom: 1em;
-}
-
-/* .project-progress:hover {
-  display: flex;
-  border-radius: 20px; */
-  /* background-color: #E6E6E6; */
-  /* flex-direction: row;
-  padding: 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
-  transition: 300ms;
-} */
-
-.react-tabs {
-  height: 100%;
-  width: 100%;
-}
-
-.employee-progress {
-  display: flex;
-  border: 1px solid  white;
-  border-radius: 25px;
-  flex-direction: row;
-  padding: 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
-  transition: 300ms;
-  height: 48vh;
-  width: 100%;
-  background-color: white;
-}
-
-.employee-progress:hover {
-  display: flex;
-
-  border-top-radius: 20px;
-  /* background-color: #E6E6E6; */
-  flex-direction: row;
-  padding: 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
-  transition: 300ms;
-}
-
-.employee-progress > canvas {
-  margin: auto;
-  width: 75%;
-}
-
 .badge-danger {
   margin: 0.5em;
   font-size: 20px !important;
@@ -106,13 +48,7 @@
 }
 
 .react-tabs {
-  width: 100%;
-}
-
-.employee-chart {
-  margin: auto;
-  width: 75%;
-  min-width: 50%;
+  position: relative;
 }
 
 .task-dashboard-top {
@@ -121,14 +57,7 @@
 .task-dashboard-bottom {
 }
 
-.react-tabs__tab-list {
-  border-bottom: none !important;
-  margin-bottom: 0 !important;
-  margin-right: 0 !important;
-}
-
 .react-tabs__tab {
-  left: 3em;
   margin: 0 0.25em;
 }
 
@@ -144,7 +73,8 @@
 }
 
 .react-tabs__tab-list {
-  margin-right: 1.5em !important;
+  margin-right: 0 auto !important;
+  border-bottom: none !important;
 }
 
 .react-tabs__tab {
@@ -155,4 +85,64 @@
   background-color: #E6E6E6;
   transition: 300ms;
   border-radius: 4px;
+}
+
+.react-tabs__tab-panel > react-tabs__tab-panel--selected {
+  width: 100%;
+}
+
+.project-progress {
+  display: flex;
+  border: 1px solid white;
+  border-radius: 25px;
+  background-color: white;
+  flex-direction: row;
+  padding: 1em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  transition: 300ms;
+  height: 100%;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+.employee-chart {
+  display: flex;
+  flex-direction: column;
+  width: 80% !important; 
+  border-radius: 25px;
+  background-color: white;
+  padding: 1em;
+  transition: 300ms;
+  height: calc(100% - 1em);
+  margin: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+}
+
+.employee-progress {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  position: relative;
+  margin: auto;
+}
+
+.pie-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+}
+
+.radar-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
 }
