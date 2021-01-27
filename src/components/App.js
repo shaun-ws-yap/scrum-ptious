@@ -26,6 +26,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import 'react-notifications/lib/notifications.css';
 import 'react-tabs/style/react-tabs.css';
 import { Button } from 'react-bootstrap';
+import { ThemeProvider } from 'styled-components';
 
 const DASHBOARD = "Dashboard";
 const TASKS = "Tasks";
@@ -34,11 +35,29 @@ const SUBMISSIONS = "Submissions"
 
 function App() {
   const [selectedMenu, setMenu] = useState(DASHBOARD);
+  const [theme, setTheme] = useState("light");
   const [loginToken, setLoginToken] = useState(0);
   const [errorNotification, setErrorNotification] = useState({
     title: "",
     message: "",
   });
+
+  const LightTheme = {
+    pageBackground: "white",
+    titleColor: "#dc658b",
+    tagLineColor: "black"
+  };
+
+  const DarkTheme = {
+    pageBackground: "#282c36",
+    titleColor: "lightpink",
+    tagLineColor: "lavender"
+  };
+
+  const themes = {
+    light: LightTheme,
+    dark: DarkTheme,
+  }
   
   const { socket } = useSocket();
 
@@ -89,6 +108,7 @@ function App() {
   }
 
   return (
+    <ThemeProvider theme={themes[theme]}>
     <div className="app-container">
       <NotificationContainer />
       <section className="sidebar">
@@ -106,6 +126,8 @@ function App() {
             createTaskItem={createTaskItem}
             errorNotification={errorNotification}
             setErrorNotification={setErrorNotification}
+            theme={theme}
+            setTheme={setTheme}
           />
         </nav>
         <span 
@@ -167,6 +189,7 @@ function App() {
       </section>
       {/* </div> */}
     </div>
+    </ThemeProvider>
   );
 }
 

@@ -4,6 +4,7 @@ import React from 'react';
 import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent, Menu, MenuItem } from 'react-pro-sidebar';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Moment from 'react-moment';
+import styled from 'styled-components';
 
 import SidebarItem from './SidebarItem';
 import NewTaskItem from '../Tasks/NewTaskItem';
@@ -25,6 +26,14 @@ export default function Sidebar(props) {
     'Chat',
     userInfo.role === 1 ? 'Submissions' : ''
   ];
+
+  function changeTheme() {
+    if (props.theme === "light") {
+      props.setTheme("dark");
+    } else {
+      props.setTheme("light");
+    }
+  };
 
   return (
     <ul>
@@ -49,6 +58,9 @@ export default function Sidebar(props) {
           />
         </div>
       )}
+      <button onClick={changeTheme}>
+        Theme Changer
+        </button>
     </ul>
   )
 }
