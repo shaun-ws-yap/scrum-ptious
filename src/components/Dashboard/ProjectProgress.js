@@ -53,7 +53,6 @@ export default function ProjectProgress(props) {
           legend: {
             display: true,
             position: 'right',
-            fontColor: props.theme === 'light' ? '' : 'white',
             labels: {
               fontColor: props.theme === 'light' ? '' : 'white',
             }

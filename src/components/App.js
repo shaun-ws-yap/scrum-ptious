@@ -56,13 +56,13 @@ function App() {
   };
 
   const DarkTheme = {
-    appContainerBackground: "#A9A9A9",
+    appContainerBackground: "#646060",
     sidebarBackground: "#282c36",
     userPanelBackground: "#282c36",
     deadlinesFontColor: "white",
     deadlinesListBackground: "#A9A9A9",
-    chartBackground: "#A9A9A9",
-    chartBorder: "1px solid #A9A9A9",
+    chartBackground: "#757575",
+    chartBorder: "1px solid #757575",
     titleColor: "lightpink",
     tagLineColor: "lavender",
   };
@@ -213,6 +213,8 @@ function App() {
               socket={socket} 
               userInfo={userInfo} 
               teamUsers={teamUsers}
+              theme={theme}
+              setTheme={setTheme}
             />}
           { selectedMenu === SUBMISSIONS &&
             <Submissions

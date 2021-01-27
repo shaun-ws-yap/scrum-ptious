@@ -5,7 +5,7 @@ import { TabPanel } from 'react-tabs';
 import filterTasksByLastThreeMonths from '../../helpers/filterTasksByLastThreeMonths';
 import styled from 'styled-components';
  
-export default function EmployeeProgress(props) {
+export default function EmployeeProgressItem(props) {
  
   const lastThreeMonths = filterTasksByLastThreeMonths(props.teamTasks, props.id);
   const month = Object.keys(lastThreeMonths);
@@ -96,7 +96,7 @@ export default function EmployeeProgress(props) {
               display: true,
               position: 'left',
               labels: {
-                fontColor: props.theme === 'light' ? '' : 'white',
+                fontColor: props.theme === 'light' ? 'black' : 'white',
               }
             }
           }}
@@ -124,7 +124,7 @@ export default function EmployeeProgress(props) {
               display: true,
               position: 'left',
               labels: {
-                fontColor: props.theme === 'light' ? '' : 'white'
+                fontColor: props.theme === 'light' ? 'black' : 'white'
               }
             },
             scale: {
@@ -136,7 +136,7 @@ export default function EmployeeProgress(props) {
                 suggestedMax: 2,
               },
               pointLabels: {
-                fontColor: props.theme === 'light' ? '' : 'white',
+                fontColor: props.theme === 'light' ? 'black' : 'white',
               }
             }
           }}
