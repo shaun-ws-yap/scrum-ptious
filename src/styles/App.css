@@ -124,6 +124,7 @@
   margin-right: 50px;
   display: flex;
   flex-direction: column;
+  padding-top: 2em;
 }
 
 .user-in-progress {
