@@ -12,28 +12,28 @@ export default function Login(props) {
 
   return (
     <div className="login-container">
-      <ul className="box-area">
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <div className="login">
-          <h1>Enter your user ID </h1>
-          <input
-            onChange={event => setLoginId(event.target.value)}
-          />
-          <br />
-          <span className="login-button" onClick={handleLogin}> 
-            Submit
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-          </span>
-        </div>
-      </ul>
+        <ul className="box-area">
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <li></li>
+          <div className="login">
+            <h1>Enter your user ID </h1>
+            <input
+              onChange={event => setLoginId(event.target.value)}
+            />
+            <br />
+            <span className="login-button" onClick={handleLogin}> 
+              Submit
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+        </ul>
     </div>
   )
 }

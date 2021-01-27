@@ -40,7 +40,9 @@
 
 .badge-danger {
   margin: 0.5em;
-  font-size: 20px !important;
+  font-size: 16px !important;
+  width: 50%;
+  margin: auto;
 }
 
 .new-task-btn {
@@ -57,13 +59,8 @@
 
 .react-tabs__tab--selected {
   border-color: white !important;
-}
-
-.react-tabs__tab:hover {
-  border-color: white !important;
-  background-color: white;
-  border-bottom-left-radius: 0px;
-  border-bottom-right-radius: 0px;
+  background-color: #E6E6E6 !important;
+  border-radius: 15px !important;
 }
 
 .react-tabs__tab-list {
@@ -78,7 +75,7 @@
 .react-tabs__tab:hover {
   background-color: #E6E6E6;
   transition: 300ms;
-  border-radius: 4px;
+  border-radius: 15px;
 }
 
 .react-tabs__tab-panel > react-tabs__tab-panel--selected {
@@ -123,6 +120,14 @@
   margin: auto;
 }
 
+.independent-progress {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  position: relative;
+  /* margin: auto auto; */
+}
+
 .pie-chart {
   position: relative;
   margin: 1.5em auto;
@@ -139,4 +144,22 @@
   max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
   height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
   max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 4.5em) - 10px);
+}
+
+.line-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 2em) - 10px);
+}
+
+.bar-chart {
+  position: relative;
+  margin: 1.5em auto;
+  width: 50%;
+  max-width: calc((100vw - ((325px + 275px) + 20%)) / 2);
+  height: calc(50vh - (1.5em + 1.5em + 1.5em) - 10px);
+  max-height: calc(50vh - (1.5em + 1.5em + 1.5em + 2em) - 10px);
 }

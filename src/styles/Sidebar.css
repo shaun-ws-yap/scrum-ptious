@@ -37,8 +37,8 @@
   color: black;
   background: white;
   transition: 300ms;
-  border-top-left-radius: 25px;
-  border-bottom-left-radius: 25px;
+  /* border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px; */
 }
 
 .logout {
@@ -70,6 +70,11 @@
   transition-delay: 0.5s;
   border-radius: 6px;
   padding-top: 1.5em;
+  font-weight: 800;
+}
+
+.logout > p {
+  margin: auto;
 }
 
 .logout > span {
