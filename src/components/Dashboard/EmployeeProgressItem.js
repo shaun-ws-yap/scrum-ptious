@@ -136,8 +136,7 @@ export default function EmployeeProgress(props) {
                 display: false,
               },
               ticks: {
-                suggestedMin: 1,
-                suggestedMax: 2,
+                beginAtZero: true,
               }
             }
           }}
