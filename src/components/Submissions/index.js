@@ -19,7 +19,7 @@ export default function Submissions(props) {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="dashboard">
+    <div className="submissions-container">
       <div className="submissions">
         <SubmissionList
           teamUsers={teamUsers}
