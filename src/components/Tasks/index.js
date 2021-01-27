@@ -6,7 +6,6 @@ import TaskProgress from './TaskProgress';
 import MyTeam from './MyTeam';
 
 import filterTasksByUser from '../../helpers/filterTasksByUser';
-import styled from 'styled-components';
 
 import '../../styles/Tasks.css';
 
@@ -22,15 +21,10 @@ export default function Tasks(props) {
     error,
     setErrorNotification,
     moveTask,
-    setTasks,
-    theme
+    setTasks
   } = props;
 
   const [selectedTasks, setSelectedTasks] = useState(tasks);
-
-  const TeamHeader = styled.div`
-  color: ${props => props.theme.chatBoxFontColor};
-  `;
 
   useEffect(() => {
     setSelectedTasks(tasks);
@@ -64,12 +58,10 @@ export default function Tasks(props) {
       </div>
       { role === 1 && 
       <div className="task-dashboard-bottom">
-        {/* <div className="my-team-header">My Team</div> */}
-        <TeamHeader className="my-team-header">My Team</TeamHeader>
+        <div className="my-team-header">My Team</div>
         <div className="team-list-container">
           <MyTeam 
             teamUsers={teamUsers} 
-            theme={theme}
             selectTasksByUser={selectTasksByUser}
           />
         </div>

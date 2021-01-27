@@ -1,7 +1,6 @@
 import React from 'react';
 
 import MyTeamItem from './MyTeamItem';
-import styled from 'styled-components';
 import '../../styles/MyTeam.css';
 
 export default function MyTeam(props) {
@@ -9,11 +8,6 @@ export default function MyTeam(props) {
     selectTasksByUser,
     teamUsers,
   } = props;
-
-  const TeamList = styled.div`
-  background: ${props => props.theme.myTeamBackground};
-  color: ${props => props.theme.chatBoxFontColor};
-  `;
 
   const teamMembers = teamUsers.map((member) => {
     return (
@@ -26,8 +20,8 @@ export default function MyTeam(props) {
   })
 
   return (
-    <TeamList className="team-list">
+    <div className="team-list">
       {teamMembers}
-    </TeamList>
+    </div>
   )
 }

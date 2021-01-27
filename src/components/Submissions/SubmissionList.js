@@ -2,7 +2,6 @@ import React from 'react';
 
 import SubmissionItem from './SubmissionItem';
 import { getEmployeeName } from '../../helpers/getEmployeeName';
-import styled from 'styled-components';
 
 export default function SubmisionList(props) {
 
@@ -12,10 +11,6 @@ export default function SubmisionList(props) {
     setSelectedTask, 
     setShow 
   } = props;
-
-  const SubmittedHeader = styled.h3`
-  color: ${props => props.theme.chatBoxFontColor};
-  `;
 
   const listedTeamTasks = teamTasks.map((task) => {
     return (
@@ -36,7 +31,7 @@ export default function SubmisionList(props) {
 
   return (
     <div className="submissions-list">
-      <SubmittedHeader>Submitted Tasks</SubmittedHeader>
+      <h3>Submitted Tasks</h3>
       <ul>
         {listedTeamTasks}
       </ul>

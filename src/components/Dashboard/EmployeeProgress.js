@@ -6,11 +6,9 @@ import { teamTaskStatus } from '../../helpers/taskStatus';
 
 export default function EmployeeProgress(props) {
   const [index, setIndex] = useState(0);
-
-  const { theme } = props;
   
   const userData = props.teamUsers.filter(user => user.role !== 1).map((user) => {
-  const taskData = teamTaskStatus(props.teamTasks, user.team_id, user.id);
+    const taskData = teamTaskStatus(props.teamTasks, user.team_id, user.id);
 
     return (
       <TabPanel>
@@ -24,7 +22,6 @@ export default function EmployeeProgress(props) {
           inReview={taskData.inReview}
           late={taskData.late}
           complete={taskData.complete}
-          theme={theme}
         />
       </TabPanel>
     )

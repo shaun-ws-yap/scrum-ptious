@@ -3,18 +3,12 @@ import React from 'react';
 import { Doughnut, Bar, Line, Radar } from 'react-chartjs-2';
 import { TabPanel } from 'react-tabs';
 import filterTasksByLastThreeMonths from '../../helpers/filterTasksByLastThreeMonths';
-import styled from 'styled-components';
  
-export default function EmployeeProgressItem(props) {
+export default function EmployeeProgress(props) {
  
   const lastThreeMonths = filterTasksByLastThreeMonths(props.teamTasks, props.id);
   const month = Object.keys(lastThreeMonths);
   const dataset = [];
-
-  const EmployeeProgress = styled.div`
-  border: ${props => props.theme.chartBorder};
-  background: ${props => props.theme.chartBackground};
-  `;
 
   for (let i = 0; i < 3; i++) {
     const key = lastThreeMonths[month[i]];
@@ -62,7 +56,7 @@ export default function EmployeeProgressItem(props) {
   }
 
   return (
-    <EmployeeProgress className="employee-progress">
+    <div className="employee-progress">
       <div className="pie-chart">
         <Doughnut
           data={{
@@ -90,14 +84,11 @@ export default function EmployeeProgressItem(props) {
               display: false,
               text: props.name,
               fontSize: 25,
-              fontFamily: 'Poppins',
+              fontFamily: 'Poppins'
             },
             legend: {
               display: true,
-              position: 'left',
-              labels: {
-                fontColor: props.theme === 'light' ? 'black' : 'white',
-              }
+              position: 'left'
             }
           }}
         />
@@ -116,16 +107,13 @@ export default function EmployeeProgressItem(props) {
             maintainAspectRatio: false,
             title: {
               display: false,
-              text: 'props.name',
+              text: props.name,
               fontSize: 25,
-              fontFamily: 'Poppins',
+              fontFamily: 'Poppins'
             },
             legend: {
               display: true,
-              position: 'left',
-              labels: {
-                fontColor: props.theme === 'light' ? 'black' : 'white'
-              }
+              position: 'left'
             },
             scale: {
               angleLines: {
@@ -134,14 +122,13 @@ export default function EmployeeProgressItem(props) {
               ticks: {
                 suggestedMin: 1,
                 suggestedMax: 2,
-              },
-              pointLabels: {
-                fontColor: props.theme === 'light' ? 'black' : 'white',
               }
             }
           }}
         />
       </div>
-    </EmployeeProgress>
+
+      
+    </div>
   )
 }
