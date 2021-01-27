@@ -6,7 +6,7 @@ export default function MyTeamItem(props) {
     selectTasksByUser,
   } = props;
 
-  const { role, name, email, phone_number } = member;
+  const { role, name, avatar, email, phone_number } = member;
 
   const roles = {
     1 : 'Project Manager',
@@ -14,14 +14,17 @@ export default function MyTeamItem(props) {
   }
 
   return (
-    <li
-    className="team-progress"
-    onClick={() => selectTasksByUser(member)}
+    <div 
+      className='my-team-item'
+      onClick={() => selectTasksByUser(member)}
     >
-        <h4>{name}</h4>
-        <h5>{email}</h5>
-        <h5>{phone_number}</h5>
-        <h6>{roles[role]}</h6>
-    </li>
+      <img src={avatar} alt= "User Avatar" className='my-team-item-avatar'></img>
+      <div className='my-team-item-right'>
+        <div className='my-team-item-name'>{name}</div>
+        <div className='my-team-item-details'>{roles[role]}</div>
+        <div className='my-team-item-details'>{email}</div>
+        <div className='my-team-item-details'>{phone_number}</div>
+      </div>
+    </div>
   )
 }
