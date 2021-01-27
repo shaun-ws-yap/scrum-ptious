@@ -105,7 +105,7 @@
   max-width: 320px;
   height: 100%;
   min-height: 800px;
-  background-color: #286FEA;
+  background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));
   text-align: center;
   /* border-radius: 20px; */
   position: fixed;
