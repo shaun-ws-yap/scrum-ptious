@@ -54,8 +54,7 @@ function App() {
     chatBoxBackground: "white",
     chatBoxFontColor: "black",
     memberListBackground: "white",
-    titleColor: "#dc658b",
-    tagLineColor: "black"
+    myTeamBackground: 'white',
   };
 
   const DarkTheme = {
@@ -69,8 +68,7 @@ function App() {
     chatBoxBackground: "#757575",
     chatBoxFontColor: "white",
     memberListBackground: "#757575",
-    titleColor: "lightpink",
-    tagLineColor: "lavender",
+    myTeamBackground: "#757575",
   };
 
   const themes = {
@@ -198,7 +196,6 @@ function App() {
               teamTasks={teamTasks}
               teamUsers={teamUsers}
               theme={theme}
-              setTheme={setTheme}
             /> }
           { selectedMenu === TASKS && 
             <Tasks 
@@ -213,6 +210,7 @@ function App() {
               setErrorNotification={setErrorNotification}
               moveTask={moveTask}
               setTasks={setTasks}
+              theme={theme}
             />}
           { selectedMenu === CHAT && 
             <Chat 
@@ -220,7 +218,6 @@ function App() {
               userInfo={userInfo} 
               teamUsers={teamUsers}
               theme={theme}
-              setTheme={setTheme}
             />}
           { selectedMenu === SUBMISSIONS &&
             <Submissions
@@ -239,7 +236,6 @@ function App() {
             tasks={teamTasks} 
             teamUsers={teamUsers}
             theme={theme}
-            setTheme={setTheme}
           />
         </UserSidePanel>
         {/* </section> */}
