@@ -27,7 +27,7 @@ export default function Chat(props) {
 
   return (
     <div className="chat-container">
-      <div className="chat-left">
+      <div style={{background: props.theme === 'light' ? 'white' : '#757575'}} className="chat-left">
       {/* <ChatBox className="chat-left"> */}
           <ScrollToBottom className="chat-log-container">
             <ChatLog 
