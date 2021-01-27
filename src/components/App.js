@@ -4,6 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import "react-datepicker/dist/react-datepicker.css";
 import 'react-notifications/lib/notifications.css';
 import 'react-tabs/style/react-tabs.css';
+import { Button } from 'react-bootstrap';
+import { ThemeProvider } from 'styled-components';
+import styled from 'styled-components';
+import { CgSun } from 'react-icons/cg';
+import { HiMoon } from 'react-icons/hi';
 
 import { useState, useEffect } from 'react';
 import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
@@ -30,12 +35,78 @@ const SUBMISSIONS = "Submissions"
 
 function App() {
   const [selectedMenu, setMenu] = useState(DASHBOARD);
+  const [theme, setTheme] = useState("light");
   const [loginToken, setLoginToken] = useState(0);
   const [errorNotification, setErrorNotification] = useState({
     title: "",
     message: "",
   });
+
+  const LightTheme = {
+    appContainerBackground: "rgba(229, 233, 236, 0.35)",
+    sidebarBackground: "linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));",
+    userPanelBackground: "#A9A9A9",
+    deadlinesFontColor: "black",
+    deadlinesListBackground: "white",
+    chartBackground: "white",
+    chartBorder: "1px solid white",
+    chatBoxBackground: "white",
+    chatBoxFontColor: "black",
+    memberListBackground: "white",
+    myTeamBackground: 'white',
+    darkModeToggle: "darkgrey",
+  };
+
+  const DarkTheme = {
+    appContainerBackground: "#646060",
+    sidebarBackground: "#282c36",
+    userPanelBackground: "#282c36",
+    deadlinesFontColor: "white",
+    deadlinesListBackground: "#A9A9A9",
+    chartBackground: "#757575",
+    chartBorder: "1px solid #757575",
+    chatBoxBackground: "#757575",
+    chatBoxFontColor: "white",
+    memberListBackground: "#757575",
+    myTeamBackground: "#757575",
+    darkModeToggle: "lightpink",
+  };
+
+  const themes = {
+    light: LightTheme,
+    dark: DarkTheme,
+  }
+
+  const AppContainer = styled.div`
+  background: ${props => props.theme.appContainerBackground};
+  transition: all .5s ease;
+  `;
   
+  const Navsidebar = styled.div`
+  background: ${props => props.theme.sidebarBackground};
+  transition: all .5s ease;
+  `;
+
+
+  const UserSidePanel = styled.div`
+  background: ${props => props.theme.userPanelBackground};
+  color: ${props => props.theme.deadlinesFontColor};
+  transition: all .5s ease;
+  `;
+
+  const Toggle = styled.button`
+  background: none;
+  color: ${props => props.theme.darkModeToggle};
+  border: none;
+  border-radius: 50%;
+  &:focus {
+    outline: none;
+  }
+  transition: all .5s ease;
+  `;
+
+  const icon = theme === 'light' ? <HiMoon size={50} /> : <CgSun size={50} />
+
   const { socket } = useSocket(loginToken);
 
   const { 
@@ -75,6 +146,14 @@ function App() {
     }
   }, [errorNotification]);
 
+  function changeTheme() {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
+
 
   const handleLogout = () => {
     logout();
@@ -88,9 +167,10 @@ function App() {
   }
 
   return (
-    <div className="app-container">
+    <ThemeProvider theme={themes[theme]}>
+      <AppContainer className="app-container">
       <NotificationContainer />
-      <section className="sidebar">
+      <Navsidebar className="sidebar">
         <Sidebar
           selectedMenu={selectedMenu}
           userInfo={userInfo}
@@ -99,9 +179,12 @@ function App() {
           createTaskItem={createTaskItem}
           errorNotification={errorNotification}
           setErrorNotification={setErrorNotification}
-          setLoginToken={setLoginToken}
-          logout={logout}
+          theme={theme}
+          setTheme={setTheme}
         />
+        <Toggle onClick={changeTheme}>
+          {icon}
+        </Toggle>
         <span 
           className="logout"
           onClick={() => handleLogout()}
@@ -112,7 +195,7 @@ function App() {
           <span></span>
           <span></span>
         </span>
-      </section>
+        </Navsidebar>
       {/* <div className="wrapper"> */}
         <section className="dashboard-main">
           { selectedMenu === DASHBOARD && 
@@ -121,6 +204,7 @@ function App() {
               role={role} 
               teamTasks={teamTasks}
               teamUsers={teamUsers}
+              theme={theme}
             /> }
           { selectedMenu === TASKS && 
             <Tasks 
@@ -135,12 +219,14 @@ function App() {
               setErrorNotification={setErrorNotification}
               moveTask={moveTask}
               setTasks={setTasks}
+              theme={theme}
             />}
           { selectedMenu === CHAT && 
             <Chat 
               socket={socket} 
               userInfo={userInfo} 
               teamUsers={teamUsers}
+              theme={theme}
             />}
           { selectedMenu === SUBMISSIONS &&
             <Submissions
@@ -151,16 +237,18 @@ function App() {
               user={userInfo}
             />}
         </section>
-        <section className="user__info">
+        <UserSidePanel className="user__info">
           <UserPanel 
             // wide={windowWidth > 1300}
             userInfo={userInfo} 
             tasks={teamTasks} 
-            teamUsers={teamUsers} 
-          /> 
-        </section>
+            teamUsers={teamUsers}
+            theme={theme}
+          />
+        </UserSidePanel>
       {/* </div> */}
-    </div>
+    </AppContainer>
+    </ThemeProvider>
   );
 }
 

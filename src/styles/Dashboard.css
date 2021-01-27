@@ -53,6 +53,7 @@
 
 .react-tabs__tab {
   margin: 0 0.25em;
+  color: black;
 }
 
 .react-tabs__tab--selected {
@@ -106,7 +107,6 @@
   flex-direction: column;
   width: 80% !important; 
   border-radius: 25px;
-  background-color: white;
   padding: 1em;
   transition: 300ms;
   height: calc(100% - 1em);
@@ -121,6 +121,7 @@
   align-content: center;
   position: relative;
   margin: auto;
+  border-radius: 25px;
 }
 
 .pie-chart {

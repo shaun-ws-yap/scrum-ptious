@@ -1,11 +1,17 @@
 import React from 'react';
 
 import MembersListItem from "./MembersListItem";
+import styled from 'styled-components';
 
 const roles = ["Project Manager", "Developer"];
 
 export default function MembersList(props) {
   const { teamUsers, onlineUsers } = props;
+
+  const MemberList = styled.div`
+  background: ${props => props.theme.memberListBackground};
+  color: ${props => props.theme.chatBoxFontColor};
+  `;
 
   const memberComponents = teamUsers.map(member => {
     const {id, name, role, avatar} = member;
@@ -20,8 +26,10 @@ export default function MembersList(props) {
     );
   })
   return (
-    <div className="members-list">
+    // <div className="members-list">
+    <MemberList className="members-list">
       {memberComponents}
-    </div>
+    </MemberList>
+    /* </div> */
   )
 }
