@@ -17,40 +17,43 @@ export default function EmployeeProgress(props) {
       data: [key.assigned, key.inprogress, key.inreview, key.late, key.complete],
     }
     if (i === 0) {
-      res.backgroundColor = 'rgba(151, 229, 215, 0.3)'
-      res.borderColor = 'rgba(151, 229, 215, 1)';
-      res.hoverBackgroundColor = 'rgba(151, 229, 215, 1)';
+      res.backgroundColor = 'rgba(212, 99, 78, 0.3)'
+      res.borderColor = 'rgba(212, 99, 78, 1)';
+      res.hoverBackgroundColor = 'rgba(212, 99, 78, 1)';
       res.borderCapStyle = 'butt';
       res.pointBackgroundColor = 'white';
-      res.pointBorderColor = 'rgba(151, 229, 215, 1)';
+      res.pointBorderColor = 'rgba(212, 99, 78, 1)';
       res.pointBorderWidth = '2px';
-      res.pointHoverBackgroundColor = 'rgba(151, 229, 215, 1)';
-      res.hoverPointBorderWidth = '4px';
+      res.pointHoverBackgroundColor = 'rgba(212, 99, 78, 1)';
+      res.hoverPointBorderWidth = '2px';
       res.spanGaps = true;
+      res.borderWidth = '4px';
     }
     if (i === 1) {
-      res.backgroundColor = 'rgba(252, 241, 221, 0.3)';
-      res.borderColor = 'rgba(252, 241, 221, 1)';
-      res.hoverBackgroundColor = 'rgba(252, 241, 221, 1)';
+      res.backgroundColor = 'rgba(255, 132, 191, 0.3)';
+      res.borderColor = 'rgba(255, 132, 191, 1)';
+      res.hoverBackgroundColor = 'rgba(255, 132, 191, 1)';
       res.borderCapStyle = 'butt';
       res.pointBackgroundColor = 'white';
-      res.pointBorderColor = 'rgba(252, 241, 221, 1)';
+      res.pointBorderColor = 'rgba(255, 132, 191, 1)';
       res.pointBorderWidth = '2px';
-      res.pointHoverBackgroundColor = 'rgba(252, 241, 221, 1)';
-      res.hoverPointBorderWidth = '4px';
+      res.pointHoverBackgroundColor = 'rgba(255, 132, 191, 1)';
+      res.hoverPointBorderWidth = '2px';
       res.spanGaps = true;
+      res.borderWidth = '4px';
     }
     if (i === 2) {
-      res.backgroundColor = 'rgba(254, 183, 179, 0.3)';
-      res.borderColor = 'rgba(254, 183, 179, 1)';
-      res.hoverBackgroundColor = 'rgba(254, 183, 179, 1)';
+      res.backgroundColor = 'rgba(22, 53, 83, 0.3)';
+      res.borderColor = 'rgba(22, 53, 83, 1)';
+      res.hoverBackgroundColor = 'rgba(22, 53, 83, 1)';
       res.borderCapStyle = 'butt';
       res.pointBackgroundColor = 'white';
-      res.pointBorderColor = 'rgba(254, 183, 179, 1)';
+      res.pointBorderColor = 'rgba(22, 53, 83, 1)';
       res.pointBorderWidth = '2px';
-      res.pointHoverBackgroundColor = 'rgba(254, 183, 179, 1)';
+      res.pointHoverBackgroundColor = 'rgba(22, 53, 83, 1)';
       res.hoverPointBorderWidth = '4px';
       res.spanGaps = true;
+      res.borderWidth = '4px';
     }
     dataset.push(res);
   }
@@ -104,7 +107,7 @@ export default function EmployeeProgress(props) {
             },
             legend: {
               display: true,
-              position: 'right'
+              position: 'left'
             }
           }}
         />
