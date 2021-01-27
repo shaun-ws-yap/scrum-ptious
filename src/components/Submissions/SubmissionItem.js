@@ -10,12 +10,11 @@ export default function SubmissionItem(props) {
   }
 
   return (
-    <li onClick={() => handleOpen()}>
-      <h4>{title}</h4>
-      <h4>{name}</h4>
-      <h4>{description}</h4>
+    <li className="submissions-list-item" onClick={() => handleOpen()}>
+      <h4 className="task-title">{title}</h4>
+      <h6 className="task-assigned-to">Assigned to: {name}</h6>
+      <p className="task-description">{description}</p>
       { is_late && <span className="badge badge-danger">LATE</span> }
-      <h4>{is_viewed && 'Feedback Given'}</h4>
     </li>
   )
 }

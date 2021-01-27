@@ -1,9 +1,9 @@
 .chat-container {
   display: flex;
   flex-direction: row;
-  margin: 3em 5em 3em 5em;
   height: 75vh;
-  width: 50vw;
+  width: 60vw;
+  max-width: 800px;
   margin-left: auto;
   margin-top: 10vh;
 }
@@ -13,7 +13,7 @@
   flex-direction: column;
   margin-right: 1em;
   height: 100%;
-  width: 70%;
+  width: 75%;
   background-color: white;
   border-radius: 20px;
 }
@@ -40,11 +40,12 @@
   width: 100%;
   height: 0;
   overflow: hidden;
+  padding-top: 1em;
   transition: height 0.15s linear;
 }
 
 .chat-log-bottom.expanded {
-  height: 2em;
+  height: 3em;
 }
 
 .chat-item {
@@ -127,8 +128,9 @@
   border-radius: 25px;
   flex-direction: row;
   width: 100%;
-  padding-top: 1em;
-  padding-left: 0.5em;
+  height: 10%;
+  padding-top: 1.5em;
+  padding-left: 2em;
 }
 
 .chat-input-box form {
@@ -179,8 +181,8 @@
   border: 2px solid white;
   border-radius: 20px;
   padding: 1em;
-  width: 20%;
-  height: 90%;
+  width: 25%;
+  height: 100%;
   overflow-y: auto;
 }
 
