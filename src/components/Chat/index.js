@@ -15,7 +15,6 @@ export default function Chat(props) {
 
   const ChatBox = styled.div`
   background: ${props => props.theme.chatBoxBackground};
-  color: ${props => props.theme.chatBoxFontColor};
   `;
 
   const { 
@@ -28,8 +27,8 @@ export default function Chat(props) {
 
   return (
     <div className="chat-container">
-      {/* <div className="chat-left"> */}
-      <ChatBox className="chat-left">
+      <div className="chat-left">
+      {/* <ChatBox className="chat-left"> */}
           <ScrollToBottom className="chat-log-container">
             <ChatLog 
               userId={userInfo.id}
@@ -40,8 +39,8 @@ export default function Chat(props) {
             />
           </ScrollToBottom>
           <InputBox sendMessage={sendMessage} />
-      </ChatBox>
-      {/* </div> */}
+      {/* </ChatBox> */}
+      </div>
       <MembersList teamUsers={teamUsers} onlineUsers={onlineUsers} />
     </div>
   )
