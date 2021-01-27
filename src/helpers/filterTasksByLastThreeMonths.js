@@ -2,6 +2,7 @@ export default function filterTasksByLastThreeMonths(tasks, userId) {
   const monthNames = ["January", "February", "March", "April", "May", "June",
     "July", "August", "September", "October", "November", "December"
   ];
+  const status = ["assigned", "inprogress", "inreview", "completed"];
 
   const filteredTasks = {};
 
@@ -21,38 +22,16 @@ export default function filterTasksByLastThreeMonths(tasks, userId) {
 
   for (const task of tasks) {
     const monthCreated = monthNames[new Date(task.creation_date).getMonth()];
+    
+    for (const month in filteredTasks) {
+      if (month === monthCreated && task.employee_id === userId) {
+        filteredTasks[month][status[task.status]] += 1;
 
-    switch(task.status) {
-      case 0:
-        if (task.employee_id === userId) {
-          filteredTasks[monthCreated].assigned = + 1;
+        if (task.is_late) {
+          filteredTasks[month].late++;
         }
-        break;
-      case 1:
-        if (task.employee_id === userId) {
-          filteredTasks[monthCreated].inprogress = + 1;
-        }
-        break;
-
-      case 2:
-        if (task.employee_id === userId) {
-          filteredTasks[monthCreated].inreview = + 1;
-        }
-        break;
-      
-      case 3:
-        if (task.employee_id === userId) {
-          filteredTasks[monthCreated].completed = + 1;
-        }
-        break;
-    }
-
-    if (task.is_late) {
-      if (task.employee_id === userId) {
-        filteredTasks[monthCreated].late = + 1;
       }
     }
   }
-
   return filteredTasks;
 }
