@@ -63,7 +63,6 @@ export default function Tasks(props) {
             teamUsers={teamUsers} 
             selectTasksByUser={selectTasksByUser}
           />}
-        { role === 2 && <TaskResource />}
       </div>
     </div>
   )
