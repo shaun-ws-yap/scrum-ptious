@@ -11,6 +11,7 @@ export default function useApplicationData(socket, loginToken, setError) {
     teamUsers: [],
     teamTasks: [],
     submissions: [],
+    messages: [],
   });
   
   const logout = () => setState({
@@ -20,6 +21,7 @@ export default function useApplicationData(socket, loginToken, setError) {
     teamUsers: [],
     teamTasks: [],
     submissions: [],
+    messages: [],
   });
   
   const setTasks = teamTasks => {
@@ -28,6 +30,13 @@ export default function useApplicationData(socket, loginToken, setError) {
   }
   const setSubmissions = submissions => setState(prev => {
     return {...prev, submissions }
+  })
+
+  const setMessages = (messages, shouldAppend) => setState(prev => {
+    if (shouldAppend) {
+      return {...prev, messages: [...prev.messages, ...messages]};
+    }
+    return {...prev, messages: [...messages, ...prev.messages]};
   })
 
   useEffect(() => {
@@ -73,5 +82,6 @@ export default function useApplicationData(socket, loginToken, setError) {
     logout,
     setTasks,  
     setSubmissions,
+    setMessages,
   }
 }
