@@ -9,6 +9,7 @@ export default function DeadlineListItem(props) {
 
   return (
     <div className={`deadline-card-${status === 0 ? 'assigned' : 'inprogress'}`}>
+
       <h5>{props.title}</h5>
       { userInfo.role === 1 && <p>{getEmployeeName(teamUsers, assignedTo)}</p> }
       <div className="card-date">

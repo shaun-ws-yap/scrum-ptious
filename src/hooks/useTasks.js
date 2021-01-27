@@ -14,6 +14,10 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
       return;
     }
 
+    if (!socket) {
+      return;
+    }
+
     socket.on('tasks update', (teamTasks, userToAlert) => {
       setTasks(teamTasks);
       setUserNotification(prev => ({...prev, message: "Your tasks have updated", user: userToAlert, title: "Click to view", type: "warning"}))
@@ -50,7 +54,7 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
       socket.off('tasks action saved');
       socket.off('submit/feedback');
     }
-  }, [loginToken]);
+  }, [socket]);
 
   const CREATE = 'CREATE';
   const EDIT   = 'EDIT';

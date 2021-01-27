@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import filterTasksByUser from '../helpers/filterTasksByUser';
 // import { Prev } from 'react-bootstrap/esm/PageItem';
 
+
 export default function useApplicationData(socket, loginToken, setError) {
   const [state, setState] = useState({
     userInfo: {},
@@ -9,7 +10,15 @@ export default function useApplicationData(socket, loginToken, setError) {
     userTasks: [],
     teamUsers: [],
     teamTasks: [],
-    deadlines: [],
+    submissions: [],
+  });
+  
+  const logout = () => setState({
+    userInfo: {},
+    role: 0,
+    userTasks: [],
+    teamUsers: [],
+    teamTasks: [],
     submissions: [],
   });
   
@@ -26,17 +35,21 @@ export default function useApplicationData(socket, loginToken, setError) {
       return;
     }
 
+    if (!socket) {
+      return;
+    }
+
+    console.log('log in');
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
-      const { userTasks, userInfo, teamTasks, teamUsers, deadlines, submissions } = loginData;
+      const { userTasks, userInfo, teamTasks, teamUsers, submissions } = loginData;
       setState(prev => ({ 
         ...prev, 
         userTasks, 
         userInfo, 
         teamTasks, 
         teamUsers, 
-        deadlines,
         submissions, 
         role: userInfo.role, 
       }));
@@ -52,11 +65,12 @@ export default function useApplicationData(socket, loginToken, setError) {
         socket.off('error');
       }
     }
-  }, [loginToken]);
+  }, [socket]);
 
 
   return { 
     state, 
+    logout,
     setTasks,  
     setSubmissions,
   }
