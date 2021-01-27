@@ -25,7 +25,7 @@ export default function UserInfo(props) {
       <div className={`user-info-transparent-${transparent}${openFilter && selectedMenu === "Tasks" ? ' change' : ''}`}  id="user-panel-wings">
         { userInfo && ( 
           <>
-            { transparent === true && selectedMenu === "Tasks" && (
+            { userInfo.role === 1 && transparent === true && selectedMenu === "Tasks" && (
               <span 
                 className="user-filter-btn"
                 onClick={event => toggleFilter(openFilter)}
