@@ -20,8 +20,14 @@ export default function UserInfo(props) {
           <img alt={userInfo.name} src={userInfo.avatar} className="user-avatar"></img>
           <h5>Welcome, {userInfo.name}</h5>
           <h6>{roles[userInfo.role]}</h6>
+          <p>Deadlines</p>
           <div className="deadlines">
             <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
+          </div>
+          <div className="socials">
+            <span><i class="fab fa-github"></i>Clarence</span>
+            <span><i class="fab fa-github"></i>Kevin</span>
+            <span><i class="fab fa-github"></i>Shaun</span>
           </div>
         </>
       )}
