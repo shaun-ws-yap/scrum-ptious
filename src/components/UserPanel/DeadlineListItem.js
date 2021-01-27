@@ -8,7 +8,7 @@ export default function DeadlineListItem(props) {
   const { title, description, due_date, creation_date, assignedTo, userInfo, teamUsers, is_late } = props;
 
   return (
-    <li>
+    <li className="deadlines-item">
       <h5>{props.title}</h5>
       { userInfo.role === 1 && <p>{getEmployeeName(teamUsers, assignedTo)}</p> } 
       <label for="creation_date">A</label>
