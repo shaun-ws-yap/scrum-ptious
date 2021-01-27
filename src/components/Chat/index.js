@@ -10,7 +10,7 @@ import '../../styles/Chat.css';
 import useChat from '../../hooks/useChat';
 
 export default function Chat(props) {
-  const { socket, userInfo, teamUsers } = props;
+  const { socket, userInfo, teamUsers, messages, setMessages } = props
 
   const ChatBox = styled.div`
   background: ${props => props.theme.chatBoxBackground};
