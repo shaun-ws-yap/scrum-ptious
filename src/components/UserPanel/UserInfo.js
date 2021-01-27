@@ -10,7 +10,7 @@ const roles = {
 }
 
 export default function UserInfo(props) {
-  const { userInfo, tasks, teamUsers, transparent } = props;
+  const { userInfo, tasks, teamUsers, transparent, selectedMenu } = props;
   const filteredTasks = filterDeadlineTasks(tasks);
   const [openFilter, setOpenFilter] = useState(false); 
 
@@ -26,12 +26,14 @@ export default function UserInfo(props) {
       <div className={`user-info-transparent-${transparent}`}  id="user-panel-wings">
         { userInfo && ( 
           <>
-            <span 
-              className="user-filter-btn"
-              onClick={event => toggleFilter(openFilter)}
-            >
-              <i class="fas fa-filter fa-2x"></i>
-            </span>
+            { transparent === true && selectedMenu === "Tasks" && (
+              <span 
+                className="user-filter-btn"
+                onClick={event => toggleFilter(openFilter)}
+              >
+                <i class="fas fa-filter fa-2x"></i>
+              </span>
+            )}
             <img alt={userInfo.name} src={userInfo.avatar} className="user-avatar"></img>
             <h5>Welcome, {userInfo.name}</h5>
             <h6>{roles[userInfo.role]}</h6>

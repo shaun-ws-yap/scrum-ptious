@@ -9,7 +9,7 @@ import useSidePanel from '../../hooks/useSidePanel';
 import '../../styles/UserInfo.css';
 
 export default function UserPanel(props) {
-  const { userInfo, tasks, teamUsers } = props;
+  const { userInfo, tasks, teamUsers, selectedMenu } = props;
   const [openPanel, setOpenPanel] = useState(false);
 
   const handleButton = (state) => {
@@ -35,6 +35,7 @@ export default function UserPanel(props) {
             tasks={tasks} 
             teamUsers={teamUsers}
             transparent={true}
+            selectedMenu={selectedMenu}
           />
         </div>
         <div className="hidden-user-panel">
@@ -48,6 +49,7 @@ export default function UserPanel(props) {
               tasks={tasks} 
               teamUsers={teamUsers}
               transparent={false}
+              selectedMenu={selectedMenu}
             /> 
           </SlidingPanel>
         </div>

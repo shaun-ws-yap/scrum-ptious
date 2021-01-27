@@ -167,7 +167,8 @@ function App() {
           <UserPanel 
             userInfo={userInfo} 
             tasks={teamTasks} 
-            teamUsers={teamUsers} 
+            teamUsers={teamUsers}
+            selectedMenu={selectedMenu}
           />
         </section>
     </div>
