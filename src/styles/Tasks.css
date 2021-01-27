@@ -1,50 +1,43 @@
+.task-dashboard-top {
+  overflow-y: scroll;
+  height: 60%;
+}
+
+.task-dashboard-bottom {
+  height: 40%
+}
+
 .task-progress {
   display: flex;
   width: 100%;
+  height: auto;
   border-radius: 20px;
   flex-direction: row;
-  padding: 1em;
+  padding: 1em 0 1em 1em;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
   text-align: center;
-  overflow: hidden;
 }
 
-.team-list {
-  display: flex;
-  width: 100%;
-  border-radius: 20px;
-  background-color: #E6E6E6;
-  flex-direction: column;
-  text-align: center;
-  padding: 1em;
-  margin-right: 1.5em;
-  margin-bottom: 1.5em;
-  transition: 300ms;
-  align-content: center;
+.task-assigned {
+  width: 33%;
   overflow: auto;
 }
 
-.team-item {
-  border: 1px solid white;
-  border-radius: 20px;
-  background-color: #B0BDFF;
-  padding: 1em;
-  margin-top: 0.5em;
-  list-style: none;
-  transition: 300ms;
-  cursor: pointer;
+.task-inprogress {
+  width: 33%;
+  overflow: auto;
 }
 
-.team-item:hover {
-  border: 1px solid white;
-  border-radius: 20px;
-  background-color: #4374FF;
-  padding: 1em;
-  margin-top: 0.5em;
-  list-style: none;
-  transition: 300ms;
-  cursor: pointer;
+.task-completed {
+  width: 33%;
+  overflow: auto;
+}
+
+.task-droppable-inprogress {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 .task__item {
@@ -112,25 +105,4 @@
 
 .task__item--complete:hover {
   background-color: #57DC55;
-}
-
-.task-assigned {
-  width: 33%;
-  overflow: auto;
-}
-
-.task-inprogress {
-  width: 33%;
-  overflow: auto;
-}
-
-.task-completed {
-  width: 33%;
-  overflow: auto;
-}
-
-.task-droppable-inprogress {
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
 }
