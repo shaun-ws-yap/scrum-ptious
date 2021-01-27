@@ -47,6 +47,8 @@ function App() {
     appContainerBackground: "rgba(229, 233, 236, 0.35)",
     sidebarBackground: "linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));",
     userPanelBackground: "#A9A9A9",
+    deadlinesFontColor: "black",
+    deadlinesListBackground: "white",
     chartBackground: "white",
     chartBorder: "1px solid white",
     titleColor: "#dc658b",
@@ -57,6 +59,8 @@ function App() {
     appContainerBackground: "#A9A9A9",
     sidebarBackground: "#282c36",
     userPanelBackground: "#282c36",
+    deadlinesFontColor: "white",
+    deadlinesListBackground: "#A9A9A9",
     chartBackground: "#A9A9A9",
     chartBorder: "1px solid #A9A9A9",
     titleColor: "lightpink",
@@ -80,6 +84,7 @@ function App() {
 
   const UserSidePanel = styled.div`
   background: ${props => props.theme.userPanelBackground};
+  color: ${props => props.theme.deadlinesFontColor};
   `;
 
   const { socket } = useSocket();
@@ -224,7 +229,9 @@ function App() {
             // wide={windowWidth > 1300}
             userInfo={userInfo} 
             tasks={teamTasks} 
-            teamUsers={teamUsers} 
+            teamUsers={teamUsers}
+            theme={theme}
+            setTheme={setTheme}
           />
         </UserSidePanel>
         {/* </section> */}
