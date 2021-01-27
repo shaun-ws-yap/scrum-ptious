@@ -97,7 +97,7 @@
   height: calc(100vh - 3em);
   min-height: calc(100vh - 3em);
   min-height: 800px;
-  background-color: #286FEA;
+  background: linear-gradient(to left, hsl(241, 96%, 56%), hsl(266, 100%, 57%));
   text-align: center;
   position: fixed;
   border-radius: 25px;
@@ -112,10 +112,11 @@
 .main {
   width: auto;
   max-width: 65%;
-  margin-left: 50px;
+  margin-left: 200px;
   margin-right: 50px;
   display: flex;
   flex-direction: column;
+  padding-top: 2em;
 }
 
 .user-in-progress {

@@ -55,11 +55,9 @@ export default function Feedback(props) {
           <Modal.Body>
             <p>{description}</p>
             <p>Assigned to: {getEmployeeName(teamUsers, employee_id)}</p>
-            <p>On: 
-              <Moment format="Do MMM YYYY h:mm A" >{creation_date}</Moment>
+            <p>On: <Moment format="Do MMM YYYY h:mm A" >{creation_date}</Moment>
             </p>
-            <p>Due on: 
-              <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment>
+            <p>Due on: <Moment format="Do MMM YYYY h:mm A" >{due_date}</Moment>
               { is_late && (<span className="badge badge-danger">LATE</span>) }
             </p>
             

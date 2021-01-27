@@ -19,12 +19,6 @@
   margin: 1.5em 0;
 }
 
-.user-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .dashboard {
   display: flex;
   flex-direction: column;
