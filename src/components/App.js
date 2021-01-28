@@ -100,7 +100,7 @@ function App() {
         <img 
           alt="Scrum-ptious Logo"
           className="sidebar-centered"
-          src="https://logoipsum.com/logo/logo-25.svg"
+          src="https://www.freelogodesign.org/file/app/client/thumb/fb19eb8b-21e7-4a5b-9695-a099867ef5e5_200x200.png?1611814732064"
         />
         <nav className="sidebar__menu">
           <Sidebar

@@ -109,6 +109,12 @@
   width: 20px;
 }
 
+.sidebar-centered {
+  width: 150px;
+  height: 150px;
+  margin-left: 4em;
+}
+
 .main {
   width: auto;
   max-width: 65%;
