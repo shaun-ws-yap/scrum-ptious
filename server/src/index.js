@@ -3,7 +3,7 @@ const path = require("path");
 
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
-const express    = require("express")();
+const express    = require("express");
 const app        = express();
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
@@ -36,14 +36,14 @@ db.connect(err => {
 app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(express.static("public"));
+app.use(express.static("public"));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+//   app.use(express.static("build"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+//   });
+// }
 
 app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
