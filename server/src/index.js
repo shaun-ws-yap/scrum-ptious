@@ -1,13 +1,15 @@
 require('dotenv').config();
+const path = require("path");
 
 const PORT       = process.env.PORT || 8080;
 const ENV        = process.env.ENV || "development";
-const cors       = require('cors');
-const app        = require("express")();
-const bodyParser = require("body-parser");
+const express    = require("express")();
+const app        = express();
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
-//const app        = express();
+
+const cors       = require('cors');
+const bodyParser = require("body-parser");
 
 const { addClientToMap, removeClientFromMap, parseMap } = require('./socket/socket-connections');
 const { getMessagesAfterTime, getRecentMessages, saveMessage, queryMessages } = require("./routes/queries/messages");
@@ -35,6 +37,13 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(express.static("public"));
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+  });
+}
 
 app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
