@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
+    "start": "node ./src/index.js",
     "local": "./node_modules/.bin/nodemon -L --ignore public/",
     "error": "TEST_ERROR=true node ./src/index.js",
     "reset-elephant": "node ./src/db/reset-db.js",
