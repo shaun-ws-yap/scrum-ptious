@@ -33,22 +33,28 @@ INSERT INTO tasks (
   projecttask_id
 )
 VALUES 
-('Create ERD', 'Design ERD to base schema off of', '2021-01-20 17:00:00', 3, 0, false, 1),
-('Create Schema', 'Write sql to create tables for database', '2021-01-20 17:00:00', 4, 1, true, 1),
-('Create seeds', 'Insert into tables in database dummy data for testing', '2021-01-15 17:00:00', 2, 2, true, 1),
-('Setup project skeleton', 'Install packages and write boiler plate code', '2021-01-10 17:00:00', 2, 2, false, 1),
-('Start project', 'Start on project', '2021-01-10 17:00:00', 4, 1, true, 1),
+('Create ERD', 'Design ERD to base schema off of', '2020-11-20 17:00:00', 2, 3, true, 1),
+('Create Schema', 'Write sql to create tables for database', '2020-11-20 17:00:00', 2, 3, true, 1),
+('Create seeds', 'Insert into tables in database dummy data for testing', '2020-11-15 17:00:00', 2, 3, true, 1),
+('Setup project skeleton', 'Install packages and write boiler plate code', '2020-11-10 17:00:00', 3, 3, true, 1),
+('Start project', 'Start on project', '2020-11-10 17:00:00', 3, 3, true, 1),
 
-('Create API server', 'Use API server to persist data from the database', '2021-01-20 17:00:00', 2, 3, false, 1),
-('Setup routes', 'Setup routes to query our database tables', '2021-01-20 17:00:00', 3, 3, true, 1),
-('Setup React layout(Sidebar, 1/3)', 'Begin to setup layout of front-end by creating a nav sidebar', '2021-01-15 17:00:00', 3, 3, true, 1),
-('Setup React layout(Dashboard display, 2/3)', 'Setup different displays for different sections of the dashboard(Main, Tasks, Chat)', '2021-01-10 17:00:00', 2, 2, false, 1),
-('Start React layout(User panel, 3/3)', 'Setup user panel to display image, name and upcoming deadlines of tasks', '2021-01-10 17:00:00', 4, 2, true, 1),
-('Create Main Dashboard components', 'Create components to display the top dashboard(project progress) and bottom dashboard (independent progress)', '2021-01-20 17:00:00', 5, 0, false, 1),
-('Utilize Charts.js library', 'Use the Charts.js library to visualize data of project/independent progress', '2021-01-20 17:00:00', 5, 3, true, 1),
-('Setup axios', 'Setup communications between our React and API server to retrieve data from our database', '2021-01-15 17:00:00', 2, 2, true, 1),
-('Use axios requests for Tasks section', 'Utilize axios to retrieve tasks according to the individual employee', '2021-01-10 17:00:00', 3, 0, false, 1),
-('Use axios requests for User panel', 'Utilize axios to retrieve deadlines according to the individual employee', '2021-01-10 17:00:00', 3, 1, true, 1);
+('Create API server', 'Use API server to persist data from the database', '2020-12-20 17:00:00', 3, 3, true, 1),
+('Setup routes', 'Setup routes to query our database tables', '2020-12-20 17:00:00', 4, 3, true, 1),
+('Setup React layout(Sidebar, 1/3)', 'Begin to setup layout of front-end by creating a nav sidebar', '2020-12-15 17:00:00', 2, 3, true, 1),
+('Setup React layout(Dashboard display, 2/3)', 'Setup different displays for different sections of the dashboard(Main, Tasks, Chat)', '2020-12-10 17:00:00', 2, 3, true, 1),
+('Start React layout(User panel, 3/3)', 'Setup user panel to display image, name and upcoming deadlines of tasks', '2020-12-10 17:00:00', 2, 2, true, 1),
+
+('Create Main Dashboard components', 'Create components to display the top dashboard(project progress) and bottom dashboard (independent progress)', '2021-01-20 17:00:00', 4, 2, true, 1),
+('Utilize Charts.js library', 'Use the Charts.js library to visualize data of project/independent progress', '2021-01-20 17:00:00', 4, 2, true, 1),
+('Use axios requests for Tasks section', 'Utilize axios to retrieve tasks according to the individual employee', '2021-01-25 17:00:00', 2, 0, false, 1),
+('Use axios requests for User panel', 'Utilize axios to retrieve deadlines according to the individual employee', '2021-01-25 17:00:00', 4, 0, false, 1),
+('Setup axios', 'Setup communications between our React and API server to retrieve data from our database', '2021-01-30 17:00:00', 3, 2, true, 1),
+
+('Implement draggables library', 'Use draggables library to visualize employees taking assigned tasks to work on', '2021-02-05 17:00:00', 2, 1, false, 1),
+('Implement CSS', 'Begin to style the web app with CSS', '2021-02-05 17:00:00', 2, 1, false, 1),
+('Implement media queries', 'Use media queries to implement reactive design for web app', '2021-02-08 17:00:00', 2, 2, false, 1),
+('Implement Dark Mode (stretch)', 'Implement a dark mode theme for better readability during the night', '2021-02-08 17:00:00', 2, 2, false, 1);
 
 
 INSERT INTO submissions (
