@@ -41,9 +41,9 @@ export default function UserInfo(props) {
               <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
             </div>
             <div className="socials">
-              <span><i class="fab fa-github"></i><p>Clarence</p></span>
-              <span><i class="fab fa-github"></i><p>Kevin</p></span>
-              <span><i class="fab fa-github"></i><p>Shaun</p></span>
+              <span><a href="https://github.com/clarchiu" target="_blank"><i class="fab fa-github"></i><p>Clarence</p></a></span>
+              <span><a href="https://github.com/Kevinli296" target="_blank"><i class="fab fa-github"></i><p>Kevin</p></a></span>
+              <span><a href="https://github.com/shaun-ws-yap" target="_blank"><i class="fab fa-github"></i><p>Shaun</p></a></span>
             </div>
           </>
         )}
