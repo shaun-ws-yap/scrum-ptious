@@ -84,7 +84,7 @@ function App() {
     setManagerNotification({message: "", title: "", type: "", user: undefined})
     setUserNotification({message: "", user: undefined, title: "", type: ""})
     setLoginToken(0);
-    setMenu('');
+    setMenu(DASHBOARD);
   }
 
   if ( loginToken === 0 ) {
