@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import { Modal, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 import 'moment-timezone'
-import { NotificationContainer } from 'react-notifications'; 
 
 import ManagerModal from './ManagerModal';
 import EmployeeModal from './EmployeeModal';
@@ -54,6 +53,7 @@ export default function TaskItem(props) {
 
   return (
     <>
+
       <div className={taskClass}
         onClick={event => setShow(true)}
       >
