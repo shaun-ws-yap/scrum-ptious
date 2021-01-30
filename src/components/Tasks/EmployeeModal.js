@@ -2,7 +2,7 @@ import React from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone'
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import FeedbackList from './FeedbackList';
 import getUserNameById from '../../helpers/getUserNameById';
