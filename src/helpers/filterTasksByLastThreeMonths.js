@@ -6,6 +6,8 @@ export default function filterTasksByLastThreeMonths(tasks, userId) {
 
   const filteredTasks = {};
 
+  console.log(tasks);
+
   for (let i = 2; i >= 0; i--) {
     const today = new Date();
 
@@ -21,7 +23,7 @@ export default function filterTasksByLastThreeMonths(tasks, userId) {
   }
 
   for (const task of tasks) {
-    const monthCreated = monthNames[new Date(task.creation_date).getMonth()];
+    const monthCreated = monthNames[new Date(task.due_date).getMonth()];
     
     for (const month in filteredTasks) {
       if (month === monthCreated && task.employee_id === userId) {
