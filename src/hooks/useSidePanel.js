@@ -8,7 +8,7 @@ export default function useSidePanel() {
     window.addEventListener('resize', updateWindowDimensions)
     updateWindowDimensions()
     return () => window.removeEventListener('resize', updateWindowDimensions)
-  }, [])
+  })
 
   useEffect(() => {
     if (windowWidth > 1300 && openPanel) {
@@ -19,7 +19,7 @@ export default function useSidePanel() {
       setOpenPanel(false);
       return;
     }
-  }, [windowWidth])
+  }, [openPanel, windowWidth])
 
   const updateWindowDimensions = () => {
     setWindowWidth(window.innerWidth)

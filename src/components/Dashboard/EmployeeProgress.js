@@ -5,13 +5,13 @@ import EmployeeProgressItem from './EmployeeProgressItem';
 import { teamTaskStatus } from '../../helpers/taskStatus';
 
 export default function EmployeeProgress(props) {
-  const [index, setIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
   
   const userData = props.teamUsers.filter(user => user.role !== 1).map((user) => {
     const taskData = teamTaskStatus(props.teamTasks, user.team_id, user.id);
 
     return (
-      <TabPanel>
+      <TabPanel key={user.id}>
         <EmployeeProgressItem
           teamTasks={props.teamTasks}
           key={user.id}
@@ -28,11 +28,11 @@ export default function EmployeeProgress(props) {
   })
 
   return (
-    <Tabs defaultIndex={0} onSelect={index => setIndex(index)} className="employee-chart" >
+    <Tabs defaultIndex={0} onSelect={index => setTabIndex(tabIndex)} className="employee-chart" >
       <TabList>
         { props.teamUsers.filter(user => user.role !== 1).map(user => {
           return (
-            <Tab>{user.name}</Tab>
+            <Tab key={user.id}>{user.name}</Tab>
           )
         }) }
       </TabList>

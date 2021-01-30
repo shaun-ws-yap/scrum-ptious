@@ -42,6 +42,8 @@ export default function useNotifications(userInfo, setMenu, NotificationManager)
           NotificationManager.error(userNotification.message, userNotification.title);
           setUserNotification(prev => ({...prev, title: "", message: "", type: "", user: ""}));
           break;
+        default: 
+          break;
       }
       setManagerNotification(prev => ({...prev, title: "", message: "", type: "", user: ""}));
       setUserNotification(prev => ({...prev, title: "", message: "", type: "", user: ""}));
@@ -67,6 +69,8 @@ export default function useNotifications(userInfo, setMenu, NotificationManager)
           setUserNotification(prev => ({...prev, title: "", message: "", type: "", user: ""}));
           NotificationManager.error(managerNotification.message, managerNotification.title);
           setManagerNotification(prev => ({...prev, title: "", message: "", type: "", user: ""}));
+          break;
+        default: 
           break;
       }
       setUserNotification(prev => ({...prev, title: "", message: "", type: "", user: ""}));

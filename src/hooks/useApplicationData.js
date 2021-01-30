@@ -73,7 +73,7 @@ export default function useApplicationData(socket, loginToken, setError) {
         socket.off('error');
       }
     }
-  }, [socket]);
+  }, [socket, setError]);
 
 
   return { 

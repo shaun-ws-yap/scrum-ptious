@@ -6,8 +6,6 @@ export default function filterTasksByLastThreeMonths(tasks, userId) {
 
   const filteredTasks = {};
 
-  console.log(tasks);
-
   for (let i = 2; i >= 0; i--) {
     const today = new Date();
 

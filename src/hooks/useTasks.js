@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import findSubmissionByTask from '../helpers/findSubmissionByTask';
 
 export default function useTasks(loginToken, socket, submissions, setTasks, setSubmissions, setUserNotification, setManagerNotification, userInfo) {
@@ -39,6 +39,8 @@ export default function useTasks(loginToken, socket, submissions, setTasks, setS
           break;
         case 'MOVE':
           setUserNotification(prev => ({...prev, message: task.title, user: Number(loginToken), title: "Task Moved", type: "success"}))
+          break;
+        default:
           break;
       }
     });

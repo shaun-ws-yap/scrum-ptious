@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 
 export default function SubmissionItem(props) {
 
-  const { title, name, description, is_late, is_viewed, taskData, setSelectedTask, setShow } = props;
+  const { title, name, description, is_late, taskData, setSelectedTask, setShow } = props;
 
   const handleOpen = () => {
     setSelectedTask(taskData);
@@ -19,18 +19,18 @@ export default function SubmissionItem(props) {
       { is_late && <span className="badge badge-danger submission-badge">LATE</span> }
       <div className="submission-card-item-dates">
         <div className="card-date">
-          <label for="creation_date">On: </label>
+          <label>On: </label>
           <Moment name="creation_date" format="Do MMM YYYY h:mm A" >{taskData.creation_date}</Moment> 
         </div>
         <div className="card-date">
-          <label for="due_date">Due:</label>
+          <label>Due:</label>
           <Moment name="due_date" format="Do MMM YYYY h:mm A" >{taskData.due_date}</Moment>
         </div>
       </div>
       <div className="submission-card-item-badge-container">
         <div className="submission-card-item-badge">
-          { taskData.status === 0 && <i class="fas fa-people-arrows"></i> }
-          { taskData.status === 1 && <i class="fas fa-spinner"></i> }
+          { taskData.status === 0 && <i className="fas fa-people-arrows"></i> }
+          { taskData.status === 1 && <i className="fas fa-spinner"></i> }
         </div>
       </div>
     </div>
