@@ -11,7 +11,6 @@ export default function axiosLogin(loginToken, setState) {
 
   axios.get(GET_INIT_DATA)
     .then(res => {
-      console.log(res.data);
       const { userTasks, userInfo, teamTasks, teamUsers, deadlines } = res.data;
 
       setState(prev => ({ 
@@ -26,7 +25,7 @@ export default function axiosLogin(loginToken, setState) {
         team: userInfo.team_id, 
       }));
     })
-    .catch(e => console.log(e));
+    .catch(e => res.send(e));
 }
 
   // useEffect(() => {

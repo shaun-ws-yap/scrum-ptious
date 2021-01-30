@@ -8,12 +8,10 @@ export default function useSocket(loginToken) {
     if (!loginToken) {
       return;
     }
-    console.log('connect');
     const conn = io();
     setSocket(conn);
 
     return () => {
-      console.log('close');
       conn.close();
     }
   }, [loginToken])
