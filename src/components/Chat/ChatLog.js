@@ -1,5 +1,4 @@
-import { React, useCallback, useState, useEffect, useRef } from 'react';
-import { useObserveScrollPosition } from 'react-scroll-to-bottom';
+import { React, useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 
 import ChatLogItem from "./ChatLogItem";
@@ -36,7 +35,7 @@ export default function ChatLog(props) {
 
   useEffect(() => {
     getPrevMessages();
-  }, [page]);
+  }, [page, getPrevMessages]);
 
   useEffect(() => {
     setVisible(true);

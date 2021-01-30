@@ -32,7 +32,7 @@ export default function InputBox(props) {
                submitForm(e);
             }}
         />
-        <button className="chat-send" type="submit"><i class="material-icons">send</i></button>
+        <button className="chat-send" type="submit"><i className="material-icons">send</i></button>
       </form>
     </div>
   );

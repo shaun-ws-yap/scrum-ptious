@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
-import { changeTaskStatus } from '../../helpers/taskStatus';
 import getUserNameById from '../../helpers/getUserNameById';
 import classNames from 'classnames';
 
-import { Modal, Button } from 'react-bootstrap';
 import Moment from 'react-moment';
 import 'moment-timezone'
-import { NotificationContainer } from 'react-notifications'; 
 
 import ManagerModal from './ManagerModal';
 import EmployeeModal from './EmployeeModal';
@@ -63,18 +60,18 @@ export default function TaskItem(props) {
         {/* { is_late && <span className="badge badge-danger task-item-badge">LATE</span> } */}
         <div className="task-item-dates">
           <div className="card-date">
-            <label for="creation_date">On: </label>
+            <label>On: </label>
             <Moment name="creation_date" format="Do MMM YYYY h:mm A" >{creation_date}</Moment> 
           </div>
           <div className="tas-item-card-date">
-            <label for="due_date">Due:</label>
+            <label>Due:</label>
             <Moment name="due_date" format="Do MMM YYYY h:mm A" >{due_date}</Moment>
           </div>
         </div>
         <div className="task-item-badge-container">
           <div className="task-item-badge">
-            { status === 0 && <i class="fas fa-people-arrows"></i> }
-            { status === 1 && <i class="fas fa-spinner"></i> }
+            { status === 0 && <i className="fas fa-people-arrows"></i> }
+            { status === 1 && <i className="fas fa-spinner"></i> }
           </div>
         </div>
       </div>

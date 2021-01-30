@@ -17,7 +17,6 @@ export default function TaskProgress(props) {
     error,
     setErrorNotification,
     moveTask,
-    setTasks
   } = props;
 
   // local states
@@ -85,7 +84,7 @@ export default function TaskProgress(props) {
 
   const onDragEnd = (res) => {
     setTrashVisible(false);
-    const { destination, source, draggableId, droppableId } = res;
+    const { destination, source, draggableId } = res;
 
     const task = findTaskItemById(tasks, Number(draggableId));
     if (!destination) {
@@ -93,7 +92,6 @@ export default function TaskProgress(props) {
     }
 
     if (role !== 1 && source.droppableId === "assigned" && destination.droppableId === "inProgress") {
-      console.log(task);
       moveTask(task, 1);
           }
     if (role !== 1 && source.droppableId === "inProgress" && destination.droppableId === "assigned") {
@@ -117,7 +115,7 @@ export default function TaskProgress(props) {
 
         <div key="assigned" className="task-progress-container-assigned">
           <h1>Assigned</h1>
-          <Droppable droppableId="assigned">
+          <Droppable key="assigned" droppableId="assigned">
             {(provided, snapshot) => (
               <div 
                 className="task-column task-assigned"
@@ -137,7 +135,7 @@ export default function TaskProgress(props) {
 
         <div key="inProgress" className="task-progress-container-inprogress">
           <h1>In-Progress</h1>
-          <Droppable droppableId="inProgress">
+          <Droppable key="inProgress" droppableId="inProgress">
             {(provided, snapshot) => (
               <div 
                 className="task-column task-inprogress"
@@ -157,7 +155,7 @@ export default function TaskProgress(props) {
 
         { role === 1 && (
           <div key="trash" className={trashVisible ? "trash--visible" : "trash--hidden"} >
-            <Droppable droppableId="trash">
+            <Droppable key="trash" droppableId="trash">
               {(provided, snapshot) => (
                 <div
                   key="trash"
@@ -165,7 +163,7 @@ export default function TaskProgress(props) {
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                 >
-                  <span className="trash-icon"><i class="far fa-trash-alt fa-3x"></i></span>
+                  <span className="trash-icon"><i className="far fa-trash-alt fa-3x"></i></span>
                   {provided.placeholder}
                 </div>
               )}

@@ -30,7 +30,7 @@ export default function UserInfo(props) {
                 className="user-filter-btn"
                 onClick={event => toggleFilter(openFilter)}
               >
-                <i class="fas fa-filter fa-2x"></i>
+                <i className="fas fa-filter fa-2x"></i>
               </span>
             )}
             <img alt={userInfo.name} src={userInfo.avatar} className="user-avatar"></img>
@@ -41,9 +41,9 @@ export default function UserInfo(props) {
               <DeadlineList deadlines={filteredTasks} userInfo={userInfo} teamUsers={teamUsers} />
             </div>
             <div className="socials">
-              <span><a href="https://github.com/clarchiu" target="_blank"><i class="fab fa-github"></i><p>Clarence</p></a></span>
-              <span><a href="https://github.com/Kevinli296" target="_blank"><i class="fab fa-github"></i><p>Kevin</p></a></span>
-              <span><a href="https://github.com/shaun-ws-yap" target="_blank"><i class="fab fa-github"></i><p>Shaun</p></a></span>
+              <span><a href="https://github.com/clarchiu" target="_blank" rel="noreferrer"><i className="fab fa-github"></i><p>Clarence</p></a></span>
+              <span><a href="https://github.com/Kevinli296" target="_blank" rel="noreferrer"><i className="fab fa-github"></i><p>Kevin</p></a></span>
+              <span><a href="https://github.com/shaun-ws-yap" target="_blank" rel="noreferrer"><i className="fab fa-github"></i><p>Shaun</p></a></span>
             </div>
           </>
         )}

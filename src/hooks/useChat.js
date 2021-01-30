@@ -41,7 +41,6 @@ export default function useChat(socket, userInfo, messages, setMessages) {
     });
 
     socket.on('message saved', function(messageData) {
-      console.log('message saved: ', messageData);
     });
 
     return () => {

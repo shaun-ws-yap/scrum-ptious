@@ -3,11 +3,8 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import { Modal, Button } from 'react-bootstrap';
 
-import getUserNameById from '../../helpers/getUserNameById';
-
 export default function NewTaskItem(props) {
   
-  // to force a bug for error messages
   const dateNow = new Date();
   dateNow.setDate(dateNow.getDate() + 7);
   dateNow.setHours(17); 
@@ -17,8 +14,7 @@ export default function NewTaskItem(props) {
     team,
     teamUsers,
     createTaskItem, 
-    error,
-    setErrorNotification
+    setErrorNotification,
   } = props;
 
   const [taskItem, setTaskItem] = useState({
@@ -91,7 +87,7 @@ export default function NewTaskItem(props) {
           </Modal.Header>
 
           <Modal.Body>
-            <label for="title">Title: </label>
+            <label>Title: </label>
             <input
               id="new-task-title"
               name="title"
@@ -100,7 +96,7 @@ export default function NewTaskItem(props) {
               onChange={(event) => setTaskItem(prev => ({...prev, title: event.target.value}))}
             />
 
-            <label for="description">Description: </label>
+            <label>Description: </label>
             <textarea
               id="new-task-description"
               name="description"
@@ -109,20 +105,20 @@ export default function NewTaskItem(props) {
               onChange={(event) => setTaskItem(prev => ({...prev, description: event.target.value}))}
             />
 
-            <label for="assignTo">Assign to: </label>
-            <select class="form-control"
+            <label>Assign to: </label>
+            <select className="form-control"
               id="new-task-assign"
               onChange={event => setTaskItem(prevTaskItem => ({...prevTaskItem, employee_id: Number(event.target.value)}))}
             >
-              <option selected value={""}></option>
+              <option key={undefined} defaultValue=""></option>
               { teamMembersList.map(member => {
                 return (
-                  <option value={member.id}>{member.name}</option>
+                  <option key={member.id} value={member.id}>{member.name}</option>
                 )
               })  }
             </select>
             <br />
-            <label for ="due-date">Due on: </label>
+            <label>Due on: </label>
             <DatePicker 
               id="new-task-date"
               className="form-control" 

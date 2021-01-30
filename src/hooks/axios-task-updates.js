@@ -9,7 +9,7 @@ export default function axiosTaskUpdates(state, setState, setTeamTasks) {
         const newTasks = [ ...state.teamTasks, res.data ];
         setTeamTasks(newTasks);
       })
-      .catch(e => console.log(e));
+      .catch(e => res.send(e));
     }
 
   function editTaskItem(taskItem) {
@@ -30,7 +30,7 @@ export default function axiosTaskUpdates(state, setState, setTeamTasks) {
         ]
       }))
     })
-    .catch(e => console.log(e));
+    .catch(e => res.send(e));
   }
 
   function deleteTaskItem(id) {
@@ -39,7 +39,7 @@ export default function axiosTaskUpdates(state, setState, setTeamTasks) {
       const tmp = state.allTasks.filter(task => task.id !== id);
       setState(prev => ({...prev, teamTasks: tmp, allTasks: tmp}));
     })
-    .catch(e => console.log(e));
+    .catch(e => res.send(e));
   }
 
   return {

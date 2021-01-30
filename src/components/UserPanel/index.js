@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import SlidingPanel from 'react-sliding-side-panel';
 import 'react-sliding-side-panel/lib/index.css';
 
 import UserInfo from './UserInfo';
-import useSidePanel from '../../hooks/useSidePanel';
 
 import '../../styles/UserInfo.css';
 

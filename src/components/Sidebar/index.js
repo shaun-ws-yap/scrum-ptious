@@ -1,9 +1,6 @@
 import '../../styles/Sidebar.css';
 
 import React from 'react';
-import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent, Menu, MenuItem } from 'react-pro-sidebar';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import Moment from 'react-moment';
 
 import SidebarItem from './SidebarItem';
 import NewTaskItem from '../Tasks/NewTaskItem';
