@@ -15,7 +15,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Getting Started
 
-### Firstly, use [NPM](https://www.npmjs.com/package/npm) to install Scrum-ptious.
+#### Firstly, use [NPM](https://www.npmjs.com/package/npm) to install Scrum-ptious.
 
 `npm install`
 
@@ -29,7 +29,7 @@ Open [http://localhost:3001](http://localhost:3001) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### In the /sever directory, run:
+#### In the /sever directory, run:
 `npm start` 
 Open [http://localhost:8001](http://localhost:8001) to view it in the browser.
 
