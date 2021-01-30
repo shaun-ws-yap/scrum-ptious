@@ -2,7 +2,7 @@
 
 A real-time workflow dashboard based that maximizes your team's efficiency by allowing assignment and tracking of tasks, as well as communications between workers via chat. Tasks are organized into a kanban board with columns for 'assigned', 'in progress' and 'completed'. Project managers can assign tasks to their team members and, upon submission, can review their team members' work to either reject or accept them. Employees can see their assigned tasks updated in real time and move them to the 'in progress' column to notify their manager that they are working on it. 
 
-Developed for the Final Project 
+Developed for the Final Project for Lighthouse Labs Web Development Bootcamp
 
 ## Tech Stack
 * PostgresSql
