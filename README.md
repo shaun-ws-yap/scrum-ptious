@@ -1,11 +1,35 @@
 # Scrum-ptious
 
-A real-time workflow dashboard that maximizes your team's efficiency by allowing assignment and tracking of tasks, as well as communications between teammates via chat. 
+A workflow dashboard that maximizes your team's efficiency by allowing assignment and tracking of tasks, as well as communications between teammates via chat. 
 
-Tasks are organized into a kanban board with columns for 'assigned', 'in progress' and 'completed'. Project managers can assign tasks to their team members and, upon submission, can review their team members' work to either reject or accept them. Employees can see their assigned tasks updated in real time and move them to the 'in progress' column to notify their manager that they are working on it. 
+Socket.io is hooked into the Express server so that all data is pushed to clients in real time. Users are then immediately notified of these changes.
 
-Developed for the Final Project for Lighthouse Labs Web Development Bootcamp
+Developed for demonstrations purposes for the Final Project of Lighthouse Labs Web Development Bootcamp
 
+## Overview
+
+### Dashboard
+
+The dashboard gives an overview of a project's progress. Using React-chartjs to visualize the portion of tasks that are assigned, in progress, in review, completed and late. The manager can also see the individual progress of his team members. 
+
+[Responive user interface with collapsible side menu](docs/ui-dashboard.png)[Responive user interface with collapsible side menu](docs/ui-expanded-userInfo.png)
+
+### Tasks
+
+Tasks are organized into a kanban board with columns for 'assigned', 'in progress' and 'completed'.
+
+[Kanban board for 'assigned','in-progress' and 'completed' tasks](docs/tasks-kanban.png)
+
+Managers can create and assign tasks to his team members. Employees can see their assigned tasks updated in real time and move them to the 'in progress' column to notify their manager that they are working on it. 
+
+[Manager modal for creating tasks](docs/create-new-task.png)
+
+### Chat
+
+Users can communicate with their team via a built-in chat feature
+
+[Chat feature](docs/real-time-chat.png)
+ 
 ## Tech Stack
 * PostgresSql
 * Express
