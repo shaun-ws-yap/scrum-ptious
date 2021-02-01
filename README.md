@@ -13,8 +13,8 @@ Developed for demonstrations purposes for the Final Project of Lighthouse Labs W
 The dashboard gives an overview of a project's progress. Using React-chartjs to visualize the portion of tasks that are assigned, in progress, in review, completed and late. The manager can also see the individual progress of his team members. 
 
 <p float="left">
-  <img alt="Responive user interface with collapsible side menu" src="/docs/ui-dashboard.png" width="50%" />
-  <img alt="Responive user interface with collapsible side menu" src="./docs/ui-expanded-userInfo.png" width="50%" /> 
+  <img alt="Responive user interface with collapsible side menu" src="/docs/ui-dashboard.png" width="45%" />
+  <img alt="Responive user interface with collapsible side menu" src="./docs/ui-expanded-userInfo.png" width="45%" /> 
 </p>
 
 ### Tasks
