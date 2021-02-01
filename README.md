@@ -63,7 +63,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### Install dependencies in both the project directory and server folder
 
-`npm install`
+`npm install`\
 `cd ./server && npm install`
 
 #### In the project directory, run to start webpack server:
@@ -77,7 +77,9 @@ The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
 #### In the /sever directory, run to start express/socket.io server:
+
 `npm start` 
+
 Open [http://localhost:8001](http://localhost:8001) to view it in the browser.
 
 ## License
