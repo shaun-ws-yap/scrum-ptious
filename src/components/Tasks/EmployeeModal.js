@@ -1,9 +1,8 @@
 import React from 'react';
-import classNames from 'classnames';
 import Moment from 'react-moment';
 import 'moment-timezone'
 
-import { Modal, Button } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import FeedbackList from './FeedbackList';
 import getUserNameById from '../../helpers/getUserNameById';
@@ -48,7 +47,7 @@ export default function EmployeeModal(props) {
     </Modal.Body>
     <Modal.Body>
       <p>Assigned to: {getUserNameById(teamUsers, employee_id)}</p>
-      <label for="viewMode-due_date">Due on: </label>
+      <label>Due on: </label>
       <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment>
       <FeedbackList
         taskId={id}
@@ -59,9 +58,9 @@ export default function EmployeeModal(props) {
       { <span className={`badge badge-${taskInfo.type}`}>{taskInfo.status}</span> }
       { is_late && <span className="badge badge-danger">LATE</span> } 
       { status === 1 &&
-          <Button confirm variant="primary" onClick={() => handleSubmit()}>
+          <button className="btn btn-primary" onClick={() => handleSubmit()}>
             Submit
-          </Button>
+          </button>
       }
     </Modal.Footer>
   </Modal>

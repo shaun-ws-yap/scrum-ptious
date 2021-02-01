@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import Moment from 'react-moment';
 import 'moment-timezone';
@@ -24,7 +23,7 @@ export default function FeedbackList(props) {
       return (
         <div key={feedback.id}>
           <p>{feedback.feedback_string}</p>
-          <label for="viewMode-due_date">Submitted on: </label>
+          <label>Submitted on: </label>
           <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{feedback.submission_date}</Moment>
           <p>{feedback.status}</p> 
         </div>

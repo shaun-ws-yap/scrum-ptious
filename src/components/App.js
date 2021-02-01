@@ -6,7 +6,6 @@ import 'react-notifications/lib/notifications.css';
 import 'react-tabs/style/react-tabs.css';
 
 import { useState, useEffect } from 'react';
-import { Route, BrowserRouter as Router, Switch, withRouter } from 'react-router-dom';
 import { NotificationManager, NotificationContainer } from 'react-notifications';
 
 import Dashboard from './Dashboard';
@@ -16,7 +15,6 @@ import Submissions from './Submissions';
 import Sidebar from './Sidebar';
 import UserPanel from './UserPanel';
 import Login from './Login';
-import SlidingPanel from 'react-sliding-side-panel';
 
 import useApplicationData from '../hooks/useApplicationData';
 import useNotifications from '../hooks/useNotifications';

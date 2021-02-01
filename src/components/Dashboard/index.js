@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import ProjectProgress from './ProjectProgress';
 import IndependentProgress from './IndependentProgress';

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
 
 import { Modal, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
@@ -16,8 +15,6 @@ export default function ManagerModal(props) {
     handleClose,
     editTaskItem,
     deleteTaskItem,
-    error,
-    setError
   } = props;
 
   const { 
@@ -38,7 +35,6 @@ export default function ManagerModal(props) {
   }
 
   const handleDelete = () => {
-    console.log(taskItem);
     deleteTaskItem(taskItem);
     handleClose();
   };
@@ -99,21 +95,21 @@ export default function ManagerModal(props) {
           <>
             <p>{description}</p>
             <p>Assigned to: { getUserNameById(employee_id) }</p>
-            <label for="viewMode-due_date">Due on: </label>
+            <label>Due on: </label>
             <Moment name="viewMode-due_date" local format="Do MMM YYYY h:mm A" >{due_date}</Moment> 
           </>
         )}
 
         { editMode && (
           <>
-            <label for="newTitle">Title: </label>
+            <label>Title: </label>
             <input
               autofocus
               className="form-control edit-task-title"
               value={newTaskData.title}
               onChange={(event) => setNewTaskData(prev => ({...prev, title: event.target.value}))}
             />
-            <label for="newDescription">Description: </label>
+            <label>Description: </label>
             <textarea
               id="edit-task-description"
               value={newTaskData.description}
@@ -122,7 +118,7 @@ export default function ManagerModal(props) {
               className="form-control"
               name="newDescription"
             />
-            <label for="assigned">Re-assign to:</label>
+            <label>Re-assign to:</label>
             <select
               id="edit-task-assign"
               name="assigned"
@@ -136,7 +132,7 @@ export default function ManagerModal(props) {
                 )
               }) }
             </select>
-            <label for="due_date">Due date:</label>
+            <label>Due date:</label>
             <DatePicker 
               id="edit-task-date"
               className="form-control" 

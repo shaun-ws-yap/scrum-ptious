@@ -1,7 +1,6 @@
 import React from 'react';
  
-import { Doughnut, Bar, Line, Radar } from 'react-chartjs-2';
-import { TabPanel } from 'react-tabs';
+import { Doughnut, Radar } from 'react-chartjs-2';
 import filterTasksByLastThreeMonths from '../../helpers/filterTasksByLastThreeMonths';
  
 export default function EmployeeProgress(props) {

@@ -51,7 +51,7 @@ export default function Feedback(props) {
           </Modal.Title>
         </Modal.Header>
 
-        <form class="form-group" onSubmit={event => event.preventDefault()}>
+        <form className="form-group" onSubmit={event => event.preventDefault()}>
           <Modal.Body>
             <p>{description}</p>
             <p>Assigned to: {getEmployeeName(teamUsers, employee_id)}</p>
@@ -62,7 +62,7 @@ export default function Feedback(props) {
             </p>
             
             <div>
-              <label for="feedback">Feedback:</label>
+              <label>Feedback:</label>
               <textarea
                 name="feedback"
                 className="form-control"

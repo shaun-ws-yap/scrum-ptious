@@ -6,12 +6,7 @@ export default function MyTeamItem(props) {
     selectTasksByUser,
   } = props;
 
-  const { role, name, avatar, email, phone_number } = member;
-
-  const roles = {
-    1 : 'Project Manager',
-    2 : 'Employee'
-  }
+  const { role, name, avatar } = member;
 
   return (
     <div 

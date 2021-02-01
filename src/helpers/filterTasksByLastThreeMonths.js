@@ -21,7 +21,7 @@ export default function filterTasksByLastThreeMonths(tasks, userId) {
   }
 
   for (const task of tasks) {
-    const monthCreated = monthNames[new Date(task.creation_date).getMonth()];
+    const monthCreated = monthNames[new Date(task.due_date).getMonth()];
     
     for (const month in filteredTasks) {
       if (month === monthCreated && task.employee_id === userId) {

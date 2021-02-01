@@ -48,7 +48,6 @@ export default function useApplicationData(socket, loginToken, setError) {
       return;
     }
 
-    console.log('log in');
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
@@ -75,7 +74,7 @@ export default function useApplicationData(socket, loginToken, setError) {
         socket.off('error');
       }
     }
-  }, [socket]);
+  }, [socket, setError]);
 
 
   return { 
