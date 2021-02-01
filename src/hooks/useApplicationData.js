@@ -52,6 +52,7 @@ export default function useApplicationData(socket, loginToken, setError) {
     socket.emit('user logged in', loginToken);
 
     socket.on('login data', loginData => {
+      console.log(loginData);
       const { userTasks, userInfo, teamTasks, teamUsers, submissions } = loginData;
       setState(prev => ({ 
         ...prev, 

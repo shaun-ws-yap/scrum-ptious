@@ -37,20 +37,20 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const publicPath = path.join(__dirname, '..', 'public');
+// const publicPath = path.join(__dirname, '..', 'public');
 
-app.use(express.static(publicPath));
+// app.use(express.static(publicPath));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(publicPath, 'index.html'));
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(publicPath, 'index.html'));
+// });
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-//   });
-// }
+// // if (process.env.NODE_ENV === "production") {
+// //   app.use(express.static("build"));
+// //   app.get("*", (req, res) => {
+// //     res.sendFile(path.resolve(__dirname,  "build", "index.html"));
+// //   });
+// // }
 
 app.use("/api", messageRoutes(db));
 app.use("/api", employeeRoutes(db));
@@ -73,6 +73,7 @@ io.on('connection', (socket) => {
   socket.on('user logged in', userId => {
     console.log('logged in');
     getLoginData(db, userId, loginData => {
+      console.log(loginData);
       socket.emit('login data', loginData);
     });
   });
