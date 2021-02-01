@@ -73,7 +73,6 @@ io.on('connection', (socket) => {
   socket.on('user logged in', userId => {
     console.log('logged in');
     getLoginData(db, userId, loginData => {
-      console.log(loginData);
       socket.emit('login data', loginData);
     });
   });
