@@ -21,7 +21,9 @@ The dashboard gives an overview of a project's progress. Using React-chartjs to 
 
 Tasks are organized into a kanban board with columns for 'assigned', 'in progress' and 'completed'.
 
-![Kanban board for 'assigned','in-progress' and 'completed' tasks](./docs/tasks-kanban.png)
+<p float="left">
+  <img alt="Kanban board for 'assigned','in-progress' and 'completed' tasks" src="./docs/tasks-kanban.png" widht="65%" />
+</p>
 
 Managers can create and assign tasks to his team members. Employees can see their assigned tasks updated in real time and move them to the 'in progress' column to notify their manager that they are working on it. 
 
