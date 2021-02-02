@@ -67,6 +67,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 #### OR, alternatively, you can checkout the live Heroku link below
 
 [Scrum-ptious](https://shaun-scrumptious.herokuapp.com/)
+* Please keep in mind that refreshing the page will log you out.
 
 #### Install dependencies in both the client and the server folder
 
