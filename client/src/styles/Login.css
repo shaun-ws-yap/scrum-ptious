@@ -18,7 +18,7 @@
   width: 30%;
   /* margin-top: 10%;
   margin-left: 30%; */
-  margin: 10% auto;
+  margin: 5% auto;
 }
 
 .login > h1 {
@@ -215,6 +215,13 @@
 	height: 110px;
 	animation-delay: 3.5s;
 }
+
+.login-info {
+  color: white;
+  margin-top: 2em;
+  font-size: 18px;
+}
+
 @keyframes animate {
 	0% {
 		transform: translateY(0) rotate(0deg);
