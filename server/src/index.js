@@ -39,6 +39,7 @@ db.connect(err => {
   if (err) {
     return console.error("could not connect to postgres", err);
   }
+  return console.log("connected to postgres db");
 });
 
 app.use(bodyParser.json());
