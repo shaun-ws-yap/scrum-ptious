@@ -9,4 +9,3 @@ node_modules/
 coverage/
 node_modules
 .eslintcache
-build/
