@@ -22,7 +22,7 @@ const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
 const taskRoutes = require("./routes/tasks");
 
-const publicPath = path.join(__dirname, '..', 'public');
+const publicPath = path.join(__dirname, '..', 'build');
 
 // PG database client/connection setup
 const { Client } = require('pg');
