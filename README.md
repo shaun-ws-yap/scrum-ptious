@@ -4,9 +4,9 @@
 
 A workflow dashboard that maximizes your team's efficiency by allowing assignment and tracking of tasks, as well as communications between teammates via chat. 
 
-Socket.io is hooked into the Express server so that all data is pushed to clients in real time. Users are then immediately notified of these changes.
+Socket.io is hooked into the Express server so that all data is pushed to clients in real time. Users are then immediately notified of these changes through live notifications.
 
-Developed for demonstrations purposes for the Final Project of Lighthouse Labs Web Development Bootcamp
+Developed for demonstrations purposes for the Final Project of Lighthouse Labs Web Development Bootcamp.
 
 ## Overview
 
@@ -68,26 +68,24 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 [Scrum-ptious](https://shaun-scrumptious.herokuapp.com/)
 
-#### Install dependencies in both the project directory and server folder
+#### Install dependencies in both the client and the server folder
 
-`npm install`\
-`cd ./server && npm install`
+`cd client`
+`npm install`
+`cd server`
+`npm install`
 
-#### In the project directory, run to start webpack server:
+#### In the client directory, run to start webpack server:
 
 `npm start`
 
+Concurrently starts the server and client.
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-#### In the /sever directory, run to start express/socket.io server:
-
-`npm start` 
-
-Open [http://localhost:8080](http://localhost:8080) to view it in the browser.
 
 ## License
 [MIT](htps://choosealicense.com/licenses/mit/)
