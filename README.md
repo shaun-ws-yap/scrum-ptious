@@ -4,9 +4,9 @@
 
 A workflow dashboard that maximizes your team's efficiency by allowing assignment and tracking of tasks, as well as communications between teammates via chat. 
 
-Socket.io is hooked into the Express server so that all data is pushed to clients in real time. Users are then immediately notified of these changes.
+Socket.io is hooked into the Express server so that all data is pushed to clients in real time. Users are then immediately notified of these changes through live notifications.
 
-Developed for demonstrations purposes for the Final Project of Lighthouse Labs Web Development Bootcamp
+Developed for demonstrations purposes for the Final Project of Lighthouse Labs Web Development Bootcamp.
 
 ## Overview
 
