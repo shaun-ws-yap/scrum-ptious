@@ -70,9 +70,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### Install dependencies in both the client and the server folder
 
-`cd client`
-`npm install`
-`cd server`
+`cd client`\
+`npm install`\
+`cd server`\
 `npm install`
 
 #### In the client directory, run to start webpack server:
