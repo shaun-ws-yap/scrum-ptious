@@ -1,12 +1,12 @@
 require('dotenv').config();
-const path = require("path");
 
-const PORT       = process.env.PORT || 8080;
+const PORT       = process.env.PORT || 3000;
 const ENV        = process.env.ENV || "development";
 const express    = require("express");
 const app        = express();
 const http       = require('http').Server(app);
 const io         = require('socket.io')(http);
+const path       = require('path');
 
 const cors       = require('cors');
 const bodyParser = require("body-parser");
@@ -22,10 +22,18 @@ const employeeRoutes = require("./routes/employees");
 const submissionRoutes = require("./routes/submissions");
 const taskRoutes = require("./routes/tasks");
 
+const publicPath = path.join(__dirname, '..', 'build');
+
 // PG database client/connection setup
 const { Client } = require('pg');
 const dbParams = require('./lib/db');
 const db = new Client(dbParams);
+
+app.use(express.static(publicPath));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(publicPath, 'index.html'));
+});
 
 db.connect(err => {
   if (err) {
