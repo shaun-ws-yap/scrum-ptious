@@ -17,6 +17,11 @@ export default function IndependentProgress(props) {
 
   for (let i = 0; i < 3; i++) {
     const key = lastThreeMonths[month[i]];
+
+    if (!key) {
+      continue; 
+    }
+    
     const res = {
       label: month[i],
       data: [key.assigned, key.inprogress, key.inreview, key.late, key.complete],
