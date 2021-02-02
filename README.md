@@ -62,7 +62,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 #### Firstly, clone the project
 
-`git clone https://github.com/clarchiu/scrum-ptious.git`
+`git clone https://github.com/shaun-ws-yap/scrum-ptious.git`
+
+#### OR, alternatively, you can checkout the live Heroku link below
+
+[Scrum-ptious](https://shaun-scrumptious.herokuapp.com/)
 
 #### Install dependencies in both the project directory and server folder
 
